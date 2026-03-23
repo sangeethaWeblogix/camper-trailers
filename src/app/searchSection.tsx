@@ -159,7 +159,7 @@ const stateMeta: StateMeta = {
         key: "Region",
         label: "Location",
         cards: regionBands.map((item) => ({
-          title: "Campervans for Sale in " + item.region,
+          title: "Camper Trailers for Sale in " + item.region,
           sub: `${item.caravan_count ?? 0}`,
           url: `/listings/${item.permalink}`,
         })),
@@ -168,7 +168,7 @@ const stateMeta: StateMeta = {
         key: "price",
         label: "Price",
         cards: priceBands.map((item) => ({
-          title: "Campervans for Sale " + item.short_label,
+          title: "Camper Trailers for Sale " + item.short_label,
           sub: `${item.caravan_count ?? 0}`,
           url: `/listings/${item.permalink}`,
         })),
@@ -177,7 +177,7 @@ const stateMeta: StateMeta = {
         key: "Weight",
         label: "Weight",
         cards: atmBands.map((item) => ({
-          title: "Campervans for Sale " + item.short_label,
+          title: "Camper Trailers for Sale " + item.short_label,
           sub: `${item.caravan_count ?? 0}`,
           url: `/listings/${item.permalink}`,
         })),
@@ -186,7 +186,7 @@ const stateMeta: StateMeta = {
         key: "Sleep",
         label: "Sleep",
         cards: sleepBands.map((item) => ({
-          title: "Campervans for Sale " + item.short_label,
+          title: "Camper Trailers for Sale " + item.short_label,
           sub: `${item.caravan_count ?? 0}`,
           url: `/listings/${item.permalink}`,
         })),
@@ -195,7 +195,7 @@ const stateMeta: StateMeta = {
         key: "Length",
         label: "Length",
         cards: lengthBands.map((item) => ({
-          title: "Campervans for Sale " + item.short_label,
+          title: "Camper Trailers for Sale " + item.short_label,
           sub: `${item.caravan_count ?? 0}`,
           url: `/listings/${item.permalink}`,
         })),
@@ -213,7 +213,7 @@ const stateMeta: StateMeta = {
         key: "Manufacturer",
         label: "Manufacturer",
         cards: manufactureBands.map((item) => ({
-          title: item.short_label + " Campervans for Sale",
+          title: item.short_label + " Camper Trailers for Sale",
           sub: `${item.caravan_count ?? 0}`,
           url: `/listings/${item.permalink}`,
         })),
@@ -482,10 +482,10 @@ const stateMeta: StateMeta = {
           <div className="col-lg-12">
             <div className="section-head text-center">
               <h1 className="divide-orange">
-                Browse New &amp; Used Campervans For Sale
+                Browse New &amp; Used Camper Trailers For Sale
               </h1>
               <p>
-                Find your ideal campervan from thousands of new and used listings
+                Find your ideal camper trailer from thousands of new and used listings
                 across Australia’s top brands, dealers, and private sellers.
                 Search by type, condition, location, and budget.
               </p>
@@ -769,7 +769,7 @@ const stateMeta: StateMeta = {
           <div className="row">
             <div className="col">
               <div className="section-head mb-2 py-2">
-                <h2>Browse Campervans for sale in Australia by State</h2>
+                <h2>Browse Camper Trailers for sale in Australia by State</h2>
               </div>
             </div>
           </div>
@@ -824,7 +824,7 @@ const stateMeta: StateMeta = {
                                   className="view_all"
                                   href={`/listings${item.permalink}`}
                                 >
-                                  View All Campervans for Sale in {stateCode}{" "}
+                                  View All Camper Trailers for Sale in {stateCode}{" "}
                                   <i className="bi bi-chevron-right"></i>
                                 </a>
                               </div>

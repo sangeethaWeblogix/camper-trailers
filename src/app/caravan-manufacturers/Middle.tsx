@@ -818,7 +818,7 @@ export default function CaravanManufacturers() {
                 <ul>
                   <li>
                     <strong>100% Australian Made:</strong> Every caravan and
-                   campervan is built locally to handle tough Aussie
+                   camper trailer is built locally to handle tough Aussie
                     conditions.
                   </li>
                   <li>

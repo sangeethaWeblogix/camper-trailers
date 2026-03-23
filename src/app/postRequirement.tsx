@@ -95,15 +95,15 @@ useEffect(() => {
             <div className="col-lg-6">
               <div className="home-post_head">
                 <h3>
-                  <span>Find Your Ideal Caravan</span>
+                  <span>Find Your Ideal Camper Trailer</span>
                   <br />– Post Your Requirements
                 </h3>
                 <p>
                   Tell us what you&apos;re looking for and we&apos;ll match you
-                  with the rightcampervan for sale, from trusted dealers at a
+                  with the right camper trailer for sale, from trusted dealers at a
                   fair price. Make sure your budget and expectations are
                   realistic to help us deliver the best possible outcome. See
-                  some examples of what other caravan buyers are looking for.
+                  some examples of what other camper trailer buyers are looking for.
                 </p>
               </div>
 
