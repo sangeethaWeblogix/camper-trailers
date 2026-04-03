@@ -25,7 +25,7 @@ import "../globals.css";
      canonical: "https://www.caravansforsale.com.au",
    },
    verification: {
-     google: "6tT6MT6AJgGromLaqvdnyyDQouJXq0VHS-7HC194xEo",
+       // google: "6tT6MT6AJgGromLaqvdnyyDQouJXq0VHS-7HC194xEo",
    },
  };
 

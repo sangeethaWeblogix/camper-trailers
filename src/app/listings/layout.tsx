@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     canonical: "https://www.caravansforsale.com.au/listings",
   },
   verification: {
-    google: "6tT6MT6AJgGromLaqvdnyyDQouJXq0VHS-7HC194xEo", // ✅ add here
+      // google: "6tT6MT6AJgGromLaqvdnyyDQouJXq0VHS-7HC194xEo", // ✅ add here
   },
 };
 

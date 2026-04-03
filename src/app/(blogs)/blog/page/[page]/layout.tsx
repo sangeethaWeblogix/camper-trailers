@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     canonical: "https://www.caravansforsale.com.au/blog/",
   },
   verification: {
-    google: "6tT6MT6AJgGromLaqvdnyyDQouJXq0VHS-7HC194xEo", // ✅ this auto generates <meta name="google-site-verification" />
+      // google: "6tT6MT6AJgGromLaqvdnyyDQouJXq0VHS-7HC194xEo", // ✅ this auto generates <meta name="google-site-verification" />
   },
 };
  export const revalidate = 3600; // ISR: refresh every 60s

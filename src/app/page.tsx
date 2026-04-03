@@ -12,7 +12,7 @@ import { Metadata } from "next";
     icons: { icon: "/favicon.ico" },
     robots: "index, follow",
     verification: {
-      google: "6tT6MT6AJgGromLaqvdnyyDQouJXq0VHS-7HC194xEo", // ✅ this auto generates <meta name="google-site-verification" />
+        // google: "6tT6MT6AJgGromLaqvdnyyDQouJXq0VHS-7HC194xEo", // ✅ this auto generates <meta name="google-site-verification" />
     },
     alternates: {
       canonical: "https://www.caravansforsale.com.au",
