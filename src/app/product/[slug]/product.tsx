@@ -1,4 +1,6 @@
- "use client";
+"use client";
+import "@fortawesome/fontawesome-free/css/fontawesome.min.css";
+import "@fortawesome/fontawesome-free/css/solid.min.css";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,7 +10,8 @@ import "swiper/css/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import CaravanDetailModal from "./CaravanDetailModal";
-import "./product.css";
+import "./product.css?=226";
+ 
 import DOMPurify from "dompurify";
 import { type HomeBlogPost } from "@/api/home/api";
 import { toSlug } from "@/utils/seo/slug";
@@ -50,6 +53,8 @@ type ProductData = {
   images?: string[];
   main_image?: string;
   location?: string;
+  region?: { label?: string; value?: string; slug?: string };
+  suburb?: { label?: string; value?: string; slug?: string };
   regular_price?: string | number;
   sale_price?: string | number;
   price_difference?: string | number;
@@ -59,6 +64,7 @@ type ProductData = {
   image?: string[];
   title?: string;
   location_shortcode?: string;
+  seller_type?: string;
   sku?: string;
   image_url?: string[];
 };
@@ -73,20 +79,23 @@ interface BlogPost extends HomeBlogPost {
   excerpt?: string;
   link?: string;
 }
+function ftToMeters(value: string): string | null {
+  const num = parseFloat(value);
+  if (isNaN(num)) return null;
+  return `(${(num * 0.3048).toFixed(1)}m)`;
+}
+
 export default function ClientLogger({
   data,
 }: {
   data: ProductDetailResponse;
 }) {
   // const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
-  console.log("datap", data);
   const router = useRouter();
-  const IMAGE_BASE = "https://caravansforsale.imagestack.net/800x600/";
-  const IMAGE_EXT = ".avif";
+ 
 
   // const [activeImage, setActiveImage] = useState<string>("");
   const pd: ApiData = data?.data ?? {};
-  console.log("pd", pd);
   const productDetails: ProductData = pd.product_details ?? {};
   const blogPosts: BlogPost[] = Array.isArray(data?.data?.latest_blog_posts)
     ? data.data.latest_blog_posts!
@@ -99,7 +108,6 @@ export default function ClientLogger({
     ? data.data.related!
     : [];
 
-  console.log("releated", blogPosts);
   const loadedCount = useRef(0);
 
   // const handleImageLoad = () => {
@@ -109,8 +117,6 @@ export default function ClientLogger({
   // };
 
   const [showPopup, setShowPopup] = useState(false);
-
-  console.log("datapb", relatedProducts);
 
   const product: ProductData = productDetails;
   const isBrowser = typeof window !== "undefined";
@@ -226,7 +232,7 @@ export default function ClientLogger({
     return slug ? `/product/${slug}/` : "";
   };
   type LinkOut = { href: string; text: string };
-  type SpecItem = { label: string; value: string; url?: string };
+  type SpecItem = { label: string; value: string; url?: string; links?: LinkOut[] };
 
   // ---------- spec fields with API urls ----------
   const specFields: SpecItem[] = [
@@ -256,8 +262,32 @@ export default function ClientLogger({
     { label: "Ball Weight", value: getAttr("Ball Weight") },
     {
       label: "Location",
-      value: getAttr("Location"),
-      url: findAttr("Location")?.url, // e.g. "queensland-state"
+      value: [
+        productDetails.region?.value?.replace(/-/g, " "),
+        getAttr("Location"),
+      ].filter(Boolean).join(", "),
+      links: (() => {
+        const result: LinkOut[] = [];
+        const regionVal = productDetails.region?.value;
+        const regionSlug = productDetails.region?.slug;
+        const state = getAttr("Location");
+        const stateAttr = findAttr("Location");
+        const stateSlug = stateAttr?.url?.trim() || `${slugify(state)}-state`;
+        if (regionVal && regionSlug) {
+          result.push({
+            href: `/listings/${stateSlug}/${regionSlug}/`,
+            text: regionVal.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
+          });
+        }
+        if (state) {
+          result.push(
+            stateAttr?.url
+              ? linkFromApiUrl(stateAttr.url, state)
+              : { href: `/listings/${stateSlug}/`, text: state },
+          );
+        }
+        return result.length > 0 ? result : undefined;
+      })(),
     },
   ];
 
@@ -286,15 +316,17 @@ export default function ClientLogger({
     // ---- fallback logic ----
     if (L === "category" || L === "type") {
       return v.split(",").map((c) => ({
-        href: `/listings/${slugify(c)}-category/`,
+        href: `/listings/${slugify(c.replace(/\s*caravan\s*/gi, " ").trim())}-category/`,
         text: c.trim(),
       }));
     }
 
     if (L === "make") return [{ href: `/listings/${slugify(v)}/`, text: v }];
 
-    if (L === "model")
-      return [{ href: `/listings/${makeValue}/${slugify(v)}/`, text: v }];
+    if (L === "model") {
+      const makeSlug = findAttr("Make")?.url?.trim().replace(/^\/+|\/+$/g, "") || slugify(makeValue);
+      return [{ href: `/listings/${makeSlug}/${slugify(v)}/`, text: v }];
+    }
 
     if (L === "location" || L === "state")
       return [{ href: `/listings/${slugify(v)}-state/`, text: v }];
@@ -385,8 +417,10 @@ export default function ClientLogger({
   };
 
 
-  const makeHref =
-    makeValue && makeValue.trim()
+  const makeAttrUrl = findAttr("Make")?.url?.trim().replace(/^\/+|\/+$/g, "");
+  const makeHref = makeAttrUrl
+    ? `/listings/${makeAttrUrl}/`
+    : makeValue?.trim()
       ? `/listings/${slugify(makeValue)}/`
       : "/listings/";
 
@@ -394,20 +428,15 @@ export default function ClientLogger({
     product.id ?? pd.id ?? product.name;
 
   const productSlug: string | undefined = product.slug ?? pd.slug;
-  console.log("product", data);
 
   const slug = productSlug || "";
   const sku = productDetails.sku;
-  console.log("slug1", productDetails);
-  console.log("rele", relatedProducts);
 
   // ---- gallery state ----
 
   // keep activeImage in sync with main image from API
 
-  const base = `https://caravansforsale.imagestack.net/800x600/${sku}/${slug}`;
-
-  const main = `${base}main1.avif`;
+ 
 
   // function buildImageCandidates(sku?: string, slug?: string) {
   //   if (!sku || !slug) return [];
@@ -419,9 +448,14 @@ export default function ClientLogger({
   //     ...Array.from({ length: 4 }, (_, i) => `${base}sub${i + 2}.avif`),
   //   ];
   // }
-  const [galleryImages, setGalleryImages] = useState<string[]>([]);
-  const [activeImage, setActiveImage] = useState<string>(main);
-
+ const [activeImage, setActiveImage] = useState<string>(
+  () => {
+    const imgs = Array.isArray(productDetails.image_url)
+      ? productDetails.image_url.filter(Boolean)
+      : [];
+    return imgs[0] || "";
+  }
+);
   // useEffect(() => {
   //   let cancelled = false;
 
@@ -461,45 +495,21 @@ export default function ClientLogger({
   //     img.src = url;
   //   });
   // }
+ 
 
-  const getIP = async () => {
-    try {
-      const res = await fetch("https://api.ipify.org?format=json");
-      const data = await res.json();
-      return data.ip || "";
-    } catch {
-      return "";
-    }
-  };
-
-  const postTrackEvent = async (url: string, product_id: number) => {
-    const ip = await getIP();
-    const user_agent = navigator.userAgent;
-
-    await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        product_id,
-        ip,
-        user_agent,
-      }),
-    });
-  };
-
-  useEffect(() => {
-    if (!productDetails?.id) return;
-
-    postTrackEvent(
-      "https://admin.caravansforsale.com.au/wp-json/cfs/v1/update-clicks",
-      Number(productDetails.id),
+  const postTrackEvent = (product_id: number) => {
+  try {
+    navigator.sendBeacon(
+      "/api/track-product/",
+      new Blob([JSON.stringify({ product_id })], { type: "application/json" })
     );
-    postTrackEvent(
-      "https://admin.caravansforsale.com.au/wp-json/cfs/v1/update-impressions",
-      Number(productDetails.id),
-    );
-  }, [productDetails?.id]);
+  } catch {}
+};
+ useEffect(() => {
+  if (!productDetails?.id) return;
 
+  postTrackEvent(Number(productDetails.id));
+}, [productDetails?.id]);
   // ✅ Add these states after allSubs state
 
   // ✅ Update the useEffect where you load gallery
@@ -563,30 +573,14 @@ export default function ClientLogger({
 
   // const [activeImage, setActiveImage] = useState(main);
 
-  // ✅ Build image URLs from API image_url array
-  const productSubImage: string[] = useMemo(() => {
-    const raw = productDetails.image_url;
-
-    console.log("API image_url:", raw); // Debug
-
-    if (Array.isArray(raw) && raw.length > 0) {
-      const urls = raw
-        .filter((v) => typeof v === "string" && v.trim() !== "")
-        .map((key) => `${IMAGE_BASE}${key}${IMAGE_EXT}`);
-
-      console.log("Built image URLs:", urls); // Debug
-      return urls;
-    }
-
-    return [];
-  }, [productDetails.image_url]);
+ 
 
   // ✅ Set active image when productSubImage loads
   useEffect(() => {
-    if (productSubImage.length > 0) {
-      setActiveImage(productSubImage[0]);
+    if (apiImages.length > 0) {
+      setActiveImage(apiImages[0]);
     }
-  }, [productSubImage]);
+  }, [apiImages]);
 
   return (
     <>
@@ -653,14 +647,24 @@ export default function ClientLogger({
                     </div>
                   </div>
 
-                  {product.location_shortcode &&
-                    product.location_shortcode.trim() !== "" && (
-                      <div className="attributes">
-                        <h6 className="category">
-                          Location- {product.location_shortcode}
-                        </h6>
-                      </div>
-                    )}
+                <div className="attributes d-flex align-items-center gap-2 flex-wrap">
+  
+  {product.location_shortcode && (
+    <span className="location_text">
+      Location - {product.location_shortcode}
+    </span>
+  )}
+
+  {product.seller_type && (
+    <span className="seller_badge">
+      
+          {product.seller_type?.replace(/^\w/, c => c.toUpperCase())}           
+
+     </span>
+  )}
+
+</div>
+
                 </div>
 
                 <div className="caravan_slider_visible">
@@ -672,7 +676,7 @@ export default function ClientLogger({
                   {/* Thumbnails */}
                   <div className="slider_thumb_vertical image_container">
                     <div className="image_mop">
-                      {productSubImage.slice(0, 4).map((image, i) => (
+                      {apiImages.slice(0, 4).map((image, i) => (
                         <div className="image_item" key={`${image}-${i}`}>
                           <div className="background_thumb">
                             <Image
@@ -701,7 +705,7 @@ export default function ClientLogger({
                       ))}
                       <div>
                         <span className="caravan__image_count">
-                          {productSubImage.length}
+                          {apiImages.length}
                         </span>
                       </div>
                     </div>
@@ -710,6 +714,7 @@ export default function ClientLogger({
                   {/* Large Image */}
                   <div className="lager_img_view image_container">
                     <div className="background_thumb">
+                       {activeImage && (
                       <Image
                         src={activeImage}
                         width={800}
@@ -718,8 +723,10 @@ export default function ClientLogger({
                         className="img-fluid"
                         unoptimized
                       />
+                       )}
                     </div>
                     <Link href="#">
+                      {activeImage && (
                       <Image
                         src={activeImage}
                         width={800}
@@ -728,6 +735,7 @@ export default function ClientLogger({
                         className="img-fluid"
                         unoptimized
                       />
+                      )}
                     </Link>
                   </div>
                 </div>
@@ -764,11 +772,15 @@ export default function ClientLogger({
                               {specFields
                                 .filter((f) => f.value)
                                 .map((f) => {
-                                  const links = linksForSpec(
-                                    f.label,
-                                    String(f.value),
-                                    f.url, // ✅ prefer API-provided url
-                                  );
+                                  const links =
+                                    f.links ??
+                                    linksForSpec(
+                                      f.label,
+                                      String(f.value),
+                                      f.url,
+                                    );
+                                  const isLength = f.label.toLowerCase() === "length";
+                                  const metersLabel = isLength ? ftToMeters(String(f.value)) : null;
                                   return (
                                     <li key={f.label}>
                                       <strong>{f.label}:</strong>{" "}
@@ -788,6 +800,7 @@ export default function ClientLogger({
                                             </span>
                                           ))
                                           : String(f.value)}
+                                        {metersLabel && <> {metersLabel}</>}
                                       </span>
                                     </li>
                                   );
@@ -1002,7 +1015,7 @@ export default function ClientLogger({
                 <CaravanDetailModal
                   isOpen={showModal}
                   onClose={() => setShowModal(false)}
-                  images={productSubImage}
+                  images={apiImages}
                   product={{
                     id: productId,
                     slug: productSlug,
@@ -1074,7 +1087,7 @@ export default function ClientLogger({
                               <div className="product_de">
                                 <div className="info">
                                   <h6 className="category">
-                                    <i className="fa fa-map-marker-alt"></i>{" "}
+                                    <i className="fa-solid fa-location-dot"></i>{" "}
                                     <span>{post.location}</span>
                                   </h6>
                                   <h3 className="title">{post.title}</h3>
@@ -1151,7 +1164,7 @@ export default function ClientLogger({
                         <div className="product-card">
                           <div className="img">
                             <Image
-                              src={post.image}
+                              src={post.image || "/images/download.svg"}
                               alt={post.title}
                               width={400}
                               height={250}
