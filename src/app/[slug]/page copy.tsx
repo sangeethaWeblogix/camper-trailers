@@ -65,7 +65,7 @@ export async function generateMetadata({
     seo.metadescription ||
     seo.meta_description ||
     data?.short_description ||
-    "View caravan details.";
+    "View camping trailer details.";
   const robots = "index, follow";
   const canonicalUrl = `https://www.caravansforsale.com.au/${slug}/`;
 
@@ -143,7 +143,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
             </Typography>
 
             <Typography variant="body1" color="text.secondary" gutterBottom>
-              Your caravan dealer will contact you as soon as possible.
+              Your camping trailer dealer will contact you as soon as possible.
             </Typography>
 
             <Link href="/" style={{ textDecoration: "none" }}>
@@ -154,7 +154,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
                   backgroundColor: "orange", // Set background to orange
                   color: "white", // Make text white
                   "&:hover": {
-                    backgroundColor: "#ec7200", // Darker orange on hover
+                    backgroundColor: "#0066cc", // Darker orange on hover
                   },
                 }}
               >

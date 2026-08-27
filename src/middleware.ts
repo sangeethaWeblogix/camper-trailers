@@ -304,7 +304,7 @@ export async function middleware(request: NextRequest) {
     'listings', 'listings-demo', 'product', 'api', '_next', 'blog', 'author', 'caravan-manufacturers',
     '410', '404', '410-new', 'images', 'fonts', 'icons',
     'demo', 'product-detail-demo',
-    'sell-my-caravan',
+    'sell-my-caravan', 'sell-my-camper-trailer',
   ]);
   const pathSegments = url.pathname.split('/').filter(Boolean);
   if (pathSegments.length >= 2 && !KNOWN_MULTI_SEGMENT.has(pathSegments[0])) {

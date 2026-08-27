@@ -15,7 +15,7 @@ const data = [
     img: "/images/australian-offroad.png",
     alt: "Australian Off Road Logo",
     title: "Australian Off Road",
-    desc: "Explore AOR caravans in Australia with our detailed review, covering top models, features and pricing to help you plan your next rugged adventure.",
+    desc: "Explore AOR camping trailers in Australia with our detailed review, covering top models, features and pricing to help you plan your next rugged adventure.",
     type: "Off Road, Hybrid, Campers",
     brand: "AOA",
     link: "/aor-caravans-australia-reviews-prices-models/",
@@ -42,7 +42,7 @@ const data = [
     img: "/images/Avan.png",
     alt: "Avan Logo",
     title: "Avan Caravans",
-    desc: "Explore our Avan Caravans review with 2025 models, key features and prices to help you choose the right caravan for your travels in Australia.",
+    desc: "Explore our Avan Caravans review with 2025 models, key features and prices to help you choose the right camping trailer for your travels in Australia.",
     type: "Campers, Pop Tops, Hard Tops",
     brand: "Avan",
     link: "/avan-caravans-review-features-prices/",
@@ -60,7 +60,7 @@ const data = [
     img: "/images/Crusader-Caravans.png",
     alt: "Crusader Caravans Logo",
     title: "Crusader Caravans",
-    desc: "Read our Crusader Caravans review covering key features, model options and pricing to help you choose the perfect caravan for your adventures.",
+    desc: "Read our Crusader Caravans review covering key features, model options and pricing to help you choose the perfect camping trailer for your adventures.",
     type: "Off-Road, Touring, Family, Luxury",
     brand: "Crusader",
     link: "/crusader-caravans-review-features-compare-prices/",
@@ -69,7 +69,7 @@ const data = [
     img: "/images/JB-caravans.png",
     alt: "JB Caravans Logo",
     title: "JB Caravans",
-    desc: "Explore our JB Caravans review with 2025 models, prices and features. From off-road touring to luxury travel, find the perfect caravan for you.",
+    desc: "Explore our JB Caravans review with 2025 models, prices and features. From off-road touring to luxury travel, find the perfect camping trailer for you.",
     type: "Off-Road, Hybrid, On-Road",
     brand: "JB",
     link: "/jb-caravans-australia-models-reviews-prices/",
@@ -78,7 +78,7 @@ const data = [
     img: "/images/MDC.png",
     alt: "MDC Caravans Logo",
     title: "MDC Caravans",
-    desc: "Discover our MDC Caravans review, exploring features and comparing off-road models to help you choose the ideal adventure-ready caravan today.",
+    desc: "Discover our MDC Caravans review, exploring features and comparing off-road models to help you choose the ideal adventure-ready camping trailer today.",
     type: "Off-Road, Hybrid, On-Road",
     brand: "MDC",
     link: "/mdc-caravans-australia-reviews-features/",
@@ -141,7 +141,7 @@ const data = [
     img: "/images/urban-caravans.png",
     alt: "Urban Caravans Logo",
     title: "Urban Caravans",
-    desc: "Discover our Urban Caravans review with model comparisons, features and pricing to help you choose a durable off-road-ready caravan.",
+    desc: "Discover our Urban Camping Trailers review with model comparisons, features and pricing to help you choose a durable off-road-ready camping trailer.",
     type: "Off-Road, Off-Grid, Hybrid, On-Road",
     brand: "AOA",
     link: "/Urban-caravans-australia-review-prices-models/",
@@ -150,7 +150,7 @@ const data = [
     img: "/images/Vision_Logo.png",
     alt: "Vision RV Caravans Logo",
     title: "Vision RV Caravans",
-    desc: "Explore our Vision RV Caravans review, comparing models, key features and off-road performance to help you choose the ideal tough caravan.",
+    desc: "Explore our Vision RV Camping Trailers review, comparing models, key features and off-road performance to help you choose the ideal tough camping trailer.",
     type: "Off-Road, Family, Luxury",
     brand: "Vision RV",
     link: "/vision-rv-caravans-review-australia/",
@@ -159,7 +159,7 @@ const data = [
     img: "/images/Trakmaster.png",
     alt: "Trakmaster Logo",
     title: "Trakmaster",
-    desc: "Read our Trakmaster Pilbara Extreme review, exploring off-road strength, features and why this caravan is built for serious adventure.",
+    desc: "Read our Trakmaster Pilbara Extreme review, exploring off-road strength, features and why this camping trailer is built for serious adventure.",
     type: "Off-Road, Camper",
     brand: "Trakmaster",
     link: "/trakmaster-pilbara-extreme-review/",
@@ -177,7 +177,7 @@ const data = [
     img: "/images/newgen-logo.png",
     alt: "Newgen Caravans Logo",
     title: "Newgen Caravans",
-    desc: "Read our Newgen NG15 review exploring layout, premium features and off-road capability, helping you pick this standout hybrid caravan.",
+    desc: "Read our Newgen NG15 review exploring layout, premium features and off-road capability, helping you pick this standout hybrid camping trailer.",
     type: "Off-Road, Hybrid",
     brand: "Newgen",
     link: "/newgen-caravans-ng15-comprehensive-review/",
@@ -188,8 +188,8 @@ const Manufacture = () => {
   return (
     <div className="container">
       <div className="section-head mb-40">
-        <h2>Top Caravan Brands Reviewed – Real Insights, Real Value</h2>
-        <p>Discover in-depth reviews of Australia’s most trusted caravan manufacturers — with honest insights into build quality, off-road performance, layouts, comfort, and long-term reliability. Explore each brand to see how they truly stack up before you buy.</p>
+        <h2>Top Camping Trailer Brands Reviewed – Real Insights, Real Value</h2>
+        <p>Discover in-depth reviews of Australia’s most trusted camping trailer manufacturers — with honest insights into build quality, off-road performance, layouts, comfort, and long-term reliability. Explore each brand to see how they truly stack up before you buy.</p>
       </div>
 
       <div className="range-home position-relative">

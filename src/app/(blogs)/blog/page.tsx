@@ -6,7 +6,7 @@ import { fetchBlogs } from "@/api/blog/api";
 export const metadata: Metadata = {
   title: { default: "Latest News, Reviews & Advice", template: "%s " },
   description:
-    "Latest news, in-depth reviews, and expert advice on the latest in the caravan market. Stay informed and make smarter decisions.",
+    "Latest news, in-depth reviews, and expert advice on the latest in the camping trailer market. Stay informed and make smarter decisions.",
   icons: { icon: "/favicon.ico" },
   robots: "index, follow",
   alternates: {
@@ -26,7 +26,7 @@ export default async function BlogPage() {
       "@type": "Blog",
       name: "Caravans for Sale Blog",
       description:
-        "Latest news, in-depth reviews, and expert advice on the latest in the caravan market.",
+        "Latest news, in-depth reviews, and expert advice on the latest in the camping trailer market.",
       url: "https://www.caravansforsale.com.au/blog/",
       publisher: {
         "@type": "Organization",

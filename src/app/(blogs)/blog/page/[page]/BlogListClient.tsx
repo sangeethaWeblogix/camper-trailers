@@ -112,7 +112,7 @@ const loading = !data || !blogPosts || blogPosts.length === 0 && data.totalPages
           >
             <div className="section-head mb-60 style-5">
               <h2>
-                Valuable News, Reviews &amp; Advice From Marketplace Network 
+                Valuable News, Reviews &amp; Advice From Marketplace Network
               </h2>
             </div>
 
@@ -234,16 +234,16 @@ const loading = !data || !blogPosts || blogPosts.length === 0 && data.totalPages
             <div className="col-lg-3">
               <div className="display_ad listing_sticky">
                 <div className="blog-sidebar-cta">
-                  <h3 className="blog-sidebar-cta__heading">Ready to Find Your Next Caravan?</h3>
-                  <p className="blog-sidebar-cta__desc">Browse thousands of new and used caravans from trusted dealers and private sellers across Australia.</p>
+                  <h3 className="blog-sidebar-cta__heading">Ready to Find Your Next Camping Trailer?</h3>
+                  <p className="blog-sidebar-cta__desc">Browse thousands of new and used camping trailers from trusted dealers and private sellers across Australia.</p>
                   <a href="/listings/" className="blog-sidebar-cta__btn">
-                    Search Caravans Now <i className="bi bi-arrow-right" />
+                    Search Camping Trailers Now <i className="bi bi-arrow-right" />
                   </a>
                 </div>
                 <div className="blog-sidebar-cta blog-sidebar-cta--sell">
-                  <h3 className="blog-sidebar-cta__heading">Sell Your Caravan Faster with Australia&apos;s Growing Caravan Marketplace</h3>
-                  <a href="/sell-my-caravan/" className="blog-sidebar-cta__btn">
-                    List Your Caravan Now <i className="bi bi-arrow-right" />
+                  <h3 className="blog-sidebar-cta__heading">Sell Your Camping Trailer Faster with Australia&apos;s Growing Camping Trailer Marketplace</h3>
+                  <a href="/sell-my-camper-trailer/" className="blog-sidebar-cta__btn">
+                    List Your Camping Trailer Now <i className="bi bi-arrow-right" />
                   </a>
                 </div>
                 {false &&

@@ -14,7 +14,7 @@ export default function CaravanBuyingSafetyGuide() {
               </h1>
 
               <p>
-                Buying a caravan is an exciting investment, whether you’re planning weekend trips or long-term travel.
+                Buying a camping trailer is an exciting investment, whether you’re planning weekend trips or long-term travel.
                 While most sellers are genuine, it is important to take precautions to ensure your purchase is safe and legitimate.
               </p>
 
@@ -34,24 +34,24 @@ export default function CaravanBuyingSafetyGuide() {
               <ul>
                 <li>confirm the seller’s name and contact details</li>
                 <li>speak directly with the seller via phone where possible</li>
-                <li>ask additional questions about the caravan</li>
+                <li>ask additional questions about the camping trailer</li>
                 <li>be cautious if the seller refuses to provide basic information</li>
               </ul>
 
               <p>
-                Legitimate sellers should have no issue answering reasonable questions about the caravan.
+                Legitimate sellers should have no issue answering reasonable questions about the camping trailer.
               </p>
 
-              <h3>2. Inspect the Caravan Before Payment</h3>
+              <h3>2. Inspect the Camping Trailer Before Payment</h3>
 
               <p>
-                Whenever possible, inspect the caravan in person before making any payment.
+                Whenever possible, inspect the camping trailer in person before making any payment.
               </p>
 
               <p>During an inspection, check:</p>
 
               <ul>
-                <li>structural condition of the caravan</li>
+                <li>structural condition of the camping trailer</li>
                 <li>signs of water damage or leaks</li>
                 <li>chassis condition</li>
                 <li>tyres and suspension</li>
@@ -60,35 +60,35 @@ export default function CaravanBuyingSafetyGuide() {
               </ul>
 
               <p>
-                If you are unable to inspect the caravan yourself, consider hiring an independent caravan inspector.
+                If you are unable to inspect the camping trailer yourself, consider hiring an independent camping trailer inspector.
               </p>
 
               <p>
-                Never send payment for a caravan that you have not verified.
+                Never send payment for a camping trailer that you have not verified.
               </p>
 
               <h3>3. Check the VIN or Chassis Number</h3>
 
               <p>
-                Every caravan should have a Vehicle Identification Number (VIN) or chassis number.
+                Every camping trailer should have a Vehicle Identification Number (VIN) or chassis number.
               </p>
 
               <p>Before buying:</p>
 
               <ul>
-                <li>confirm the VIN on the caravan matches the documentation</li>
+                <li>confirm the VIN on the camping trailer matches the documentation</li>
                 <li>ensure the VIN has not been altered or tampered with</li>
-                <li>verify the caravan registration details where applicable</li>
+                <li>verify the camping trailer registration details where applicable</li>
               </ul>
 
               <p>
-                Matching VIN numbers help confirm the caravan’s identity and ownership history.
+                Matching VIN numbers help confirm the camping trailer’s identity and ownership history.
               </p>
 
               <h3>4. Check for Finance Owing</h3>
 
               <p>
-                Before purchasing a caravan, check whether finance is still owing.
+                Before purchasing a camping trailer, check whether finance is still owing.
               </p>
 
               <p>
@@ -98,13 +98,13 @@ export default function CaravanBuyingSafetyGuide() {
               <p>A PPSR search can reveal whether:</p>
 
               <ul>
-                <li>finance is still owing on the caravan</li>
-                <li>another party has a financial interest in the caravan</li>
-                <li>the caravan has been reported stolen</li>
+                <li>finance is still owing on the camping trailer</li>
+                <li>another party has a financial interest in the camping trailer</li>
+                <li>the camping trailer has been reported stolen</li>
               </ul>
 
               <p>
-                Purchasing a caravan with outstanding finance could affect your ownership rights.
+                Purchasing a camping trailer with outstanding finance could affect your ownership rights.
               </p>
 
               <p>
@@ -114,7 +114,7 @@ export default function CaravanBuyingSafetyGuide() {
               <h3>5. Be Cautious of Prices That Are Too Good to Be True</h3>
 
               <p>
-                Scammers often advertise caravans at prices significantly below market value.
+                Scammers often advertise camping trailers at prices significantly below market value.
               </p>
 
               <p>Be cautious if:</p>
@@ -122,7 +122,7 @@ export default function CaravanBuyingSafetyGuide() {
               <ul>
                 <li>the price seems unusually low</li>
                 <li>the seller claims urgent circumstances for selling</li>
-                <li>the seller says the caravan is located overseas</li>
+                <li>the seller says the camping trailer is located overseas</li>
                 <li>the seller asks for immediate payment</li>
               </ul>
 
@@ -138,7 +138,7 @@ export default function CaravanBuyingSafetyGuide() {
 
               <ul>
                 <li>verified the seller</li>
-                <li>inspected the caravan</li>
+                <li>inspected the camping trailer</li>
                 <li>confirmed ownership documentation</li>
               </ul>
 
@@ -232,7 +232,7 @@ export default function CaravanBuyingSafetyGuide() {
 
               <p>
                 Buyers are responsible for conducting their own inspections,
-                verification checks, and due diligence before purchasing any caravan.
+                verification checks, and due diligence before purchasing any camping trailer.
               </p>
 
             </div>

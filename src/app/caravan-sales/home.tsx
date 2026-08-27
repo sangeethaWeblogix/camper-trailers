@@ -62,7 +62,7 @@ const SEARCH_FILTERS = [
       { text: "Under $100,000",        href: "/listings/?max_price=100000&category=off-road" },
       { text: "Over $100,000",         href: "/listings/?min_price=100000&category=off-road" },
       { text: "Second Hand Off Road",  href: "/listings/?condition=used&category=off-road" },
-      { text: "New Off Road Caravans", href: "/listings/?condition=new&category=off-road" },
+      { text: "New Off Road Camping Trailers", href: "/listings/?condition=new&category=off-road" },
     ],
   },
   {
@@ -108,19 +108,19 @@ export default function OffRoadCaravansPage({ stateBands, blogPosts }: Props) {
       <section className="cs-banner">
         <div className="cs-banner__inner">
           <div className="cs-banner__img">
-            <img src="/images/caravn-sales-banner.jpg" alt="Caravan Sales Australia" />
+            <img src="/images/caravn-sales-banner.jpg" alt="Camping Trailer Sales Australia" />
           </div>
           <div className="cs-banner__content">
             <h1 className="cs-banner__title">
-              <span className="cs-banner__title-orange">Caravan Sales</span>
+              <span className="cs-banner__title-orange">Camping Trailer Sales</span>
               <span className="cs-banner__title-dark">Australia</span>
             </h1>
             <p className="cs-banner__desc">
-              Find the best caravan sales across Australia and connect with trusted dealers and private sellers. Browse thousands of new and used listings—including off-road, family, touring, luxury, and pop-top caravans—and easily filter by location, price, size and towing weight to find the perfect van for your next adventure.
+              Find the best camping trailer sales across Australia and connect with trusted dealers and private sellers. Browse thousands of new and used listings—including off-road, family, touring, luxury, and pop-top camping trailers—and easily filter by location, price, size and towing weight to find the perfect van for your next adventure.
             </p>
             <div className="cs-banner__btns">
-              <a href="/listings/" className="cs-banner__btn cs-banner__btn--primary">Browse All Caravans for Sale</a>
-              <a href="/sell-my-caravan/" className="cs-banner__btn cs-banner__btn--outline">Sell Your Caravan</a>
+              <a href="/listings/" className="cs-banner__btn cs-banner__btn--primary">Browse All Camping Trailers for Sale</a>
+              <a href="/sell-my-camper-trailer/" className="cs-banner__btn cs-banner__btn--outline">Sell Your Camping Trailer</a>
             </div>
           </div>
         </div>
@@ -129,7 +129,7 @@ export default function OffRoadCaravansPage({ stateBands, blogPosts }: Props) {
             <img src="/images/category.svg" alt="" className="cs-banner__stat-icon" />
             <div className="cs-banner__stat-text">
               <strong>7,000+</strong>
-              <span>Active Caravan Sales<br></br>Australia Wide</span>
+              <span>Active Camping Trailer Sales<br></br>Australia Wide</span>
             </div>
           </div>
           <div className="cs-banner__stat">
@@ -143,7 +143,7 @@ export default function OffRoadCaravansPage({ stateBands, blogPosts }: Props) {
             <img src="/images/seller.svg" alt="" className="cs-banner__stat-icon" />
             <div className="cs-banner__stat-text">
               <strong>Dealers & Private Sellers</strong>
-              <span>Compare New &<br></br>Used Caravans</span>
+              <span>Compare New &<br></br>Used Camping Trailers</span>
             </div>
           </div>
           <div className="cs-banner__stat">
@@ -164,11 +164,11 @@ export default function OffRoadCaravansPage({ stateBands, blogPosts }: Props) {
         <div className="container">
           <div className="sell-banner">
             <div className="sell-content">
-              <h3>Caravan Sales Made Hassle-Free & Straightforward</h3>
-              <p className="desc">List your van on Australia’s leading caravan sales marketplace and easily connect with thousands of serious buyers</p>
+              <h3>Camping Trailer Sales Made Hassle-Free & Straightforward</h3>
+              <p className="desc">List your van on Australia’s leading camping trailer sales marketplace and easily connect with thousands of serious buyers</p>
               <div className="btns_two">
                 <a href="/dealer-advertising/" className="btn primary-btn">Dealer Sign Up</a>
-                <a href="/sell-my-caravan/" className="btn secondary-btn">Private Seller - Click Here</a>
+                <a href="/sell-my-camper-trailer/" className="btn secondary-btn">Private Seller - Click Here</a>
               </div>
             </div>
           </div>
@@ -176,7 +176,7 @@ export default function OffRoadCaravansPage({ stateBands, blogPosts }: Props) {
       </section>
 
       {/* ── Browse by State ── */}
-      <HomeStateSection stateBands={stateBands} title="Browse Caravans Listings in Australia by State" />
+      <HomeStateSection stateBands={stateBands} title="Browse Camping Trailers Listings in Australia by State" />
 
       {/* ── Location + Search Your Way ── */}
       <HomeLocationSection />

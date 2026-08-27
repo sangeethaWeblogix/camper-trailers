@@ -13,7 +13,7 @@ const staticUrls = [
   "about-us",
   "contact",
   "dealer-advertising",
-  "sell-my-caravan",
+  "sell-my-camper-trailer",
 ];
 
 export async function GET() {

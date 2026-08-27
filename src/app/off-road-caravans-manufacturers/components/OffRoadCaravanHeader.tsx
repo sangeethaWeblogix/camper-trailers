@@ -8,12 +8,12 @@ const OffRoadCaravanHeader = () => {
         <div className="post_featured with_thumb hover_simple post_featured_bg buzzstone_inline_210659395">
           <div className="post_info">
             <h1 className="post_title entry-title">
-              Best <span>Off-Road Caravan</span> Manufacturers You Haven&apos;t
+              Best <span>Off-Road Camping Trailer</span> Manufacturers You Haven&apos;t
               Heard Of
             </h1>
             <p>
               Comprehensive information that helps our users research in the
-              ever growing off road caravan marketplace in Australia.
+              ever growing off road camping trailer marketplace in Australia.
             </p>
             <div>
               <Link
@@ -22,7 +22,7 @@ const OffRoadCaravanHeader = () => {
               >
                 <small>
                   Hybrid Off Road, Semi Off Road, Full Off Road &amp; Extreme
-                  Off Road Caravan Manufacturers
+                  Off Road Camping Trailer Manufacturers
                 </small>
               </Link>
             </div>

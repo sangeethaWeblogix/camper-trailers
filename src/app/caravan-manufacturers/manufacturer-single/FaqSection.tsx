@@ -38,12 +38,13 @@ const FaqSection = () => {
                     >
                       <div className="accordion-body">
                         <h4>
-                          What types of caravans does Everest Caravans
-                          specialize in?
+                          What types of camping trailers does Everest Camping
+                          Trailers specialize in?
                         </h4>
                         <p>
-                          Everest Caravans specializes in custom-built extreme
-                          off-road caravans, including models like{" "}
+                          Everest Caravans specializes in custom-built
+                          extreme off-road camping trailers, including models
+                          like{" "}
                           <Link
                             href="https://www.everestcaravans.com.au/range/falcon/"
                             target="_blank"
@@ -86,14 +87,15 @@ const FaqSection = () => {
                           series.
                         </p>
                         <h4>
-                          Can I customize my caravan with Everest Caravans?
+                          Can I customize my camping trailer with Everest
+                          Camping Trailers?
                         </h4>
                         <p>
-                          Yes, Everest Caravans offers custom-built options to
-                          tailor the caravan to your specific needs and
-                          preferences.
+                          Yes, Everest Caravans offers custom-built
+                          options to tailor the camping trailer to your
+                          specific needs and preferences.
                         </p>
-                        <h4>Are their caravans family-friendly?</h4>
+                        <h4>Are their camping trailers family-friendly?</h4>
                         <p>
                           Yes, the Calibra and Summit models are particularly
                           designed to accommodate families, offering spacious
@@ -124,11 +126,12 @@ const FaqSection = () => {
                     >
                       <div className="accordion-body">
                         <h4>
-                          What range of caravans does Orbit Caravans offer?
+                          What range of camping trailers does Orbit Camping
+                          Trailers offer?
                         </h4>
                         <p>
-                          Orbit Caravans offers luxury off-road caravans such as
-                          the{" "}
+                          Orbit Caravans offers luxury off-road camping
+                          trailers such as the{" "}
                           <Link
                             href="https://orbitcaravans.com.au/range/discovery-x/"
                             target="_blank"
@@ -192,8 +195,9 @@ const FaqSection = () => {
                       <div className="accordion-body">
                         <h4>What technology is used in Grand City Caravans?</h4>
                         <p>
-                          Grand City Caravans utilizes state-of-the-art 3D
-                          modeling software for precise and high-quality builds.
+                          Grand City Caravans utilizes state-of-the-art
+                          3D modeling software for precise and high-quality
+                          builds.
                         </p>
                         <h4>Are Grand City Caravans customizable?</h4>
                         <p>
@@ -216,10 +220,11 @@ const FaqSection = () => {
                           offer customizable options to suit individual
                           preferences and travel needs.
                         </p>
-                        <h4>What types of caravans do they offer?</h4>
+                        <h4>What types of camping trailers do they offer?</h4>
                         <p>
-                          Grand City Caravans offers full off-road caravans like
-                          Nomad and Explorer, semi off-road models like{" "}
+                          Grand City Caravans offers full off-road
+                          camping trailers like Nomad and Explorer, semi
+                          off-road models like{" "}
                           <Link
                             href="https://grandcitycaravans.com.au/range/royale/"
                             target="_blank"
@@ -263,19 +268,20 @@ const FaqSection = () => {
                       <div className="accordion-body">
                         <h4>What makes High Country Caravans stand out?</h4>
                         <p>
-                          High Country Caravans are designed to tackle the
-                          harshest Australian off-road conditions, combining
-                          comfort with durability.
+                          High Country Caravans are designed to tackle
+                          the harshest Australian off-road conditions,
+                          combining comfort with durability.
                         </p>
                         <h4>
-                          What models are available from High Country Caravans?
+                          What models are available from High Country Camping
+                          Trailers?
                         </h4>
                         <p>
                           They offer models such as the Alpine, Explore,
                           Extreme, and Summit, all built for off-road
                           adventures.
                         </p>
-                        <h4>Are their caravans family-friendly?</h4>
+                        <h4>Are their camping trailers family-friendly?</h4>
                         <p>
                           Yes, their models cater to families looking for
                           off-road adventures with ample space and modern
@@ -306,12 +312,12 @@ const FaqSection = () => {
                     >
                       <div className="accordion-body">
                         <h4>
-                          What types of caravans does Silver Valley Caravans
-                          offer?
+                          What types of camping trailers does Silver Valley
+                          Camping Trailers offer?
                         </h4>
                         <p>
-                          Silver Valley Caravans offers luxury touring caravans
-                          such as the{" "}
+                          Silver Valley Caravans offers luxury touring
+                          camping trailers such as the{" "}
                           <Link
                             href="https://www.silvervalleycaravans.com.au/range/the-family-getaway.html"
                             target="_blank"
@@ -353,17 +359,18 @@ const FaqSection = () => {
                           </Link>
                           .
                         </p>
-                        <h4>Are their caravans customizable?</h4>
+                        <h4>Are their camping trailers customizable?</h4>
                         <p>
                           Yes, their models come with customizable options for
                           both interiors and exteriors to meet individual
                           preferences.
                         </p>
-                        <h4>What makes their caravans luxurious?</h4>
+                        <h4>What makes their camping trailers luxurious?</h4>
                         <p>
-                          Silver Valley Caravans incorporate high-quality
-                          materials, modern appliances, and smart storage
-                          solutions to provide a luxurious travel experience.
+                          Silver Valley Caravans incorporate
+                          high-quality materials, modern appliances, and smart
+                          storage solutions to provide a luxurious travel
+                          experience.
                         </p>
                       </div>
                     </div>
@@ -390,17 +397,20 @@ const FaqSection = () => {
                     >
                       <div className="accordion-body">
                         <h4>
-                          What distinguishes Red Centre Caravans from others?
+                          What distinguishes Red Centre Caravans from
+                          others?
                         </h4>
                         <p>
-                          Red Centre Caravans are known for their sturdy
-                          aluminium frame construction, combining lightness with
-                          strength for both on-road and off-road adventures.
+                          Red Centre Caravans are known for their
+                          sturdy aluminium frame construction, combining
+                          lightness with strength for both on-road and
+                          off-road adventures.
                         </p>
-                        <h4>What types of caravans do they offer?</h4>
+                        <h4>What types of camping trailers do they offer?</h4>
                         <p>
                           They offer a variety of models including on-road,
-                          off-road, and semi off-road caravans like the{" "}
+                          off-road, and semi off-road camping trailers like
+                          the{" "}
                           <Link
                             href="https://redcentrecaravans.com.au/newell/"
                             target="_blank"
@@ -434,7 +444,7 @@ const FaqSection = () => {
                           </Link>
                           .
                         </p>
-                        <h4>Are their caravans energy-efficient?</h4>
+                        <h4>Are their camping trailers energy-efficient?</h4>
                         <p>
                           Yes, many of their models feature advanced
                           energy-efficient designs and systems, such as the
@@ -465,21 +475,22 @@ const FaqSection = () => {
                     >
                       <div className="accordion-body">
                         <h4>
-                          What range of caravans does Masterpiece Caravans
-                          provide?
+                          What range of camping trailers does Masterpiece
+                          Camping Trailers provide?
                         </h4>
                         <p>
-                          Masterpiece Caravans offers the ultimate in off-road
-                          caravans with models like Optimum, Performance and
-                          XTM.
+                          Masterpiece Caravans offers the ultimate in
+                          off-road camping trailers with models like Optimum,
+                          Performance and XTM.
                         </p>
                         <h4>
-                          Are their caravans designed for extreme conditions?
+                          Are their camping trailers designed for extreme
+                          conditions?
                         </h4>
                         <p>
-                          Yes, their caravans are engineered for excellence in
-                          the most rugged terrains, providing robust
-                          construction and luxurious interiors.
+                          Yes, their camping trailers are engineered for
+                          excellence in the most rugged terrains, providing
+                          robust construction and luxurious interiors.
                         </p>
                         <h4>Do they offer compact yet luxurious models?</h4>
                         <p>
@@ -512,24 +523,25 @@ const FaqSection = () => {
                     >
                       <div className="accordion-body">
                         <h4>
-                          What type of caravans does Villa Caravans specialize
-                          in?
+                          What type of camping trailers does Villa Camping
+                          Trailers specialize in?
                         </h4>
                         <p>
-                          Villa Caravans specializes in semi off-road caravans
-                          like the Escape SE and Escape, designed for exploring
-                          remote areas with semi off-road capabilities.
+                          Villa Caravans specializes in semi off-road
+                          camping trailers like the Escape SE and Escape,
+                          designed for exploring remote areas with semi
+                          off-road capabilities.
                         </p>
                         <h4>Are Villa Caravans suitable for rough terrains?</h4>
                         <p>
-                          Yes, their semi off-road caravans are built to
-                          withstand dirt roads and remote areas while providing
-                          comfort and luxury.
+                          Yes, their semi off-road camping trailers are built
+                          to withstand dirt roads and remote areas while
+                          providing comfort and luxury.
                         </p>
                         <h4>Do they offer family-friendly options?</h4>
                         <p>
-                          Yes, their caravans are designed to cater to families,
-                          offering spacious and feature-rich models.
+                          Yes, their camping trailers are designed to cater to
+                          families, offering spacious and feature-rich models.
                         </p>
                       </div>
                     </div>
@@ -557,12 +569,12 @@ const FaqSection = () => {
                       <div className="accordion-body">
                         <p>
                           <strong>
-                            What types of caravans does Willow RV offer?
+                            What types of camping trailers does Willow RV offer?
                           </strong>
                         </p>
                         <p>
-                          Willow RV offers a range of Australian-made caravans
-                          including the{" "}
+                          Willow RV offers a range of Australian-made camping
+                          trailers including the{" "}
                           <Link
                             href="https://willowrv.com.au/illawarra-series-caravans/"
                             target="_blank"
@@ -599,28 +611,29 @@ const FaqSection = () => {
                         </p>
                         <p>
                           <strong>
-                            Are the interiors of Willow RV caravans comfortable
-                            for long trips?
+                            Are the interiors of Willow RV camping trailers
+                            comfortable for long trips?
                           </strong>
                         </p>
                         <p>
                           <span style={{ fontWeight: 400 }}>
-                            Absolutely. Willow RV caravans feature luxury
-                            interiors with open-plan layouts, spacious ensuites,
-                            and five-star comfort suitable for both short and
-                            extended stays.
+                            Absolutely. Willow RV camping trailers feature
+                            luxury interiors with open-plan layouts, spacious
+                            ensuites, and five-star comfort suitable for both
+                            short and extended stays.
                           </span>
                         </p>
                         <p>
                           <strong>
                             What kind of value can I expect from a Willow RV
-                            caravan?
+                            camping trailer?
                           </strong>
                           <br />
                           <span style={{ fontWeight: 400 }}>
-                            Willow RV caravans come with premium features
-                            included as standard—delivering exceptional value
-                            without hidden costs or extra upgrades.
+                            Willow RV camping trailers come with premium
+                            features included as standard—delivering
+                            exceptional value without hidden costs or extra
+                            upgrades.
                           </span>
                         </p>
                       </div>
@@ -649,16 +662,16 @@ const FaqSection = () => {
                       <div className="accordion-body">
                         <p>
                           <strong>
-                            What makes Apache Caravans stand out in the
-                            Australian market?
+                            What makes Apache Caravans stand out in
+                            the Australian market?
                           </strong>
                           <br />
                           <span style={{ fontWeight: 400 }}>
-                            Apache Caravans are known for their innovative
-                            layouts, eco-friendly features, and space-efficient
-                            interiors. Their designs prioritise comfort,
-                            practicality, and flexibility for all types of
-                            travellers.
+                            Apache Caravans are known for their
+                            innovative layouts, eco-friendly features, and
+                            space-efficient interiors. Their designs
+                            prioritise comfort, practicality, and flexibility
+                            for all types of travellers.
                           </span>
                         </p>
                         <p>
@@ -674,7 +687,8 @@ const FaqSection = () => {
                         </p>
                         <p>
                           <strong>
-                            Do Apache Caravans cater to off-road conditions?
+                            Do Apache Caravans cater to off-road
+                            conditions?
                           </strong>
                         </p>
                         <p>

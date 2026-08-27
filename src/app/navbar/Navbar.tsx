@@ -73,7 +73,7 @@ export default function Navbar() {
           <div className="logo_left">
             <a className="navbar-brand" href="/">
               <Image
-                src="/images/cfs-logo-black.svg"
+                src="/images/cts-logo.svg"
                 alt="Caravans For Sale"
                 width={150}
                 height={50}
@@ -106,6 +106,7 @@ export default function Navbar() {
                 </li>
 
                 {/* ── Explore dropdown ── */}
+                {/*
                 <li className="nav-item explore-nav-item" ref={exploreRef}>
                   <button
                     className="nav-link explore-nav-btn"
@@ -117,14 +118,15 @@ export default function Navbar() {
                   {exploreOpen && (
                     <div className="explore-dropdown">
                       <a href="/off-road-caravans/" className="explore-item" onClick={() => setExploreOpen(false)}>
-                        Off Road Caravans
+                        Off Road Camping Trailers
                       </a>
                     </div>
                   )}
                 </li>
+                */}
 
                 <li className="nav-item">
-                  <a className="nav-link" href="/sell-my-caravan/">Sell My Caravan</a>
+                  <a className="nav-link" href="/sell-my-camper-trailer/">Sell My Camping Trailer</a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="/dealer-advertising/">Dealer Advertising</a>
@@ -143,8 +145,8 @@ export default function Navbar() {
                 </button>
                 {hamOpen && (
                   <div className="ham-dropdown">
-                    <a href="/listings/" className="ham-item">Caravan Listings</a>
-                    <a href="/sell-my-caravan/" className="ham-item">Sell My Caravan</a>
+                    <a href="/listings/" className="ham-item">Camping Trailer Listings</a>
+                    <a href="/sell-my-camper-trailer/" className="ham-item">Sell My Camping Trailer</a>
                     <a href="/dealer-advertising/" className="ham-item">Dealer Advertising</a>
                     <a href="/blog/" className="ham-item">Blog</a>
                     <a href="/about-us/" className="ham-item">About</a>
@@ -198,7 +200,7 @@ export default function Navbar() {
           <div className="sidenav-panel sidenav-panel-main">
             <div className="sidenav-header">
               <a href="/" onClick={closeNav} className="sidenav-logo-link">
-                <Image src="/images/cfs-logo-black.svg" alt="Caravans For Sale" width={120} height={40} className="sidenav-logo-img" />
+                <Image src="/images/cts-logo.svg" alt="Caravans For Sale" width={120} height={40} className="sidenav-logo-img" />
               </a>
               <button className="sidenav-close" onClick={closeNav} aria-label="Close menu">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -220,7 +222,7 @@ export default function Navbar() {
                     </button>
                     {mobileExploreOpen && (
                       <div className="sidenav-explore-sub">
-                        <a href="/off-road-caravans/" onClick={closeNav}>Off Road Caravans</a>
+                        <a href="/off-road-caravans/" onClick={closeNav}>Off Road Camping Trailers</a>
                       </div>
                     )}
                   </li>
@@ -230,7 +232,7 @@ export default function Navbar() {
                 </ul>
               </div>
               <div className="sidenav-cta">
-                <a href="/sell-my-caravan/" className="sidenav-cta-link" onClick={closeNav}>Sell My Caravan</a>
+                <a href="/sell-my-camper-trailer/" className="sidenav-cta-link" onClick={closeNav}>Sell My Camping Trailer</a>
                 <a href="/dealer-advertising/" className="sidenav-cta-link" onClick={closeNav}>Dealer Advertising</a>
                 <a href="/login/" className="sidenav-cta-login" onClick={closeNav}>
                   <i className="bi bi-person-fill"></i> Login
