@@ -57,7 +57,7 @@ const DEALER_FAQS = [
 
 const DealerLandingPage = () => {
 
-  const [activeFaq, setActiveFaq] = useState(null);
+  const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
 
 
