@@ -38,7 +38,7 @@ export default function OffRoadCaravanMiddle() {
                 We understand that buying a camping trailer is a significant investment,
                 and we offer resources to help make the process easier and help
                 you finding some of the
-                <Link href="https://www.caravansforsale.com.au/best-caravans-full-off-road-capabilities-australia/">
+                <Link href="https://www.campingtrailersforsale.com.au/best-caravans-full-off-road-capabilities-australia/">
                   best off-road camping trailers in Australia
                 </Link>
                 . We are here to make a difference and to genuinely help both
@@ -174,7 +174,7 @@ export default function OffRoadCaravanMiddle() {
               </div>
               <Link
                 className="banner_ad_now"
-                href="https://www.caravansforsale.com.au/"
+                href="https://www.campingtrailersforsale.com.au/"
                 style={{
                   border: "1px solid #d3d3d3",
                   boxShadow: "0px 0px 10px rgb(0 0 0 / 8%)",

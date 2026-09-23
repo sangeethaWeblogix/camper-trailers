@@ -11,13 +11,13 @@ export const metadata: Metadata = {
 import { fetchRequirements } from "@/api/postRquirements/api";
 import { fetchHomePage } from "@/api/home/api";
 
-const API_BASE = process.env.NEXT_PUBLIC_CFS_API_BASE;
-const API_KEY  = process.env.CFS_API_KEY;
-const APP_URL  = process.env.NEXT_PUBLIC_APP_URL || "https://www.caravansforsale.com.au";
+const API_BASE = process.env.MPN_API_BASE;
+const API_KEY  = process.env.MPN_API_KEY;
+const APP_URL  = process.env.NEXT_PUBLIC_APP_URL || "https://www.campingtrailersforsale.com.au";
 
 const wpHeaders = (): Record<string, string> => ({
   Accept: "application/json",
-  ...(API_KEY ? { "X-API-Key": API_KEY } : {}),
+  ...(API_KEY ? { "X-Secret-Key": API_KEY } : {}),
 });
 
 type SnapshotData = {
@@ -32,8 +32,8 @@ async function fetchOffRoadSnapshot(): Promise<SnapshotData> {
   const empty = { total_count: 0, price_min: 0, price_max: 0, used_price_min: 0, used_price_max: 0 };
   try {
     const res = await fetch(
-      `${API_BASE}/market_snapshot?category=off-road`,
-      { headers: wpHeaders(), next: { revalidate: 3600 } }
+      `${API_BASE}/market-snapshot?category=off-road`,
+      { headers: wpHeaders(), cache: "no-store" }
     );
     if (!res.ok) return empty;
     const raw = await res.text();
@@ -56,62 +56,69 @@ async function fetchOffRoadBlogs(): Promise<any[]> {
   try {
     const res = await fetch(
       `${API_BASE}/blog?product_category=off-road&per_page=20&page=1`,
-      { headers: wpHeaders(), next: { revalidate: 3600 } }
+      { headers: wpHeaders(), cache: "no-store" }
     );
     if (!res.ok) return [];
     const raw = await res.text();
     const jsonStart = raw.indexOf("{");
     const json = JSON.parse(jsonStart <= 0 ? raw : raw.substring(jsonStart));
-    return json?.data?.latest_blog_posts?.items ?? json?.data?.posts ?? json?.posts ?? [];
+    // MPN returns a flat array under `data` (plain/paginated mode, since only
+    // product_category is set here) — older shape nested items under
+    // data.latest_blog_posts.
+    return Array.isArray(json?.data) ? json.data : json?.data?.latest_blog_posts?.items ?? json?.data?.posts ?? json?.posts ?? [];
   } catch { return []; }
 }
 
+// blog-shuffle doesn't exist on the MPN API — /blog's own "related mode"
+// (triggered by make/model/popular) already does this shuffled/limit-5
+// behaviour, so these three now call the same /blog endpoint fetchOffRoadBlogs
+// uses, just with the relevant filter param instead of product_category alone.
 async function fetchOffRoadPopularBlogs(seed: number): Promise<any[]> {
   try {
     const res = await fetch(
-      `${API_BASE}/blog-shuffle?popular=off-road&seed=${seed}`,
-      { headers: wpHeaders(), next: { revalidate: 3600 } }
+      `${API_BASE}/blog?popular=off-road&seed=${seed}`,
+      { headers: wpHeaders(), cache: "no-store" }
     );
     if (!res.ok) return [];
     const raw = await res.text();
     const jsonStart = raw.indexOf("{");
     const json = JSON.parse(jsonStart <= 0 ? raw : raw.substring(jsonStart));
-    return json?.data ?? json?.posts ?? json?.items ?? [];
+    return Array.isArray(json?.data) ? json.data : json?.posts ?? json?.items ?? [];
   } catch { return []; }
 }
 
 async function fetchOffRoadBrandBlogs(seed: number): Promise<any[]> {
   try {
     const res = await fetch(
-      `${API_BASE}/blog-shuffle?make=off-road&seed=${seed}`,
-      { headers: wpHeaders(), next: { revalidate: 3600 } }
+      `${API_BASE}/blog?make=off-road&seed=${seed}`,
+      { headers: wpHeaders(), cache: "no-store" }
     );
     if (!res.ok) return [];
     const raw = await res.text();
     const jsonStart = raw.indexOf("{");
     const json = JSON.parse(jsonStart <= 0 ? raw : raw.substring(jsonStart));
-    return json?.data ?? json?.posts ?? json?.items ?? [];
+    return Array.isArray(json?.data) ? json.data : json?.posts ?? json?.items ?? [];
   } catch { return []; }
 }
 
 async function fetchOffRoadModelBlogs(seed: number): Promise<any[]> {
   try {
     const res = await fetch(
-      `${API_BASE}/blog-shuffle?model=off-road&seed=${seed}`,
-      { headers: wpHeaders(), next: { revalidate: 3600 } }
+      `${API_BASE}/blog?model=off-road&seed=${seed}`,
+      { headers: wpHeaders(), cache: "no-store" }
     );
     if (!res.ok) return [];
     const raw = await res.text();
     const jsonStart = raw.indexOf("{");
     const json = JSON.parse(jsonStart <= 0 ? raw : raw.substring(jsonStart));
-    return json?.data ?? json?.posts ?? json?.items ?? [];
+    return Array.isArray(json?.data) ? json.data : json?.posts ?? json?.items ?? [];
   } catch { return []; }
 }
 
 
-export const revalidate = 86400;
+export const dynamic = "force-dynamic";
 
-const CANONICAL = "https://www.caravansforsale.com.au/off-road-caravans/";
+const CANONICAL = "https://www.campingtrailersforsale.com.au/off-road-caravans/";
 
 const schemaJsonLd = {
   "@context": "https://schema.org",
@@ -124,13 +131,13 @@ const schemaJsonLd = {
       "description": "Discover Australia's largest collection of off road camping trailers. Compare full off road, semi off road and hybrid camping trailers, browse live listings, read expert reviews and explore detailed buying guides.",
       "inLanguage": "en-AU",
       "breadcrumb": { "@id": `${CANONICAL}#breadcrumb` },
-      "isPartOf": { "@type": "WebSite", "url": "https://www.caravansforsale.com.au/" },
+      "isPartOf": { "@type": "WebSite", "url": "https://www.campingtrailersforsale.com.au/" },
     },
     {
       "@type": "BreadcrumbList",
       "@id": `${CANONICAL}#breadcrumb`,
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home",             "item": "https://www.caravansforsale.com.au/" },
+        { "@type": "ListItem", "position": 1, "name": "Home",             "item": "https://www.campingtrailersforsale.com.au/" },
         { "@type": "ListItem", "position": 2, "name": "Off Road Camping Trailers", "item": CANONICAL },
       ],
     },

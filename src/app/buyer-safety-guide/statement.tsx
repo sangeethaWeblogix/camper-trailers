@@ -19,7 +19,7 @@ export default function CaravanBuyingSafetyGuide() {
               </p>
 
               <p>
-                CaravansForSale.com.au connects buyers and sellers, but transactions take place directly between those parties.
+                CampingTrailersForSale.com.au connects buyers and sellers, but transactions take place directly between those parties.
                 The following safety guidelines will help you make informed decisions and reduce the risk of scams.
               </p>
 
@@ -218,15 +218,15 @@ export default function CaravanBuyingSafetyGuide() {
               <p>You can contact our team at:</p>
 
               <p>
-                <a href="mailto:admin@caravansforsale.com.au">
-                  admin@caravansforsale.com.au
+                <a href="mailto:admin@campingtrailersforsale.com.au">
+                  admin@campingtrailersforsale.com.au
                 </a>
               </p>
 
               <h3>Important Disclaimer</h3>
 
               <p>
-                CaravansForSale.com.au is an online marketplace operated by Marketplace Network Pty Ltd.
+                CampingTrailersForSale.com.au is an online marketplace operated by Marketplace Network Pty Ltd.
                 We connect buyers and sellers but do not participate in transactions between users.
               </p>
 

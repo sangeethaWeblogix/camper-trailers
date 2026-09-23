@@ -9,14 +9,14 @@ import { ReactNode } from "react";
      template: "%s ",
    },
    description:
-     "Advertise your camping trailer dealership on CaravansForSale.com.au. Unlimited listings, zero lead fees, and reach high-intent camping trailer buyers across Australia.",
+     "Advertise your camping trailer dealership on CampingTrailersForSale.com.au. Unlimited listings, zero lead fees, and reach high-intent camping trailer buyers across Australia.",
    icons: { icon: "/favicon.ico" },
    robots: "index, follow",
    verification: {
      google: "6tT6MT6AJgGromLaqvdnyyDQouJXq0VHS-7HC194xEo", // ✅ this auto generates <meta name="google-site-verification" />
    },
    alternates: {
-    canonical: "https://www.caravansforsale.com.au/dealer-advertising/",
+    canonical: "https://www.campingtrailersforsale.com.au/dealer-advertising/",
    },
    
  

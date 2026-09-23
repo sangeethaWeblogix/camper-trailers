@@ -1,7 +1,7 @@
 import SellerDemo from "./seller-demo";
 import "./seller-demo.css";
 
-const BASE_URL = "https://www.caravansforsale.com.au";
+const BASE_URL = "https://www.campingtrailersforsale.com.au";
 
 const sellPageJsonLd = {
   "@context": "https://schema.org",
@@ -22,7 +22,7 @@ const sellPageJsonLd = {
       "name": "Private Camping Trailer Listing Service",
       "url": `${BASE_URL}/sell-my-camper-trailer/`,
       "description":
-        "List your camping trailer for sale on CaravansForSale.com.au for a one-time $49 fee. No commissions, no subscriptions, live until sold.",
+        "List your camping trailer for sale on CampingTrailersForSale.com.au for a one-time $49 fee. No commissions, no subscriptions, live until sold.",
       "provider": {
         "@type": "Organization",
         "name": "Camping Trailers For Sale",
@@ -48,7 +48,7 @@ const sellPageJsonLd = {
           "name": "How do I sell my camping trailer online in Australia?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "You can sell your camping trailer online by creating a private seller listing on CaravansForSale.com.au. Add your camping trailer details, upload clear photos, set your asking price and publish your ad so buyers across Australia can contact you directly.",
+            "text": "You can sell your camping trailer online by creating a private seller listing on CampingTrailersForSale.com.au. Add your camping trailer details, upload clear photos, set your asking price and publish your ad so buyers across Australia can contact you directly.",
           },
         },
         {
@@ -56,7 +56,7 @@ const sellPageJsonLd = {
           "name": "How much does it cost to list my camping trailer?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It costs $49 inc. GST to list your camping trailer on CaravansForSale.com.au. This is a one-time listing fee with no monthly subscription, no hidden charges and no commission when your camping trailer sells.",
+            "text": "It costs $49 inc. GST to list your camping trailer on CampingTrailersForSale.com.au. This is a one-time listing fee with no monthly subscription, no hidden charges and no commission when your camping trailer sells.",
           },
         },
         {
@@ -88,7 +88,7 @@ const sellPageJsonLd = {
           "name": "Do I pay commission when my camping trailer sells?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. CaravansForSale.com.au does not charge commission when your camping trailer sells. You pay the one-time listing fee and keep 100% of the agreed sale price.",
+            "text": "No. CampingTrailersForSale.com.au does not charge commission when your camping trailer sells. You pay the one-time listing fee and keep 100% of the agreed sale price.",
           },
         },
         {

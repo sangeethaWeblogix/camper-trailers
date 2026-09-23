@@ -1,6 +1,6 @@
 import { cache } from "react";
 
-const API_KEY = process.env.CFS_API_KEY;
+const API_KEY = process.env.MPN_API_KEY;
 const FETCH_TIMEOUT_MS = 8000;
 const MAX_ATTEMPTS = 3;
 
@@ -13,7 +13,7 @@ async function fetchWithTimeout(url: string) {
       headers: {
         Accept: "application/json",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
-        ...(API_KEY && { "X-API-Key": API_KEY }),
+        ...(API_KEY && { "X-Secret-Key": API_KEY }),
       },
       signal: controller.signal,
     });
@@ -22,13 +22,18 @@ async function fetchWithTimeout(url: string) {
   }
 }
 
+// MPN_API_BASE already includes the /camping-trailers vehicle-scope suffix
+// (e.g. https://admin.marketplacenetwork.com.au/wp-json/mpn/v1/camping-trailers),
+// but blog detail lives on the root mpn-blog namespace (GET /blog/{slug}),
+// not under /camping-trailers — strip that suffix back off to get there.
+// Response envelope matches the old /blog-detail-new shape by design.
+const MPN_ROOT_BASE = process.env.MPN_API_BASE?.replace(/\/camping-trailers\/?$/, "");
+
 // cache() dedupes identical (slug, seed) calls within a single request, so
 // generateMetadata + layout + page no longer each hit the WP API separately.
 export const fetchBlogDetail = cache(async (slug: string, seed?: number) => {
-  const seedParam = seed ? `&seed=${seed}` : "";
-  const url = `https://admin.caravansforsale.com.au/wp-json/cfs/v1/blog-detail-new/?slug=${encodeURIComponent(
-    slug
-  )}${seedParam}`;
+  const seedParam = seed ? `?seed=${seed}` : "";
+  const url = `${MPN_ROOT_BASE}/blog/${encodeURIComponent(slug)}${seedParam}`;
 
   let lastErr: unknown;
   for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
@@ -38,7 +43,7 @@ export const fetchBlogDetail = cache(async (slug: string, seed?: number) => {
         return null;
       }
       if (!res.ok) {
-        lastErr = new Error(`blog-detail-new status ${res.status}`);
+        lastErr = new Error(`blog detail status ${res.status}`);
         continue;
       }
       const raw = await res.text();

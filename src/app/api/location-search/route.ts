@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const API_BASE = process.env.NEXT_PUBLIC_CFS_API_BASE;
-const API_KEY = process.env.CFS_API_KEY;
+const API_BASE = process.env.MPN_API_BASE;
+const API_KEY = process.env.MPN_API_KEY;
 
 export async function GET(req: NextRequest) {
   const keyword = req.nextUrl.searchParams.get("keyword") ?? "";
@@ -15,9 +15,9 @@ export async function GET(req: NextRequest) {
     {
       headers: {
         Accept: "application/json",
-        ...(API_KEY && { "X-API-Key": API_KEY }),
+        ...(API_KEY && { "X-Secret-Key": API_KEY }),
       },
-      next: { revalidate: 86400 }, // location data is static — cache for 24h
+      cache: "no-store",
     }
   );
 
@@ -30,6 +30,6 @@ export async function GET(req: NextRequest) {
   }
 
   const response = NextResponse.json(json, { status: res.status });
-  response.headers.set("Cache-Control", "public, max-age=3600, stale-while-revalidate=86400");
+  response.headers.set("Cache-Control", "no-store");
   return response;
 }

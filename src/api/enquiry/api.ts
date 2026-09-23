@@ -1,10 +1,11 @@
 // src/api/enquiry/api.ts
-const API_BASE = process.env.NEXT_PUBLIC_CFS_API_BASE;
-// e.g. "https://www.dev.caravansforsale.com.au/wp-json/cfs/v1"
-const API_KEY = process.env.CFS_API_KEY;
+const API_BASE = process.env.MPN_API_BASE;
+// e.g. "https://www.dev.campingtrailersforsale.com.au/wp-json/cfs/v1"
+const API_KEY = process.env.MPN_API_KEY;
 
 export type ProductEnquiryPayload = {
   product_id: number | string;
+  product_slug: string;
   email: string;
   name: string;
   phone: string;
@@ -28,13 +29,13 @@ export type ProductEnquiryResponse = {
 export async function createProductEnquiry(
   payload: ProductEnquiryPayload
 ): Promise<ProductEnquiryResponse> {
-  if (!API_BASE) throw new Error("Missing NEXT_PUBLIC_CFS_API_BASE");
+  if (!API_BASE) throw new Error("Missing MPN_API_BASE");
 
-  const res = await fetch(`${API_BASE}/product_enquiry`, {
+  const res = await fetch(`${API_BASE}/enquiries/product`, {
     method: "POST",
     headers: {
         Accept: "application/json",
-        ...(API_KEY && { "X-API-Key": API_KEY }), // ✅ API key added
+        ...(API_KEY && { "X-Secret-Key": API_KEY }), // ✅ API key added
       },
     body: JSON.stringify(payload),
     // next/image pages usually don't need credentials; add if your API requires:

@@ -3,7 +3,7 @@ import statesData from "../../../../cfs-paths/states.json";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
-  "https://www.caravansforsale.com.au/listings/";
+  "https://www.campingtrailersforsale.com.au/listings/";
 
 export async function GET() {
   try {

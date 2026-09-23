@@ -1,17 +1,17 @@
 // src/api/homeSearch/api.ts
-const API_BASE = process.env.NEXT_PUBLIC_CFS_API_BASE;
-const API_KEY = process.env.CFS_API_KEY; // ✅ Add this
+const API_BASE = process.env.MPN_API_BASE;
+const API_KEY = process.env.MPN_API_KEY; // ✅ Add this
 
 export async function fetchKeywordSuggestions(
   query: string,
   signal?: AbortSignal
 ): Promise<string[]> {
-  if (!API_BASE) throw new Error("Missing NEXT_PUBLIC_CFS_API_BASE");
-  const url = `${API_BASE}/home_search/?keyword=${encodeURIComponent(query)}`;
+  if (!API_BASE) throw new Error("Missing MPN_API_BASE");
+  const url = `${API_BASE}/search-keyword?keyword=${encodeURIComponent(query)}`;
 
   const res = await fetch(url, {  headers: {
     Accept: "application/json",
-    ...(API_KEY && { "X-API-Key": API_KEY }), // ✅ Missing — add this
+    ...(API_KEY && { "X-Secret-Key": API_KEY }), // ✅ Missing — add this
   }, cache: "no-store", signal });
   if (!res.ok) throw new Error(`Keyword API failed: ${res.status}`);
 

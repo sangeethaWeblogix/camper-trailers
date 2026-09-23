@@ -1,31 +1,22 @@
-const API_KEY = process.env.CFS_API_KEY; // ✅ Added
+const API_KEY = process.env.MPN_API_KEY;
+
+// /click needs the listing slug (query param) — the old update-clicks
+// endpoint took product_id in the body; the MPN API's click beacon is
+// slug-based instead, so this route now requires slug from the caller.
 export async function POST(req: Request) {
   try {
     const body = await req.json();
+    const slug: string | undefined = body.slug;
+    if (!slug) return Response.json({ success: false, error: "slug required" });
 
-    // ✅ Get user IP from headers
-    const ip =
-      req.headers.get("x-forwarded-for") ||
-      req.headers.get("x-real-ip") ||
-      "unknown";
-
-    const user_agent = req.headers.get("user-agent") || "";
-  console.log("IP:", ip);
-  console.log("IPUA:", user_agent);
-    // 🔥 Your existing API call (move here)
     await fetch(
-      "https://admin.caravansforsale.com.au/wp-json/cfs/v1/update-clicks",
+      `${process.env.MPN_API_BASE}/click?slug=${encodeURIComponent(slug)}`,
       {
         method: "POST",
-       headers: {
+        headers: {
           "Content-Type": "application/json",
-          ...(API_KEY && { "X-API-Key": API_KEY }), // ✅ Added
+          ...(API_KEY && { "X-Secret-Key": API_KEY }),
         },
-        body: JSON.stringify({
-          product_id: body.product_id,
-          ip,
-          user_agent,
-        }),
       }
     );
 

@@ -75,12 +75,12 @@ import GlobalImageFallback from "@/components/GlobalImageFallback";
       "/caravan-manufacturers/": {
         title: "Top 10 Camping Trailer Manufacturers in Australia: Best Brands of 2024",
         description: "See how top Australian camping trailer manufacturers excel with the best in innovative designs, quality construction, cost efficiency, and expert craftsmanship.",
-        canonical: "https://www.caravansforsale.com.au/caravan-manufacturers/",
+        canonical: "https://www.campingtrailersforsale.com.au/caravan-manufacturers/",
       },
       "/off-road-caravans-manufacturers/": {
         title: "Top Off-Road Camping Trailer Manufacturers in Australia: Best Brands 2024",
         description: "Discover Australia's leading off-road camping trailer manufacturers. Compare top brands known for rugged build quality, innovative design, and outback-ready performance.",
-        canonical: "https://www.caravansforsale.com.au/off-road-caravans-manufacturers/",
+        canonical: "https://www.campingtrailersforsale.com.au/off-road-caravans-manufacturers/",
       },
     };
     const staticMeta = STATIC_META[pathname] ?? null;
@@ -101,7 +101,7 @@ import GlobalImageFallback from "@/components/GlobalImageFallback";
       const listingsData = await fetchListingsForHead(normalizedPath);
       if (listingsData) {
         const crumbs = buildBreadcrumbs(pathname);
-        const pageUrl = `https://www.caravansforsale.com.au${normalizedPath}`;
+        const pageUrl = `https://www.campingtrailersforsale.com.au${normalizedPath}`;
         const { collectionPageLd, searchResultsLd } = buildListingsJsonLd(
           listingsData,
           pageUrl,
@@ -124,7 +124,7 @@ import GlobalImageFallback from "@/components/GlobalImageFallback";
       // Middleware signals 0 products via x-robots: noindex — use it directly, no API call needed
       if (isListingSlug && xRobots === "noindex") {
         slugRobots = "noindex";
-        slugCanonical = `https://www.caravansforsale.com.au/listings/${slugParts.join("/")}/`;
+        slugCanonical = `https://www.campingtrailersforsale.com.au/listings/${slugParts.join("/")}/`;
         slugDescription = "Browse camping trailers for sale across Australia. Compare prices on off-road, hybrid, pop top, touring, luxury models with size, weight & sleeping capacity.";
       } else {
         // try {
@@ -151,7 +151,7 @@ import GlobalImageFallback from "@/components/GlobalImageFallback";
         //   slugTitle = parts.length
         //     ? `${parts.join(" ")} Caravans for Sale in Australia`
         //     : "Caravans for Sale in Australia";
-        //   slugCanonical = `https://www.caravansforsale.com.au/listings/${slugParts.join("/")}/`;
+        //   slugCanonical = `https://www.campingtrailersforsale.com.au/listings/${slugParts.join("/")}/`;
         //   slugDescription = "Browse caravans for sale across Australia. Compare prices on off-road, hybrid, pop top, touring, luxury models with size, weight & sleeping capacity.";
         //   slugRobots = "index, follow";
         // }
@@ -202,56 +202,56 @@ import GlobalImageFallback from "@/components/GlobalImageFallback";
                   "@graph": [
                     {
                       "@type": "WebSite",
-                      "@id": "https://www.caravansforsale.com.au/#website",
-                      "url": "https://www.caravansforsale.com.au/",
+                      "@id": "https://www.campingtrailersforsale.com.au/#website",
+                      "url": "https://www.campingtrailersforsale.com.au/",
                       "name": "Camping Trailers For Sale",
                       "alternateName": "Camping Trailers For Sale by Marketplace Network",
                     },
                     {
                       "@type": "Organization",
-                      "@id": "https://www.caravansforsale.com.au/#organization",
+                      "@id": "https://www.campingtrailersforsale.com.au/#organization",
                       "name": "Marketplace Network Pty Ltd",
                       "legalName": "Marketplace Network Pty Ltd",
                       "taxID": "ABN 70 694 987 052",
-                      "url": "https://www.caravansforsale.com.au/",
+                      "url": "https://www.campingtrailersforsale.com.au/",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.caravansforsale.com.au/images/cfs-logo-black.svg",
+                        "url": "https://www.campingtrailersforsale.com.au/images/cfs-logo-black.svg",
                         "caption": "Camping Trailers For Sale by Marketplace Network",
                       },
                       "contactPoint": {
                         "@type": "ContactPoint",
                         "contactType": "customer service",
-                        "url": "https://www.caravansforsale.com.au/contact/",
+                        "url": "https://www.campingtrailersforsale.com.au/contact/",
                         "availableLanguage": "en",
                         "areaServed": "AU",
                       },
                     },
                     {
                       "@type": "ContactPage",
-                      "@id": "https://www.caravansforsale.com.au/contact/#webpage",
-                      "url": "https://www.caravansforsale.com.au/contact/",
+                      "@id": "https://www.campingtrailersforsale.com.au/contact/#webpage",
+                      "url": "https://www.campingtrailersforsale.com.au/contact/",
                       "name": "Contact Us | Get in Touch with Camping Trailers For Sale",
-                      "isPartOf": { "@id": "https://www.caravansforsale.com.au/#website" },
-                      "about": { "@id": "https://www.caravansforsale.com.au/#organization" },
+                      "isPartOf": { "@id": "https://www.campingtrailersforsale.com.au/#website" },
+                      "about": { "@id": "https://www.campingtrailersforsale.com.au/#organization" },
                       "description": "Have a question about buying, selling, or dealer advertising solutions? Fill out our online contact form to get in touch with the Camping Trailers For Sale customer support team.",
-                      "breadcrumb": { "@id": "https://www.caravansforsale.com.au/contact/#breadcrumb" },
+                      "breadcrumb": { "@id": "https://www.campingtrailersforsale.com.au/contact/#breadcrumb" },
                     },
                     {
                       "@type": "BreadcrumbList",
-                      "@id": "https://www.caravansforsale.com.au/contact/#breadcrumb",
+                      "@id": "https://www.campingtrailersforsale.com.au/contact/#breadcrumb",
                       "itemListElement": [
                         {
                           "@type": "ListItem",
                           "position": 1,
                           "name": "Home",
-                          "item": "https://www.caravansforsale.com.au/",
+                          "item": "https://www.campingtrailersforsale.com.au/",
                         },
                         {
                           "@type": "ListItem",
                           "position": 2,
                           "name": "Contact Us",
-                          "item": "https://www.caravansforsale.com.au/contact/",
+                          "item": "https://www.campingtrailersforsale.com.au/contact/",
                         },
                       ],
                     },

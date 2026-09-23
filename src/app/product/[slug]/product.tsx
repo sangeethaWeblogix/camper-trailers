@@ -497,18 +497,18 @@ export default function ClientLogger({
   // }
  
 
-  const postTrackEvent = (product_id: number) => {
+  const postTrackEvent = (product_id: number, slug?: string) => {
   try {
     navigator.sendBeacon(
       "/api/track-product/",
-      new Blob([JSON.stringify({ product_id })], { type: "application/json" })
+      new Blob([JSON.stringify({ product_id, slug })], { type: "application/json" })
     );
   } catch {}
 };
  useEffect(() => {
   if (!productDetails?.id) return;
 
-  postTrackEvent(Number(productDetails.id));
+  postTrackEvent(Number(productDetails.id), productDetails.slug);
 }, [productDetails?.id]);
   // ✅ Add these states after allSubs state
 

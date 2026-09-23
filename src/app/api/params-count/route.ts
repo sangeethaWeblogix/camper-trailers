@@ -1,14 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export const preferredRegion = "syd1";
+export const dynamic = "force-dynamic";
 
-const API_KEY = process.env.CFS_API_KEY;
+const API_KEY = process.env.MPN_API_KEY;
 
 async function fetchFromWP(
   searchParams: URLSearchParams
 ): Promise<NextResponse> {
   const paramsStr = searchParams.toString();
-  const url = `https://admin.caravansforsale.com.au/wp-json/cfs/v1/params_count?${paramsStr}`;
+  const url = `${process.env.MPN_API_BASE}/params-count?${paramsStr}`;
 
   console.log(`[params-count] Calling WP | params="${paramsStr}"`);
 
@@ -18,13 +19,14 @@ async function fetchFromWP(
         "Content-Type": "application/json",
         Accept: "application/json",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
-        ...(API_KEY && { "X-API-Key": API_KEY }),
+        ...(API_KEY && { "X-Secret-Key": API_KEY }),
       },
+      cache: "no-store",
     });
 
     if (!response.ok) {
       console.error(
-        `[params-count] WP API HTTP ${response.status} | params="${paramsStr}" | Check CFS_API_KEY.`
+        `[params-count] WP API HTTP ${response.status} | params="${paramsStr}" | Check MPN_API_KEY.`
       );
       return NextResponse.json({}, { status: response.status });
     }

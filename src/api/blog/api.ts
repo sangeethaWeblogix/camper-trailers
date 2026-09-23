@@ -1,5 +1,5 @@
-const API_BASE = process.env.NEXT_PUBLIC_CFS_API_BASE;
-const API_KEY = process.env.CFS_API_KEY; // ✅ Add this
+const API_BASE = process.env.MPN_API_BASE;
+const API_KEY = process.env.MPN_API_KEY; // ✅ Add this
 
 export interface BlogPost {
   id: number;
@@ -12,13 +12,10 @@ export interface BlogPost {
 }
 
 export interface BlogApiResponse {
-  data: {
-    latest_blog_posts: {
-      items: BlogPost[];
-      current_page?: number;
-      total_pages?: number;
-    };
-  };
+  // MPN shape: { success, data: BlogPost[], meta: {total, page, per_page, total_pages, seed} }
+  success?: boolean;
+  data?: BlogPost[] | { latest_blog_posts?: { items: BlogPost[]; current_page?: number; total_pages?: number } };
+  meta?: { total?: number; page?: number; per_page?: number; total_pages?: number };
 }
 
 export type BlogPageResult = {
@@ -39,7 +36,7 @@ const fetchWithTimeout = async (url: string) => {
     return await fetch(url, {
       headers: {
         Accept: "application/json",
-        ...(API_KEY && { "X-API-Key": API_KEY }), // ✅ API key added
+        ...(API_KEY && { "X-Secret-Key": API_KEY }), // ✅ API key added
       },
       cache: "no-store",
       signal: controller.signal,
@@ -73,17 +70,19 @@ export const fetchBlogs = async (page: number = 1): Promise<BlogPageResult> => {
       const idx = raw.indexOf('{"');
       const data = JSON.parse(idx >= 0 ? raw.substring(idx) : raw) as BlogApiResponse;
 
-      const lp = data?.data?.latest_blog_posts ?? {
-        items: [],
-        current_page: page,
-        total_pages: 1,
-      };
+      // MPN returns a flat array under `data` + pagination under `meta`;
+      // older shape nested items under `data.latest_blog_posts` — support both.
+      const items: BlogPost[] = Array.isArray(data?.data)
+        ? data.data
+        : (data?.data as { latest_blog_posts?: { items: BlogPost[] } })?.latest_blog_posts?.items ?? [];
+      const currentPage = data?.meta?.page ?? (data?.data as { latest_blog_posts?: { current_page?: number } })?.latest_blog_posts?.current_page ?? page;
+      const totalPages = data?.meta?.total_pages ?? (data?.data as { latest_blog_posts?: { total_pages?: number } })?.latest_blog_posts?.total_pages ?? 1;
 
       return {
-        items: lp.items ?? [],
-        currentPage: lp.current_page ?? page,
-        totalPages: lp.total_pages ?? 1,
-        total_pages: lp.total_pages ?? 1,
+        items,
+        currentPage,
+        totalPages,
+        total_pages: totalPages,
       };
     } catch (err) {
       console.error(`❌ fetchBlogs error (attempt ${attempt}/${MAX_ATTEMPTS}):`, err);

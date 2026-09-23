@@ -12,16 +12,16 @@ export const metadata: Metadata = {
     "Discover a diverse range of top-tier camping trailer manufacturers specializing in off-road, compact poptops, touring models, luxury editions & innovative hybrids.",
   robots: "index, follow",
   alternates: {
-    canonical: "https://www.caravansforsale.com.au/caravan-manufacturers/all/",
+    canonical: "https://www.campingtrailersforsale.com.au/caravan-manufacturers/all/",
   },
   openGraph: {
     title: "Full List of Top Quality Camping Trailer Manufacturers in Australia",
     description:
       "Discover a diverse range of top-tier camping trailer manufacturers specializing in off-road, compact poptops, touring models, luxury editions & innovative hybrids.",
-    url: "https://www.caravansforsale.com.au/caravan-manufacturers/all/",
+    url: "https://www.campingtrailersforsale.com.au/caravan-manufacturers/all/",
     images: [
       {
-        url: "https://www.caravansforsale.com.au/images/cfs-logo.png",
+        url: "https://www.campingtrailersforsale.com.au/images/cfs-logo.png",
         width: 800,
         height: 600,
         alt: "Camping Trailer Manufacturers Australia",

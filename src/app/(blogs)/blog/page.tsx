@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   icons: { icon: "/favicon.ico" },
   robots: "index, follow",
   alternates: {
-    canonical: "https://www.caravansforsale.com.au/blog/",
+    canonical: "https://www.campingtrailersforsale.com.au/blog/",
 
    },
 };
@@ -27,19 +27,19 @@ export default async function BlogPage() {
       name: "Caravans for Sale Blog",
       description:
         "Latest news, in-depth reviews, and expert advice on the latest in the camping trailer market.",
-      url: "https://www.caravansforsale.com.au/blog/",
+      url: "https://www.campingtrailersforsale.com.au/blog/",
       publisher: {
         "@type": "Organization",
         name: "Caravans for Sale",
-        url: "https://www.caravansforsale.com.au",
+        url: "https://www.campingtrailersforsale.com.au",
       },
     },
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.caravansforsale.com.au/" },
-        { "@type": "ListItem", position: 2, name: "Blog", item: "https://www.caravansforsale.com.au/blog/" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.campingtrailersforsale.com.au/" },
+        { "@type": "ListItem", position: 2, name: "Blog", item: "https://www.campingtrailersforsale.com.au/blog/" },
       ],
     },
     ...(data.items.length > 0

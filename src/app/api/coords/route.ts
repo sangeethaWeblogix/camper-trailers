@@ -19,10 +19,10 @@ export async function GET(req: NextRequest) {
           `https://nominatim.openstreetmap.org/search?postalcode=${pincode}&countrycodes=au&format=json&limit=1`,
           {
             headers: {
-              "User-Agent": "caravansforsale.com.au contact@caravansforsale.com.au",
+              "User-Agent": "campingtrailersforsale.com.au contact@campingtrailersforsale.com.au",
               "Accept-Language": "en",
             },
-            next: { revalidate: false },
+            cache: "no-store",
           }
         );
         if (!res.ok) { coords[pincode] = null; return; }
@@ -38,6 +38,6 @@ export async function GET(req: NextRequest) {
   );
 
   return NextResponse.json(coords, {
-    headers: { "Cache-Control": "public, max-age=31536000, immutable" },
+    headers: { "Cache-Control": "no-store" },
   });
 }

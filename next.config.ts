@@ -41,7 +41,7 @@ const nextConfig: NextConfig = {
     optimizeCss: true,
     staleTimes: {
       dynamic: 0,
-      static: 0,
+      static: 30, // Next.js requires >=30; this is the closest to "no cache" it allows
     },
   },
 

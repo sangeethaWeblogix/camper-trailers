@@ -16,13 +16,13 @@ import { ReactNode } from "react";
      google: "6tT6MT6AJgGromLaqvdnyyDQouJXq0VHS-7HC194xEo", // ✅ this auto generates <meta name="google-site-verification" />
    },
    alternates: {
-    canonical: "https://www.caravansforsale.com.au/privacy-policy/",
+    canonical: "https://www.campingtrailersforsale.com.au/privacy-policy/",
 
    },
    
    openGraph: {
-      url: "https://www.caravansforsale.com.au/privacy-policy/",
-     title: "Privacy Policy - caravansforsale.com.au - Camping Trailer Marketplace",
+      url: "https://www.campingtrailersforsale.com.au/privacy-policy/",
+     title: "Privacy Policy - campingtrailersforsale.com.au - Camping Trailer Marketplace",
        description:
      "Learn about Camping Trailer Marketplace's privacy policy on data collection, usage, security measures, and your rights regarding your information.",
      

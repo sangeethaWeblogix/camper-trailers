@@ -425,7 +425,7 @@ const priceUpperIdx = !isPOA ? PRICE_STEPS.findIndex(s => s >= displayPrice) : -
     if (!productId) return;
     navigator.sendBeacon(
       "/api/track-product/",
-      new Blob([JSON.stringify({ product_id: Number(productId) })], { type: "application/json" })
+      new Blob([JSON.stringify({ product_id: Number(productId), slug: product.slug })], { type: "application/json" })
     );
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product.id]);
@@ -662,7 +662,7 @@ const priceUpperIdx = !isPOA ? PRICE_STEPS.findIndex(s => s >= displayPrice) : -
               </h2>
               <p className="lsd-offroad-extra__body">
                 Browse live camping trailer listings from across the country, then compare{" "}
-                <a href="https://www.caravansforsale.com.au/off-road-caravans/">off road camping trailers in Australia</a>{" "}
+                <a href="https://www.campingtrailersforsale.com.au/off-road-caravans/">off road camping trailers in Australia</a>{" "}
                 using search filters by price, location, weight, length and sleeping capacity while exploring manufacturer and model reviews.
               </p>
             

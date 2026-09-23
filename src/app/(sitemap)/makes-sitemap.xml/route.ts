@@ -2,18 +2,18 @@
  
  const SITE_URL =
    process.env.NEXT_PUBLIC_SITE_URL ||
-   "https://www.caravansforsale.com.au/listings/";
-     const API_KEY = process.env.CFS_API_KEY; // ✅ Added
+   "https://www.campingtrailersforsale.com.au/listings/";
+     const API_KEY = process.env.MPN_API_KEY; // ✅ Added
 
  
  export async function GET() {
    try {
      const res = await fetch(
-       "https://admin.caravansforsale.com.au/wp-json/cfs/v1/sitemap/makes",
+       `${process.env.MPN_API_BASE}/sitemap/makes`,
         {
         headers: {
           Accept: "application/json",
-          ...(API_KEY && { "X-API-Key": API_KEY }), // ✅ Added
+          ...(API_KEY && { "X-Secret-Key": API_KEY }), // ✅ Added
         },
       }
       

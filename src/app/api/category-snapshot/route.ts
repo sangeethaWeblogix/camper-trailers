@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const API_BASE = process.env.NEXT_PUBLIC_CFS_API_BASE;
-const API_KEY  = process.env.CFS_API_KEY;
+const API_BASE = process.env.MPN_API_BASE;
+const API_KEY  = process.env.MPN_API_KEY;
 
 export async function GET(request: NextRequest) {
   const category = request.nextUrl.searchParams.get("category") ?? "";
@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ success: false, message: "category param is required" }, { status: 400 });
   }
 
-  const url = `${API_BASE}/market_snapshot?category=${encodeURIComponent(category)}`;
+  const url = `${API_BASE}/market-snapshot?category=${encodeURIComponent(category)}`;
 
   const controller = new AbortController();
   const timeoutId  = setTimeout(() => controller.abort(), 10000);
@@ -20,9 +20,9 @@ export async function GET(request: NextRequest) {
       signal: controller.signal,
       headers: {
         Accept: "application/json",
-        ...(API_KEY && { "X-API-Key": API_KEY }),
+        ...(API_KEY && { "X-Secret-Key": API_KEY }),
       },
-      next: { revalidate: 3600 }, // match WP transient TTL
+      cache: "no-store",
     });
 
     clearTimeout(timeoutId);

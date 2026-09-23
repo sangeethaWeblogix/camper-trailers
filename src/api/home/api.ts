@@ -1,6 +1,6 @@
 // src/api/home/api.ts
-const API_BASE = process.env.NEXT_PUBLIC_CFS_API_BASE!;
-const API_KEY = process.env.CFS_API_KEY; // ✅ Add this
+const API_BASE = process.env.MPN_API_BASE!;
+const API_KEY = process.env.MPN_API_KEY; // ✅ Add this
  
 export type HomeProduct = {
   id?: number | string;
@@ -121,35 +121,47 @@ function normalizeBlog(src: BlogRaw = {}): HomeBlogPost {
 /* -------------------------------- fetcher ---------------------------------- */
 const EMPTY_HOME: HomePageData = { featured: [], products: [], latest_posts: [] };
 
+// /home_page never existed on the MPN API (only /blog, /home-featured, etc.
+// exist) — only `latest_posts` from this function's result is actually
+// consumed by callers (see src/app/page.tsx), so this now calls /blog
+// directly instead of a bundle endpoint that was never real.
 export async function fetchHomePage(): Promise<HomePageData> {
-  const url = `${API_BASE.replace(/\/$/, "")}/home_page`;
+  const url = `${API_BASE.replace(/\/$/, "")}/blog?per_page=6&page=1`;
   try {
     const res = await fetch(url, {
       headers: {
         Accept: "application/json",
-        ...(API_KEY && { "X-API-Key": API_KEY }),
+        ...(API_KEY && { "X-Secret-Key": API_KEY }),
       },
-      next: { revalidate: 3600 },
+      cache: "no-store",
     });
     if (!res.ok) return EMPTY_HOME;
 
     const json = (await res.json()) as ApiEnvelope;
+    // /blog's `data` is a flat BlogRaw[] array directly — not an object with
+    // sub-keys like the old bundle shape this was written for. Handle that
+    // case first; fall back to the old object-shape probing otherwise.
+    if (Array.isArray(json?.data)) {
+      const latest_posts = (json.data as BlogRaw[]).map(normalizeBlog);
+      return { featured: [], products: [], latest_posts };
+    }
+
     const root: HomeRoot = json.data ?? json;
- 
+
   const featuredRaw =
     root.featured ??
     root.featured_products ??
     root.featured_caravans ??
     root.top;
- 
+
   const productsRaw =
     root.products ??
     root.more_products ??
     root.latest_listings ??
     root.recommended;
- 
+
   const postsRaw = root.latest_blog_posts ?? root.blog ?? root.posts;
- 
+
     const featured = pickItems<ProductRaw>(featuredRaw).map(normalizeProduct);
     const products = pickItems<ProductRaw>(productsRaw).map(normalizeProduct);
     const latest_posts = pickItems<BlogRaw>(postsRaw).map(normalizeBlog);

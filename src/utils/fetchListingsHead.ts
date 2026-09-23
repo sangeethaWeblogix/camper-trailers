@@ -38,9 +38,9 @@ type ApiResponse = {
   emp_exclusive_products?: Item[];
 };
 
-const BASE_URL = "https://www.caravansforsale.com.au";
-const API_BASE = process.env.NEXT_PUBLIC_CFS_API_BASE;
-const API_KEY = process.env.CFS_API_KEY;
+const BASE_URL = "https://www.campingtrailersforsale.com.au";
+const API_BASE = process.env.MPN_API_BASE;
+const API_KEY = process.env.MPN_API_KEY;
 
 /** Manual TTL cache (mirrors seoCache/productCache in middleware.ts) instead of
  * Next's `next: { revalidate }` fetch Data Cache — that internal stream-teeing
@@ -86,7 +86,7 @@ async function fetchPoolListingsForHead(
   if (filters.condition) params.set("condition", String(filters.condition));
   if (filters.search || filters.keyword) params.set("search", String(filters.search ?? filters.keyword));
 
-  const url = `${API_BASE}/pool_test?${params.toString()}`;
+  const url = `${API_BASE}/pool?${params.toString()}`;
 
   const cached = headPoolCache.get(url);
   if (cached && cached.expires > Date.now()) return cached.data;
@@ -96,7 +96,7 @@ async function fetchPoolListingsForHead(
     res = await fetch(url, {
       headers: {
         Accept: "application/json",
-        ...(API_KEY && { "X-API-Key": API_KEY }),
+        ...(API_KEY && { "X-Secret-Key": API_KEY }),
       },
       cache: "no-store",
     });
@@ -232,7 +232,7 @@ export function buildListingsJsonLd(
     ...(response.data?.products || []),
     ...(response.data?.emp_exclusive_products || []),
   ];
-const weburl = "https://www.caravansforsale.com.au"
+const weburl = "https://www.campingtrailersforsale.com.au"
 
   const footerDescription = response?.seo_v2?.footer_description
     ? stripHtml(response.seo_v2.footer_description)

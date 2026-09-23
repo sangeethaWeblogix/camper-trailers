@@ -46,13 +46,8 @@ export function BannerProvider({ children }: { children: ReactNode }) {
     async function fetchAllBanners() {
       try {
         setIsLoading(true);
-        const cached = sessionStorage.getItem("banners_cache");
-        if (cached) {
-          setAllBanners(JSON.parse(cached));
-          setIsLoading(false);
-          return;
-        }
-        const res = await fetch("/api/banners/");
+        sessionStorage.removeItem("banners_cache");
+        const res = await fetch("/api/banners/", { cache: "no-store" });
         if (!res.ok) {
           setAllBanners([]);
           return;
@@ -60,7 +55,6 @@ export function BannerProvider({ children }: { children: ReactNode }) {
         const data = await res.json();
         const banners = Array.isArray(data) ? data : [];
         setAllBanners(banners);
-        sessionStorage.setItem("banners_cache", JSON.stringify(banners));
       } catch (error) {
         console.error("Banner fetch error:", error);
       } finally {

@@ -15,13 +15,13 @@ export async function generateMetadata(): Promise<Metadata> {
     robots: robots,
 
     alternates: {
-      canonical: "https://www.caravansforsale.com.au/privacy-collection-statement/",
+      canonical: "https://www.campingtrailersforsale.com.au/privacy-collection-statement/",
     },
 
     openGraph: {
       title: metaTitle,
       description: metaDescription,
-      url: "https://www.caravansforsale.com.au/privacy-collection-statement/",
+      url: "https://www.campingtrailersforsale.com.au/privacy-collection-statement/",
       type: "article",
     },
 

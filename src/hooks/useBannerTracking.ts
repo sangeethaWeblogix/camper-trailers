@@ -40,7 +40,7 @@ export function useBannerTracking(banners: Banner[], visitorIp?: string) {
 
     try {
       await fetch(
-        `${process.env.NEXT_PUBLIC_CF7_BASE || "https://admin.caravansforsale.com.au"}/wp-json/ads-manager/v1/banners/track`,
+        `${process.env.NEXT_PUBLIC_CF7_BASE || "https://admin.marketplacenetwork.com.au"}/wp-json/ads-manager/v1/banners/track`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -52,6 +52,9 @@ export function useBannerTracking(banners: Banner[], visitorIp?: string) {
             device_type: getDeviceType(),
             user_agent: navigator.userAgent,
             ip_address: ip,
+            // Must match the banner's owning site or the event is rejected —
+            // see the same param on GET /banners in src/app/api/banners/route.ts.
+            site: "ctfs",
           }),
         },
       );

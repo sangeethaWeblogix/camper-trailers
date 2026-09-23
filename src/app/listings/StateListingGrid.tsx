@@ -244,20 +244,20 @@ function ListingCard({
  // sendBeacon (not fetch) — same tracking, but categorized separately from
  // regular XHR/fetch traffic in devtools instead of sitting in plain sight
  // next to the page's data requests.
- const postTrackClick = (product_id: number) => {
+ const postTrackClick = (product_id: number, slug?: string) => {
     try {
       navigator.sendBeacon(
         "/api/track-click",
-        new Blob([JSON.stringify({ product_id })], { type: "application/json" })
+        new Blob([JSON.stringify({ product_id, slug })], { type: "application/json" })
       );
    } catch {}
    };
 
-     const postTrackEvent = (product_id: number) => {
+     const postTrackEvent = (product_id: number, slug?: string) => {
     try {
        navigator.sendBeacon(
          "/api/track",
-         new Blob([JSON.stringify({ product_id })], { type: "application/json" })
+         new Blob([JSON.stringify({ product_id, slug })], { type: "application/json" })
        );
      } catch {}
    };
@@ -270,7 +270,7 @@ function ListingCard({
         entries.forEach((entry) => {
            if (entry.isIntersecting) {
             const id = Number(entry.target.getAttribute("data-product-id"));
-            if (id) postTrackEvent(id);
+            if (id) postTrackEvent(id, item.slug);
             observer.unobserve(entry.target);
           }
         });
@@ -288,7 +288,7 @@ function ListingCard({
       prefetch={false}
       className={`lsd-card${spotlight ? " lsd-card--spotlight" : ""}`}
       data-product-id={item.id}
-      onClick={() => postTrackClick(item.id)}
+      onClick={() => postTrackClick(item.id, item.slug)}
     >
       {/* Image */}
       <div className="lsd-card__img-wrap">
@@ -475,9 +475,16 @@ export default function StateListingGrid({ title, viewAllHref, apiUrl, items: ex
       .then((json) => {
         console.log(`[StateListingGrid] "${title}" API response:`, json);
 
-        // pool_test returns products/premium_products/exclusive_products at the
-        // top level; new_optimize_code nests them under `data` — support both shapes.
-        const products: Listing[]      = json?.data?.products ?? json?.products ?? [];
+        // /pool returns products/premium_products/exclusive_products at the top
+        // level for page 2+/explicit sort. Page 1/default order instead returns
+        // pre-split featured_products/new_products/used_products (no flat
+        // `products` array) — fold those into one list here since this grid
+        // doesn't need the Featured/New/Used split (that's done a level up).
+        const products: Listing[]      = json?.data?.products ?? json?.products ?? [
+          ...(json?.data?.featured_products ?? json?.featured_products ?? []),
+          ...(json?.data?.new_products ?? json?.new_products ?? []),
+          ...(json?.data?.used_products ?? json?.used_products ?? []),
+        ];
         const premiumsRaw: Listing[]   = json?.data?.premium_products ?? json?.premium_products ?? [];
         const exclusivesRaw: Listing[] = json?.data?.exclusive_products ?? json?.exclusive_products ?? [];
         const empExclusivesRaw: Listing[] = json?.data?.emp_exclusive_products ?? json?.emp_exclusive_products ?? [];

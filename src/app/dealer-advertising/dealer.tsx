@@ -10,7 +10,7 @@ const DEALER_FAQS = [
       <p>
         The dealer subscription is $299 per month (including GST). This flat
         monthly fee allows your dealership to list unlimited camping trailers on
-        CaravansForSale.com.au. There are no per-listing charges, and we never
+        CampingTrailersForSale.com.au. There are no per-listing charges, and we never
         charge per lead or take success commissions – no matter how many
         inquiries or sales you get, $299/month covers it all.
       </p>
@@ -30,7 +30,7 @@ const DEALER_FAQS = [
     q: "What kind of audience will my camping trailers reach?",
     a: (
       <p>
-        CaravansForSale.com.au is a camping trailer-only marketplace with a focused,
+        CampingTrailersForSale.com.au is a camping trailer-only marketplace with a focused,
         nationwide audience of serious buyers.
       </p>
     ),
@@ -86,7 +86,7 @@ const DealerLandingPage = () => {
                 </p>
 
                 <a
-                  href="https://seller.caravansforsale.com.au/dealer-subscription/"
+                  href="https://seller.campingtrailersforsale.com.au/dealer-subscription/"
                   className="btn white_btn"
                 >
                   Start Dealer Signup
@@ -302,7 +302,7 @@ const DealerLandingPage = () => {
                   </ul>
 
                   <a
-                    href="https://seller.caravansforsale.com.au/dealer-subscription/"
+                    href="https://seller.campingtrailersforsale.com.au/dealer-subscription/"
                     className="btn white_btn"
                   >
                     Start Dealer Signup

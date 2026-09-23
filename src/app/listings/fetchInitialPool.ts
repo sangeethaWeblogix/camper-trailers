@@ -10,14 +10,14 @@
  * contains real product listings from the first byte.
  */
 
-import { Listing, SeoV2, buildFeaturedOrder } from "./listingShared";
+import { Listing, SeoV2, buildFeaturedOrder, splitPoolProducts } from "./listingShared";
 import type { InitialPool } from "./home";
 import type { FilterState } from "./StateFilterBar";
 
-const APP_URL         = process.env.NEXT_PUBLIC_APP_URL || "https://www.caravansforsale.com.au";
+const APP_URL         = process.env.NEXT_PUBLIC_APP_URL || "https://www.campingtrailersforsale.com.au";
 // Direct WP API — used when seed > 0 to bypass Cloudflare's pool cache (which strips seed).
-const WP_API_BASE     = process.env.NEXT_PUBLIC_CFS_API_BASE;
-const WP_API_KEY      = process.env.CFS_API_KEY;
+const WP_API_BASE     = process.env.MPN_API_BASE;
+const WP_API_KEY      = process.env.MPN_API_KEY;
 
 /** Build the /api/pool-listings/ query string from the full FilterState. */
 function buildApiParams(filters: FilterState, seed: number): URLSearchParams {
@@ -47,21 +47,35 @@ function buildApiParams(filters: FilterState, seed: number): URLSearchParams {
   return params;
 }
 
-/** Parse a raw pool_test JSON response into the InitialPool shape. */
+/** Parse a raw /pool JSON response into the InitialPool shape.
+ *
+ * The MPN API returns TWO shapes depending on the request:
+ *  - Page 1, default order, no condition filter: pre-split top-level
+ *    `featured_products` / `new_products` / `used_products` arrays.
+ *  - Every other case (explicit sort, page 2+, condition filter): a single
+ *    flat `products` array (each item carries a `tier` field).
+ */
 function parsePoolJson(json: any, isIndexed: boolean): InitialPool | null {
   const seo: SeoV2 | null = json?.data?.seo_v2 ?? json?.seo_v2 ?? null;
-  const products: Listing[]         = json?.data?.products         ?? json?.products         ?? [];
-  const premiumsRaw: Listing[]      = json?.data?.premium_products  ?? json?.premium_products  ?? [];
-  const exclusivesRaw: Listing[]    = json?.data?.exclusive_products ?? json?.exclusive_products ?? [];
-  const empExclusivesRaw: Listing[] = json?.data?.emp_exclusive_products ?? json?.emp_exclusive_products ?? [];
-  const totalCount: number          = json?.data?.counts?.total_count ?? json?.counts?.total_count ?? products.length;
+  const data = json?.data ?? json;
 
-  if (!products.length && !premiumsRaw.length) return null;
+  const featuredSplit: Listing[] = data?.featured_products ?? [];
+  const newSplit: Listing[]      = data?.new_products      ?? [];
+  const usedSplit: Listing[]     = data?.used_products     ?? [];
+  const hasPreSplit = featuredSplit.length > 0 || newSplit.length > 0 || usedSplit.length > 0;
 
-  const totalProducts = json?.data?.pagination?.total_products ?? json?.pagination?.total_products ?? totalCount;
+  const products: Listing[]         = data?.products         ?? [];
+  const premiumsRaw: Listing[]      = data?.premium_products  ?? [];
+  const exclusivesRaw: Listing[]    = data?.exclusive_products ?? [];
+  const empExclusivesRaw: Listing[] = data?.emp_exclusive_products ?? [];
+  const totalCount: number          = data?.counts?.total ?? data?.counts?.total_count ?? (products.length || featuredSplit.length + newSplit.length + usedSplit.length);
+
+  if (!products.length && !premiumsRaw.length && !hasPreSplit) return null;
+
+  const totalProducts = data?.pagination?.total_products ?? totalCount;
   // Use total_pages from the API response (computed by backend using actual per_page).
   // Fallback to manual calculation with per_page=21 if the field is absent.
-  const apiTotalPages = json?.data?.pagination?.total_pages ?? json?.pagination?.total_pages;
+  const apiTotalPages = data?.pagination?.total_pages;
   const maxPages = apiTotalPages
     ? Math.max(1, apiTotalPages)
     : Math.max(1, Math.ceil(totalProducts / 21));
@@ -71,17 +85,18 @@ function parsePoolJson(json: any, isIndexed: boolean): InitialPool | null {
   let usedItems: Listing[] = [];
 
   if (isIndexed) {
-    const featuredSource = products.filter((p) => p.slot_bucket === "featured");
-    featured = buildFeaturedOrder(featuredSource, premiumsRaw, exclusivesRaw);
-    const featuredIds = new Set(featured.map((p) => p.id));
-    newItems  = products.filter((p) => p.slot_bucket === "new"  && !p.is_premium && !p.is_exclusive && !featuredIds.has(p.id));
-    usedItems = products.filter((p) => p.slot_bucket === "used" && !p.is_premium && !p.is_exclusive && !featuredIds.has(p.id));
+    const split = splitPoolProducts(products, premiumsRaw, exclusivesRaw, {
+      featured: featuredSplit, new: newSplit, used: usedSplit,
+    });
+    featured = split.featured;
+    newItems = split.new;
+    usedItems = split.used;
   } else {
     // Non-indexed: combined grid, no slot splitting
     const totalC = totalCount === 0 && empExclusivesRaw.length > 0;
     featured = totalC
       ? empExclusivesRaw
-      : buildFeaturedOrder(products, premiumsRaw, exclusivesRaw);
+      : buildFeaturedOrder(products.length ? products : featuredSplit, premiumsRaw, exclusivesRaw);
     newItems  = [];
     usedItems = [];
   }
@@ -101,10 +116,10 @@ async function fetchConditionSeoV2(
   params.set("per_page", "1");
   try {
     if (seed > 0 && WP_API_BASE) {
-      const res = await fetch(`${WP_API_BASE}/pool_test?${params.toString()}`, {
+      const res = await fetch(`${WP_API_BASE}/pool?${params.toString()}`, {
         headers: {
           Accept: "application/json",
-          ...(WP_API_KEY && { "X-API-Key": WP_API_KEY }),
+          ...(WP_API_KEY && { "X-Secret-Key": WP_API_KEY }),
         },
         cache: "no-store",
       });
@@ -138,10 +153,10 @@ async function fetchFromApi(filters: FilterState, seed: number): Promise<any | n
   if (seed > 0 && WP_API_BASE) {
     // engine=typesense removed — backend hardcodes SQL engine; the param is ignored.
     try {
-      const res = await fetch(`${WP_API_BASE}/pool_test?${params.toString()}`, {
+      const res = await fetch(`${WP_API_BASE}/pool?${params.toString()}`, {
         headers: {
           Accept: "application/json",
-          ...(WP_API_KEY && { "X-API-Key": WP_API_KEY }),
+          ...(WP_API_KEY && { "X-Secret-Key": WP_API_KEY }),
         },
         cache: "no-store",
       });

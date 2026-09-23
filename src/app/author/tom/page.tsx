@@ -22,7 +22,7 @@ title: "Latest News, Reviews & Advice",
       "Latest news, in-depth reviews, and expert advice on the latest in the caravan market. Stay informed and make smarter decisions.",
   },
   alternates: {
-    canonical: "https://www.caravansforsale.com.au/author/tom/",
+    canonical: "https://www.campingtrailersforsale.com.au/author/tom/",
   },
 
 };

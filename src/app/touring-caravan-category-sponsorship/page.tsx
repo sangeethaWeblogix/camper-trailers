@@ -27,7 +27,7 @@ export default function OffRoadCategoryTakeOver() {
               Limited to Just 1 Spot Per Month
             </p>
             <div className="mb-4">
-              <Link className="btn btn-caravan-orange px-5 py-3 fs-5" href="https://advertisers.caravansforsale.com.au/touring-ad-type/">
+              <Link className="btn btn-caravan-orange px-5 py-3 fs-5" href="https://advertisers.campingtrailersforsale.com.au/touring-ad-type/">
                 Claim Your Spot
               </Link>
             </div>
@@ -239,7 +239,7 @@ export default function OffRoadCategoryTakeOver() {
             <div className="col-auto">
               <Link
                 className="btn btn-caravan-orange btn-lg px-5 py-3 fs-4 shadow-lg"
-                href="https://advertisers.caravansforsale.com.au/touring-ad-type/"
+                href="https://advertisers.campingtrailersforsale.com.au/touring-ad-type/"
               >
                 Subscribe Now
               </Link>

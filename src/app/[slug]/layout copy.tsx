@@ -10,7 +10,7 @@ type RouteParams = { slug: string };
 async function fetchBlogDetail(slug: string) {
   try {
     const res = await fetch(
-      `https://admin.caravansforsale.com.au/wp-json/cfs/v1/blog-detail-new/?slug=${encodeURIComponent(
+      `${process.env.MPN_API_BASE}/blog-detail-new/?slug=${encodeURIComponent(
         slug
       )}`,
       { cache: "no-store", headers: { Accept: "application/json" } }
@@ -39,7 +39,7 @@ export async function generateMetadata({
     seo.metadescription ||
     post.short_description ||
     "Read more on Caravans for Sale.";
-  const canonical = `https://www.caravansforsale.com.au/${slug}/`;
+  const canonical = `https://www.campingtrailersforsale.com.au/${slug}/`;
 
   return {
     title,
@@ -77,7 +77,7 @@ export default async function Layout({
   const post = data?.data?.blog_detail || {};
   const seo = data?.seo || {};
 
-  const canonical = `https://www.caravansforsale.com.au/${slug}/`;
+  const canonical = `https://www.campingtrailersforsale.com.au/${slug}/`;
   const title = seo.metatitle || post.title || "Caravans for Sale Blog";
   const description =
     seo.metadescription ||
@@ -87,7 +87,7 @@ export default async function Layout({
   const bannerImage =
     post.banner_image ||
     post.image ||
-    "https://www.caravansforsale.com.au/load.svg";
+    "https://www.campingtrailersforsale.com.au/load.svg";
 
   // ✅ JSON-LD schema (Google Rich Result compatible)
   const jsonLd = {
@@ -108,14 +108,14 @@ export default async function Layout({
     author: {
       "@type": "Person",
       name: "Tom",
-      url: "https://www.caravansforsale.com.au/author/tom/",
+      url: "https://www.campingtrailersforsale.com.au/author/tom/",
     },
     publisher: {
       "@type": "Organization",
       name: "Caravans for Sale",
       logo: {
         "@type": "ImageObject",
-        url: "https://www.caravansforsale.com.au/images/cfs-logo-black.svg",
+        url: "https://www.campingtrailersforsale.com.au/images/cfs-logo-black.svg",
         width: 300,
         height: 60,
       },

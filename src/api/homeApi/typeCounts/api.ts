@@ -1,5 +1,5 @@
-const API_BASE = process.env.NEXT_PUBLIC_CFS_API_BASE;
-const API_KEY = process.env.CFS_API_KEY;
+const API_BASE = process.env.MPN_API_BASE;
+const API_KEY = process.env.MPN_API_KEY;
 const SERVER_UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36";
 
@@ -9,12 +9,12 @@ export type TypeCounts = Partial<Record<TypeCategory, number>>;
 
 async function fetchCategoryCount(category: TypeCategory): Promise<number> {
   try {
-    const res = await fetch(`${API_BASE}/product_exists_check?category=${category}`, {
-      next: { revalidate: 3600 },
+    const res = await fetch(`${API_BASE}/exists?category=${category}`, {
+      cache: "no-store",
       headers: {
         Accept: "application/json",
         "User-Agent": SERVER_UA,
-        ...(API_KEY && { "X-API-Key": API_KEY }),
+        ...(API_KEY && { "X-Secret-Key": API_KEY }),
       },
     });
     if (!res.ok) return 0;

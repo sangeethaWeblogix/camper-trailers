@@ -1,5 +1,5 @@
-const API_BASE = process.env.NEXT_PUBLIC_CFS_API_BASE;
-const API_KEY = process.env.CFS_API_KEY;
+const API_BASE = process.env.MPN_API_BASE;
+const API_KEY = process.env.MPN_API_KEY;
 const SERVER_UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36";
 
@@ -41,12 +41,15 @@ export async function fetchHomeFeatured(params: {
 
   if (!API_BASE) return [];
 
-  const url = `${API_BASE}/home_featured?type=${encodeURIComponent(type)}${
+  const url = `${API_BASE}/home-featured?type=${encodeURIComponent(type)}${
     seed ? `&seed=${encodeURIComponent(seed)}` : ""
   }${category ? `&category=${encodeURIComponent(category)}` : ""}`;
 
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 10000);
+  // 20s: the home page fires several of these in parallel (type=all/new/used)
+  // alongside other API calls, and dev-mode's first Turbopack compile can
+  // delay the event loop enough to abort a ~1.5s request prematurely at 10s.
+  const timeoutId = setTimeout(() => controller.abort(), 20000);
 
   try {
     const res = await fetch(url, {
@@ -54,7 +57,7 @@ export async function fetchHomeFeatured(params: {
       headers: {
         Accept: "application/json",
         "User-Agent": SERVER_UA,
-        ...(API_KEY && { "X-API-Key": API_KEY }),
+        ...(API_KEY && { "X-Secret-Key": API_KEY }),
         ...(visitorIp && { "X-Visitor-IP": visitorIp }),
       },
       cache: "no-store",
@@ -77,7 +80,9 @@ export async function fetchHomeFeatured(params: {
     const jsonStart = raw.indexOf("{");
     const json = JSON.parse(jsonStart > 0 ? raw.substring(jsonStart) : raw);
 
-    const rawProducts: any[] = json?.products ?? json?.data?.products ?? [];
+    // MPN response shape: { success, type, state, seed, counts, count, items: [...] }
+    // (older shape used `products`/`data.products` — kept as a fallback)
+    const rawProducts: any[] = json?.items ?? json?.products ?? json?.data?.products ?? [];
     return rawProducts.map(normalizeProduct);
   } catch (err: any) {
     clearTimeout(timeoutId);

@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://www.caravansforsale.com.au";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.campingtrailersforsale.com.au";
 
 const CONSUMER_KEY = "ck_73393ca56ac29867aa71c9beeba4714a49c4116b";
 const CONSUMER_SECRET = "cs_b554ee636b76bf9968bbe181695a6fb2b4b180b1";
@@ -22,7 +22,7 @@ const auth = Buffer.from(
         Authorization: `Basic ${auth}`,
         "User-Agent": "Mozilla/5.0 (CaravansForSale Sitemap Bot)",
       },
-      next: { revalidate: 3600 },
+      cache: "no-store",
     },
   );
 

@@ -36,7 +36,7 @@ export default function HomeBuyerGuide() {
               </h2>
 
               <p className="hbg-body">
-                CaravansForSale.com.au helps Australian buyers compare a wide range of active camping trailer sales in one convenient place. Browse affordable used camping trailer sales, premium new models, and options designed for touring, family holidays, or off-road adventures. Compare important features such as layout, ATM, tare weight, sleeping capacity, length, suspension, condition, service history, and towing requirements to narrow down your choices before contacting a seller or visiting a dealership. Our easy-to-use platform makes researching and comparing camping trailer sales simple.
+                CampingTrailersForSale.com.au helps Australian buyers compare a wide range of active camping trailer sales in one convenient place. Browse affordable used camping trailer sales, premium new models, and options designed for touring, family holidays, or off-road adventures. Compare important features such as layout, ATM, tare weight, sleeping capacity, length, suspension, condition, service history, and towing requirements to narrow down your choices before contacting a seller or visiting a dealership. Our easy-to-use platform makes researching and comparing camping trailer sales simple.
               </p>
               <p className="hbg-body">
                 Explore popular categories including off-road, hybrid, pop-top, touring, and luxury camping trailer sales, while also comparing trusted brands and reputable dealers across Australia. Check whether dealers offer warranty support, finance options, trade-ins, after-sales service, and detailed vehicle information before making your decision. Use our buyers guide and convenient search filters to browse camping trailer sales by state, location, budget, size, weight, and berth, helping you find the right van for your lifestyle and travel plans.
@@ -52,7 +52,7 @@ export default function HomeBuyerGuide() {
       <section className="hbg-why-section">
         <div className="container">
           <h2 className="hbg-why-title">
-            Why caravansforsale.com.au is your best choice <span className="hbg-why-accent">for camping trailer sales across Australia</span>
+            Why campingtrailersforsale.com.au is your best choice <span className="hbg-why-accent">for camping trailer sales across Australia</span>
           </h2>
           
 

@@ -30,7 +30,7 @@ export default function HomePageTakeOver() {
               Limited to Just 1 Advertiser Per Month
             </p>
             <div className="mb-4">
-              <Link className="btn btn-caravan-orange px-5 py-3 fs-5" href="https://advertisers.caravansforsale.com.au/ad-signup-home/">
+              <Link className="btn btn-caravan-orange px-5 py-3 fs-5" href="https://advertisers.campingtrailersforsale.com.au/ad-signup-home/">
                 Claim Your Spot
               </Link>
             </div>
@@ -242,7 +242,7 @@ export default function HomePageTakeOver() {
             <div className="col-auto">
               <Link
                 className="btn btn-caravan-orange btn-lg px-5 py-3 fs-4 shadow-lg"
-                href="https://advertisers.caravansforsale.com.au/ad-signup-home/"
+                href="https://advertisers.campingtrailersforsale.com.au/ad-signup-home/"
               >
                 Subscribe Now
               </Link>

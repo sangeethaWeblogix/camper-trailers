@@ -1,7 +1,7 @@
- const API_LOCATION = process.env.NEXT_PUBLIC_CFS_API_BASE;
+ const API_LOCATION = process.env.MPN_API_BASE;
 // api/links/api.ts
-const API_BASE = process.env.NEXT_PUBLIC_CFS_API_BASE;
-const API_KEY = process.env.CFS_API_KEY; // ✅ Add this
+const API_BASE = process.env.MPN_API_BASE;
+const API_KEY = process.env.MPN_API_KEY; // ✅ Add this
 
 export const fetchLinksData = async (filters: Record<string, any>) => {
   try {
@@ -12,10 +12,10 @@ export const fetchLinksData = async (filters: Record<string, any>) => {
       }
     });
   const res = await fetch(`${API_BASE}/links?${params.toString()}`, {
-      next: { revalidate: 300 },
+      cache: "no-store",
       headers: {
         Accept: "application/json",
-        ...(API_KEY && { "X-API-Key": API_KEY }), // ✅ Added
+        ...(API_KEY && { "X-Secret-Key": API_KEY }), // ✅ Added
       },
     });
 

@@ -55,7 +55,7 @@ export default function EverestCaravans() {
                 <p>
                   Everest Caravans build{" "}
                   <Link
-                    href="https://www.caravansforsale.com.au/top-family-off-road-caravans-australia/"
+                    href="https://www.campingtrailersforsale.com.au/top-family-off-road-caravans-australia/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

@@ -115,7 +115,7 @@ export function getRegionsByState(stateSlug: string): RegionInfo[] {
   return ALL_REGIONS.filter((r) => r.state.slug === stateSlug);
 }
 
-const BASE_URL = "https://www.caravansforsale.com.au";
+const BASE_URL = "https://www.campingtrailersforsale.com.au";
 
 export function buildRegionMetadata(region: RegionInfo): Metadata {
   return {
@@ -139,7 +139,7 @@ export function buildRegionJsonLd(region: RegionInfo) {
         "@id": `${pageUrl}#webpage`,
         url: pageUrl,
         name: `Sell My Camping Trailer in ${region.label} | List Until Sold for $49`,
-        description: `Sell your camping trailer in ${region.label}, ${region.state.label} with CaravansForSale.com.au. List your camping trailer for a one-time $49 fee, keep 100% of the sale price, and stay live until sold.`,
+        description: `Sell your camping trailer in ${region.label}, ${region.state.label} with CampingTrailersForSale.com.au. List your camping trailer for a one-time $49 fee, keep 100% of the sale price, and stay live until sold.`,
         inLanguage: "en-AU",
         isPartOf: { "@id": `${BASE_URL}/#website` },
       },
@@ -148,7 +148,7 @@ export function buildRegionJsonLd(region: RegionInfo) {
         "@id": `${pageUrl}#service`,
         name: "Private Camping Trailer Listing Service",
         url: pageUrl,
-        description: `List your camping trailer for sale on CaravansForSale.com.au for a one-time $49 fee. No commissions, no subscriptions, live until sold.`,
+        description: `List your camping trailer for sale on CampingTrailersForSale.com.au for a one-time $49 fee. No commissions, no subscriptions, live until sold.`,
         provider: {
           "@type": "Organization",
           name: "Caravans For Sale",
@@ -174,7 +174,7 @@ export function buildRegionJsonLd(region: RegionInfo) {
             name: `How do I sell my camping trailer in ${region.label}?`,
             acceptedAnswer: {
               "@type": "Answer",
-              text: `You can sell your camping trailer in ${region.label} by creating a private seller listing on CaravansForSale.com.au. Add your camping trailer details, upload clear photos, set your asking price and publish your ad so buyers in ${region.label} and across ${region.state.label} can contact you directly.`,
+              text: `You can sell your camping trailer in ${region.label} by creating a private seller listing on CampingTrailersForSale.com.au. Add your camping trailer details, upload clear photos, set your asking price and publish your ad so buyers in ${region.label} and across ${region.state.label} can contact you directly.`,
             },
           },
           {
@@ -182,7 +182,7 @@ export function buildRegionJsonLd(region: RegionInfo) {
             name: `How much does it cost to sell my camping trailer in ${region.label}?`,
             acceptedAnswer: {
               "@type": "Answer",
-              text: "It costs $49 inc. GST to list your camping trailer on CaravansForSale.com.au. This is a one-time listing fee with no monthly subscription, no hidden charges and no commission when your camping trailer sells.",
+              text: "It costs $49 inc. GST to list your camping trailer on CampingTrailersForSale.com.au. This is a one-time listing fee with no monthly subscription, no hidden charges and no commission when your camping trailer sells.",
             },
           },
           {
@@ -214,7 +214,7 @@ export function buildRegionJsonLd(region: RegionInfo) {
             name: "Do I pay commission when my camping trailer sells?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "No. CaravansForSale.com.au does not charge commission when your camping trailer sells. You pay the one-time listing fee and keep 100% of the agreed sale price.",
+              text: "No. CampingTrailersForSale.com.au does not charge commission when your camping trailer sells. You pay the one-time listing fee and keep 100% of the agreed sale price.",
             },
           },
           {

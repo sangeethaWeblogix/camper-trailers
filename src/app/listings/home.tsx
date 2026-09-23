@@ -7,6 +7,7 @@ import Link from "next/link";
 import StateHero from "./StateHero";
 import StateFilterBar, { FilterState } from "./StateFilterBar";
 import StateListingGrid, { SeoV2, Listing, buildFeaturedOrder } from "./StateListingGrid";
+import { splitPoolProducts } from "./listingShared";
 import StateBrowseSection from "./StateBrowseSection";
 import type { BrowseSectionData } from "./browseSectionShared";
 import StateContent from "./StateContent";
@@ -153,6 +154,9 @@ export default function StateHome({
     premiumsRaw: Listing[];
     exclusivesRaw: Listing[];
     empExclusivesRaw: Listing[];
+    featuredSplit: Listing[];
+    newSplit: Listing[];
+    usedSplit: Listing[];
     seoData: unknown;
     totalPages: number;
     isIndexed: boolean;  // is_indexed value from the preload — authoritative source
@@ -415,17 +419,18 @@ export default function StateHome({
       const premiumsRaw: Listing[] = (json as any)?.data?.premium_products ?? (json as any)?.premium_products ?? [];
       const exclusivesRaw: Listing[] = (json as any)?.data?.exclusive_products ?? (json as any)?.exclusive_products ?? [];
       const empExclusivesRaw: Listing[] = (json as any)?.data?.emp_exclusive_products ?? (json as any)?.emp_exclusive_products ?? [];
-      const totalCount: number = (json as any)?.data?.counts?.total_count ?? (json as any)?.counts?.total_count ?? products.length;
+      const featuredSplit: Listing[] = (json as any)?.data?.featured_products ?? (json as any)?.featured_products ?? [];
+      const newSplit: Listing[] = (json as any)?.data?.new_products ?? (json as any)?.new_products ?? [];
+      const usedSplit: Listing[] = (json as any)?.data?.used_products ?? (json as any)?.used_products ?? [];
+      const totalCount: number = (json as any)?.data?.counts?.total_count ?? (json as any)?.counts?.total_count ?? (products.length || featuredSplit.length + newSplit.length + usedSplit.length);
 
       if (totalCount === 0 && empExclusivesRaw.length > 0) {
         const empItems = empExclusivesRaw.map((p) => ({ ...p, is_exclusive: true }));
         setPool({ featured: empItems, new: [], used: [] });
       } else if (isIndexed) {
-        const featuredSource = products.filter((p) => p.slot_bucket === "featured");
-        const featuredItems = buildFeaturedOrder(featuredSource, premiumsRaw, exclusivesRaw);
-        const featuredIds = new Set(featuredItems.map((p) => p.id));
-        const newItems = products.filter((p) => p.slot_bucket === "new" && !p.is_premium && !p.is_exclusive && !featuredIds.has(p.id));
-        const usedItems = products.filter((p) => p.slot_bucket === "used" && !p.is_premium && !p.is_exclusive && !featuredIds.has(p.id));
+        const { featured: featuredItems, new: newItems, used: usedItems } = splitPoolProducts(
+          products, premiumsRaw, exclusivesRaw, { featured: featuredSplit, new: newSplit, used: usedSplit }
+        );
         setPool({ featured: featuredItems, new: newItems, used: usedItems });
       } else {
         const combined = buildFeaturedOrder(products, premiumsRaw, exclusivesRaw);
@@ -446,6 +451,9 @@ export default function StateHome({
         premiumsRaw,
         exclusivesRaw,
         empExclusivesRaw,
+        featuredSplit,
+        newSplit,
+        usedSplit,
         seoData: seoData ?? null,
         totalPages,
         isIndexed,  // record the is_indexed value used when consuming the preload
@@ -462,22 +470,20 @@ export default function StateHome({
     if (preloadSnapshotRef.current && preloadSnapshotRef.current.poolApiUrl === poolApiUrl) {
       const snap = preloadSnapshotRef.current;
       if (snap.seoData) setSeo(snap.seoData as Parameters<typeof setSeo>[0]);
-      const { products, premiumsRaw, exclusivesRaw, empExclusivesRaw } = snap;
+      const { products, premiumsRaw, exclusivesRaw, empExclusivesRaw, featuredSplit, newSplit, usedSplit } = snap;
       // Use snap.isIndexed (the is_indexed embedded in the preload), NOT the
       // current isIndexed state — which may have been overridden by the async
       // /api/indexed-url/ check. The preload value is authoritative.
       const snapIsIndexed = snap.isIndexed;
-      if (empExclusivesRaw.length > 0 && products.length === 0) {
+      if (empExclusivesRaw.length > 0 && products.length === 0 && featuredSplit.length === 0) {
         setPool({ featured: empExclusivesRaw.map((p) => ({ ...p, is_exclusive: true })), new: [], used: [] });
       } else if (snapIsIndexed) {
-        const featuredSource = products.filter((p) => p.slot_bucket === "featured");
-        const featuredItems = buildFeaturedOrder(featuredSource, premiumsRaw, exclusivesRaw);
-        const featuredIds = new Set(featuredItems.map((p) => p.id));
-        const newItems = products.filter((p) => p.slot_bucket === "new" && !p.is_premium && !p.is_exclusive && !featuredIds.has(p.id));
-        const usedItems = products.filter((p) => p.slot_bucket === "used" && !p.is_premium && !p.is_exclusive && !featuredIds.has(p.id));
+        const { featured: featuredItems, new: newItems, used: usedItems } = splitPoolProducts(
+          products, premiumsRaw, exclusivesRaw, { featured: featuredSplit, new: newSplit, used: usedSplit }
+        );
         setPool({ featured: featuredItems, new: newItems, used: usedItems });
       } else {
-        setPool({ featured: buildFeaturedOrder(products, premiumsRaw, exclusivesRaw), new: [], used: [] });
+        setPool({ featured: buildFeaturedOrder(products.length ? products : featuredSplit, premiumsRaw, exclusivesRaw), new: [], used: [] });
       }
       handleTotalPages(snap.totalPages);
       // Also restore isIndexed state to the preload's value in case the async
@@ -516,7 +522,11 @@ export default function StateHome({
         const premiumsRaw: Listing[] = json?.data?.premium_products ?? json?.premium_products ?? [];
         const exclusivesRaw: Listing[] = json?.data?.exclusive_products ?? json?.exclusive_products ?? [];
         const empExclusivesRaw: Listing[] = json?.data?.emp_exclusive_products ?? json?.emp_exclusive_products ?? [];
-        const totalCount: number = json?.data?.counts?.total_count ?? json?.counts?.total_count ?? products.length;
+        const featuredSplit: Listing[] = json?.data?.featured_products ?? json?.featured_products ?? [];
+        const newSplit: Listing[] = json?.data?.new_products ?? json?.new_products ?? [];
+        const usedSplit: Listing[] = json?.data?.used_products ?? json?.used_products ?? [];
+        const hasPreSplit = featuredSplit.length > 0 || newSplit.length > 0 || usedSplit.length > 0;
+        const totalCount: number = json?.data?.counts?.total_count ?? json?.counts?.total_count ?? (products.length || featuredSplit.length + newSplit.length + usedSplit.length);
         console.log("shared  premium:", premiumsRaw);
         if (totalCount === 0 && empExclusivesRaw.length > 0) {
           // No products at all — fall back to the emp_exclusive_products pool
@@ -524,23 +534,28 @@ export default function StateHome({
           const empItems = empExclusivesRaw.map((p) => ({ ...p, is_exclusive: true }));
           setPool({ featured: empItems, new: [], used: [] });
         } else if (isIndexed) {
-          // Indexed pages split by slot_bucket into Featured/New/Used.
+          // Indexed pages split into Featured/New/Used — the backend pre-splits these
+          // on page 1/default order (featured_products/new_products/used_products),
+          // otherwise falls back to bucketing the flat `products` array by tier/slot_bucket.
           // seededShuffle reorders each bucket using the client's random seed so
           // different products appear on each refresh even when the pool-listings
           // KV cache serves the same JSON for every seed value.
+          const bucketOf = (p: Listing) => (p as Listing & { tier?: string }).tier ?? p.slot_bucket;
           const featuredSource = seededShuffle(
-            products.filter((p) => p.slot_bucket === "featured"),
+            hasPreSplit ? featuredSplit : products.filter((p) => bucketOf(p) === "featured"),
             seed
           );
           const featuredItems = buildFeaturedOrder(featuredSource, premiumsRaw, exclusivesRaw);
           const featuredIds = new Set(featuredItems.map((p) => p.id));
 
+          const newSource = hasPreSplit ? newSplit : products.filter((p) => bucketOf(p) === "new");
+          const usedSource = hasPreSplit ? usedSplit : products.filter((p) => bucketOf(p) === "used");
           const newItems = seededShuffle(
-            products.filter((p) => p.slot_bucket === "new" && !p.is_premium && !p.is_exclusive && !featuredIds.has(p.id)),
+            newSource.filter((p) => !p.is_premium && !p.is_exclusive && !featuredIds.has(p.id)),
             seed + 1000
           );
           const usedItems = seededShuffle(
-            products.filter((p) => p.slot_bucket === "used" && !p.is_premium && !p.is_exclusive && !featuredIds.has(p.id)),
+            usedSource.filter((p) => !p.is_premium && !p.is_exclusive && !featuredIds.has(p.id)),
             seed + 2000
           );
 
@@ -548,7 +563,7 @@ export default function StateHome({
         } else {
           // Non-indexed pages get one combined grid instead of a split.
           const combined = buildFeaturedOrder(
-            seededShuffle(products, seed),
+            seededShuffle(products.length ? products : featuredSplit, seed),
             premiumsRaw,
             exclusivesRaw
           );
@@ -760,7 +775,7 @@ export default function StateHome({
           {filters.category === 'off-road' && (
             <section className="lsd-offroad-extra"><div className="container">
               <h2 className="lsd-offroad-extra__title">{seed % 2 === 0 ? "Find Your Ideal Off Road Camping Trailer" : "Search and Compare Off Road Camping Trailers"}</h2>
-              <p className="lsd-offroad-extra__body">Browse live camping trailer listings from across the country, then compare <a href="https://www.caravansforsale.com.au/off-road-caravans/">off road camping trailers in Australia</a> using search filters by price, location, weight, length and sleeping capacity while exploring manufacturer and model reviews.</p>
+              <p className="lsd-offroad-extra__body">Browse live camping trailer listings from across the country, then compare <a href="https://www.campingtrailersforsale.com.au/off-road-caravans/">off road camping trailers in Australia</a> using search filters by price, location, weight, length and sleeping capacity while exploring manufacturer and model reviews.</p>
             </div></section>
           )}
           <div className="lsd-sell-cta">
@@ -770,7 +785,7 @@ export default function StateHome({
                 <p className="lsd-sell-cta__body">
                   If you&apos;re upgrading or no longer need your current camping trailer,{" "}
                   <a href="/sell-my-camper-trailer/" className="lsd-sell-cta__link">sell your camping trailer</a>{" "}
-                  by creating a listing on CaravansForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
+                  by creating a listing on CampingTrailersForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
                 </p>
               </div>
             </div>
@@ -814,7 +829,7 @@ export default function StateHome({
               <p className="lsd-sell-cta__body">
                 If you&apos;re upgrading or no longer need your current camping trailer,{" "}
                 <a href="/sell-my-camper-trailer/" className="lsd-sell-cta__link">sell your camping trailer</a>{" "}
-                by creating a listing on CaravansForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
+                by creating a listing on CampingTrailersForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
               </p>
             </div>
           </div>
@@ -918,7 +933,7 @@ export default function StateHome({
         {filters.category === 'off-road' && (
           <section className="lsd-offroad-extra"><div className="container">
             <h2 className="lsd-offroad-extra__title">{seed % 2 === 0 ? "Find Your Ideal Off Road Camping Trailer" : "Search and Compare Off Road Camping Trailers"}</h2>
-            <p className="lsd-offroad-extra__body">Browse live camping trailer listings from across the country, then compare <a href="https://www.caravansforsale.com.au/off-road-caravans/">off road camping trailers in Australia</a> using search filters by price, location, weight, length and sleeping capacity while exploring manufacturer and model reviews.</p>
+            <p className="lsd-offroad-extra__body">Browse live camping trailer listings from across the country, then compare <a href="https://www.campingtrailersforsale.com.au/off-road-caravans/">off road camping trailers in Australia</a> using search filters by price, location, weight, length and sleeping capacity while exploring manufacturer and model reviews.</p>
           </div></section>
         )}
         <div className="lsd-sell-cta">
@@ -928,7 +943,7 @@ export default function StateHome({
               <p className="lsd-sell-cta__body">
                 If you&apos;re upgrading or no longer need your current camping trailer,{" "}
                 <a href="/sell-my-camper-trailer/" className="lsd-sell-cta__link">sell your camping trailer</a>{" "}
-                by creating a listing on CaravansForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
+                by creating a listing on CampingTrailersForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
               </p>
             </div>
           </div>
@@ -987,7 +1002,7 @@ export default function StateHome({
       {filters.category === 'off-road' && (
         <section className="lsd-offroad-extra"><div className="container">
           <h2 className="lsd-offroad-extra__title">{seed % 2 === 0 ? "Find Your Ideal Off Road Camping Trailer" : "Search and Compare Off Road Camping Trailers"}</h2>
-          <p className="lsd-offroad-extra__body">Browse live camping trailer listings from across the country, then compare <a href="https://www.caravansforsale.com.au/off-road-caravans/">off road camping trailers in Australia</a> using search filters by price, location, weight, length and sleeping capacity while exploring manufacturer and model reviews.</p>
+          <p className="lsd-offroad-extra__body">Browse live camping trailer listings from across the country, then compare <a href="https://www.campingtrailersforsale.com.au/off-road-caravans/">off road camping trailers in Australia</a> using search filters by price, location, weight, length and sleeping capacity while exploring manufacturer and model reviews.</p>
         </div></section>
       )}
       <div className="lsd-sell-cta">
@@ -997,7 +1012,7 @@ export default function StateHome({
             <p className="lsd-sell-cta__body">
               If you&apos;re upgrading or no longer need your current camping trailer,{" "}
               <a href="/sell-my-camper-trailer/" className="lsd-sell-cta__link">sell your camping trailer</a>{" "}
-              by creating a listing on CaravansForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
+              by creating a listing on CampingTrailersForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
             </p>
           </div>
         </div>

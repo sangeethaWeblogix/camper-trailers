@@ -687,7 +687,7 @@ export default function BlogDetailsPage({
           <p className="bds-cta-body">
             <strong>Looking to sell?</strong> If you&apos;re upgrading to a newer camping trailer or no longer need your current one,{" "}
             <a href="/sell-my-camper-trailer/" className="bds-cta-link">sell your camping trailer</a>{" "}
-            by creating a listing on CaravansForSale.com.au. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
+            by creating a listing on CampingTrailersForSale.com.au. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
           </p>
         </div>
       </section>

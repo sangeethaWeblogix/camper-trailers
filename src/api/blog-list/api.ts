@@ -1,5 +1,5 @@
-const BASE = process.env.NEXT_PUBLIC_CFS_API_BASE;
-const API_KEY = process.env.CFS_API_KEY;
+const BASE = process.env.MPN_API_BASE;
+const API_KEY = process.env.MPN_API_KEY;
 export type BlogDetail = {
   slug: string;
   title: string;
@@ -19,10 +19,10 @@ export async function fetchBlogDetail(
     {
       headers: {
         Accept: "application/json",
-        ...(API_KEY && { "X-API-Key": API_KEY }), // ✅ API key added
+        ...(API_KEY && { "X-Secret-Key": API_KEY }), // ✅ API key added
       },
       // cache strategy: tweak as you like
-      next: { revalidate: 60 },
+      cache: "no-store",
 
     }
   );

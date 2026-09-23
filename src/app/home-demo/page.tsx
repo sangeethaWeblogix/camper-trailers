@@ -9,7 +9,7 @@ import { fetchBlogs } from "@/api/blog/api";
 
 const FEATURED_SEED_MAX = 15;
 
-export const revalidate = 86400;
+export const dynamic = "force-dynamic";
 
 export default async function HomeDemoPage() {
   const featuredSeed = Math.floor(Math.random() * FEATURED_SEED_MAX) + 1;

@@ -1,6 +1,6 @@
 // src/api/requirements/api.ts
-const API_BASE = process.env.NEXT_PUBLIC_CFS_API_BASE;
-const API_KEY = process.env.CFS_API_KEY; // ✅ Add this
+const API_BASE = process.env.MPN_API_BASE;
+const API_KEY = process.env.MPN_API_KEY; // ✅ Add this
 
 export type Requirement = {
   id?: number; // if the API returns one
@@ -19,15 +19,20 @@ type ListResp = {
   data: Requirement[]; // screenshot shows an array under data
 };
 
+// Maps onto GET /get-home-enquiries-list — returns featured (featured=1)
+// buy/sell requirement submissions. Confirmed working against the dedicated
+// MPN Camping Trailers Postman collection: {success, data: Requirement[]}
+// on a hit, {success: false, message: "No enquiries found", data: []} when
+// empty — data is always a usable array either way.
 export async function fetchRequirements(): Promise<Requirement[]> {
   if (!API_BASE) return [];
-  const url = `${API_BASE}/cara_req`;
+  const url = `${API_BASE}/get-home-enquiries-list`;
   try {
     const res = await fetch(url, {
-      next: { revalidate: 86400 },
+      cache: "no-store",
       headers: {
         Accept: "application/json",
-        ...(API_KEY && { "X-API-Key": API_KEY }),
+        ...(API_KEY && { "X-Secret-Key": API_KEY }),
       },
     });
     if (!res.ok) return [];
@@ -38,31 +43,36 @@ export async function fetchRequirements(): Promise<Requirement[]> {
   }
 }
 
-// If your backend accepts JSON POST at same endpoint.
-// If it’s form-data or a different path (e.g. /cara_req/create),
-// just tweak the fetch below.
+/** Maps onto POST /enquiries/home (the "buy/sell requirement" form) —
+ * name/email/phone/postcode/budget/requirements required, condition
+ * optional. The old Requirement type's `type`/`location`/`featured`/`active`
+ * fields have no equivalent on the new API and are dropped from the request;
+ * callers now need to supply name/email/phone directly. */
 export async function createRequirement(
-  payload: Requirement
+  payload: Requirement & { name: string; email: string; phone: string; postcode?: string }
 ): Promise<boolean> {
-  if (!API_BASE) throw new Error("Missing NEXT_PUBLIC_CFS_API_BASE");
-  const url = `${API_BASE}/cara_req`;
+  if (!API_BASE) throw new Error("Missing MPN_API_BASE");
+  const url = `${API_BASE}/enquiries/home`;
   const res = await fetch(url, {
     method: "POST",
-headers: {
-        Accept: "application/json",
-        ...(API_KEY && { "X-API-Key": API_KEY }), // ✅ Added
-      },    // normalize optional booleans to "0"/"1" strings if needed
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      ...(API_KEY && { "X-Secret-Key": API_KEY }),
+    },
     body: JSON.stringify({
-      ...payload,
-      featured: payload.featured ?? "0",
-      active: payload.active ?? "1",
+      name: payload.name,
+      email: payload.email,
+      phone: payload.phone,
+      postcode: payload.postcode ?? payload.location,
+      condition: payload.condition,
+      budget: payload.budget,
+      requirements: payload.requirements,
     }),
   });
   if (!res.ok) {
     const text = await res.text().catch(() => "");
     throw new Error(`createRequirement failed: ${res.status} ${text}`);
   }
-  // if your API returns {success:true}, you can check it here:
-  // const json = await res.json(); return json?.success === true;
   return true;
 }

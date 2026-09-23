@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 
-const BASE_URL = "https://www.caravansforsale.com.au";
+const BASE_URL = "https://www.campingtrailersforsale.com.au";
 
 export default function robots(): MetadataRoute.Robots {
   return {

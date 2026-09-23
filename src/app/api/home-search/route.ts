@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const API_BASE = process.env.NEXT_PUBLIC_CFS_API_BASE;
-const API_KEY = process.env.CFS_API_KEY;
+const API_BASE = process.env.MPN_API_BASE;
+const API_KEY = process.env.MPN_API_KEY;
 
 export async function GET(req: NextRequest) {
   if (!API_BASE) {
@@ -10,14 +10,14 @@ export async function GET(req: NextRequest) {
 
   const keyword = req.nextUrl.searchParams.get("keyword");
   const url = keyword
-    ? `${API_BASE}/home_search_new?keyword=${encodeURIComponent(keyword)}`
-    : `${API_BASE}/home_search_new`;
+    ? `${API_BASE}/search-keyword?keyword=${encodeURIComponent(keyword)}`
+    : `${API_BASE}/search-keyword`;
 
   try {
     const res = await fetch(url, {
       headers: {
         Accept: "application/json",
-        ...(API_KEY && { "X-API-Key": API_KEY }),
+        ...(API_KEY && { "X-Secret-Key": API_KEY }),
       },
       cache: "no-store",
     });

@@ -51,11 +51,11 @@ const HOW_TO_STEPS = [
 const MAIN_FAQS = [
   {
     q: "How do I sell my camping trailer online in Australia?",
-    a: <p>You can sell your camping trailer online by creating a private seller listing on CaravansForSale.com.au. Add your camping trailer details, upload clear photos, set your asking price and publish your ad so buyers across Australia can contact you directly.</p>,
+    a: <p>You can sell your camping trailer online by creating a private seller listing on CampingTrailersForSale.com.au. Add your camping trailer details, upload clear photos, set your asking price and publish your ad so buyers across Australia can contact you directly.</p>,
   },
   {
     q: "How much does it cost to list my camping trailer?",
-    a: <p>It costs $49 inc. GST to list your camping trailer on CaravansForSale.com.au. This is a one-time listing fee with no monthly subscription, no hidden charges and no commission when your camping trailer sells.</p>,
+    a: <p>It costs $49 inc. GST to list your camping trailer on CampingTrailersForSale.com.au. This is a one-time listing fee with no monthly subscription, no hidden charges and no commission when your camping trailer sells.</p>,
   },
   {
     q: "How long does my camping trailer listing stay live?",
@@ -83,7 +83,7 @@ const MAIN_FAQS = [
   },
   {
     q: "Do I pay commission when my camping trailer sells?",
-    a: <p>No. CaravansForSale.com.au does not charge commission when your camping trailer sells. You pay the one-time listing fee and keep 100% of the agreed sale price.</p>,
+    a: <p>No. CampingTrailersForSale.com.au does not charge commission when your camping trailer sells. You pay the one-time listing fee and keep 100% of the agreed sale price.</p>,
   },
   {
     q: "Can I remove my listing after my camping trailer is sold?",
@@ -121,7 +121,7 @@ export default function SellerDemo() {
               <h3>Looking to sell your camping trailer?</h3>
             </div>
               <p className="demo-price-card__desc">
-                CaravansForSale.com.au helps private sellers advertise directly to genuine camping trailer buyers for a one-time $49 listing fee, with no commissions, no subscriptions and your ad live until sold.
+                CampingTrailersForSale.com.au helps private sellers advertise directly to genuine camping trailer buyers for a one-time $49 listing fee, with no commissions, no subscriptions and your ad live until sold.
               </p>
               
             </div>
@@ -156,7 +156,7 @@ export default function SellerDemo() {
           </div>
 
           {/* CTA — inside wrapper so it attaches seamlessly to card bottom */}
-          <a href="https://seller.caravansforsale.com.au/seller-signup/" className="demo-hero__cta">
+          <a href="https://seller.campingtrailersforsale.com.au/seller-signup/" className="demo-hero__cta">
             List Your Camping Trailer Now <i className="fa-solid fa-arrow-right" />
           </a>
           </div>{/* end demo-price-wrapper */}
@@ -226,7 +226,7 @@ export default function SellerDemo() {
                   </li>
                 ))}
               </ul>
-              <a href="https://seller.caravansforsale.com.au/seller-signup/" className="demo-reach-card__cta">
+              <a href="https://seller.campingtrailersforsale.com.au/seller-signup/" className="demo-reach-card__cta">
                 List My Camping Trailer Now <i className="fa-solid fa-arrow-right" />
               </a>
             </div>
@@ -275,7 +275,7 @@ export default function SellerDemo() {
             <div className="demo-guide-card">
               <div className="demo-guide-card__header">
                 <span className="demo-guide-card__num">1</span>
-                <h3>Why sell on CaravansForSale.com.au?</h3>
+                <h3>Why sell on CampingTrailersForSale.com.au?</h3>
               </div>
               <ul className="demo-guide-card__list">
                 <li>Camping trailer-only marketplace, not a general classifieds page.</li>
@@ -331,7 +331,7 @@ export default function SellerDemo() {
           <div className="demo-faq-head">
             <span className="demo-faq-head__tag">FAQ</span>
             <h2>Frequently Asked Questions</h2>
-            <p>Everything you need to know about selling your camping trailer on CaravansForSale.com.au</p>
+            <p>Everything you need to know about selling your camping trailer on CampingTrailersForSale.com.au</p>
           </div>
           <div className="demo-faq-list">
             {MAIN_FAQS.map((faq, i) => (
@@ -416,7 +416,7 @@ export default function SellerDemo() {
             <div className="col-md-6">
               <h2>Why Thousands of Camping Trailer Buyers Visit CaravansForSale Every Month</h2>
               <p>
-                CaravansForSale.com.au is Australia's dedicated camping trailer marketplace, built exclusively
+                CampingTrailersForSale.com.au is Australia's dedicated camping trailer marketplace, built exclusively
                 for camping trailer buyers and sellers. We attract thousands of genuine buyers every day who
                 are actively searching for road camping trailers, family camping trailers, pop-top camping trailers, luxury
                 camping trailers and more.
@@ -477,7 +477,7 @@ export default function SellerDemo() {
             Start selling your camping trailer today for just{" "}
             <strong>$49 (Inc. GST)</strong> — Live until sold!
           </p>
-          <a href="https://seller.caravansforsale.com.au/seller-signup/" className="btn white_btn">
+          <a href="https://seller.campingtrailersforsale.com.au/seller-signup/" className="btn white_btn">
             List Your Camping Trailer Now
           </a>
         </div>

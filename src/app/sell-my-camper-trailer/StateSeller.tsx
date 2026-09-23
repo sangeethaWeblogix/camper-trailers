@@ -53,7 +53,7 @@ export default function StateSeller({ state }: StateSellerProps) {
   const MAIN_FAQS = [
     {
       q: `How do I sell my camping trailer in ${stateLabel}?`,
-      a: <p>You can sell your camping trailer online by creating a private seller listing on CaravansForSale.com.au. Simply add your camping trailer details, upload clear photos, set your asking price, and publish your ad so active buyers across {stateLabel} and all of Australia can contact you directly.</p>,
+      a: <p>You can sell your camping trailer online by creating a private seller listing on CampingTrailersForSale.com.au. Simply add your camping trailer details, upload clear photos, set your asking price, and publish your ad so active buyers across {stateLabel} and all of Australia can contact you directly.</p>,
     },
     {
       q: `How much does it cost to sell my camping trailer in ${stateLabel}?`,
@@ -85,7 +85,7 @@ export default function StateSeller({ state }: StateSellerProps) {
     },
     {
       q: "Do I pay commission when my camping trailer sells?",
-      a: <p>No. CaravansForSale.com.au does not charge commission when your camping trailer sells. You pay the one-time listing fee and keep 100% of the agreed sale price.</p>,
+      a: <p>No. CampingTrailersForSale.com.au does not charge commission when your camping trailer sells. You pay the one-time listing fee and keep 100% of the agreed sale price.</p>,
     },
     {
       q: "Can I remove my listing after my camping trailer is sold?",
@@ -153,7 +153,7 @@ export default function StateSeller({ state }: StateSellerProps) {
             </div>
 
             {/* CTA */}
-            <a href="https://seller.caravansforsale.com.au/seller-signup/" className="demo-hero__cta">
+            <a href="https://seller.campingtrailersforsale.com.au/seller-signup/" className="demo-hero__cta">
               List Your Camping Trailer Now <i className="fa-solid fa-arrow-right" />
             </a>
           </div>{/* end demo-price-wrapper */}
@@ -245,7 +245,7 @@ export default function StateSeller({ state }: StateSellerProps) {
                     </li>
                   ))}
                 </ul>
-                <a href="https://seller.caravansforsale.com.au/seller-signup/" className="demo-reach-card__cta">
+                <a href="https://seller.campingtrailersforsale.com.au/seller-signup/" className="demo-reach-card__cta">
                   List Your Camping Trailer Now <i className="fa-solid fa-arrow-right" />
                 </a>
               </div>
@@ -289,7 +289,7 @@ export default function StateSeller({ state }: StateSellerProps) {
             <div className="demo-guide-card">
               <div className="demo-guide-card__header">
                 <span className="demo-guide-card__num">1</span>
-                <h3>Why sell on CaravansForSale.com.au?</h3>
+                <h3>Why sell on CampingTrailersForSale.com.au?</h3>
               </div>
               <ul className="demo-guide-card__list">
                 <li>Australia's #1 marketplace for buying and selling camping trailers.</li>
@@ -331,7 +331,7 @@ export default function StateSeller({ state }: StateSellerProps) {
               <ul className="demo-guide-card__list">
                 <li>Private sale: you keep 100% of the sale price.</li>
                 <li>Dealers/consignment: may charge fees or commission.</li>
-                <li>CaravansForSale.com.au: one-time fee, no commission.</li>
+                <li>CampingTrailersForSale.com.au: one-time fee, no commission.</li>
               </ul>
             </div>
 
@@ -345,7 +345,7 @@ export default function StateSeller({ state }: StateSellerProps) {
           <div className="demo-faq-head">
             <span className="demo-faq-head__tag">FAQ</span>
             <h2>Frequently Asked Questions</h2>
-            <p>Everything you need to know about selling your camping trailer in {stateLabel} on CaravansForSale.com.au</p>
+            <p>Everything you need to know about selling your camping trailer in {stateLabel} on CampingTrailersForSale.com.au</p>
           </div>
           <div className="demo-faq-list">
             {MAIN_FAQS.map((faq, i) => (
@@ -381,7 +381,7 @@ export default function StateSeller({ state }: StateSellerProps) {
             <div className="col-md-6">
               <h2>Why {demonym} Camping Trailer Buyers Visit CaravansForSale Every Month</h2>
               <p>
-                CaravansForSale.com.au helps {demonym} camping trailer sellers reach buyers searching for
+                CampingTrailersForSale.com.au helps {demonym} camping trailer sellers reach buyers searching for
                 used camping trailers, off road camping trailers, family camping trailers, pop tops, hybrids and touring
                 camping trailers across {capital} and regional {stateLabel}.
               </p>
@@ -436,7 +436,7 @@ export default function StateSeller({ state }: StateSellerProps) {
             Start selling your camping trailer in {stateLabel} today for just{" "}
             <strong>$49 (Inc. GST)</strong> — live until sold.
           </p>
-          <a href="https://seller.caravansforsale.com.au/seller-signup/" className="btn white_btn">
+          <a href="https://seller.campingtrailersforsale.com.au/seller-signup/" className="btn white_btn">
             List Your Camping Trailer Now
           </a>
           <p className="demo-cta-strip__alt-link">

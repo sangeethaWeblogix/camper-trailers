@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const preferredRegion = "syd1";
 
-const API_BASE = process.env.NEXT_PUBLIC_CFS_API_BASE;
-const API_KEY = process.env.CFS_API_KEY;
+const API_BASE = process.env.MPN_API_BASE;
+const API_KEY = process.env.MPN_API_KEY;
 
 /**
  * Band-count lookup for the browse-section filter links (Price/ATM/Length/Sleep).
@@ -13,12 +13,12 @@ export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const paramsStr = searchParams.toString();
   try {
-    const res = await fetch(`${API_BASE}/product_exists_check?${paramsStr}`, {
+    const res = await fetch(`${API_BASE}/exists?${paramsStr}`, {
       headers: {
         Accept: "application/json",
-        ...(API_KEY ? { "X-API-Key": API_KEY } : {}),
+        ...(API_KEY ? { "X-Secret-Key": API_KEY } : {}),
       },
-      next: { revalidate: 3600 },
+      cache: "no-store",
     });
 
     if (!res.ok) {

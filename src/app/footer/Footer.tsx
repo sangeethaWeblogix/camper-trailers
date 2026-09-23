@@ -35,7 +35,7 @@ const Footer = () => {
               <div className="foot-info logo-social">
                 <div className="socials">
                   <a
-                    href="https://www.facebook.com/caravansforsale.com.au"
+                    href="https://www.facebook.com/campingtrailersforsale.com.au"
                     className="facebook"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -43,7 +43,7 @@ const Footer = () => {
                     <FaFacebookF />
                   </a>
                   <a
-                    href="https://www.instagram.com/caravansforsale.com.au"
+                    href="https://www.instagram.com/campingtrailersforsale.com.au"
                     className="instagram"
                     target="_blank"
                     rel="noopener noreferrer"

@@ -5,20 +5,20 @@ const schemaGraph = [
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "@id": "https://www.caravansforsale.com.au/dealer-advertising/#webpage",
-    "url": "https://www.caravansforsale.com.au/dealer-advertising/",
+    "@id": "https://www.campingtrailersforsale.com.au/dealer-advertising/#webpage",
+    "url": "https://www.campingtrailersforsale.com.au/dealer-advertising/",
     "name": "Camping Trailer Dealer Advertising | Unlimited Listings $299/Month | CaravansForSale",
-    "description": "Advertise your camping trailer dealership on CaravansForSale.com.au. Unlimited listings, zero lead fees, $299/month (inc. GST). Cancel anytime.",
-    "isPartOf": { "@id": "https://www.caravansforsale.com.au/#website" },
-    "breadcrumb": { "@id": "https://www.caravansforsale.com.au/dealer-advertising/#breadcrumb" },
+    "description": "Advertise your camping trailer dealership on CampingTrailersForSale.com.au. Unlimited listings, zero lead fees, $299/month (inc. GST). Cancel anytime.",
+    "isPartOf": { "@id": "https://www.campingtrailersforsale.com.au/#website" },
+    "breadcrumb": { "@id": "https://www.campingtrailersforsale.com.au/dealer-advertising/#breadcrumb" },
   },
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "@id": "https://www.caravansforsale.com.au/dealer-advertising/#breadcrumb",
+    "@id": "https://www.campingtrailersforsale.com.au/dealer-advertising/#breadcrumb",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.caravansforsale.com.au/" },
-      { "@type": "ListItem", "position": 2, "name": "Dealer Advertising", "item": "https://www.caravansforsale.com.au/dealer-advertising/" },
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.campingtrailersforsale.com.au/" },
+      { "@type": "ListItem", "position": 2, "name": "Dealer Advertising", "item": "https://www.campingtrailersforsale.com.au/dealer-advertising/" },
     ],
   },
   {
@@ -28,10 +28,10 @@ const schemaGraph = [
     "provider": {
       "@type": "Organization",
       "name": "Camping Trailers For Sale",
-      "url": "https://www.caravansforsale.com.au/",
+      "url": "https://www.campingtrailersforsale.com.au/",
     },
-    "description": "Unlimited camping trailer listings on CaravansForSale.com.au for $299/month (inc. GST). Zero lead fees, no lock-in contracts, automatic inventory sync.",
-    "url": "https://www.caravansforsale.com.au/dealer-advertising/",
+    "description": "Unlimited camping trailer listings on CampingTrailersForSale.com.au for $299/month (inc. GST). Zero lead fees, no lock-in contracts, automatic inventory sync.",
+    "url": "https://www.campingtrailersforsale.com.au/dealer-advertising/",
     "areaServed": { "@type": "Country", "name": "Australia" },
     "offers": {
       "@type": "Offer",
@@ -54,7 +54,7 @@ const schemaGraph = [
         "name": "How much does the dealer subscription cost, and what's included?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The dealer subscription is $299 per month (including GST). This flat monthly fee allows your dealership to list unlimited camping trailers on CaravansForSale.com.au. There are no per-listing charges, and we never charge per lead or take success commissions – no matter how many inquiries or sales you get, $299/month covers it all.",
+          "text": "The dealer subscription is $299 per month (including GST). This flat monthly fee allows your dealership to list unlimited camping trailers on CampingTrailersForSale.com.au. There are no per-listing charges, and we never charge per lead or take success commissions – no matter how many inquiries or sales you get, $299/month covers it all.",
         },
       },
       {
@@ -70,7 +70,7 @@ const schemaGraph = [
         "name": "What kind of audience will my camping trailers reach?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "CaravansForSale.com.au is a camping trailer-only marketplace with a focused, nationwide audience of serious buyers.",
+          "text": "CampingTrailersForSale.com.au is a camping trailer-only marketplace with a focused, nationwide audience of serious buyers.",
         },
       },
       {

@@ -4,7 +4,7 @@ import { buildSlugFromFilters } from "@/app/components/slugBuilter";
 import { isAllowedSingleBand } from "@/utils/seo/band-utils";
 import regionPathsData from "../cfs-paths/regions.json";
 import makesData from "../cfs-paths/makes.json";
-const API_KEY = process.env.CFS_API_KEY;
+const API_KEY = process.env.MPN_API_KEY;
 const SERVER_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36';
 
 /* Valid region slugs built from cfs-paths/regions.json (sitemap source of truth) */
@@ -25,8 +25,8 @@ const VALID_MAKE_SLUGS = new Set<string>(
 ────────────────────────────────────────────── */
 const seoCache = new Map<string, { robots: string; isEmpty: boolean; hasExclusiveOnly: boolean; expires: number; staleExpires: number }>();
 const productCache = new Map<string, { exists: boolean; expires: number }>();
-const CACHE_TTL = 10 * 60 * 1000;       // 10 min fresh
-const CACHE_STALE_TTL = 60 * 60 * 1000; // 1 hr stale-while-revalidate window
+const CACHE_TTL = 0;       // caching disabled — always refetch
+const CACHE_STALE_TTL = 0; // caching disabled — always refetch
 
 
 /* Valid Australian state slug parts (the bit before -state in the URL) */
@@ -36,7 +36,7 @@ const VALID_AU_STATES = new Set([
   'nsw', 'vic', 'qld', 'sa', 'wa', 'tas', 'nt', 'act',
 ]);
 
-const API_WP = 'https://admin.caravansforsale.com.au/wp-json/cfs/v1';
+const API_WP = (process.env.MPN_API_BASE || 'https://admin.marketplacenetwork.com.au/wp-json/mpn/v1/camping-trailers');
 
 
 
@@ -51,7 +51,7 @@ async function isValidSuburb(suburb: string, pincode: string | undefined, apiKey
     const controller = new AbortController();
     const tid = setTimeout(() => controller.abort(), 5000);
     const res = await fetch(`${API_WP}/location-search?keyword=${encodeURIComponent(suburb)}`, {
-      headers: { 'User-Agent': SERVER_UA, ...(apiKey && { 'X-API-Key': apiKey }) },
+      headers: { 'User-Agent': SERVER_UA, ...(apiKey && { 'X-Secret-Key': apiKey }) },
       signal: controller.signal,
     });
     clearTimeout(tid);
@@ -66,7 +66,7 @@ async function isValidSuburb(suburb: string, pincode: string | undefined, apiKey
           ? u.includes(`${suburbSlug}-${pincode}-suburb`) || u.includes(`/${suburbSlug}-suburb/${pincode}`)
           : u.includes(`${suburbSlug}-suburb`);
       });
-      suburbValidCache.set(cacheKey, { valid, expires: Date.now() + 60 * 60 * 1000 });
+      suburbValidCache.set(cacheKey, { valid, expires: Date.now() });
       return valid;
     }
   } catch {}
@@ -145,23 +145,25 @@ async function refreshSeoCache(cacheKey: string, url: URL, request: NextRequest)
     const slugParts = url.pathname.replace("/listings", "").split("/").filter(Boolean);
     const filters = parseSlugToFilters(slugParts, Object.fromEntries(url.searchParams));
     const apiParams = buildApiParams(filters);
-    const apiUrl = `${API_WP}/pool_test?${apiParams.toString()}`;
+    const apiUrl = `${API_WP}/pool?${apiParams.toString()}`;
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 10000);
     const apiRes = await fetch(apiUrl, {
-      headers: { "User-Agent": SERVER_UA, ...(API_KEY && { "X-API-Key": API_KEY }) },
+      headers: { "User-Agent": SERVER_UA, ...(API_KEY && { "X-Secret-Key": API_KEY }) },
       signal: controller.signal,
       // @ts-ignore
-      next: { revalidate: 3600 },
+      cache: "no-store",
     });
     clearTimeout(timeoutId);
     if (apiRes.ok) {
       const data = await apiRes.json();
-      // pool_test returns products at top level; support old new_optimize_code shape too
+      // /pool returns a flat `products` array for page 2+/explicit sort, but pre-split
+      // `featured_products`/`new_products`/`used_products` for page 1 default order.
       const products = data?.products ?? data?.data?.products ?? [];
+      const preSplitCount = (data?.featured_products?.length ?? 0) + (data?.new_products?.length ?? 0) + (data?.used_products?.length ?? 0);
       const empExclusive = data?.emp_exclusive_products ?? [];
-      const isEmpty = products.length === 0 && empExclusive.length === 0;
-      const hasExclusiveOnly = products.length === 0 && empExclusive.length > 0;
+      const isEmpty = products.length === 0 && preSplitCount === 0 && empExclusive.length === 0;
+      const hasExclusiveOnly = products.length === 0 && preSplitCount === 0 && empExclusive.length > 0;
       const seo = data?.seo_v2 ?? data?.seo ?? {};
       const rawIndex = String(seo?.index ?? "").toLowerCase().trim();
       const rawFollow = String(seo?.follow ?? "").toLowerCase().trim();
@@ -338,15 +340,15 @@ export async function middleware(request: NextRequest) {
         if (!cached.exists) return render410(request);
       } else {
         try {
-          const API_BASE = process.env.NEXT_PUBLIC_CFS_API_BASE || 'https://admin.caravansforsale.com.au/wp-json/cfs/v1';
+          const API_BASE = process.env.MPN_API_BASE || 'https://admin.marketplacenetwork.com.au/wp-json/mpn/v1/camping-trailers';
           const controller = new AbortController();
           const timeoutId = setTimeout(() => controller.abort(), 5000);
           const apiRes = await fetch(
-            `${API_BASE}/product-detail-new/?slug=${encodeURIComponent(slug)}`,
+            `${API_BASE}/${encodeURIComponent(slug)}`,
             {
               headers: {
                 'User-Agent': SERVER_UA,
-                ...(API_KEY && { 'X-API-Key': API_KEY }),
+                ...(API_KEY && { 'X-Secret-Key': API_KEY }),
               },
               signal: controller.signal,
             }
@@ -441,7 +443,7 @@ export async function middleware(request: NextRequest) {
         // Build API params using the same mapping as fetchListings (api/listings/api.ts).
         // Raw filter keys (minKg, maxKg, sleeps) must be converted to API names (from_atm, to_atm, sleep).
         const apiParams = buildApiParams(filters);
-        const apiUrl = `${API_WP}/pool_test?${apiParams.toString()}`;
+        const apiUrl = `${API_WP}/pool?${apiParams.toString()}`;
 
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 5000);
@@ -449,11 +451,11 @@ export async function middleware(request: NextRequest) {
         const apiRes = await fetch(apiUrl, {
           headers: {
             "User-Agent": SERVER_UA,
-            ...(API_KEY && { "X-API-Key": API_KEY }),
+            ...(API_KEY && { "X-Secret-Key": API_KEY }),
           },
           signal: controller.signal,
           // @ts-ignore - Edge runtime specific
-          next: { revalidate: 3600 },
+          cache: "no-store",
         });
 
         clearTimeout(timeoutId);
@@ -471,10 +473,12 @@ export async function middleware(request: NextRequest) {
           // 0 regular products:
           //   - empExclusive also empty → 410 (Vercel shows its own Gone page — no content anyway)
           //   - empExclusive has items  → 200 noindex (Vercel intercepts 410+rewrite, page must show exclusive content)
-          // pool_test returns products at top level; support old new_optimize_code shape too
+          // /pool returns a flat `products` array for page 2+/explicit sort, but pre-split
+          // `featured_products`/`new_products`/`used_products` for page 1 default order.
           const products = data?.products ?? data?.data?.products ?? [];
+          const preSplitCount = (data?.featured_products?.length ?? 0) + (data?.new_products?.length ?? 0) + (data?.used_products?.length ?? 0);
           const empExclusive = data?.emp_exclusive_products ?? [];
-          if (products.length === 0) {
+          if (products.length === 0 && preSplitCount === 0) {
             if (empExclusive.length === 0) {
               // Don't 410 from middleware — ISR/page component handles empty state
               seoCache.set(cacheKey, { robots: "noindex, nofollow", isEmpty: true, hasExclusiveOnly: false, expires: Date.now() + CACHE_TTL, staleExpires: Date.now() + CACHE_STALE_TTL });

@@ -2,13 +2,19 @@
 // src/app/api/banners/route.ts
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 const PLACEMENTS = ["listings", "home"];
 
 export async function GET() {
   try {
     const results = await Promise.allSettled(
       PLACEMENTS.map(async (placement) => {
-        const url = `http://admin.caravansforsale.com.au/wp-json/ads-manager/v1/banners?placement=${placement}&limit=50&paged=1`; // ✅ http://
+        // site=ctfs scopes results to this site's own banners — the Marketplace
+        // Network backend serves multiple connected sites (camping trailers,
+        // campervans, etc.) from the same ads-manager API; without this param
+        // it returns banners for whichever site happens to match first.
+        const url = `http://admin.marketplacenetwork.com.au/wp-json/ads-manager/v1/banners?placement=${placement}&limit=50&paged=1&site=ctfs`;
 
         const res = await fetch(url, {
           headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" },
@@ -47,7 +53,9 @@ export async function GET() {
     );
 
     console.log(`✅ Total banners: ${unique.length}`);
-    return NextResponse.json(unique);
+    return NextResponse.json(unique, {
+      headers: { "Cache-Control": "no-store" },
+    });
 
   } catch (error) {
     console.error("🔴 Error:", error);

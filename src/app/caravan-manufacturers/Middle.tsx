@@ -142,7 +142,7 @@ export default function CaravanManufacturers() {
                   compromising on comfort.Renowned for durability and smart
                   design, Everest Caravans is recognised as a top
                   builder of the{" "}
-                  <Link href="https://www.caravansforsale.com.au/best-caravans-full-off-road-capabilities-australia/">
+                  <Link href="https://www.campingtrailersforsale.com.au/best-caravans-full-off-road-capabilities-australia/">
                     best off road camping trailers
                   </Link>{" "}
                   in Australia—trusted by adventurers for performance, comfort,
@@ -170,7 +170,7 @@ export default function CaravanManufacturers() {
 
               <Link
                 className="block border border-gray-300 shadow-md my-4"
-                href="https://www.caravansforsale.com.au/"
+                href="https://www.campingtrailersforsale.com.au/"
                 target="_blank"
                 rel="noopener noreferrer"
               >

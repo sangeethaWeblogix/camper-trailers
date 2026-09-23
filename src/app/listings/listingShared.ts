@@ -46,3 +46,37 @@ export function buildFeaturedOrder(products: Listing[], premiumsRaw: Listing[], 
   const rest = products.filter((p) => !heroIds.has(p.id));
   return [...hero, ...rest];
 }
+
+/** Split a /pool response's products into Featured/New/Used buckets.
+ *
+ * The MPN API returns TWO shapes depending on the request:
+ *  - Page 1, default order, no condition filter: pre-split top-level
+ *    `featured_products` / `new_products` / `used_products` arrays.
+ *  - Every other case (explicit sort, page 2+, condition filter): a single
+ *    flat `products` array, each item carrying a `tier` (or legacy
+ *    `slot_bucket`) field to bucket by.
+ */
+export function splitPoolProducts(
+  products: Listing[],
+  premiumsRaw: Listing[],
+  exclusivesRaw: Listing[],
+  presplit?: { featured?: Listing[]; new?: Listing[]; used?: Listing[] }
+): { featured: Listing[]; new: Listing[]; used: Listing[] } {
+  const hasPreSplit = !!(presplit && ((presplit.featured?.length ?? 0) + (presplit.new?.length ?? 0) + (presplit.used?.length ?? 0) > 0));
+
+  if (hasPreSplit) {
+    const featured = buildFeaturedOrder(presplit!.featured ?? [], premiumsRaw, exclusivesRaw);
+    const featuredIds = new Set(featured.map((p) => p.id));
+    const newItems  = (presplit!.new ?? []).filter((p) => !p.is_premium && !p.is_exclusive && !featuredIds.has(p.id));
+    const usedItems = (presplit!.used ?? []).filter((p) => !p.is_premium && !p.is_exclusive && !featuredIds.has(p.id));
+    return { featured, new: newItems, used: usedItems };
+  }
+
+  const bucketOf = (p: Listing) => (p as Listing & { tier?: string }).tier ?? p.slot_bucket;
+  const featuredSource = products.filter((p) => bucketOf(p) === "featured");
+  const featured = buildFeaturedOrder(featuredSource, premiumsRaw, exclusivesRaw);
+  const featuredIds = new Set(featured.map((p) => p.id));
+  const newItems  = products.filter((p) => bucketOf(p) === "new"  && !p.is_premium && !p.is_exclusive && !featuredIds.has(p.id));
+  const usedItems = products.filter((p) => bucketOf(p) === "used" && !p.is_premium && !p.is_exclusive && !featuredIds.has(p.id));
+  return { featured, new: newItems, used: usedItems };
+}

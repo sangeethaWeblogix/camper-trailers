@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const preferredRegion = "syd1";
 
-const API_BASE = process.env.NEXT_PUBLIC_CFS_API_BASE;
-const API_KEY = process.env.CFS_API_KEY;
+const API_BASE = process.env.MPN_API_BASE;
+const API_KEY = process.env.MPN_API_KEY;
 
 // Normalize each product so components always get image_format as string[]
 // home_featured returns `thumbnail` (imagestack R2 URL); also handle `image` fallback
@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
   const type     = request.nextUrl.searchParams.get("type") ?? "all";
   const seed     = request.nextUrl.searchParams.get("seed");
   const category = request.nextUrl.searchParams.get("category");
-  const url = `${API_BASE}/home_featured?type=${encodeURIComponent(type)}${seed ? `&seed=${encodeURIComponent(seed)}` : ""}${category ? `&category=${encodeURIComponent(category)}` : ""}`;
+  const url = `${API_BASE}/home-featured?type=${encodeURIComponent(type)}${seed ? `&seed=${encodeURIComponent(seed)}` : ""}${category ? `&category=${encodeURIComponent(category)}` : ""}`;
 
   const visitorIp =
     request.headers.get("cf-connecting-ip") ||
@@ -40,7 +40,7 @@ export async function GET(request: NextRequest) {
       headers: {
         Accept: "application/json",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
-        ...(API_KEY && { "X-API-Key": API_KEY }),
+        ...(API_KEY && { "X-Secret-Key": API_KEY }),
         ...(visitorIp && { "X-Visitor-IP": visitorIp }),
       },
       cache: "no-store",
@@ -71,7 +71,7 @@ export async function GET(request: NextRequest) {
       console.error(
         `[WP API] home_featured type=${type} CLOUDFLARE CHALLENGE blocked request — ` +
         `ip=${visitorIp || "(none)"}, url=${url}. ` +
-        `Fix: add a WAF bypass rule in Cloudflare for X-API-Key header.`
+        `Fix: add a WAF bypass rule in Cloudflare for X-Secret-Key header.`
       );
       return NextResponse.json(
         { success: false, _cf_blocked: true },
@@ -106,8 +106,9 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Response shape: { success, products: [...], meta: {...} }
-    const rawProducts: any[] = json?.products ?? json?.data?.products ?? [];
+    // MPN response shape: { success, type, state, seed, counts, count, items: [...] }
+    // (older shape used `products`/`data.products` — kept as a fallback)
+    const rawProducts: any[] = json?.items ?? json?.products ?? json?.data?.products ?? [];
     const products = rawProducts.map(normalizeProduct);
 
     return NextResponse.json(

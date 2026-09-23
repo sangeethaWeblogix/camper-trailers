@@ -1,23 +1,26 @@
-const API_BASE = process.env.NEXT_PUBLIC_CFS_API_BASE;
-const API_KEY  = process.env.CFS_API_KEY;
+const API_BASE = process.env.MPN_API_BASE;
+const API_KEY  = process.env.MPN_API_KEY;
 
 /** Shared headers for every WP API call. */
 const wpHeaders = (): Record<string, string> => ({
   Accept: "application/json",
-  ...(API_KEY ? { "X-API-Key": API_KEY } : {}),
+  ...(API_KEY ? { "X-Secret-Key": API_KEY } : {}),
 });
 
 // ---------------------------------------------------------------------------
 // fetchMakeDetails
-// make_details is not pre-warmed in KV — rely on Next.js 24h fetch cache.
+// MPN has no make_details-with-models-per-make equivalent — closest route is
+// attribute-terms/make, a flat list of make names (no slugs). Adapted into
+// the old { name, slug } shape callers expect.
 // ---------------------------------------------------------------------------
 export const fetchMakeDetails = async () => {
-  const res = await fetch(`${API_BASE}/make_details`, {
+  const res = await fetch(`${API_BASE}/attribute-terms/make`, {
     headers: wpHeaders(),
-    next: { revalidate: 86400 },
+    cache: "no-store",
   });
   const json = await res.json();
-  return json?.data?.make_options || [];
+  const values: string[] = json?.values ?? [];
+  return values.map((name) => ({ name, slug: name.trim().toLowerCase().replace(/\s+/g, "-") }));
 };
 
 // ---------------------------------------------------------------------------
@@ -30,10 +33,10 @@ export const fetchModelCounts = async (
   const timeoutId = setTimeout(() => controller.abort(), 8000);
   try {
     const res = await fetch(
-      `${API_BASE}/params_count?group_by=model&make=${encodeURIComponent(make)}`,
+      `${API_BASE}/params-count?group_by=model&make=${encodeURIComponent(make)}`,
       {
         headers: wpHeaders(),
-        next: { revalidate: 3600 },
+        cache: "no-store",
         signal: controller.signal,
       }
     );
@@ -64,9 +67,9 @@ export const fetchMakeCounts = async (): Promise<
   { name: string; slug: string; count: number }[]
 > => {
   try {
-    const res = await fetch(`${API_BASE}/params_count?group_by=make`, {
+    const res = await fetch(`${API_BASE}/params-count?group_by=make`, {
       headers: wpHeaders(),
-      next: { revalidate: 3600 },
+      cache: "no-store",
     });
     if (!res.ok) return [];
     const data = await res.json();
@@ -83,9 +86,9 @@ export const fetchCategoryCounts = async (): Promise<
   { name: string; slug: string; count: number }[]
 > => {
   try {
-    const res = await fetch(`${API_BASE}/params_count?group_by=category`, {
+    const res = await fetch(`${API_BASE}/params-count?group_by=category`, {
       headers: wpHeaders(),
-      next: { revalidate: 3600 },
+      cache: "no-store",
     });
     if (!res.ok) return [];
     const data = await res.json();
@@ -107,7 +110,7 @@ export const fetchProductList = async () => {
   try {
     const res = await fetch(`${API_BASE}/params-product-list`, {
       headers: wpHeaders(),
-      next: { revalidate: 3600 },
+      cache: "no-store",
     });
     if (!res.ok) throw new Error("Failed to fetch product list");
     return await res.json();

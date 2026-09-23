@@ -27,6 +27,8 @@ interface Props {
 export default function HomeLatestBlogs({ posts: rawPosts }: Props) {
   const posts = rawPosts.filter((p) => !!p?.id && !!p?.title && !!p?.slug);
 
+  if (posts.length === 0) return null;
+
   const getHref = (p: BlogPost) => {
     const slug = p.slug?.trim() || toSlug(p.title || "post");
     return `/${slug}/`;

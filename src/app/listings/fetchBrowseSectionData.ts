@@ -7,12 +7,12 @@ import {
   type BrowseSectionData,
 } from "./browseSectionShared";
 
-const API_BASE = process.env.NEXT_PUBLIC_CFS_API_BASE;
-const API_KEY = process.env.CFS_API_KEY;
+const API_BASE = process.env.MPN_API_BASE;
+const API_KEY = process.env.MPN_API_KEY;
 
 const wpHeaders = (): Record<string, string> => ({
   Accept: "application/json",
-  ...(API_KEY ? { "X-API-Key": API_KEY } : {}),
+  ...(API_KEY ? { "X-Secret-Key": API_KEY } : {}),
 });
 
 export async function fetchGroupCountsServer(
@@ -21,9 +21,9 @@ export async function fetchGroupCountsServer(
 ): Promise<CountItem[]> {
   try {
     const qs = new URLSearchParams({ group_by: groupBy, ...scope });
-    const res = await fetch(`${API_BASE}/params_count?${qs.toString()}`, {
+    const res = await fetch(`${API_BASE}/params-count?${qs.toString()}`, {
       headers: wpHeaders(),
-      next: { revalidate: 3600 },
+      cache: "no-store",
     });
     if (!res.ok) return [];
     const json = await res.json();
@@ -44,9 +44,9 @@ async function fetchBandCountServer(scope: Record<string, string>, query: string
 
   try {
     const qs = new URLSearchParams(bandParams);
-    const res = await fetch(`${API_BASE}/product_exists_check?${qs.toString()}`, {
+    const res = await fetch(`${API_BASE}/exists?${qs.toString()}`, {
       headers: wpHeaders(),
-      next: { revalidate: 3600 },
+      cache: "no-store",
     });
     if (!res.ok) return 0;
     const json = await res.json();

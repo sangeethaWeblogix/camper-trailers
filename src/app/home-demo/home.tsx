@@ -90,8 +90,10 @@ const handleBannerClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>) =
     device_type: window.innerWidth < 768 ? "mobile" : "desktop",
     user_agent: navigator.userAgent,
     ip_address: visitorIp,
+    // Must match the banner's owning site or the event is rejected.
+    site: "ctfs",
   });
-  const trackUrl = `${process.env.NEXT_PUBLIC_CF7_BASE || "https://admin.caravansforsale.com.au"}/wp-json/ads-manager/v1/banners/track`;
+  const trackUrl = `${process.env.NEXT_PUBLIC_CF7_BASE || "https://admin.marketplacenetwork.com.au"}/wp-json/ads-manager/v1/banners/track`;
   fetch(trackUrl, { method: "POST", headers: { "Content-Type": "application/json" }, body, keepalive: true })
     .catch((err) => console.error("[home] banner click tracking failed:", err));
 
@@ -257,7 +259,7 @@ const handleBannerClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>) =
             <div className="sell-content">
               <h3>List Your Camping Trailer For Sale Today</h3>
               <p className="subtitle">Reach thousands of camping trailer buyers daily.</p>
-              <p className="desc">List your camping trailer on CaravansForSale.com.au — Australia&apos;s trusted marketplace to buy and sell camping trailers.</p>
+              <p className="desc">List your camping trailer on CampingTrailersForSale.com.au — Australia&apos;s trusted marketplace to buy and sell camping trailers.</p>
               <div className="btns_two">
                 <a href="/dealer-advertising/" className="btn primary-btn">Dealer Sign Up</a>
                 <a href="/sell-my-camper-trailer/" className="btn secondary-btn">Private Seller - Click Here</a>

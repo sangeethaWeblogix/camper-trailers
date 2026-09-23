@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "Sell your camping trailer online across Australia for just $49. List until sold, edit anytime, pay no commission and connect directly with genuine camping trailer buyers.",
   robots: "index, follow",
   alternates: {
-    canonical: "https://www.caravansforsale.com.au/sell-my-camper-trailer/",
+    canonical: "https://www.campingtrailersforsale.com.au/sell-my-camper-trailer/",
   },
 };
 

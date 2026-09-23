@@ -36,7 +36,7 @@ export default function HomeBuyerGuide() {
               </h2>
               
               <p className="hbg-body">
-                CaravansForSale.com.au helps Australian buyers compare a wide range of camping trailers for sale in one convenient place. Browse affordable used camping trailers, premium new models and options designed for touring, family holidays or off-road adventures. Compare important features such as layout, ATM, tare weight, sleeping capacity, length, suspension, condition, service history and towing requirements to narrow down your choices before contacting a seller or visiting a dealership. Our easy-to-use platform makes researching and comparing camping trailers simple.
+                CampingTrailersForSale.com.au helps Australian buyers compare a wide range of camping trailers for sale in one convenient place. Browse affordable used camping trailers, premium new models and options designed for touring, family holidays or off-road adventures. Compare important features such as layout, ATM, tare weight, sleeping capacity, length, suspension, condition, service history and towing requirements to narrow down your choices before contacting a seller or visiting a dealership. Our easy-to-use platform makes researching and comparing camping trailers simple.
               </p>
               <p className="hbg-body">
                 Explore popular camping trailer types including off-road, hybrid, pop top, touring and luxury camping trailers, while also comparing trusted camping trailer brands and reputable dealers across Australia. Check whether dealers offer warranty support, finance options, trade-ins, after-sales service and detailed vehicle information before making your decision. Use our buyers guide and convenient search filters to browse listings by state, location, budget, size, weight and berth, helping you find the right camping trailer for your lifestyle and travel plans.
@@ -66,7 +66,7 @@ export default function HomeBuyerGuide() {
             <p className="hbg-sell-body">
               If you&apos;re upgrading or no longer need your current camping trailer,{" "}
               <a href="/sell-my-camper-trailer/" className="hbg-sell-link">sell your camping trailer</a>{" "}
-              by creating a listing on CaravansForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
+              by creating a listing on CampingTrailersForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
             </p>
 
 
@@ -78,7 +78,7 @@ export default function HomeBuyerGuide() {
       <section className="hbg-why-section">
         <div className="container">
           <h2 className="hbg-why-title">
-            Why Australians Use <span className="hbg-why-accent">CaravansForSale.com.au</span>
+            Why Australians Use <span className="hbg-why-accent">CampingTrailersForSale.com.au</span>
           </h2>
           
 

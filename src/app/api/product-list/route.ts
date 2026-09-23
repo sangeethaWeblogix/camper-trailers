@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
-const API_BASE = process.env.NEXT_PUBLIC_CFS_API_BASE;
-const API_KEY  = process.env.CFS_API_KEY;
+const API_BASE = process.env.MPN_API_BASE;
+const API_KEY  = process.env.MPN_API_KEY;
 
 export async function GET() {
   if (!API_BASE) {
@@ -12,9 +12,9 @@ export async function GET() {
     const res = await fetch(`${API_BASE}/params-product-list`, {
       headers: {
         Accept: "application/json",
-        ...(API_KEY && { "X-API-Key": API_KEY }),
+        ...(API_KEY && { "X-Secret-Key": API_KEY }),
       },
-      next: { revalidate: 3600 },
+      cache: "no-store",
     });
 
     const raw = await res.text();

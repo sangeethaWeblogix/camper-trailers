@@ -5,7 +5,7 @@ import "./statement.css?=123";
 export async function generateMetadata(): Promise<Metadata> {
   const metaTitle = "Buyer Safety Guide - CaravansForSale";
   const metaDescription =
-    "Learn how to buy a camping trailer safely on CaravansForSale.com.au. Follow our buyer safety checklist including VIN checks, PPSR searches, secure payments, and scam prevention tips.";
+    "Learn how to buy a camping trailer safely on CampingTrailersForSale.com.au. Follow our buyer safety checklist including VIN checks, PPSR searches, secure payments, and scam prevention tips.";
 
   const robots = "index";
 
@@ -15,13 +15,13 @@ export async function generateMetadata(): Promise<Metadata> {
     robots: robots,
 
     alternates: {
-      canonical: "https://www.caravansforsale.com.au/buyer-safety-guide/",
+      canonical: "https://www.campingtrailersforsale.com.au/buyer-safety-guide/",
     },
 
     openGraph: {
       title: metaTitle,
       description: metaDescription,
-      url: "https://www.caravansforsale.com.au/buyer-safety-guide/",
+      url: "https://www.campingtrailersforsale.com.au/buyer-safety-guide/",
       type: "article",
     },
 

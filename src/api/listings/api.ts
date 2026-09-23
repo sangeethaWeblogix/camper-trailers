@@ -1,4 +1,4 @@
-const API_BASE = process.env.NEXT_PUBLIC_CFS_API_BASE;
+const API_BASE = process.env.MPN_API_BASE;
 
 interface Filters {
   page?: number;
@@ -195,7 +195,7 @@ export const fetchListings = async (
   const isClient = typeof window !== "undefined";
   const url = isClient
     ? `/api/listings/?${params.toString()}`
-    : `${API_BASE}/new_optimize_code?${params.toString()}`;
+    : `${API_BASE}/pool?${params.toString()}`;
 
   const controller = new AbortController();
   const timeoutMs = Number(process.env.CFS_API_TIMEOUT_MS) || 30000;
@@ -207,8 +207,8 @@ export const fetchListings = async (
       signal: controller.signal,
       headers: {
         Accept: "application/json",
-        ...(!isClient && process.env.CFS_API_KEY
-          ? { "X-API-Key": process.env.CFS_API_KEY }
+        ...(!isClient && process.env.MPN_API_KEY
+          ? { "X-Secret-Key": process.env.MPN_API_KEY }
           : {}),
       },
       ...(!isClient && { cache: 'no-store' }),

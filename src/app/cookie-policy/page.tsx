@@ -15,13 +15,13 @@ export async function generateMetadata(): Promise<Metadata> {
     robots: robots,
 
     alternates: {
-      canonical: "https://www.caravansforsale.com.au/cookie-policy/",
+      canonical: "https://www.campingtrailersforsale.com.au/cookie-policy/",
     },
 
     openGraph: {
       title: metaTitle,
       description: metaDescription,
-      url: "https://www.caravansforsale.com.au/cookie-policy/",
+      url: "https://www.campingtrailersforsale.com.au/cookie-policy/",
       type: "article",
     },
 

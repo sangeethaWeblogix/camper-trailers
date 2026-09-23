@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const preferredRegion = "syd1";
 
-const API_BASE = process.env.NEXT_PUBLIC_CFS_API_BASE;
-const API_KEY = process.env.CFS_API_KEY;
+const API_BASE = process.env.MPN_API_BASE;
+const API_KEY = process.env.MPN_API_KEY;
 
 async function fetchPoolTest(url: string, signal: AbortSignal) {
   const res = await fetch(url, {
@@ -12,7 +12,7 @@ async function fetchPoolTest(url: string, signal: AbortSignal) {
     headers: {
       Accept: "application/json",
       "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
-      ...(API_KEY && { "X-API-Key": API_KEY }),
+      ...(API_KEY && { "X-Secret-Key": API_KEY }),
     },
     cache: "no-store",
   });
@@ -46,8 +46,8 @@ export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const params = searchParams.toString();
 
-  // Forward all params directly to WP pool_test (SQL engine, no typesense).
-  const url = `${API_BASE}/pool_test?${params}`;
+  // Forward all params directly to the MPN pool endpoint (SQL engine, no typesense).
+  const url = `${API_BASE}/pool?${params}`;
 
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 30000);

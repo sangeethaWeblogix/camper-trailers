@@ -14,7 +14,7 @@ type PageProps = { params: Promise<RouteParams> };
 async function fetchBlogDetail(slug: string) {
   try {
     const res = await fetch(
-      `https://admin.caravansforsale.com.au/wp-json/cfs/v1/blog-detail-new/?slug=${encodeURIComponent(
+      `${process.env.MPN_API_BASE}/blog-detail-new/?slug=${encodeURIComponent(
         slug
       )}`,
       { cache: "no-store", headers: { Accept: "application/json" } }
@@ -47,7 +47,7 @@ export async function generateMetadata({
         google: "6tT6MT6AJgGromLaqvdnyyDQouJXq0VHS-7HC194xEo", // ✅ Google site verification
       },
       alternates: {
-        canonical: `https://www.caravansforsale.com.au/${slug}/`,
+        canonical: `https://www.campingtrailersforsale.com.au/${slug}/`,
       },
     };
   }
@@ -67,7 +67,7 @@ export async function generateMetadata({
     data?.short_description ||
     "View camping trailer details.";
   const robots = "index, follow";
-  const canonicalUrl = `https://www.caravansforsale.com.au/${slug}/`;
+  const canonicalUrl = `https://www.campingtrailersforsale.com.au/${slug}/`;
 
   return {
     title,
@@ -139,7 +139,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
             </div>
             <Typography variant="h5" fontWeight="bold" gutterBottom>
               Thank you for submitting your information with{" "}
-              <span style={{ color: "#000" }}>caravansforsale.com.au</span>.
+              <span style={{ color: "#000" }}>campingtrailersforsale.com.au</span>.
             </Typography>
 
             <Typography variant="body1" color="text.secondary" gutterBottom>

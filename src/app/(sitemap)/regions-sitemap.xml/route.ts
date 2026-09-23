@@ -3,7 +3,7 @@ import regionsData from "../../../../cfs-paths/regions.json";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
-  "https://www.caravansforsale.com.au/listings/";
+  "https://www.campingtrailersforsale.com.au/listings/";
 
 export async function GET() {
   try {

@@ -8,35 +8,31 @@ export interface ProductMeta {
 }
 
 export const fetchProductMeta = cache(async (slug: string): Promise<ProductMeta> => {
-  const API_BASE = process.env.NEXT_PUBLIC_CFS_API_BASE!;
-  const API_KEY = process.env.CFS_API_KEY;
+  const API_BASE = process.env.MPN_API_BASE!;
+  const API_KEY = process.env.MPN_API_KEY;
   const empty: ProductMeta = { title: "", description: "", canonical: "", ogImage: "" };
   try {
     const res = await fetch(
-      `${API_BASE}/product-detail-new/?slug=${encodeURIComponent(slug)}`,
+      `${API_BASE}/${encodeURIComponent(slug)}`,
       {
-        next: { revalidate: 3600 },
+        cache: "no-store",
         headers: {
           Accept: "application/json",
-          ...(API_KEY && { "X-API-Key": API_KEY }),
+          ...(API_KEY && { "X-Secret-Key": API_KEY }),
         },
       }
     );
     if (!res.ok) return empty;
     const raw = await res.text();
     const idx = raw.indexOf('{"');
-    const data = JSON.parse(idx >= 0 ? raw.substring(idx) : raw);
-    const seo = data?.seo ?? data?.product?.seo ?? {};
-    const pd = data?.data?.product_details ?? {};
-    const title = seo.metatitle || seo.meta_title || pd.name || data?.name || "";
-    const description = seo.metadescription || seo.meta_description || pd.short_description || "";
-    const canonical = `https://www.caravansforsale.com.au/product/${slug}/`;
-    const imageUrlRaw = pd.image_url;
-    const ogImage: string = Array.isArray(imageUrlRaw)
-      ? imageUrlRaw.filter(Boolean)[0] ?? ""
-      : typeof imageUrlRaw === "string"
-      ? imageUrlRaw
-      : "";
+    // MPN /{slug} returns a flat listing object (title, seo_title,
+    // seo_description, images_full, ...) — no more data.product_details nesting.
+    const pd = JSON.parse(idx >= 0 ? raw.substring(idx) : raw);
+    const title = pd.seo_title || pd.title || "";
+    const description = pd.seo_description || "";
+    const canonical = `https://www.campingtrailersforsale.com.au/product/${slug}/`;
+    const images: string[] = pd.images_full ?? pd.images ?? [];
+    const ogImage: string = images.filter(Boolean)[0] ?? "";
     return { title, description, canonical, ogImage };
   } catch {
     return empty;

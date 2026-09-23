@@ -12,9 +12,9 @@ import { fetchRequirements } from "@/api/postRquirements/api";
 import { fetchHomePage } from "@/api/home/api";
 import { fetchBlogs } from "@/api/blog/api";
 
-export const revalidate = 86400;
+export const dynamic = "force-dynamic";
 
-const CANONICAL = "https://www.caravansforsale.com.au/caravan-sales/";
+const CANONICAL = "https://www.campingtrailersforsale.com.au/caravan-sales/";
 
 const schemaJsonLd = {
   "@context": "https://schema.org",
@@ -27,13 +27,13 @@ const schemaJsonLd = {
       "description": "Find the best camping trailer sales across Australia. Browse thousands of new and used camping trailers from trusted dealers and private sellers.",
       "inLanguage": "en-AU",
       "breadcrumb": { "@id": `${CANONICAL}#breadcrumb` },
-      "isPartOf": { "@type": "WebSite", "url": "https://www.caravansforsale.com.au/" },
+      "isPartOf": { "@type": "WebSite", "url": "https://www.campingtrailersforsale.com.au/" },
     },
     {
       "@type": "BreadcrumbList",
       "@id": `${CANONICAL}#breadcrumb`,
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home",          "item": "https://www.caravansforsale.com.au/" },
+        { "@type": "ListItem", "position": 1, "name": "Home",          "item": "https://www.campingtrailersforsale.com.au/" },
         { "@type": "ListItem", "position": 2, "name": "Camping Trailer Sales", "item": CANONICAL },
       ],
     },
