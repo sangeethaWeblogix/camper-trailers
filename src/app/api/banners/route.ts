@@ -14,10 +14,18 @@ export async function GET() {
         // Network backend serves multiple connected sites (camping trailers,
         // campervans, etc.) from the same ads-manager API; without this param
         // it returns banners for whichever site happens to match first.
-        const url = `http://admin.marketplacenetwork.com.au/wp-json/ads-manager/v1/banners?placement=${placement}&limit=50&paged=1&site=ctfs`;
+        // The `_` cache-buster + explicit no-cache headers are needed because the
+        // WP origin sits behind its own HTTP proxy cache (X-Proxy-Cache-Info) that
+        // has been observed serving a *different site's* stale cached banner list
+        // for this exact URL — bypassing that is out of our control otherwise.
+        const url = `https://admin.marketplacenetwork.com.au/wp-json/ads-manager/v1/banners?placement=${placement}&limit=50&paged=1&site=ctfs&_=${Date.now()}`;
 
         const res = await fetch(url, {
-          headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" },
+          headers: {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            "Pragma": "no-cache",
+          },
           cache: "no-store",
         });
 
