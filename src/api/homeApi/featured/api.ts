@@ -18,15 +18,26 @@ export type FeaturedListing = {
   berths?: string | number;
 };
 
-// Normalize each product so components always get image_format as string[]
-// home_featured returns `thumbnail` (imagestack R2 URL); also handle `image` fallback
+// Adapts a raw /home-featured item (MPN's flat listing shape: `title`,
+// `r2_thumbnails` as bare host+path, `category`, numeric prices) onto the
+// FeaturedListing shape HomeFeatured/HomeListingSlider render — see the
+// matching adapter for /pool items in src/app/listings/listingShared.ts.
+const formatPriceDisplay = (v: unknown): string | undefined => {
+  const n = typeof v === "number" ? v : typeof v === "string" ? Number(v.replace(/[^0-9.]/g, "")) : NaN;
+  return Number.isFinite(n) && n > 0 ? `$${n.toLocaleString("en-AU")}` : undefined;
+};
+
 function normalizeProduct(p: any): FeaturedListing {
   if (!p.image_format) {
-    const img = p.thumbnail ?? p.image ?? p.main_image ?? null;
-    p.image_format = img ? [img] : [];
+    const thumbs: string[] = p.r2_thumbnails?.length ? p.r2_thumbnails : (p.thumbnail ?? p.image ?? p.main_image ? [p.thumbnail ?? p.image ?? p.main_image] : []);
+    p.image_format = thumbs.map((t: string) => (/^https?:\/\//.test(t) ? t : `https://${t}`));
   } else if (typeof p.image_format === "string") {
     p.image_format = [p.image_format];
   }
+  if (!p.name) p.name = p.title;
+  if (!p.categories) p.categories = p.category;
+  p.regular_price = formatPriceDisplay(p.regular_price);
+  p.sale_price = formatPriceDisplay(p.sale_price);
   if (!p.seller_type) p.seller_type = "dealer";
   return p;
 }

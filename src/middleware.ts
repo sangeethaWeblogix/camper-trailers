@@ -3,7 +3,6 @@ import { parseSlugToFilters, type Filters } from "@/app/components/urlBuilder";
 import { buildSlugFromFilters } from "@/app/components/slugBuilter";
 import { isAllowedSingleBand } from "@/utils/seo/band-utils";
 import regionPathsData from "../cfs-paths/regions.json";
-import makesData from "../cfs-paths/makes.json";
 const API_KEY = process.env.MPN_API_KEY;
 const SERVER_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36';
 
@@ -13,11 +12,6 @@ const VALID_REGION_SLUGS = new Set<string>(
     const part = p.split('/').find(s => s.endsWith('-region'));
     return part ? part.replace(/-region$/, '') : '';
   }).filter(Boolean)
-);
-
-/* Valid make slugs built from cfs-paths/makes.json — zero API dependency */
-const VALID_MAKE_SLUGS = new Set<string>(
-  (makesData.paths as string[]).map(p => p.replace(/\/$/, ''))
 );
 
 /* ──────────────────────────────────────────────
@@ -274,10 +268,14 @@ export async function middleware(request: NextRequest) {
           }
         }
 
-        // Make value validation — check against cfs-paths/makes.json (sitemap source of truth)
-        if (filters.make && !VALID_MAKE_SLUGS.has(filters.make)) {
-          return render410(request);
-        }
+        // NOTE: make used to be validated against the static cfs-paths/makes.json
+        // snapshot (a leftover CaravansForSale sitemap list). The MPN backend's
+        // make list is now live/dynamic (new makes get added as listings are
+        // imported), so that static list constantly falls behind and was
+        // 410-ing real makes like "track-trailer". Removed — an invalid/typo'd
+        // make now falls through to the live /pool check below, which
+        // correctly renders an empty, noindex'd results page instead of a
+        // false 410 for a make that's actually valid on the live backend.
 
         // Region value validation — check against cfs-paths/regions.json (sitemap source of truth)
         const regionSegment = slugParts.find(s => s.endsWith('-region'));

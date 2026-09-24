@@ -71,16 +71,16 @@ function getImages(item: Listing): string[] {
   return [];
 }
 
-function formatPrice(p: string | undefined): string {
-  if (!p) return "POA";
-  const n = Number(p.replace(/[^0-9.]/g, ""));
-  if (isNaN(n) || n === 0) return p;
+function formatPrice(p: string | number | undefined | null): string {
+  if (p === undefined || p === null || p === "") return "POA";
+  const n = typeof p === "number" ? p : Number(String(p).replace(/[^0-9.]/g, ""));
+  if (isNaN(n) || n === 0) return String(p);
   return `$${n.toLocaleString("en-AU")}`;
 }
 
-function formatLength(len: string | undefined): string | null {
+function formatLength(len: string | number | undefined): string | null {
   if (!len) return null;
-  const ft = parseFloat(len);
+  const ft = typeof len === "number" ? len : parseFloat(len);
   if (isNaN(ft)) return null;
   const m = (ft * 0.3048).toFixed(1);
   return `${ft} ft (${m}m)`;
@@ -206,7 +206,6 @@ function ListingCard({
   spotlight?: boolean;
   onContact: (item: Listing) => void;
 }) {
-  console.log("ooo", item)
   const images = getImages(item);
   const [idx, setIdx] = useState(0);
   const href   = `/product/${item.slug ?? item.id}/`;

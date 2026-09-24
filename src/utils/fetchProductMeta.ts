@@ -31,9 +31,10 @@ export const fetchProductMeta = cache(async (slug: string): Promise<ProductMeta>
     const title = pd.seo_title || pd.title || "";
     const description = pd.seo_description || "";
     const canonical = `https://www.campingtrailersforsale.com.au/product/${slug}/`;
-    const images: string[] = pd.images_full ?? pd.images ?? [];
-    const ogImage: string = images.filter(Boolean)[0] ?? "";
-    return { title, description, canonical, ogImage };
+    const rawImages: string[] = pd.r2_thumbnails ?? pd.images_full ?? pd.images ?? [];
+    const ogImage: string = rawImages.filter(Boolean)[0];
+    const ogImageFull = ogImage ? (/^https?:\/\//.test(ogImage) ? ogImage : `https://${ogImage}`) : "";
+    return { title, description, canonical, ogImage: ogImageFull };
   } catch {
     return empty;
   }

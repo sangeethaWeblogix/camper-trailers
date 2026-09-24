@@ -311,11 +311,20 @@ export default function ProductDetailDemo({ data, similarData }: Props) {
   const shortSleeps   = getAttr("sleeps").replace(/\s+people?$/i, '').trim();
   const shortAtm      = getAttr("ATM");
 
+  /* Tracks which raw attribute labels the curated rows below have already
+   * claimed, so any attribute the API sends that ISN'T one of these known
+   * ones (a brand-new field the backend adds later, for example) still gets
+   * its own row further down instead of silently being dropped. */
+  const consumedLabels = new Set<string>();
+
   /* helper: find first matching attribute with value + url */
   const pickFull = (...labels: string[]): { value: string; url: string } => {
     for (const l of labels) {
       const attr = attributes.find(a => String(a?.label ?? "").toLowerCase() === l.toLowerCase());
-      if (attr?.value) return { value: attr.value, url: attr.url ?? "" };
+      if (attr?.value) {
+        consumedLabels.add(String(attr.label).toLowerCase());
+        return { value: attr.value, url: attr.url ?? "" };
+      }
     }
     return { value: "", url: "" };
   };
@@ -327,7 +336,15 @@ export default function ProductDetailDemo({ data, similarData }: Props) {
   const makeDetailUrl = (label: string, value: string, apiUrl: string): string => {
     const v = value.trim();
     const L = label.toLowerCase();
-    if (L === "year" || L === "years") { const n = toInt(v); return n ? `/listings/${n}-caravans-range/` : ""; }
+    if (L === "year" || L === "years") {
+      // urlBuilder.ts's year-range parser only understands `{from}-{to}-caravans-range`,
+      // `year-from-{y}-caravans-range` or `year-to-{y}-caravans-range` — a bare
+      // `{y}-caravans-range` (what this used to build) doesn't match any of them,
+      // so the canonical-path check in middleware.ts 410'd it. Use the exact-year
+      // form (same value for from and to) so it round-trips correctly.
+      const n = toInt(v);
+      return n ? `/listings/${n}-${n}-caravans-range/` : "";
+    }
     if (apiUrl) return linkFromApiUrl(apiUrl, v).href;
     if (L === "type" || L === "category") return v ? `/listings/${slugify(v.replace(/\s*caravans?\s*/gi, " ").trim())}-category/` : "";
     if (L === "make") return v ? `/listings/${slugify(v)}/` : "";
@@ -379,12 +396,24 @@ export default function ProductDetailDemo({ data, similarData }: Props) {
   if (locationCity || locationState) {
     const regionSlug  = product.region?.slug ?? slugify(locationCity);
     const stateAttr   = attributes.find(a => String(a?.label ?? "").toLowerCase() === "location");
+    if (stateAttr) consumedLabels.add("location");
     const stateSlug   = stateAttr?.url?.trim() || `${slugify(locationState)}-state`;
     const links: DetailLink[] = [];
     if (locationCity && regionSlug) links.push({ href: `/listings/${stateSlug}/${regionSlug}/`, text: locationCity.replace(/\b\w/g, c => c.toUpperCase()) });
     if (locationState) links.push(stateAttr?.url ? linkFromApiUrl(stateAttr.url, locationState) : { href: `/listings/${stateSlug}/`, text: locationState });
     detailRows.push({ label: "Location", value: [locationCity, locationState].filter(Boolean).join(", "), url: "", links });
   }
+
+  // Any attribute the curated rows above didn't claim (new/unknown fields the
+  // API starts sending later) still gets shown, as a generic row.
+  const extraRows: DetailRow[] = attributes
+    .filter(a => a?.value && !consumedLabels.has(String(a.label ?? "").toLowerCase()))
+    .map(a => {
+      const label = String(a.label ?? "");
+      const value = String(a.value ?? "");
+      return { label, value, url: a.url ? makeDetailUrl(label, value, a.url) : "" };
+    });
+  detailRows.push(...extraRows);
 
   const half2     = Math.ceil(detailRows.length / 2);
   const leftRows  = detailRows.slice(0, half2);

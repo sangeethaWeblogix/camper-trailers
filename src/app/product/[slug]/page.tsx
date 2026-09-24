@@ -107,9 +107,54 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 function normalizeProductDetail(raw: any): any {
   if (!raw || raw.message === "Listing not found." || raw.code) return raw;
 
-  const images: string[] = raw.images_full ?? raw.images ?? [];
-  const attributesObj: Record<string, string> = raw.attributes ?? {};
-  const attribute_urls = Object.entries(attributesObj).map(([label, value]) => ({ label, value: String(value) }));
+  const rawImages: string[] = raw.r2_thumbnails ?? raw.images_full ?? raw.images ?? [];
+  const images: string[] = rawImages.map((t) => (/^https?:\/\//.test(t) ? t : `https://${t}`));
+
+  // The MPN listing has no `attributes` object — the details-table data lives
+  // as flat top-level fields instead. Map them onto the same {label, value}
+  // shape ProductDetailDemo's attribute_urls-driven details table expects,
+  // labeled to match the lookups it does (e.g. "Conditions" not "Condition").
+  const attributesObj: Record<string, unknown> = raw.attributes ?? {};
+  const flatAttrPairs: [string, unknown][] = [
+    ["Make", raw.make?.name],
+    ["Model", raw.model?.name],
+    ["Years", raw.year],
+    ["Conditions", raw.condition],
+    ["Length", raw.length],
+    ["sleeps", raw.sleep],
+    ["ATM", raw.atm],
+    ["Tare Mass", raw.tare_mass],
+    ["Ball Weight", raw.ball_weight],
+    ["Axle Configuration", raw.axle_configuration],
+    ["Suspension", raw.suspension],
+    ["Brakes", raw.brakes],
+    ["Location", typeof raw.state === "string" ? raw.state.replace(/\b\w/g, (c: string) => c.toUpperCase()) : raw.state],
+  ];
+  // Any OTHER field the API returns that isn't already mapped above or listed
+  // as non-attribute metadata below gets auto-included too, humanized from its
+  // key (e.g. `tyre_size` → "Tyre Size") — so a brand-new field the backend
+  // adds later shows up in the details table without another code change.
+  const NON_ATTR_META_KEYS = new Set([
+    "id", "source", "source_id", "sku", "unique_key", "dealer_id", "dealer",
+    "seller_type", "product_type", "title", "slug", "status", "visibility",
+    "is_featured", "featured", "exclusive", "premium", "make", "model", "year",
+    "condition", "length", "atm", "sleep", "tare_mass", "ball_weight",
+    "axle_configuration", "suspension", "brakes", "category", "state", "region",
+    "suburb", "pincode", "regular_price", "sale_price", "r2_thumbnails",
+    "updated_at", "imported_at", "images_full", "wc_categories", "in_stock",
+    "seo_title", "seo_description", "location", "created_at", "description",
+    "attributes", "name",
+  ]);
+  const ACRONYMS: Record<string, string> = { atm: "ATM", gps: "GPS", vin: "VIN", uv: "UV", led: "LED", usb: "USB" };
+  const humanizeLabel = (key: string) =>
+    key.split("_").map((w) => ACRONYMS[w.toLowerCase()] ?? (w.charAt(0).toUpperCase() + w.slice(1))).join(" ");
+  const discoveredPairs: [string, unknown][] = Object.entries(raw)
+    .filter(([k, v]) => !NON_ATTR_META_KEYS.has(k) && v !== null && v !== undefined && v !== "" && typeof v !== "object")
+    .map(([k, v]) => [humanizeLabel(k), v]);
+
+  const attribute_urls = [...Object.entries(attributesObj), ...flatAttrPairs, ...discoveredPairs]
+    .filter(([, value]) => value !== null && value !== undefined && value !== "")
+    .map(([label, value]) => ({ label, value: String(value) }));
 
   const product_details = {
     id: raw.id,
@@ -185,11 +230,12 @@ const fetchProductDetail = cache(async (slug: string) => {
 });
 
 
-/** GET /{slug}/similar returns a flat `{items: [...]}` array (same state,
- * similar price band) — unlike the old CFS API's richer
- * `{similar_by_make, similar_by_price, ...}` grouping. Mapped onto
- * `similar_by_price`/`price_similar` here since that's the closest match;
- * the old by-make grouping and blog sections have no MPN equivalent yet. */
+/** GET /{slug}/similar returns `{ same_make: [...], price_range: [...], blog: [...] }`
+ * (not the old CFS API's `{similar_by_make, similar_by_price, ...}` shape, and
+ * not a flat `items` array either). Combined + deduped here into
+ * `similar_by_price`/`price_similar` since that's what ProductDetailDemo renders;
+ * items are also normalized the same way as the main listing (title→name,
+ * r2_thumbnails→image_format with an https:// prefix). */
 async function fetchSimilarProducts(slug: string) {
   const API_KEY = process.env.MPN_API_KEY;
   try {
@@ -207,7 +253,23 @@ async function fetchSimilarProducts(slug: string) {
     const raw = await res.text();
     const idx = raw.indexOf("{");
     const json = JSON.parse(idx > 0 ? raw.substring(idx) : raw);
-    const items = json?.items ?? [];
+
+    const seen = new Set<number>();
+    const items = [...(json?.same_make ?? []), ...(json?.price_range ?? [])]
+      .filter((it: any) => {
+        if (!it?.id || seen.has(it.id)) return false;
+        seen.add(it.id);
+        return true;
+      })
+      .map((it: any) => ({
+        ...it,
+        name: it.name ?? it.title,
+        categories: it.categories ?? it.category,
+        image_format: (it.r2_thumbnails ?? it.image_format ?? []).map((t: string) =>
+          /^https?:\/\//.test(t) ? t : `https://${t}`
+        ),
+      }));
+
     if (!items.length) return null;
     return {
       similar_by_price: { products: items },
@@ -246,7 +308,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
     name: pdName,
     ...(pdDesc && { description: pdDesc }),
     ...(images.length > 0 && { image: images }),
-    ...(pd.make && { brand: { "@type": "Brand", name: pd.make } }),
+    ...(pd.make && { brand: { "@type": "Brand", name: pd.make?.name ?? pd.make } }),
     ...(pd.condition && {
       itemCondition:
         String(pd.condition).toLowerCase() === "new"

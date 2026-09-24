@@ -711,7 +711,9 @@ export default function StateFilterBar({
       {(currentFilters.category || currentFilters.state || currentFilters.region || currentFilters.suburb ||
         currentFilters.make || currentFilters.model || currentFilters.from_price || currentFilters.to_price ||
         currentFilters.minKg || currentFilters.maxKg || currentFilters.condition ||
-        currentFilters.from_sleep || currentFilters.to_sleep) && (
+        currentFilters.from_sleep || currentFilters.to_sleep ||
+        currentFilters.acustom_fromyears || currentFilters.acustom_toyears ||
+        currentFilters.from_length || currentFilters.to_length) && (
         <div className="container">
           <div className="active-chips-row">
             {currentFilters.make && (
@@ -802,6 +804,32 @@ export default function StateFilterBar({
                       : `Upto ${currentFilters.to_sleep} Berths`}
                 </span>
                 <span className="chip-close" onClick={() => removeChip("sleep", { from_sleep:undefined, to_sleep:undefined })}>×</span>
+              </span>
+            )}
+            {(currentFilters.acustom_fromyears || currentFilters.acustom_toyears) && (
+              <span className={`active-chip${removingChip === "year" ? " chip-removing" : ""}`}>
+                <span className="chip-label" onClick={handleAllFiltersOpen}>
+                  {currentFilters.acustom_fromyears && currentFilters.acustom_toyears
+                    ? currentFilters.acustom_fromyears === currentFilters.acustom_toyears
+                      ? `${currentFilters.acustom_fromyears}`
+                      : `${currentFilters.acustom_fromyears} – ${currentFilters.acustom_toyears}`
+                    : currentFilters.acustom_fromyears
+                      ? `From ${currentFilters.acustom_fromyears}`
+                      : `Upto ${currentFilters.acustom_toyears}`}
+                </span>
+                <span className="chip-close" onClick={() => removeChip("year", { acustom_fromyears:undefined, acustom_toyears:undefined })}>×</span>
+              </span>
+            )}
+            {(currentFilters.from_length || currentFilters.to_length) && (
+              <span className={`active-chip${removingChip === "length" ? " chip-removing" : ""}`}>
+                <span className="chip-label" onClick={handleAllFiltersOpen}>
+                  {currentFilters.from_length && currentFilters.to_length
+                    ? `${currentFilters.from_length} – ${currentFilters.to_length} ft`
+                    : currentFilters.from_length
+                      ? `From ${currentFilters.from_length} ft`
+                      : `Upto ${currentFilters.to_length} ft`}
+                </span>
+                <span className="chip-close" onClick={() => removeChip("length", { from_length:undefined, to_length:undefined })}>×</span>
               </span>
             )}
             <button className="chip-clear-all" disabled={clearingAll} onClick={handleClearAll}>
