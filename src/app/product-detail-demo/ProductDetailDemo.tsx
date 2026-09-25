@@ -292,7 +292,7 @@ export default function ProductDetailDemo({ data, similarData }: Props) {
 
   const state    = getAttr("Location");
   const location = product.region?.value
-    ? `${product.region.value.replace(/-/g, " ")}, ${state}`
+    ? `${product.region.value.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase())}, ${state}`
     : state;
 
   /* Specs bar — shortened display values */

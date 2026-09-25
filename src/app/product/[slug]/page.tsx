@@ -98,6 +98,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+// region/state come back lowercase (e.g. "melbourne", "victoria") from the
+// MPN API; suburb is usually already correctly cased ("Bayswater North") —
+// title-casing all three keeps the combined location string consistent.
+const titleCaseLocation = (s: string) =>
+  s.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+
 /** The MPN API returns a FLAT single-listing object at GET /{slug} — this
  * adapts it into the old CFS envelope shape (`{ data: { product_details, ... }, seo }`)
  * that generateMetadata() and ProductDetailDemo already expect, so neither
@@ -166,7 +172,10 @@ function normalizeProductDetail(raw: any): any {
     image: images,
     regular_price: raw.regular_price,
     sale_price: raw.sale_price,
-    location: [raw.suburb, raw.region, raw.state].filter(Boolean).join(", "),
+    location: [raw.suburb, raw.region, raw.state]
+      .filter(Boolean)
+      .map((s) => titleCaseLocation(String(s)))
+      .join(", "),
     location_shortcode: raw.state,
     region: raw.region ? { label: raw.region, value: raw.region, slug: raw.region } : undefined,
     suburb: raw.suburb ? { label: raw.suburb, value: raw.suburb, slug: raw.suburb } : undefined,

@@ -10,6 +10,10 @@ export const dynamic = "force-dynamic";
 
 const DEMO_SLUG = "2025-retreat-caravans-daydream-29ft6-off-road";
 
+// See the matching note in src/app/product/[slug]/page.tsx.
+const titleCaseLocation = (s: string) =>
+  s.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+
 /** Adapts the MPN API's flat single-listing response into the old CFS
  * envelope shape (`{ data: { product_details, ... }, seo }`) that
  * ProductDetailDemo already expects. Kept in sync with the same adapter in
@@ -74,7 +78,10 @@ function normalizeProductDetail(raw: any): any {
     image: images,
     regular_price: raw.regular_price,
     sale_price: raw.sale_price,
-    location: [raw.suburb, raw.region, raw.state].filter(Boolean).join(", "),
+    location: [raw.suburb, raw.region, raw.state]
+      .filter(Boolean)
+      .map((s) => titleCaseLocation(String(s)))
+      .join(", "),
     location_shortcode: raw.state,
     region: raw.region ? { label: raw.region, value: raw.region, slug: raw.region } : undefined,
     suburb: raw.suburb ? { label: raw.suburb, value: raw.suburb, slug: raw.suburb } : undefined,

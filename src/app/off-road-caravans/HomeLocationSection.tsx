@@ -67,8 +67,7 @@ const FILTERS = [
       { text: "2 Berth",  href: "/listings/off-road-category/2-people-sleeping-capacity/" },
       { text: "3 Berth",  href: "/listings/off-road-category/3-people-sleeping-capacity/" },
       { text: "4 Berth",  href: "/listings/off-road-category/4-people-sleeping-capacity/" },
-      { text: "5 Berth",  href: "/listings/off-road-category/5-people-sleeping-capacity/" },
-      { text: "6+ Berth", href: "/listings/off-road-category/over-6-people-sleeping-capacity/" },
+      { text: "4+ Berth", href: "/listings/off-road-category/over-3-people-sleeping-capacity/" },
     ],
   },
 ];

@@ -166,7 +166,7 @@ export default function CaravanDetailModal({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          product_id: product.id ?? product.slug ?? product.name,
+          product_slug: product.slug ?? product.id ?? product.name,
           email: form.email.trim(),
           name: form.name.trim(),
           phone: form.phone.trim(),
@@ -240,8 +240,8 @@ export default function CaravanDetailModal({
       String(product.regularPrice).replace(/[^0-9.]/g, "")
     );
 
-    if (sale > 0) return product.salePrice;
-    if (regular > 0) return product.regularPrice;
+    if (sale > 0) return `$${sale.toLocaleString("en-AU")}`;
+    if (regular > 0) return `$${regular.toLocaleString("en-AU")}`;
 
     return "POA";
   };
