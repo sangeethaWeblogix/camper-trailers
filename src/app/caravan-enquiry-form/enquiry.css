@@ -122,6 +122,23 @@ p.terms_text {
   background-color: #000000;
 }
 
+/* Submit button — force the brand blue in every state (including :disabled,
+ * which browsers render with their own default background on <input> unless
+ * overridden explicitly) so it doesn't flash white while/after submitting. */
+.contact.style-6 .btn.bg-blue4,
+.contact.style-6 .btn.bg-blue4:hover,
+.contact.style-6 .btn.bg-blue4:focus,
+.contact.style-6 .btn.bg-blue4:disabled {
+  background-color: #0066cc !important;
+  color: #fff !important;
+  opacity: 1;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.contact.style-6 .btn.bg-blue4:disabled {
+  cursor: not-allowed;
+}
+
 .butn,
 .btn {
   padding: 12px 30px;

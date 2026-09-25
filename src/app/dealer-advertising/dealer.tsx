@@ -86,8 +86,11 @@ const DealerLandingPage = () => {
                 </p>
 
                 <a
-                  href="https://seller.campingtrailersforsale.com.au/dealer-subscription/"
-                  className="btn white_btn"
+                  href="#"
+                  aria-disabled="true"
+                  tabIndex={-1}
+                  onClick={(e) => e.preventDefault()}
+                  className="btn white_btn cta-disabled"
                 >
                   Start Dealer Signup
                 </a>
@@ -302,8 +305,11 @@ const DealerLandingPage = () => {
                   </ul>
 
                   <a
-                    href="https://seller.campingtrailersforsale.com.au/dealer-subscription/"
-                    className="btn white_btn"
+                    href="#"
+                    aria-disabled="true"
+                    tabIndex={-1}
+                    onClick={(e) => e.preventDefault()}
+                    className="btn white_btn cta-disabled"
                   >
                     Start Dealer Signup
                   </a>

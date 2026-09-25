@@ -291,6 +291,17 @@
   text-decoration: none;
 }
 
+/* Seller-signup CTA temporarily disabled (external seller portal not live yet) */
+.cta-disabled,
+.cta-disabled:hover {
+  background: #c7c7c7 !important;
+  color: #6b6b6b !important;
+  border-color: #c7c7c7 !important;
+  cursor: not-allowed !important;
+  pointer-events: none;
+  opacity: 0.75;
+}
+
 /* Trust bar */
 .demo-trust-bar {
   display: flex;

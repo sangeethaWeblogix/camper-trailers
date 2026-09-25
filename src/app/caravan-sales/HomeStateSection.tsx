@@ -27,7 +27,10 @@ const stateMeta: Record<string, { code: string; image: string }> = {
   tasmania:           { code: "TAS", image: "/images/tas_map.svg" },
 };
 
-export default function HomeStateSection({ stateBands, title = "Browse Camping Trailers for Sale in Australia by State" }: Props) {
+export default function HomeStateSection({ stateBands: stateBandsRaw, title = "Browse Camping Trailers for Sale in Australia by State" }: Props) {
+  const stateBands = stateBandsRaw.filter(
+    (item) => item.state.toLowerCase() !== "australian capital territory"
+  );
   const loading = stateBands.length === 0;
 
   return (
@@ -80,7 +83,7 @@ export default function HomeStateSection({ stateBands, title = "Browse Camping T
                           <div className="info">
                             <div className="quick_linkss">
                               <p>{item.display_text.replace("caravan listings", "camping trailer listings")}</p>
-                              <a className="view_all" href={`/listings${item.permalink}/`}>
+                              <a className="view_all" href={item.permalink}>
                                 View All Camping Trailers for Sale in  {meta.code}{" "}
                                 <i className="bi bi-chevron-right" />
                               </a>

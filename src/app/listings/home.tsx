@@ -7,7 +7,7 @@ import Link from "next/link";
 import StateHero from "./StateHero";
 import StateFilterBar, { FilterState } from "./StateFilterBar";
 import StateListingGrid, { SeoV2, Listing, buildFeaturedOrder } from "./StateListingGrid";
-import { splitPoolProducts } from "./listingShared";
+import { splitPoolProducts, normalizeAll } from "./listingShared";
 import StateBrowseSection from "./StateBrowseSection";
 import type { BrowseSectionData } from "./browseSectionShared";
 import StateContent from "./StateContent";
@@ -424,8 +424,13 @@ export default function StateHome({
       const usedSplit: Listing[] = (json as any)?.data?.used_products ?? (json as any)?.used_products ?? [];
       const totalCount: number = (json as any)?.data?.counts?.total_count ?? (json as any)?.counts?.total_count ?? (products.length || featuredSplit.length + newSplit.length + usedSplit.length);
 
-      if (totalCount === 0 && empExclusivesRaw.length > 0) {
-        const empItems = empExclusivesRaw.map((p) => ({ ...p, is_exclusive: true }));
+      // Zero regular results — show every exclusive/spotlight van instead of
+      // capping to 1 (buildFeaturedOrder below only mixes in 1 exclusive
+      // alongside real hero products; with no products at all, showing just
+      // one wastes the other exclusives that would otherwise fill the page).
+      const emptyStateExclusives = empExclusivesRaw.length > 0 ? empExclusivesRaw : exclusivesRaw;
+      if (totalCount === 0 && emptyStateExclusives.length > 0) {
+        const empItems = normalizeAll(emptyStateExclusives).map((p) => ({ ...p, is_exclusive: true }));
         setPool({ featured: empItems, new: [], used: [] });
       } else if (isIndexed) {
         const { featured: featuredItems, new: newItems, used: usedItems } = splitPoolProducts(
@@ -475,8 +480,9 @@ export default function StateHome({
       // current isIndexed state — which may have been overridden by the async
       // /api/indexed-url/ check. The preload value is authoritative.
       const snapIsIndexed = snap.isIndexed;
-      if (empExclusivesRaw.length > 0 && products.length === 0 && featuredSplit.length === 0) {
-        setPool({ featured: empExclusivesRaw.map((p) => ({ ...p, is_exclusive: true })), new: [], used: [] });
+      const snapEmptyStateExclusives = empExclusivesRaw.length > 0 ? empExclusivesRaw : exclusivesRaw;
+      if (snapEmptyStateExclusives.length > 0 && products.length === 0 && featuredSplit.length === 0) {
+        setPool({ featured: normalizeAll(snapEmptyStateExclusives).map((p) => ({ ...p, is_exclusive: true })), new: [], used: [] });
       } else if (snapIsIndexed) {
         const { featured: featuredItems, new: newItems, used: usedItems } = splitPoolProducts(
           products, premiumsRaw, exclusivesRaw, { featured: featuredSplit, new: newSplit, used: usedSplit }
@@ -528,10 +534,12 @@ export default function StateHome({
         const hasPreSplit = featuredSplit.length > 0 || newSplit.length > 0 || usedSplit.length > 0;
         const totalCount: number = json?.data?.counts?.total_count ?? json?.counts?.total_count ?? (products.length || featuredSplit.length + newSplit.length + usedSplit.length);
         console.log("shared  premium:", premiumsRaw);
-        if (totalCount === 0 && empExclusivesRaw.length > 0) {
-          // No products at all — fall back to the emp_exclusive_products pool
-          // so the page isn't empty, all shown with the Spotlight Van design.
-          const empItems = empExclusivesRaw.map((p) => ({ ...p, is_exclusive: true }));
+        // No products at all — fall back to whichever exclusive pool the API
+        // actually populated (emp_exclusive_products or exclusive_products) so
+        // the page isn't empty, showing ALL of them (not just 1 spotlight slot).
+        const liveEmptyStateExclusives = empExclusivesRaw.length > 0 ? empExclusivesRaw : exclusivesRaw;
+        if (totalCount === 0 && liveEmptyStateExclusives.length > 0) {
+          const empItems = normalizeAll(liveEmptyStateExclusives).map((p) => ({ ...p, is_exclusive: true }));
           setPool({ featured: empItems, new: [], used: [] });
         } else if (isIndexed) {
           // Indexed pages split into Featured/New/Used — the backend pre-splits these

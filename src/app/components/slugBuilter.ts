@@ -122,9 +122,12 @@ if (fromYear !== undefined && toYear !== undefined) {
 }
   const query = new URLSearchParams();
 
-  // Radius search only makes sense relative to a suburb center point.
+  // Radius search only makes sense relative to a suburb center point. 25km is
+  // the default radius (RADIUS_OPTIONS[0] in StateFilterBar.tsx) — keep the
+  // URL clean for it and only show radius_kms for a non-default radius.
+  const DEFAULT_RADIUS_KMS = 25;
   const radiusKms = asNum(f.radius_kms as string | number | undefined);
-  if (suburb && radiusKms) query.set("radius_kms", String(radiusKms));
+  if (suburb && radiusKms && radiusKms !== DEFAULT_RADIUS_KMS) query.set("radius_kms", String(radiusKms));
   // 9) Search (APPEND at the end — never replace other segments)
   if (f.search) {
     // Normalize for SEO URL: spaces → hyphen, remove junk

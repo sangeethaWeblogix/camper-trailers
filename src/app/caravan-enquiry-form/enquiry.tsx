@@ -278,12 +278,11 @@ export default function ContactSection() {
                             <option value="">
                               What type of camping trailer are you looking for?
                             </option>
-                            <option value="Off Road">Off Road</option>
+                            <option value="Camper Trailer">Camper Trailer</option>
+                            <option value="Off Road Camper">Off Road Camper</option>
+                            <option value="Tent Trailer">Tent Trailer</option>
                             <option value="Hybrid">Hybrid</option>
-                            <option value="Pop Top">Pop Top</option>
-                            <option value="Luxury">Luxury</option>
-                            <option value="Family">Family</option>
-                            <option value="Touring">Touring</option>
+                            <option value="Toy Hauler / Carrier">Toy Hauler / Carrier</option>
                           </select>
                           {errors["caravan-type"] && (
                             <small className="text-danger">

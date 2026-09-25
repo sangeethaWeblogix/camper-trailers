@@ -51,7 +51,7 @@ function normalizeListing(raw: RawPoolItem): Listing {
   };
 }
 
-const normalizeAll = (items: Listing[]): Listing[] =>
+export const normalizeAll = (items: Listing[]): Listing[] =>
   (items ?? []).map((item) => normalizeListing(item as RawPoolItem));
 
 export type SeoV2 = {

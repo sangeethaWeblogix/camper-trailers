@@ -165,7 +165,7 @@
            </div>
  
            {/* CTA — inside wrapper so it attaches seamlessly to card bottom */}
-           <a href="https://seller.campingtrailersforsale.com.au/seller-signup/" className="demo-hero__cta">
+           <a href="#" aria-disabled="true" tabIndex={-1} onClick={(e) => e.preventDefault()} className="demo-hero__cta cta-disabled">
              List Your Camping Trailer Now <i className="fa-solid fa-arrow-right" />
            </a>
            </div>{/* end demo-price-wrapper */}
@@ -282,7 +282,7 @@
                    </li>
                  ))}
                </ul>
-               <a href="https://seller.campingtrailersforsale.com.au/seller-signup/" className="demo-reach-card__cta">
+               <a href="#" aria-disabled="true" tabIndex={-1} onClick={(e) => e.preventDefault()} className="demo-reach-card__cta cta-disabled">
                  List My Camping Trailer Now <i className="fa-solid fa-arrow-right" />
                </a>
              </div>
@@ -485,7 +485,7 @@
              Start selling your camping trailer today for just{" "}
              <strong>$49 (Inc. GST)</strong> — Live until sold!
            </p>
-           <a href="https://seller.campingtrailersforsale.com.au/seller-signup/" className="btn white_btn">
+           <a href="#" aria-disabled="true" tabIndex={-1} onClick={(e) => e.preventDefault()} className="btn white_btn cta-disabled">
              List Your Camping Trailer Now
            </a>
          </div>
