@@ -78,8 +78,7 @@ export const FILTERS_NO_STATE = [
       { text: "2 Berth",  href: "/listings/2-people-sleeping-capacity/" },
       { text: "3 Berth",  href: "/listings/3-people-sleeping-capacity/" },
       { text: "4 Berth",  href: "/listings/4-people-sleeping-capacity/" },
-      { text: "5 Berth",  href: "/listings/5-people-sleeping-capacity/" },
-      { text: "6+ Berth", href: "/listings/over-5-people-sleeping-capacity/" },
+      { text: "4+ Berth", href: "/listings/over-3-people-sleeping-capacity/" },
     ],
   },
 ];
@@ -140,8 +139,7 @@ export const SLEEP_BANDS = [
   { text: "2 Berth",  href: "/listings/2-people-sleeping-capacity/",      query: "from_sleep=2&to_sleep=2" },
   { text: "3 Berth",  href: "/listings/3-people-sleeping-capacity/",      query: "from_sleep=3&to_sleep=3" },
   { text: "4 Berth",  href: "/listings/4-people-sleeping-capacity/",      query: "from_sleep=4&to_sleep=4" },
-  { text: "5 Berth",  href: "/listings/5-people-sleeping-capacity/",      query: "from_sleep=5&to_sleep=5" },
-  { text: "6+ Berth", href: "/listings/over-5-people-sleeping-capacity/", query: "from_sleep=6" },
+  { text: "4+ Berth", href: "/listings/over-3-people-sleeping-capacity/", query: "from_sleep=4" },
 ];
 
 export const CATEGORY_LABELS: Record<string, string> = {

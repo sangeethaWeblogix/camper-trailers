@@ -556,8 +556,8 @@ export default function StateHome({
           const featuredItems = buildFeaturedOrder(featuredSource, premiumsRaw, exclusivesRaw);
           const featuredIds = new Set(featuredItems.map((p) => p.id));
 
-          const newSource = hasPreSplit ? newSplit : products.filter((p) => bucketOf(p) === "new");
-          const usedSource = hasPreSplit ? usedSplit : products.filter((p) => bucketOf(p) === "used");
+          const newSource = normalizeAll(hasPreSplit ? newSplit : products.filter((p) => bucketOf(p) === "new"));
+          const usedSource = normalizeAll(hasPreSplit ? usedSplit : products.filter((p) => bucketOf(p) === "used"));
           const newItems = seededShuffle(
             newSource.filter((p) => !p.is_premium && !p.is_exclusive && !featuredIds.has(p.id)),
             seed + 1000

@@ -165,8 +165,7 @@ const BROWSE_TABS: BrowseTab[] = [
       { text: "2 Berth",  href: "/listings/2-people-sleeping-capacity/" },
       { text: "3 Berth",  href: "/listings/3-people-sleeping-capacity/" },
       { text: "4 Berth",  href: "/listings/4-people-sleeping-capacity/" },
-      { text: "5 Berth",  href: "/listings/5-people-sleeping-capacity/" },
-      { text: "6+ Berth", href: "/listings/over-5-people-sleeping-capacity/" },
+      { text: "4+ Berth", href: "/listings/over-3-people-sleeping-capacity/" },
     ],
   },
 ];
