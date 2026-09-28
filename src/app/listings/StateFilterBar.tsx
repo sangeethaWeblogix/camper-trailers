@@ -1466,7 +1466,9 @@ export default function StateFilterBar({
             <div className="filter-search-bar">
               {makeSubView === "models" && (
                 <div className="loc-region-heading" style={{ marginBottom:8, borderBottom:"none", paddingBottom:0 }}>
-                  {makes.find(m => m.slug === tempMake)?.name ?? tempMake}
+                  {makeCounts.find(m => m.slug === tempMake)?.name ??
+                    makes.find(m => m.slug === tempMake)?.name ??
+                    tempMake}
                 </div>
               )}
               <div className="loc-search-wrap" style={{ marginBottom:0 }}>

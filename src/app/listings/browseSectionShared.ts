@@ -30,13 +30,14 @@ export const STATES = [
   { name: "Tasmania",            href: "/listings/tasmania-state/" },
 ];
 
+// Matches the live /api/product-list/ all_categories list (same source the
+// "Camping Trailer Type" filter modal uses) — update both together if the
+// backend's category set changes.
 export const TYPES_NO_STATE = [
-  { label: "Off Road Camping Trailers", href: "/listings/off-road-category/" },
-  { label: "Luxury Camping Trailers",   href: "/listings/luxury-category/" },
-  { label: "Hybrid Camping Trailers",   href: "/listings/hybrid-category/" },
-  { label: "Pop Top Camping Trailers",  href: "/listings/pop-top-category/" },
-  { label: "Touring Camping Trailers",  href: "/listings/touring-category/" },
-  { label: "Family Camping Trailers",   href: "/listings/family-category/" },
+  { label: "Hybrid Camping Trailers",         href: "/listings/hybrid-category/" },
+  { label: "Camper Trailers",                 href: "/listings/camper-trailer-category/" },
+  { label: "Off Road Camper Trailers",        href: "/listings/off-road-camper-category/" },
+  { label: "Tent Trailers",                   href: "/listings/tent-trailer-category/" },
 ];
 
 export const FILTERS_NO_STATE = [
