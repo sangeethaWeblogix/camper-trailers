@@ -81,7 +81,7 @@ export default function HomeStateSection({ stateBands: stateBandsRaw }: Props) {
                           <h3>{item.state}</h3>
                           <div className="info">
                             <div className="quick_linkss">
-                              <p>{item.display_text}</p>
+                              <p>{item.display_text.replace("caravan listings", "camping trailer listings")}</p>
                               <a className="view_all" href={item.permalink}>
                                 View All Camping Trailers for Sale in {meta.code}{" "}
                                 <i className="bi bi-chevron-right" />

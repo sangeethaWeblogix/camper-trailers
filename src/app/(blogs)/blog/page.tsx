@@ -24,13 +24,13 @@ export default async function BlogPage() {
     {
       "@context": "https://schema.org",
       "@type": "Blog",
-      name: "Caravans for Sale Blog",
+      name: "Camping Trailers for Sale Blog",
       description:
         "Latest news, in-depth reviews, and expert advice on the latest in the camping trailer market.",
       url: "https://www.campingtrailersforsale.com.au/blog/",
       publisher: {
         "@type": "Organization",
-        name: "Caravans for Sale",
+        name: "Camping Trailers for Sale",
         url: "https://www.campingtrailersforsale.com.au",
       },
     },

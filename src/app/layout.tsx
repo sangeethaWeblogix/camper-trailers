@@ -71,18 +71,7 @@ import GlobalImageFallback from "@/components/GlobalImageFallback";
     const isMainListings = pathname === "/listings/" || pathname === "/listings";
 
     // Static pages whose metadata ends up after </head> due to streaming — inject directly
-    const STATIC_META: Record<string, { title: string; description: string; canonical: string }> = {
-      "/caravan-manufacturers/": {
-        title: "Top 10 Camping Trailer Manufacturers in Australia: Best Brands of 2024",
-        description: "See how top Australian camping trailer manufacturers excel with the best in innovative designs, quality construction, cost efficiency, and expert craftsmanship.",
-        canonical: "https://www.campingtrailersforsale.com.au/caravan-manufacturers/",
-      },
-      "/off-road-caravans-manufacturers/": {
-        title: "Top Off-Road Camping Trailer Manufacturers in Australia: Best Brands 2024",
-        description: "Discover Australia's leading off-road camping trailer manufacturers. Compare top brands known for rugged build quality, innovative design, and outback-ready performance.",
-        canonical: "https://www.campingtrailersforsale.com.au/off-road-caravans-manufacturers/",
-      },
-    };
+    const STATIC_META: Record<string, { title: string; description: string; canonical: string }> = {};
     const staticMeta = STATIC_META[pathname] ?? null;
 
     let productMeta = { title: "", description: "", canonical: "", ogImage: "" };

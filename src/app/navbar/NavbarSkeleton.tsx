@@ -7,7 +7,7 @@ export default function NavbarSkeleton() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/cts-logo.svg"
-              alt="Caravans For Sale"
+              alt="Camping Trailers For Sale"
               width={150}
               height={50}
             />
@@ -24,13 +24,13 @@ export default function NavbarSkeleton() {
           <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul className="navbar-nav mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link" href="/sell-my-camper-trailer/">Sell My Camping Trailer</a>
+                <a className="nav-link" href="/sell-my-camping-trailer/">Sell My Camping Trailer</a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/dealer-advertising/">Dealer Advertising</a>
               </li>
               <li className="nav-item login">
-                <a className="nav-link" href="/login/">
+                <a className="nav-link" href="https://seller.marketplacenetwork.com.au/seller-login/">
                   <i className="bi bi-person-fill"></i> Login
                 </a>
               </li>

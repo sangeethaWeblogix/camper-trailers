@@ -1,16 +1,25 @@
 import { NextResponse } from "next/server";
-import statesData from "../../../../cfs-paths/states.json";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
   "https://www.campingtrailersforsale.com.au/listings/";
 
+const API_KEY = process.env.MPN_API_KEY;
+
 export async function GET() {
   try {
-    const data = statesData as { success: boolean; paths: string[] };
+    const res = await fetch(`${process.env.MPN_API_BASE}/sitemap/states?min_count=1`, {
+      headers: {
+        Accept: "application/json",
+        ...(API_KEY && { "X-Secret-Key": API_KEY }),
+      },
+      cache: "no-store",
+    });
+
+    const data = await res.json();
 
     if (!data?.success || !Array.isArray(data.paths)) {
-      throw new Error("Invalid sitemap data");
+      throw new Error("Invalid sitemap API response");
     }
 
     const urls = data.paths

@@ -8,11 +8,11 @@ const DEALER_FAQS = [
     q: "How much does the dealer subscription cost, and what’s included?",
     a: (
       <p>
-        The dealer subscription is $299 per month (including GST). This flat
+        The dealer subscription is $99 per month (including GST). This flat
         monthly fee allows your dealership to list unlimited camping trailers on
         CampingTrailersForSale.com.au. There are no per-listing charges, and we never
         charge per lead or take success commissions – no matter how many
-        inquiries or sales you get, $299/month covers it all.
+        inquiries or sales you get, $99/month covers it all.
       </p>
     ),
   },
@@ -74,7 +74,7 @@ const DealerLandingPage = () => {
                 <h1>
                   Unlimited Listings. Zero Lead Fees. <br />
                   <span className="color-text">
-                    $299 per month{" "}
+                    $99 per month{" "}
                     <span style={{ fontSize: "20px" }}>(inc. GST)</span>
                   </span>{" "}
                   <span className="no-color-text">- Cancel anytime</span>
@@ -86,11 +86,8 @@ const DealerLandingPage = () => {
                 </p>
 
                 <a
-                  href="#"
-                  aria-disabled="true"
-                  tabIndex={-1}
-                  onClick={(e) => e.preventDefault()}
-                  className="btn white_btn cta-disabled"
+                  href="https://seller.marketplacenetwork.com.au/campingtrailer-dealer-subscription/"
+                  className="btn white_btn"
                 >
                   Start Dealer Signup
                 </a>
@@ -293,7 +290,7 @@ const DealerLandingPage = () => {
                   <h2>Simple Pricing. No Surprises.</h2>
 
                   <div className="price">
-                    $299 Per Month{" "}
+                    $99 Per Month{" "}
                     <span style={{ fontSize: "20px" }}>(inc. GST)</span>
                   </div>
 
@@ -305,12 +302,9 @@ const DealerLandingPage = () => {
                   </ul>
 
                   <a
-                    href="#"
-                    aria-disabled="true"
-                    tabIndex={-1}
-                    onClick={(e) => e.preventDefault()}
-                    className="btn white_btn cta-disabled"
-                  >
+                  href="https://seller.marketplacenetwork.com.au/campingtrailer-dealer-subscription/"
+                  className="btn white_btn"
+                >
                     Start Dealer Signup
                   </a>
                 </div>

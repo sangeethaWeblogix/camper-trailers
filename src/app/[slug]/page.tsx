@@ -55,7 +55,7 @@ export async function generateMetadata({
     seo.meta_title ||
     data?.title ||
     data?.name ||
-    "Product - Caravans for Sale";
+    "Product - Camping Trailers for Sale";
 
   const description =
     seo.metadescription ||

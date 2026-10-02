@@ -1,5 +1,5 @@
 const GITHUB_OWNER = "sangeethaWeblogix";
-const GITHUB_REPO = "caravansforsale-main-LIVE";
+const GITHUB_REPO = "camper-trailers";
 const GITHUB_API = "https://api.github.com";
 
 export interface GitHubErrorPayload {

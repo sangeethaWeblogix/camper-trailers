@@ -1,9 +1,10 @@
-  "use client";
+"use client";
 import "@fortawesome/fontawesome-free/css/fontawesome.min.css";
 import "@fortawesome/fontawesome-free/css/solid.min.css";
 import "@fortawesome/fontawesome-free/css/regular.min.css";
 import React, { useState } from "react";
-import { RegionInfo } from "./regions-data";
+import { StateData } from "../sell-my-caravan-region/states-data";
+import { getRegionsByState } from "../sell-my-caravan-region/regions-data";
 
 const CARAVAN_TYPES = [
   { label: "Off Road Camping Trailers", img: "/images/off-road.webp", href: "/listings/off-road-category/" },
@@ -18,31 +19,44 @@ const CARAVAN_TYPES = [
   { label: "Used Camping Trailers", img: "/images/off-road.webp", href: "/listings/used-condition/" },
 ];
 
-interface RegionSellerProps {
-  region: RegionInfo;
+interface StateSellerProps {
+  state: StateData;
 }
 
-export default function RegionSeller({ region }: RegionSellerProps) {
+const DEMONYMS: Record<string, string> = {
+  victoria: "Victorian",
+  "new-south-wales": "New South Wales",
+  queensland: "Queensland",
+  "south-australia": "South Australian",
+  tasmania: "Tasmanian",
+  "western-australia": "Western Australian",
+};
+
+export default function StateSeller({ state }: StateSellerProps) {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
-  const regionLabel = region.label;
-  const stateLabel = region.state.label;
-  const stateSlug = region.state.slug;
+
+  const stateLabel = state.label;
+  const capital = state.capital;
+  const abbr = state.abbr;
+  const demonym = DEMONYMS[state.slug] ?? stateLabel;
+
+  const CITY_LINKS = getRegionsByState(state.slug);
 
   const HOW_TO_STEPS = [
-    { num: 1, iconSet: "fa-regular", icon: "fa-file-lines",    title: "Create Your Listing",    desc: "Add your camping trailer details, description, price and location in minutes." },
-    { num: 2, iconSet: "fa-regular", icon: "fa-image",         title: "Upload Photos",          desc: "Add clear photos of the inside, outside and features of your camping trailer." },
-    { num: 3, iconSet: "fa-regular", icon: "fa-comment-dots",  title: "Reach Buyers",           desc: `Your listing is live across ${regionLabel} and ${stateLabel}. Buyers contact you directly.` },
-    { num: 4, iconSet: "fa-regular", icon: "fa-handshake",     title: "Negotiate Directly",     desc: "Arrange inspections and negotiate price with buyers." },
-    { num: 5, iconSet: "fa-regular", icon: "fa-circle-check",  title: "Complete The Sale",      desc: "Once sold, remove your listing or mark as sold. It's that simple." },
+    { num: 1, iconSet: "fa-regular", icon: "fa-file-lines", title: "Create Your Listing", desc: "Add your camping trailer details, description, price and location in minutes." },
+    { num: 2, iconSet: "fa-regular", icon: "fa-image", title: "Upload Photos", desc: "Add clear photos of the inside, outside and features of your camping trailer." },
+    { num: 3, iconSet: "fa-regular", icon: "fa-comment-dots", title: "Reach Buyers", desc: `Your listing is live across ${stateLabel}. Buyers contact you directly.` },
+    { num: 4, iconSet: "fa-regular", icon: "fa-handshake", title: "Negotiate Directly", desc: "Arrange inspections and negotiate price with buyers." },
+    { num: 5, iconSet: "fa-regular", icon: "fa-circle-check", title: "Complete The Sale", desc: "Once sold, remove your listing or mark as sold. It's that simple." },
   ];
 
   const MAIN_FAQS = [
     {
-      q: `How do I sell my camping trailer in ${regionLabel}?`,
-      a: <p>You can sell your camping trailer online by creating a private seller listing on CampingTrailersForSale.com.au. Simply add your camping trailer details, upload clear photos, set your asking price, and publish your ad so active buyers in {regionLabel} and across {stateLabel} can contact you directly.</p>,
+      q: `How do I sell my camping trailer in ${stateLabel}?`,
+      a: <p>You can sell your camping trailer online by creating a private seller listing on CampingTrailersForSale.com.au. Simply add your camping trailer details, upload clear photos, set your asking price, and publish your ad so active buyers across {stateLabel} and all of Australia can contact you directly.</p>,
     },
     {
-      q: `How much does it cost to sell my camping trailer in ${regionLabel}?`,
+      q: `How much does it cost to sell my camping trailer in ${stateLabel}?`,
       a: <p>We charge a simple, flat one-time fee of just $49 (inc. GST). There are absolutely no commissions, no hidden upfront fees, and no recurring monthly subscriptions. You keep 100% of your sale price.</p>,
     },
     {
@@ -63,7 +77,7 @@ export default function RegionSeller({ region }: RegionSellerProps) {
     },
     {
       q: "How should I price my camping trailer?",
-      a: <p>Check similar camping trailers for sale in {regionLabel} before setting your price. Compare by make, model, year, condition, length, ATM, tare weight, sleeping capacity, features and location. A realistic asking price can help attract more genuine buyers.</p>,
+      a: <p>Check similar camping trailers for sale in {stateLabel} before setting your price. Compare by make, model, year, condition, length, ATM, tare weight, sleeping capacity, features and location. A realistic asking price can help attract more genuine buyers.</p>,
     },
     {
       q: "Is it safe to sell my camping trailer privately online?",
@@ -86,63 +100,62 @@ export default function RegionSeller({ region }: RegionSellerProps) {
       <section className="demo-hero">
         <div className="container">
           <h1 className="demo-hero__title">
-            Sell My Camping Trailer in {regionLabel}
+            Sell My Camping Trailer in {stateLabel}
           </h1>
           <p className="demo-hero__subtitle">
-            The fastest, safest way to reach active camping trailer buyers in {regionLabel}, {stateLabel}.
+            The fastest, safest way to reach active camping trailer buyers across {capital} and regional {stateLabel}.
           </p>
 
-          {/* Pricing card + CTA wrapper — one seamless unit */}
+          {/* Pricing card + CTA wrapper */}
           <div className="demo-price-wrapper">
-          <div className="demo-price-card">
+            <div className="demo-price-card">
 
-            {/* Left: region info */}
-            <div className="demo-price-card__left">
-              <div className="demo-price-card__aus-circle">
-                <img src="/images/vic_map.svg" alt={regionLabel} />
-              </div>
-              <div className="demo-price-card__header">
-              <h3>Looking to sell your camping trailer?</h3>
-            </div>
-              <p className="demo-price-card__desc">
-                List your camping trailer on Australia's #1 camping trailer marketplace and connect with thousands of buyers in {regionLabel}, {stateLabel}.
-              </p>
-
-            </div>
-
-            {/* Center: Price highlight */}
-            <div className="demo-price-card__center">
-              <div className="demo-price-card__badge">BEST VALUE</div>
-              <div className="demo-price-card__price-box">
-                <div className="demo-price-card__only">ONLY</div>
-                <div className="demo-price-card__amount"><sup>$</sup>49</div>
-                <hr className="demo-price-card__hr" />
-                <div className="demo-price-card__fee">One-Time Listing Fee (Inc. GST)</div>
-              </div>
-            </div>
-
-            {/* Right: Features */}
-            <div className="demo-price-card__right">
-              {[
-                { icon: "fa-percent", label: "No Commissions" },
-                { icon: "fa-calendar-days", label: "No Subscription" },
-                { icon: "fa-circle-dollar-to-slot", label: "No Upfront Fees" },
-                { icon: "fa-bullhorn", label: "Sell Until It's Sold" },
-              ].map((item, i) => (
-                <div key={item.label} className={`demo-price-card__feature${i < 3 ? " demo-price-card__feature--border" : ""}`}>
-                  <span className="demo-price-card__feature-icon">
-                    <i className={`fa-solid ${item.icon}`} />
-                  </span>
-                  <span className="demo-price-card__feature-label">{item.label}</span>
+              {/* Left: State info */}
+              <div className="demo-price-card__left">
+                <div className="demo-price-card__aus-circle">
+                  <img src={state.mapImg} alt={stateLabel} />
                 </div>
-              ))}
-            </div>
-          </div>
+                <div className="demo-price-card__header">
+                  <h3>Looking to sell your camping trailer?</h3>
+                </div>
+                <p className="demo-price-card__desc">
+                  List your camping trailer on Australia's #1 camping trailer marketplace and connect with thousands of buyers across {capital} and regional {stateLabel}.
+                </p>
+              </div>
 
-          {/* CTA — inside wrapper so it attaches seamlessly to card bottom */}
-          <a href="https://seller.marketplacenetwork.com.au/campingtrailer-seller-subscription/" className="demo-hero__cta">
-            List Your Camping Trailer Now <i className="fa-solid fa-arrow-right" />
-          </a>
+              {/* Center: Price highlight */}
+              <div className="demo-price-card__center">
+                <div className="demo-price-card__badge">BEST VALUE</div>
+                <div className="demo-price-card__price-box">
+                  <div className="demo-price-card__only">ONLY</div>
+                  <div className="demo-price-card__amount"><sup>$</sup>49</div>
+                  <hr className="demo-price-card__hr" />
+                  <div className="demo-price-card__fee">One-Time Listing Fee (Inc. GST)</div>
+                </div>
+              </div>
+
+              {/* Right: Features */}
+              <div className="demo-price-card__right">
+                {[
+                  { icon: "fa-percent", label: "No Commissions" },
+                  { icon: "fa-calendar-days", label: "No Subscription" },
+                  { icon: "fa-circle-dollar-to-slot", label: "No Upfront Fees" },
+                  { icon: "fa-bullhorn", label: "Sell Until It's Sold" },
+                ].map((item, i) => (
+                  <div key={item.label} className={`demo-price-card__feature${i < 3 ? " demo-price-card__feature--border" : ""}`}>
+                    <span className="demo-price-card__feature-icon">
+                      <i className={`fa-solid ${item.icon}`} />
+                    </span>
+                    <span className="demo-price-card__feature-label">{item.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* CTA */}
+            <a href="https://seller.marketplacenetwork.com.au/campingtrailer-seller-subscription/" className="demo-hero__cta">
+              List Your Camping Trailer Now <i className="fa-solid fa-arrow-right" />
+            </a>
           </div>{/* end demo-price-wrapper */}
 
         </div>
@@ -174,74 +187,93 @@ export default function RegionSeller({ region }: RegionSellerProps) {
       <section className="demo-reach-section">
         <div className="container">
 
-          {/* Heading */}
           <div className="demo-reach-heading">
-            <h3>Reach Camping Trailer Buyers in {regionLabel}, {stateLabel}</h3>
+            <h3>Reach Camping Trailer Buyers Across {stateLabel}, Including: </h3>
           </div>
+
+          {/* Region links */}
+          <section className="demo-city-section">
+            <div className="container">
+              <div className="demo-city-grid">
+                {CITY_LINKS.map((c) => (
+                  <div key={c.label} className="demo-city-item">
+                    <span className="demo-city-icon">
+                      <img src="/images/caravan.png" alt="" />
+                    </span>
+                    <h3 className="demo-city-label">
+                      <a
+                        href={`/sell-my-camping-trailer/${state.slug}/${c.pageSlug}/`}
+                        title={`Sell my camping trailer in ${c.label.trim()}`}
+                        className="demo-city-label"
+                      >
+                        {c.label}
+                      </a>
+                    </h3>
+                    <i className="fa-solid fa-chevron-right demo-city-arrow" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
 
           <div className="demo-reach-row">
-          {/* Device image */}
-          <div className="demo-reach-device">
-            <img src="/images/your-caravan-desktop-seller-2.jpg" className="img-fluid d-none d-lg-block" alt="Camping Trailer For Sale Desktop" />
-            <img src="/images/your-caravan-mobile-2.jpg" className="img-fluid d-block d-lg-none" alt="Camping Trailer For Sale Mobile" />
-          </div>
-
-          {/* Pricing + FAQ card */}
-          <div className="demo-reach-card">
-            {/* Left: Pricing */}
-            <div className="demo-reach-card__left">
-              <span className="demo-reach-card__badge">BEST VALUE</span>
-              <div className="demo-reach-card__price">
-                <span className="demo-reach-card__dollar">$</span>
-                <span className="demo-reach-card__amount">49</span>
-                <span className="demo-reach-card__gst">(Inc. GST)</span>
-              </div>
-              <p className="demo-reach-card__fee-label">One-Time Listing Fee</p>
-              <ul className="demo-reach-card__list">
-                {[
-                  "1 Camping Trailer listed until sold",
-                  "Edit your listing anytime",
-                  "No expiration or monthly fees",
-                ].map((item) => (
-                  <li key={item}>
-                    <i className="fa-solid fa-circle-check" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <a href="https://seller.marketplacenetwork.com.au/campingtrailer-seller-subscription/" className="demo-reach-card__cta">
-                List Your Camping Trailer Now <i className="fa-solid fa-arrow-right" />
-              </a>
+            {/* Device image */}
+            <div className="demo-reach-device">
+              <img src="/images/your-caravan-desktop-seller-2.jpg" className="img-fluid d-none d-lg-block" alt="Camping Trailer For Sale Desktop" />
+              <img src="/images/your-caravan-mobile-2.jpg" className="img-fluid d-block d-lg-none" alt="Camping Trailer For Sale Mobile" />
             </div>
 
-            {/* Divider */}
-            <div className="demo-reach-card__divider" />
-
-            {/* Right: FAQ items */}
-            <div className="demo-reach-card__right">
-              <div className="demo-reach-faq">
-
-                <div className="demo-reach-faq__body">
-                  <h4>How long does the listing stay up?</h4>
-                  <ul>
-                    <li><i className="fa-solid fa-circle-check" />Your listing stays live until sold.</li>
-                    <li><i className="fa-solid fa-circle-check" />Edit or update anytime, even after publishing.</li>
-                    <li><i className="fa-solid fa-circle-check" />No extra fees to keep your ad active.</li>
-                  </ul>
+            {/* Pricing + FAQ card */}
+            <div className="demo-reach-card">
+              <div className="demo-reach-card__left">
+                <span className="demo-reach-card__badge">BEST VALUE</span>
+                <div className="demo-reach-card__price">
+                  <span className="demo-reach-card__dollar">$</span>
+                  <span className="demo-reach-card__amount">49</span>
+                  <span className="demo-reach-card__gst">(Inc. GST)</span>
                 </div>
+                <p className="demo-reach-card__fee-label">One-Time Listing Fee</p>
+                <ul className="demo-reach-card__list">
+                  {[
+                    "1 Camping Trailer listed until sold",
+                    "Edit your listing anytime",
+                    "No expiration or monthly fees",
+                  ].map((item) => (
+                    <li key={item}>
+                      <i className="fa-solid fa-circle-check" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <a href="https://seller.marketplacenetwork.com.au/campingtrailer-seller-subscription/" className="demo-reach-card__cta">
+                  List Your Camping Trailer Now <i className="fa-solid fa-arrow-right" />
+                </a>
               </div>
-              <div className="demo-reach-faq demo-reach-faq--border">
 
-                <div className="demo-reach-faq__body">
-                  <h4>Can I edit my listing after posting?</h4>
-                  <ul>
-                    <li><i className="fa-solid fa-circle-check" />Yes, update your details, photos or price.</li>
-                    <li><i className="fa-solid fa-circle-check" />Keep your listing accurate 24/7.</li>
-                  </ul>
+              <div className="demo-reach-card__divider" />
+
+              <div className="demo-reach-card__right">
+                <div className="demo-reach-faq">
+                  <div className="demo-reach-faq__body">
+                    <h4>How long does the listing stay up?</h4>
+                    <ul>
+                      <li><i className="fa-solid fa-circle-check" />Your listing stays live until sold.</li>
+                      <li><i className="fa-solid fa-circle-check" />Edit or update anytime, even after publishing.</li>
+                      <li><i className="fa-solid fa-circle-check" />No extra fees to keep your ad active.</li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="demo-reach-faq demo-reach-faq--border">
+                  <div className="demo-reach-faq__body">
+                    <h4>Can I edit my listing after posting?</h4>
+                    <ul>
+                      <li><i className="fa-solid fa-circle-check" />Yes, update your details, photos or price.</li>
+                      <li><i className="fa-solid fa-circle-check" />Keep your listing accurate 24/7.</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
           </div>{/* end demo-reach-row */}
 
         </div>
@@ -261,7 +293,7 @@ export default function RegionSeller({ region }: RegionSellerProps) {
               </div>
               <ul className="demo-guide-card__list">
                 <li>Australia's #1 marketplace for buying and selling camping trailers.</li>
-                <li>Targeted camping trailer buyers across {regionLabel} and regional {stateLabel}.</li>
+                <li>Targeted camping trailer buyers across {capital} and regional {stateLabel}.</li>
                 <li>Your listing stays live until sold with no hidden fees.</li>
                 <li>Fast, simple and secure way to sell your camping trailer.</li>
               </ul>
@@ -285,7 +317,7 @@ export default function RegionSeller({ region }: RegionSellerProps) {
                 <h3>How to price your camping trailer</h3>
               </div>
               <ul className="demo-guide-card__list">
-                <li>Check similar camping trailers for sale in {regionLabel}.</li>
+                <li>Check similar camping trailers for sale in {stateLabel}.</li>
                 <li>Compare make, model, year, condition and inclusions.</li>
                 <li>List at a realistic price to attract more buyers.</li>
               </ul>
@@ -313,7 +345,7 @@ export default function RegionSeller({ region }: RegionSellerProps) {
           <div className="demo-faq-head">
             <span className="demo-faq-head__tag">FAQ</span>
             <h2>Frequently Asked Questions</h2>
-            <p>Everything you need to know about selling your camping trailer in {regionLabel} on CampingTrailersForSale.com.au</p>
+            <p>Everything you need to know about selling your camping trailer in {stateLabel} on CampingTrailersForSale.com.au</p>
           </div>
           <div className="demo-faq-list">
             {MAIN_FAQS.map((faq, i) => (
@@ -325,7 +357,7 @@ export default function RegionSeller({ region }: RegionSellerProps) {
                   className="demo-faq-item__q"
                   onClick={() => setActiveFaq(activeFaq === i ? null : i)}
                 >
-       <h3 className="demo-faq-item__q-text">{faq.q}</h3>
+                  <h3 className="demo-faq-item__q-text">{faq.q}</h3>
                   <span className="demo-faq-item__icon">
                     <i className={`fa-solid ${activeFaq === i ? "fa-minus" : "fa-plus"}`} />
                   </span>
@@ -344,18 +376,18 @@ export default function RegionSeller({ region }: RegionSellerProps) {
         <div className="container">
           <div className="row align-items-center g-4">
             <div className="col-md-6">
-              <img src="/images/your-caravan-desktop-seller-2.jpg" className="img-fluid demo-why-img" alt={`${regionLabel} camping trailer buyers`} />
+              <img src="/images/your-caravan-desktop-seller-2.jpg" className="img-fluid demo-why-img" alt={`${demonym} camping trailer buyers`} />
             </div>
             <div className="col-md-6">
-              <h2>Why {regionLabel} Camping Trailer Buyers Visit CampingTrailersForSale Every Month</h2>
+              <h2>Why {demonym} Camping Trailer Buyers Visit CampingTrailersForSale Every Month</h2>
               <p>
-                CampingTrailersForSale.com.au helps camping trailer sellers in {regionLabel} reach buyers searching for
+                CampingTrailersForSale.com.au helps {demonym} camping trailer sellers reach buyers searching for
                 used camping trailers, off road camping trailers, family camping trailers, pop tops, hybrids and touring
-                camping trailers across {regionLabel} and regional {stateLabel}.
+                camping trailers across {capital} and regional {stateLabel}.
               </p>
               <div className="demo-check-grid demo-check-grid--2col mt-3">
                 {[
-                  "Thousands of active buyers", `Local reach across ${regionLabel}`,
+                  "Thousands of active buyers", `Local reach across ${abbr} regions`,
                   "Camping Trailer-only marketplace", "Simple listing process",
                   "High quality enquiries", "No commissions",
                   "Live until sold – no extra fees", "Friendly local support team",
@@ -373,11 +405,9 @@ export default function RegionSeller({ region }: RegionSellerProps) {
       {/* ── How to sell ── */}
       <section className="demo-steps-section">
         <div className="container">
-
           <h2 className="demo-steps-title">How To Sell Your Camping Trailer Online</h2>
-          <p className="demo-steps-subtitle">List in minutes and reach thousands of active camping trailer buyers in {regionLabel}.</p>
+          <p className="demo-steps-subtitle">List in minutes and reach thousands of active camping trailer buyers in {stateLabel}.</p>
 
-          {/* Steps: each column has number circle + icon + content; connectors between columns */}
           <div className="demo-steps-wrapper">
             {HOW_TO_STEPS.map((s, i) => (
               <React.Fragment key={s.num}>
@@ -403,14 +433,14 @@ export default function RegionSeller({ region }: RegionSellerProps) {
       <section className="demo-cta-strip">
         <div className="container text-center">
           <p>
-            Start selling your camping trailer in {regionLabel} today for just{" "}
+            Start selling your camping trailer in {stateLabel} today for just{" "}
             <strong>$49 (Inc. GST)</strong> — live until sold.
           </p>
           <a href="https://seller.marketplacenetwork.com.au/campingtrailer-seller-subscription/" className="btn white_btn">
             List Your Camping Trailer Now
           </a>
           <p className="demo-cta-strip__alt-link">
-            Not in {regionLabel}? Sell your camping trailer across {stateLabel} <a href={`/sell-my-caravan-${stateSlug}/`}>here</a>.
+            Not in {abbr}? Sell your camping trailer across Australia <a href="/sell-my-camping-trailer/">here</a>.
           </p>
         </div>
       </section>

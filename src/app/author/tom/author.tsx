@@ -83,7 +83,7 @@ const loading = !data || !blogPosts || blogPosts.length === 0 && data.totalPages
                 <div>
                   <h1 className="author-name">Tom</h1>
                   <h5 className="author-tagline">
-                    Author at Caravans For Sale
+                    Author at Camping Trailers For Sale
                   </h5>
                 </div>
               </div>

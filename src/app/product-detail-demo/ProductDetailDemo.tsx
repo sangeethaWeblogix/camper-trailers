@@ -492,7 +492,7 @@ const priceUpperIdx = !isPOA ? PRICE_STEPS.findIndex(s => s >= displayPrice) : -
         {/* Subtitle */}
         <div className="pdd-subtitle">
           <span>Have a similar camping trailer to sell?</span>
-          <a href="/sell-my-camper-trailer/" className="pdd-subtitle__link">List Your Camping Trailer</a>
+          <a href="/sell-my-camping-trailer/" className="pdd-subtitle__link">List Your Camping Trailer</a>
           <span className="pdd-subtitle__badge">$49 Until Sold</span>
         </div>
 
@@ -677,7 +677,7 @@ const priceUpperIdx = !isPOA ? PRICE_STEPS.findIndex(s => s >= displayPrice) : -
             <div className="pdd-sidebar__sell">
               <strong>Thinking of selling?</strong>
               <p>Get more eyes on your camping trailer today.</p>
-              <a href="/sell-my-camper-trailer/" className="pdd-btn-sell">Sell My Camping Trailer</a>
+              <a href="/sell-my-camping-trailer/" className="pdd-btn-sell">Sell My Camping Trailer</a>
             </div>
           </aside>
         </div>
@@ -690,9 +690,8 @@ const priceUpperIdx = !isPOA ? PRICE_STEPS.findIndex(s => s >= displayPrice) : -
                 {offRoadSeed % 2 === 0 ? "Find Your Ideal Off Road Camping Trailer" : "Search and Compare Off Road Camping Trailers"}
               </h2>
               <p className="lsd-offroad-extra__body">
-                Browse live camping trailer listings from across the country, then compare{" "}
-                <a href="https://www.campingtrailersforsale.com.au/off-road-caravans/">off road camping trailers in Australia</a>{" "}
-                using search filters by price, location, weight, length and sleeping capacity while exploring manufacturer and model reviews.
+                Browse live camping trailer listings from across the country, then compare
+                off road camping trailers in Australia using search filters by price, location, weight, length and sleeping capacity while exploring manufacturer and model reviews.
               </p>
             
           </section>

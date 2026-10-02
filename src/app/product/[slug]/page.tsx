@@ -71,7 +71,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const slugTitle = slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
   const title = seo.metatitle || seo.meta_title || pd.name || data?.name || slugTitle || "Camping Trailer for Sale";
-  const description = seo.metadescription || seo.meta_description || pd.short_description || "View camping trailer details on Caravans For Sale Australia.";
+  const description = seo.metadescription || seo.meta_description || pd.short_description || "View camping trailer details on Camping Trailers For Sale Australia.";
   const canonicalUrl = `https://www.campingtrailersforsale.com.au/product/${slug}/`;
   const rawImages = pd.image_url ?? pd.images ?? [];
   const images: string[] = (Array.isArray(rawImages) ? rawImages : [rawImages]).filter(Boolean);
@@ -330,7 +330,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
       ...(priceStr && { price: priceStr }),
       availability: "https://schema.org/InStock",
       url: canonicalUrl,
-      seller: { "@type": "Organization", name: "Caravans For Sale" },
+      seller: { "@type": "Organization", name: "Camping Trailers For Sale" },
     },
   };
 

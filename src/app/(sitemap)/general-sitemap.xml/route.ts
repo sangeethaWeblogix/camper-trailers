@@ -6,14 +6,12 @@ const SITE_URL =
 
 // Static URLs (you can extend this later with categories, states, regions)
 const staticUrls = [
-  "caravan-manufacturers",
-  "off-road-caravans-manufacturers",
   "listings",
   "blog",
   "about-us",
   "contact",
   "dealer-advertising",
-  "sell-my-camper-trailer",
+  "sell-my-camping-trailer",
 ];
 
 export async function GET() {

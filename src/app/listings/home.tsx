@@ -783,7 +783,7 @@ export default function StateHome({
           {filters.category === 'off-road' && (
             <section className="lsd-offroad-extra"><div className="container">
               <h2 className="lsd-offroad-extra__title">{seed % 2 === 0 ? "Find Your Ideal Off Road Camping Trailer" : "Search and Compare Off Road Camping Trailers"}</h2>
-              <p className="lsd-offroad-extra__body">Browse live camping trailer listings from across the country, then compare <a href="https://www.campingtrailersforsale.com.au/off-road-caravans/">off road camping trailers in Australia</a> using search filters by price, location, weight, length and sleeping capacity while exploring manufacturer and model reviews.</p>
+              <p className="lsd-offroad-extra__body">Browse live camping trailer listings from across the country, then compare off road camping trailers in Australia using search filters by price, location, weight, length and sleeping capacity while exploring manufacturer and model reviews.</p>
             </div></section>
           )}
           <div className="lsd-sell-cta">
@@ -792,7 +792,7 @@ export default function StateHome({
                 <h2 className="lsd-sell-cta__title">Looking to Sell Your Camping Trailer?</h2>
                 <p className="lsd-sell-cta__body">
                   If you&apos;re upgrading or no longer need your current camping trailer,{" "}
-                  <a href="/sell-my-camper-trailer/" className="lsd-sell-cta__link">sell your camping trailer</a>{" "}
+                  <a href="/sell-my-camping-trailer/" className="lsd-sell-cta__link">sell your camping trailer</a>{" "}
                   by creating a listing on CampingTrailersForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
                 </p>
               </div>
@@ -836,7 +836,7 @@ export default function StateHome({
               <h2 className="lsd-sell-cta__title">Looking to Sell Your Camping Trailer?</h2>
               <p className="lsd-sell-cta__body">
                 If you&apos;re upgrading or no longer need your current camping trailer,{" "}
-                <a href="/sell-my-camper-trailer/" className="lsd-sell-cta__link">sell your camping trailer</a>{" "}
+                <a href="/sell-my-camping-trailer/" className="lsd-sell-cta__link">sell your camping trailer</a>{" "}
                 by creating a listing on CampingTrailersForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
               </p>
             </div>
@@ -941,7 +941,7 @@ export default function StateHome({
         {filters.category === 'off-road' && (
           <section className="lsd-offroad-extra"><div className="container">
             <h2 className="lsd-offroad-extra__title">{seed % 2 === 0 ? "Find Your Ideal Off Road Camping Trailer" : "Search and Compare Off Road Camping Trailers"}</h2>
-            <p className="lsd-offroad-extra__body">Browse live camping trailer listings from across the country, then compare <a href="https://www.campingtrailersforsale.com.au/off-road-caravans/">off road camping trailers in Australia</a> using search filters by price, location, weight, length and sleeping capacity while exploring manufacturer and model reviews.</p>
+            <p className="lsd-offroad-extra__body">Browse live camping trailer listings from across the country, then compare off road camping trailers in Australia using search filters by price, location, weight, length and sleeping capacity while exploring manufacturer and model reviews.</p>
           </div></section>
         )}
         <div className="lsd-sell-cta">
@@ -950,7 +950,7 @@ export default function StateHome({
               <h2 className="lsd-sell-cta__title">Looking to Sell Your Camping Trailer?</h2>
               <p className="lsd-sell-cta__body">
                 If you&apos;re upgrading or no longer need your current camping trailer,{" "}
-                <a href="/sell-my-camper-trailer/" className="lsd-sell-cta__link">sell your camping trailer</a>{" "}
+                <a href="/sell-my-camping-trailer/" className="lsd-sell-cta__link">sell your camping trailer</a>{" "}
                 by creating a listing on CampingTrailersForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
               </p>
             </div>
@@ -1010,7 +1010,7 @@ export default function StateHome({
       {filters.category === 'off-road' && (
         <section className="lsd-offroad-extra"><div className="container">
           <h2 className="lsd-offroad-extra__title">{seed % 2 === 0 ? "Find Your Ideal Off Road Camping Trailer" : "Search and Compare Off Road Camping Trailers"}</h2>
-          <p className="lsd-offroad-extra__body">Browse live camping trailer listings from across the country, then compare <a href="https://www.campingtrailersforsale.com.au/off-road-caravans/">off road camping trailers in Australia</a> using search filters by price, location, weight, length and sleeping capacity while exploring manufacturer and model reviews.</p>
+          <p className="lsd-offroad-extra__body">Browse live camping trailer listings from across the country, then compare off road camping trailers in Australia using search filters by price, location, weight, length and sleeping capacity while exploring manufacturer and model reviews.</p>
         </div></section>
       )}
       <div className="lsd-sell-cta">
@@ -1019,7 +1019,7 @@ export default function StateHome({
             <h2 className="lsd-sell-cta__title">Looking to Sell Your Camping Trailer?</h2>
             <p className="lsd-sell-cta__body">
               If you&apos;re upgrading or no longer need your current camping trailer,{" "}
-              <a href="/sell-my-camper-trailer/" className="lsd-sell-cta__link">sell your camping trailer</a>{" "}
+              <a href="/sell-my-camping-trailer/" className="lsd-sell-cta__link">sell your camping trailer</a>{" "}
               by creating a listing on CampingTrailersForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
             </p>
           </div>

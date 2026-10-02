@@ -87,27 +87,27 @@ const BROWSE_TABS: BrowseTab[] = [
   {
     label: "Manufacturer",
     icon: "bi-buildings",
-    viewAll: { text: "View all manufacturers", href: "/caravan-manufacturers/" },
+    viewAll: { text: "View all camping trailers", href: "/listings/" },
     links: [
-      { text: "Jayco Caravans for Sale",       href: "/listings/jayco/" },
-      { text: "Snowy River Caravans for Sale", href: "/listings/snowy-river/" },
-      { text: "Evernew Caravans for Sale",     href: "/listings/evernew/" },
-      { text: "Crusader Caravans for Sale",    href: "/listings/crusader/" },
-      { text: "New Age Caravans for Sale",     href: "/listings/new-age/" },
-      { text: "MDC Caravans for Sale",         href: "/listings/mdc/" },
-      { text: "Essential Caravans for Sale",   href: "/listings/essential/" },
-      { text: "Design RV Caravans for Sale",   href: "/listings/design-rv/" },
-      { text: "JB Caravans for Sale",          href: "/listings/jb/" },
-      { text: "Supreme Caravans for Sale",     href: "/listings/supreme/" },
-      { text: "Avan Caravans for Sale",        href: "/listings/avan/" },
-      { text: "Lotus Caravans for Sale",       href: "/listings/lotus/" },
-      { text: "Royal Flair Caravans for Sale", href: "/listings/royal-flair/" },
-      { text: "Windsor Caravans for Sale",     href: "/listings/windsor/" },
-      { text: "Golf Caravans for Sale",        href: "/listings/golf/" },
-      { text: "Nova Caravans for Sale",        href: "/listings/nova/" },
-      { text: "Retreat Caravans for Sale",     href: "/listings/retreat/" },
-      { text: "Adria Caravans for Sale",       href: "/listings/adria/" },
-      { text: "Coromal Caravans for Sale",     href: "/listings/coromal/" },
+      { text: "Jayco Camping Trailers for Sale",       href: "/listings/jayco/" },
+      { text: "Snowy River Camping Trailers for Sale", href: "/listings/snowy-river/" },
+      { text: "Evernew Camping Trailers for Sale",     href: "/listings/evernew/" },
+      { text: "Crusader Camping Trailers for Sale",    href: "/listings/crusader/" },
+      { text: "New Age Camping Trailers for Sale",     href: "/listings/new-age/" },
+      { text: "MDC Camping Trailers for Sale",         href: "/listings/mdc/" },
+      { text: "Essential Camping Trailers for Sale",   href: "/listings/essential/" },
+      { text: "Design RV Camping Trailers for Sale",   href: "/listings/design-rv/" },
+      { text: "JB Camping Trailers for Sale",          href: "/listings/jb/" },
+      { text: "Supreme Camping Trailers for Sale",     href: "/listings/supreme/" },
+      { text: "Avan Camping Trailers for Sale",        href: "/listings/avan/" },
+      { text: "Lotus Camping Trailers for Sale",       href: "/listings/lotus/" },
+      { text: "Royal Flair Camping Trailers for Sale", href: "/listings/royal-flair/" },
+      { text: "Windsor Camping Trailers for Sale",     href: "/listings/windsor/" },
+      { text: "Golf Camping Trailers for Sale",        href: "/listings/golf/" },
+      { text: "Nova Camping Trailers for Sale",        href: "/listings/nova/" },
+      { text: "Retreat Camping Trailers for Sale",     href: "/listings/retreat/" },
+      { text: "Adria Camping Trailers for Sale",       href: "/listings/adria/" },
+      { text: "Coromal Camping Trailers for Sale",     href: "/listings/coromal/" },
     ],
   },
   {
@@ -616,7 +616,7 @@ export default function BlogDetailsPage({
                 </div>
                 <div className="blog-sidebar-cta blog-sidebar-cta--sell">
                   <h3 className="blog-sidebar-cta__heading">Sell Your Camping Trailer Faster with Australia's Growing Camping Trailer Marketplace</h3>
-                  <a href="/sell-my-camper-trailer/" className="blog-sidebar-cta__btn">
+                  <a href="/sell-my-camping-trailer/" className="blog-sidebar-cta__btn">
                     List Your Camping Trailer Now <i className="bi bi-arrow-right" />
                   </a>
                 </div>
@@ -685,7 +685,7 @@ export default function BlogDetailsPage({
           </p>
           <p className="bds-cta-body">
             <strong>Looking to sell?</strong> If you&apos;re upgrading to a newer camping trailer or no longer need your current one,{" "}
-            <a href="/sell-my-camper-trailer/" className="bds-cta-link">sell your camping trailer</a>{" "}
+            <a href="/sell-my-camping-trailer/" className="bds-cta-link">sell your camping trailer</a>{" "}
             by creating a listing on CampingTrailersForSale.com.au. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
           </p>
         </div>

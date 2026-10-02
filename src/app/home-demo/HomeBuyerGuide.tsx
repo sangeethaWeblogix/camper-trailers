@@ -65,7 +65,7 @@ export default function HomeBuyerGuide() {
             <h2 className="hbg-sell-title">Looking to Sell Your Camping Trailer?</h2>
             <p className="hbg-sell-body">
               If you&apos;re upgrading or no longer need your current camping trailer,{" "}
-              <a href="/sell-my-camper-trailer/" className="hbg-sell-link">sell your camping trailer</a>{" "}
+              <a href="/sell-my-camping-trailer/" className="hbg-sell-link">sell your camping trailer</a>{" "}
               by creating a listing on CampingTrailersForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
             </p>
 

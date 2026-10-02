@@ -34,11 +34,11 @@ export async function generateMetadata({
   const seo = data?.seo ?? {};
   const post = data?.data?.blog_detail || {};
 
-  const title = seo.metatitle || post.title || "Caravans for Sale Blog";
+  const title = seo.metatitle || post.title || "Camping Trailers for Sale Blog";
   const description =
     seo.metadescription ||
     post.short_description ||
-    "Read more on Caravans for Sale.";
+    "Read more on Camping Trailers for Sale.";
   const canonical = `https://www.campingtrailersforsale.com.au/${slug}/`;
 
   return {
@@ -78,11 +78,11 @@ export default async function Layout({
   const seo = data?.seo || {};
 
   const canonical = `https://www.campingtrailersforsale.com.au/${slug}/`;
-  const title = seo.metatitle || post.title || "Caravans for Sale Blog";
+  const title = seo.metatitle || post.title || "Camping Trailers for Sale Blog";
   const description =
     seo.metadescription ||
     post.short_description ||
-    "Read more on Caravans for Sale.";
+    "Read more on Camping Trailers for Sale.";
 
   const bannerImage =
     post.banner_image ||
@@ -112,7 +112,7 @@ export default async function Layout({
     },
     publisher: {
       "@type": "Organization",
-      name: "Caravans for Sale",
+      name: "Camping Trailers for Sale",
       logo: {
         "@type": "ImageObject",
         url: "https://www.campingtrailersforsale.com.au/images/cfs-logo-black.svg",

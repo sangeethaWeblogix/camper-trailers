@@ -67,13 +67,13 @@ export function buildStateMetadata(state: StateData): Metadata {
     description: `Sell your camping trailer in ${state.label} for just $49. List until sold, pay no commission and connect directly with camping trailer buyers across ${state.capital} and regional ${state.label}.`,
     robots: "index, follow",
     alternates: {
-      canonical: `${BASE_URL}/sell-my-camper-trailer/${state.slug}/`,
+      canonical: `${BASE_URL}/sell-my-camping-trailer/${state.slug}/`,
     },
   };
 }
 
 export function buildStateJsonLd(state: StateData) {
-  const pageUrl = `${BASE_URL}/sell-my-camper-trailer/${state.slug}/`;
+  const pageUrl = `${BASE_URL}/sell-my-camping-trailer/${state.slug}/`;
 
   return {
     "@context": "https://schema.org",
@@ -96,7 +96,7 @@ export function buildStateJsonLd(state: StateData) {
           "List your camping trailer for sale on CampingTrailersForSale.com.au for a one-time $49 fee. No commissions, no subscriptions, live until sold.",
         provider: {
           "@type": "Organization",
-          name: "Caravans For Sale",
+          name: "Camping Trailers For Sale",
           url: BASE_URL,
         },
         areaServed: {
