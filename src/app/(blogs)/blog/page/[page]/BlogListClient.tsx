@@ -242,7 +242,7 @@ const loading = !data || !blogPosts || blogPosts.length === 0 && data.totalPages
                 </div>
                 <div className="blog-sidebar-cta blog-sidebar-cta--sell">
                   <h3 className="blog-sidebar-cta__heading">Sell Your Camper Trailer Faster with Australia&apos;s Growing Camper Trailer Marketplace</h3>
-                  <a href="/sell-my-camping-trailer/" className="blog-sidebar-cta__btn">
+                  <a href="/sell-my-camper-trailer/" className="blog-sidebar-cta__btn">
                     List Your Camper Trailer Now <i className="bi bi-arrow-right" />
                   </a>
                 </div>

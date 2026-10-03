@@ -100,7 +100,7 @@ export default function Navbar() {
                 </li>
 
                 <li className="nav-item">
-                  <a className="nav-link" href="/sell-my-camping-trailer/">Sell My Camper Trailer</a>
+                  <a className="nav-link" href="/sell-my-camper-trailer/">Sell My Camper Trailer</a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="/dealer-advertising/">Dealer Advertising</a>
@@ -120,7 +120,7 @@ export default function Navbar() {
                 {hamOpen && (
                   <div className="ham-dropdown">
                     <a href="/listings/" className="ham-item">Camper Trailer Listings</a>
-                    <a href="/sell-my-camping-trailer/" className="ham-item">Sell My Camper Trailer</a>
+                    <a href="/sell-my-camper-trailer/" className="ham-item">Sell My Camper Trailer</a>
                     <a href="/dealer-advertising/" className="ham-item">Dealer Advertising</a>
                     <a href="/blog/" className="ham-item">Blog</a>
                     <a href="/about-us/" className="ham-item">About</a>
@@ -193,7 +193,7 @@ export default function Navbar() {
                 </ul>
               </div>
               <div className="sidenav-cta">
-                <a href="/sell-my-camping-trailer/" className="sidenav-cta-link" onClick={closeNav}>Sell My Camper Trailer</a>
+                <a href="/sell-my-camper-trailer/" className="sidenav-cta-link" onClick={closeNav}>Sell My Camper Trailer</a>
                 <a href="/dealer-advertising/" className="sidenav-cta-link" onClick={closeNav}>Dealer Advertising</a>
                 <a href="https://seller.marketplacenetwork.com.au/seller-login/" className="sidenav-cta-login" onClick={closeNav}>
                   <i className="bi bi-person-fill"></i> Login

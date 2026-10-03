@@ -492,7 +492,7 @@ const priceUpperIdx = !isPOA ? PRICE_STEPS.findIndex(s => s >= displayPrice) : -
         {/* Subtitle */}
         <div className="pdd-subtitle">
           <span>Have a similar camper trailer to sell?</span>
-          <a href="/sell-my-camping-trailer/" className="pdd-subtitle__link">List Your Camper Trailer</a>
+          <a href="/sell-my-camper-trailer/" className="pdd-subtitle__link">List Your Camper Trailer</a>
           <span className="pdd-subtitle__badge">$49 Until Sold</span>
         </div>
 
@@ -677,7 +677,7 @@ const priceUpperIdx = !isPOA ? PRICE_STEPS.findIndex(s => s >= displayPrice) : -
             <div className="pdd-sidebar__sell">
               <strong>Thinking of selling?</strong>
               <p>Get more eyes on your camper trailer today.</p>
-              <a href="/sell-my-camping-trailer/" className="pdd-btn-sell">Sell My Camper Trailer</a>
+              <a href="/sell-my-camper-trailer/" className="pdd-btn-sell">Sell My Camper Trailer</a>
             </div>
           </aside>
         </div>

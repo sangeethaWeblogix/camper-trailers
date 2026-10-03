@@ -5,25 +5,25 @@ import "@fortawesome/fontawesome-free/css/regular.min.css";
 import React, { useState } from "react";
 
 const STATE_LINKS = [
-  { label: "Victoria",              img: "/images/vic_map.svg", href: "/sell-my-camping-trailer/" },
-  { label: "New South Wales",       img: "/images/nsw_map.svg", href: "/sell-my-camping-trailer/" },
-  { label: "Queensland",            img: "/images/qld_map.svg", href: "/sell-my-camping-trailer/" },
-  { label: "Western Australia",     img: "/images/wa_map.svg",  href: "/sell-my-camping-trailer/" },
-  { label: "South Australia",       img: "/images/sa_map.svg",  href: "/sell-my-camping-trailer/" },
-  { label: "Tasmania",              img: "/images/tas_map.svg", href: "/sell-my-camping-trailer/" },
+  { label: "Victoria",              img: "/images/vic_map.svg", href: "/sell-my-camper-trailer/" },
+  { label: "New South Wales",       img: "/images/nsw_map.svg", href: "/sell-my-camper-trailer/" },
+  { label: "Queensland",            img: "/images/qld_map.svg", href: "/sell-my-camper-trailer/" },
+  { label: "Western Australia",     img: "/images/wa_map.svg",  href: "/sell-my-camper-trailer/" },
+  { label: "South Australia",       img: "/images/sa_map.svg",  href: "/sell-my-camper-trailer/" },
+  { label: "Tasmania",              img: "/images/tas_map.svg", href: "/sell-my-camper-trailer/" },
 ];
 
 const CITY_LINKS = [
-  { label: "Sell My Camper Trailer Melbourne", href: "/sell-my-camping-trailer/" },
-  { label: "Sell My Camper Trailer Sydney", href: "/sell-my-camping-trailer/" },
-  { label: "Sell My Camper Trailer Brisbane", href: "/sell-my-camping-trailer/" },
-  { label: "Sell My Camper Trailer Perth", href: "/sell-my-camping-trailer/" },
-  { label: "Sell My Camper Trailer Adelaide", href: "/sell-my-camping-trailer/" },
-  { label: "Sell My Camper Trailer Gold Coast", href: "/sell-my-camping-trailer/" },
-  { label: "Sell My Camper Trailer Sunshine Coast", href: "/sell-my-camping-trailer/" },
-  { label: "Sell My Camper Trailer Newcastle", href: "/sell-my-camping-trailer/" },
-  { label: "Sell My Camper Trailer Canberra", href: "/sell-my-camping-trailer/" },
-  { label: "Sell My Camper Trailer Hobart", href: "/sell-my-camping-trailer/" },
+  { label: "Sell My Camper Trailer Melbourne", href: "/sell-my-camper-trailer/" },
+  { label: "Sell My Camper Trailer Sydney", href: "/sell-my-camper-trailer/" },
+  { label: "Sell My Camper Trailer Brisbane", href: "/sell-my-camper-trailer/" },
+  { label: "Sell My Camper Trailer Perth", href: "/sell-my-camper-trailer/" },
+  { label: "Sell My Camper Trailer Adelaide", href: "/sell-my-camper-trailer/" },
+  { label: "Sell My Camper Trailer Gold Coast", href: "/sell-my-camper-trailer/" },
+  { label: "Sell My Camper Trailer Sunshine Coast", href: "/sell-my-camper-trailer/" },
+  { label: "Sell My Camper Trailer Newcastle", href: "/sell-my-camper-trailer/" },
+  { label: "Sell My Camper Trailer Canberra", href: "/sell-my-camper-trailer/" },
+  { label: "Sell My Camper Trailer Hobart", href: "/sell-my-camper-trailer/" },
 ];
 
 const CARAVAN_TYPES = [

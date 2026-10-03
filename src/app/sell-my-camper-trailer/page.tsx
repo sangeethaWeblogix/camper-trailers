@@ -8,8 +8,8 @@ const sellPageJsonLd = {
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": `${BASE_URL}/sell-my-camping-trailer/#webpage`,
-      "url": `${BASE_URL}/sell-my-camping-trailer/`,
+      "@id": `${BASE_URL}/sell-my-camper-trailer/#webpage`,
+      "url": `${BASE_URL}/sell-my-camper-trailer/`,
       "name": "Sell My Camper Trailer Online Australia | List Until Sold for $49",
       "description":
         "Sell your camper trailer online across Australia for just $49. List until sold, edit anytime, pay no commission and connect directly with genuine camper trailer buyers.",
@@ -18,9 +18,9 @@ const sellPageJsonLd = {
     },
     {
       "@type": "Service",
-      "@id": `${BASE_URL}/sell-my-camping-trailer/#service`,
+      "@id": `${BASE_URL}/sell-my-camper-trailer/#service`,
       "name": "Private Camper Trailer Listing Service",
-      "url": `${BASE_URL}/sell-my-camping-trailer/`,
+      "url": `${BASE_URL}/sell-my-camper-trailer/`,
       "description":
         "List your camper trailer for sale on CampingTrailersForSale.com.au for a one-time $49 fee. No commissions, no subscriptions, live until sold.",
       "provider": {
@@ -41,7 +41,7 @@ const sellPageJsonLd = {
     },
     {
       "@type": "FAQPage",
-      "@id": `${BASE_URL}/sell-my-camping-trailer/#faqpage`,
+      "@id": `${BASE_URL}/sell-my-camper-trailer/#faqpage`,
       "mainEntity": [
         {
           "@type": "Question",

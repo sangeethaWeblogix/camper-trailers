@@ -153,7 +153,7 @@ export default function StateSeller({ state }: StateSellerProps) {
             </div>
 
             {/* CTA */}
-            <a href="https://seller.marketplacenetwork.com.au/campingtrailer-seller-subscription/" className="demo-hero__cta">
+            <a href="https://seller.marketplacenetwork.com.au/camper-trailer-seller-subscription/" className="demo-hero__cta">
               List Your Camper Trailer Now <i className="fa-solid fa-arrow-right" />
             </a>
           </div>{/* end demo-price-wrapper */}
@@ -202,7 +202,7 @@ export default function StateSeller({ state }: StateSellerProps) {
                     </span>
                     <h3 className="demo-city-label">
                       <a
-                        href={`/sell-my-camping-trailer/${state.slug}/${c.pageSlug}/`}
+                        href={`/sell-my-camper-trailer/${state.slug}/${c.pageSlug}/`}
                         title={`Sell my camper trailer in ${c.label.trim()}`}
                         className="demo-city-label"
                       >
@@ -245,7 +245,7 @@ export default function StateSeller({ state }: StateSellerProps) {
                     </li>
                   ))}
                 </ul>
-                <a href="https://seller.marketplacenetwork.com.au/campingtrailer-seller-subscription/" className="demo-reach-card__cta">
+                <a href="https://seller.marketplacenetwork.com.au/camper-trailer-seller-subscription/" className="demo-reach-card__cta">
                   List Your Camper Trailer Now <i className="fa-solid fa-arrow-right" />
                 </a>
               </div>
@@ -436,11 +436,11 @@ export default function StateSeller({ state }: StateSellerProps) {
             Start selling your camper trailer in {stateLabel} today for just{" "}
             <strong>$49 (Inc. GST)</strong> — live until sold.
           </p>
-          <a href="https://seller.marketplacenetwork.com.au/campingtrailer-seller-subscription/" className="btn white_btn">
+          <a href="https://seller.marketplacenetwork.com.au/camper-trailer-seller-subscription/" className="btn white_btn">
             List Your Camper Trailer Now
           </a>
           <p className="demo-cta-strip__alt-link">
-            Not in {abbr}? Sell your camper trailer across Australia <a href="/sell-my-camping-trailer/">here</a>.
+            Not in {abbr}? Sell your camper trailer across Australia <a href="/sell-my-camper-trailer/">here</a>.
           </p>
         </div>
       </section>

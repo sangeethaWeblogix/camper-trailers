@@ -792,7 +792,7 @@ export default function StateHome({
                 <h2 className="lsd-sell-cta__title">Looking to Sell Your Camper Trailer?</h2>
                 <p className="lsd-sell-cta__body">
                   If you&apos;re upgrading or no longer need your current camper trailer,{" "}
-                  <a href="/sell-my-camping-trailer/" className="lsd-sell-cta__link">sell your camper trailer</a>{" "}
+                  <a href="/sell-my-camper-trailer/" className="lsd-sell-cta__link">sell your camper trailer</a>{" "}
                   by creating a listing on CampingTrailersForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
                 </p>
               </div>
@@ -836,7 +836,7 @@ export default function StateHome({
               <h2 className="lsd-sell-cta__title">Looking to Sell Your Camper Trailer?</h2>
               <p className="lsd-sell-cta__body">
                 If you&apos;re upgrading or no longer need your current camper trailer,{" "}
-                <a href="/sell-my-camping-trailer/" className="lsd-sell-cta__link">sell your camper trailer</a>{" "}
+                <a href="/sell-my-camper-trailer/" className="lsd-sell-cta__link">sell your camper trailer</a>{" "}
                 by creating a listing on CampingTrailersForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
               </p>
             </div>
@@ -950,7 +950,7 @@ export default function StateHome({
               <h2 className="lsd-sell-cta__title">Looking to Sell Your Camper Trailer?</h2>
               <p className="lsd-sell-cta__body">
                 If you&apos;re upgrading or no longer need your current camper trailer,{" "}
-                <a href="/sell-my-camping-trailer/" className="lsd-sell-cta__link">sell your camper trailer</a>{" "}
+                <a href="/sell-my-camper-trailer/" className="lsd-sell-cta__link">sell your camper trailer</a>{" "}
                 by creating a listing on CampingTrailersForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
               </p>
             </div>
@@ -1019,7 +1019,7 @@ export default function StateHome({
             <h2 className="lsd-sell-cta__title">Looking to Sell Your Camper Trailer?</h2>
             <p className="lsd-sell-cta__body">
               If you&apos;re upgrading or no longer need your current camper trailer,{" "}
-              <a href="/sell-my-camping-trailer/" className="lsd-sell-cta__link">sell your camper trailer</a>{" "}
+              <a href="/sell-my-camper-trailer/" className="lsd-sell-cta__link">sell your camper trailer</a>{" "}
               by creating a listing on CampingTrailersForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
             </p>
           </div>

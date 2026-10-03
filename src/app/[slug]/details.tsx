@@ -616,7 +616,7 @@ export default function BlogDetailsPage({
                 </div>
                 <div className="blog-sidebar-cta blog-sidebar-cta--sell">
                   <h3 className="blog-sidebar-cta__heading">Sell Your Camper Trailer Faster with Australia's Growing Camper Trailer Marketplace</h3>
-                  <a href="/sell-my-camping-trailer/" className="blog-sidebar-cta__btn">
+                  <a href="/sell-my-camper-trailer/" className="blog-sidebar-cta__btn">
                     List Your Camper Trailer Now <i className="bi bi-arrow-right" />
                   </a>
                 </div>
@@ -685,7 +685,7 @@ export default function BlogDetailsPage({
           </p>
           <p className="bds-cta-body">
             <strong>Looking to sell?</strong> If you&apos;re upgrading to a newer camper trailer or no longer need your current one,{" "}
-            <a href="/sell-my-camping-trailer/" className="bds-cta-link">sell your camper trailer</a>{" "}
+            <a href="/sell-my-camper-trailer/" className="bds-cta-link">sell your camper trailer</a>{" "}
             by creating a listing on CampingTrailersForSale.com.au. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
           </p>
         </div>

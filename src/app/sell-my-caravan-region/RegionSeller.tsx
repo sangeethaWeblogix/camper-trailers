@@ -140,7 +140,7 @@ export default function RegionSeller({ region }: RegionSellerProps) {
           </div>
 
           {/* CTA — inside wrapper so it attaches seamlessly to card bottom */}
-          <a href="https://seller.marketplacenetwork.com.au/campingtrailer-seller-subscription/" className="demo-hero__cta">
+          <a href="https://seller.marketplacenetwork.com.au/camper-trailer-seller-subscription/" className="demo-hero__cta">
             List Your Camper Trailer Now <i className="fa-solid fa-arrow-right" />
           </a>
           </div>{/* end demo-price-wrapper */}
@@ -209,7 +209,7 @@ export default function RegionSeller({ region }: RegionSellerProps) {
                   </li>
                 ))}
               </ul>
-              <a href="https://seller.marketplacenetwork.com.au/campingtrailer-seller-subscription/" className="demo-reach-card__cta">
+              <a href="https://seller.marketplacenetwork.com.au/camper-trailer-seller-subscription/" className="demo-reach-card__cta">
                 List Your Camper Trailer Now <i className="fa-solid fa-arrow-right" />
               </a>
             </div>
@@ -406,7 +406,7 @@ export default function RegionSeller({ region }: RegionSellerProps) {
             Start selling your camper trailer in {regionLabel} today for just{" "}
             <strong>$49 (Inc. GST)</strong> — live until sold.
           </p>
-          <a href="https://seller.marketplacenetwork.com.au/campingtrailer-seller-subscription/" className="btn white_btn">
+          <a href="https://seller.marketplacenetwork.com.au/camper-trailer-seller-subscription/" className="btn white_btn">
             List Your Camper Trailer Now
           </a>
           <p className="demo-cta-strip__alt-link">

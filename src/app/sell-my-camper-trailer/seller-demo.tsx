@@ -6,12 +6,12 @@
  import { getRegionBySlug } from "../sell-my-caravan-region/regions-data";
 
  const STATE_LINKS = [
-   { label: "Victoria",              img: "/images/vic_map.svg", href: "/sell-my-camping-trailer/victoria/" },
-   { label: "New South Wales",       img: "/images/nsw_map.svg", href: "/sell-my-camping-trailer/new-south-wales/" },
-   { label: "Queensland",            img: "/images/qld_map.svg", href: "/sell-my-camping-trailer/queensland/" },
-   { label: "Western Australia",     img: "/images/wa_map.svg",  href: "/sell-my-camping-trailer/western-australia/" },
-   { label: "South Australia",       img: "/images/sa_map.svg",  href: "/sell-my-camping-trailer/south-australia/" },
-   { label: "Tasmania",              img: "/images/tas_map.svg", href: "/sell-my-camping-trailer/tasmania/" },
+   { label: "Victoria",              img: "/images/vic_map.svg", href: "/sell-my-camper-trailer/victoria/" },
+   { label: "New South Wales",       img: "/images/nsw_map.svg", href: "/sell-my-camper-trailer/new-south-wales/" },
+   { label: "Queensland",            img: "/images/qld_map.svg", href: "/sell-my-camper-trailer/queensland/" },
+   { label: "Western Australia",     img: "/images/wa_map.svg",  href: "/sell-my-camper-trailer/western-australia/" },
+   { label: "South Australia",       img: "/images/sa_map.svg",  href: "/sell-my-camper-trailer/south-australia/" },
+   { label: "Tasmania",              img: "/images/tas_map.svg", href: "/sell-my-camper-trailer/tasmania/" },
  ];
 
  const CITY_SLUGS = [
@@ -31,7 +31,7 @@
    const region = getRegionBySlug(regionSlug);
    return {
      label,
-     href: region ? `/sell-my-camping-trailer/${region.state.slug}/${region.pageSlug}/` : "/sell-my-camping-trailer/",
+     href: region ? `/sell-my-camper-trailer/${region.state.slug}/${region.pageSlug}/` : "/sell-my-camper-trailer/",
    };
  });
  
