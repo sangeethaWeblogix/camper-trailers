@@ -83,35 +83,35 @@ const loading = !data || !blogPosts || blogPosts.length === 0 && data.totalPages
                 <div>
                   <h1 className="author-name">Tom</h1>
                   <h5 className="author-tagline">
-                    Author at Camping Trailers For Sale
+                    Author at Camper Trailers For Sale
                   </h5>
                 </div>
               </div>
 
               <div className="author-info">
                 <p>
-                  Tom is a passionate camping trailer enthusiast and content writer at{" "}
+                  Tom is a passionate camper trailer enthusiast and content writer at{" "}
                   <Link href="https://www.campingtrailersforsale.com.au/">
                     CampingTrailersForSale.com.au
                   </Link>{" "}
                   — Australia’s trusted destination for buying, selling, and
-                  researching camping trailers.
+                  researching camper trailers.
                 </p>
                 <p>
                   He helps Australians make informed decisions across every
-                  stage of the camping trailer journey, from choosing the right model to
+                  stage of the camper trailer journey, from choosing the right model to
                   comparing prices and discovering hidden gems from regional
                   manufacturers.
                 </p>
                 <p>
-                  Tom’s articles focus on off-road camping trailers, touring models,
+                  Tom’s articles focus on off-road camper trailers, touring models,
                   hybrids, and family-friendly designs, offering practical
                   insights tailored to Australian conditions, travel habits, and
                   market trends.
                 </p>
                 <p>
                   With a genuine love for the outdoors, Tom’s writing reflects
-                  Australia’s camping trailer lifestyle — adventure, community, and
+                  Australia’s camper trailer lifestyle — adventure, community, and
                   freedom on the open road.
                 </p>
               </div>

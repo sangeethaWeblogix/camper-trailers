@@ -225,7 +225,7 @@ export function buildListingsJsonLd(
   const pageTitle =
     response?.seo_v2?.h1 ||
     response?.seo_v2?.meta_title ||
-    "Camping Trailers for Sale in Australia";
+    "Camper Trailers for Sale in Australia";
   const totalProducts = response?.pagination?.total_products ?? 0;
 
   const allProducts = [
@@ -284,7 +284,7 @@ const weburl = "https://www.campingtrailersforsale.com.au"
   const searchResultsLd = {
     "@context": "https://schema.org/",
     "@type": "SearchResultsPage",
-    audience: { "@type": "Audience", audienceType: "camping trailer buyers" },
+    audience: { "@type": "Audience", audienceType: "camper trailer buyers" },
     potentialAction: {
       "@type": "SearchAction",
       target: { "@type": "EntryPoint", urlTemplate: weburl },
@@ -325,7 +325,7 @@ const fetchListingsForHead = cache(
 export function buildBreadcrumbs(pathname: string): { name: string; url: string }[] {
   const crumbs: { name: string; url: string }[] = [
     { name: "Home", url: `${BASE_URL}/` },
-    { name: "Camping Trailers for Sale", url: `${BASE_URL}/listings/` },
+    { name: "Camper Trailers for Sale", url: `${BASE_URL}/listings/` },
   ];
   if (pathname === "/listings/" || pathname === "/listings") return crumbs;
 

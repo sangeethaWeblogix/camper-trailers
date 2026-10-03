@@ -217,7 +217,7 @@ export default function SearchSection() {
                     ref={searchInputRef}
                     type="text"
                     className="search-box"
-                    placeholder="Search by camping trailers..."
+                    placeholder="Search by camper trailers..."
                     id="searchInput"
                     autoComplete="off"
                     value={query}

@@ -6,16 +6,16 @@ import React, { useState } from "react";
 import { RegionInfo } from "./regions-data";
 
 const CARAVAN_TYPES = [
-  { label: "Off Road Camping Trailers", img: "/images/off-road.webp", href: "/listings/off-road-category/" },
-  { label: "Family Camping Trailers", img: "/images/family.webp", href: "/listings/family-caravans-category/" },
-  { label: "Pop Top Camping Trailers", img: "/images/pop-top.webp", href: "/listings/pop-top-category/" },
-  { label: "Hybrid Camping Trailers", img: "/images/hybrid.webp", href: "/listings/hybrid-caravans-category/" },
-  { label: "Luxury Camping Trailers", img: "/images/luxury.webp", href: "/listings/luxury-caravans-category/" },
-  { label: "Couples Camping Trailers", img: "/images/touring.webp", href: "/listings/couples-caravans-category/" },
-  { label: "Touring Camping Trailers", img: "/images/touring.webp", href: "/listings/touring-caravans-category/" },
-  { label: "Bunk Camping Trailers", img: "/images/family.webp", href: "/listings/bunk-caravans-category/" },
-  { label: "Small Camping Trailers", img: "/images/pop-top.webp", href: "/listings/small-caravans-category/" },
-  { label: "Used Camping Trailers", img: "/images/off-road.webp", href: "/listings/used-condition/" },
+  { label: "Off Road Camper Trailers", img: "/images/off-road.webp", href: "/listings/off-road-category/" },
+  { label: "Family Camper Trailers", img: "/images/family.webp", href: "/listings/family-caravans-category/" },
+  { label: "Pop Top Camper Trailers", img: "/images/pop-top.webp", href: "/listings/pop-top-category/" },
+  { label: "Hybrid Camper Trailers", img: "/images/hybrid.webp", href: "/listings/hybrid-caravans-category/" },
+  { label: "Luxury Camper Trailers", img: "/images/luxury.webp", href: "/listings/luxury-caravans-category/" },
+  { label: "Couples Camper Trailers", img: "/images/touring.webp", href: "/listings/couples-caravans-category/" },
+  { label: "Touring Camper Trailers", img: "/images/touring.webp", href: "/listings/touring-caravans-category/" },
+  { label: "Bunk Camper Trailers", img: "/images/family.webp", href: "/listings/bunk-caravans-category/" },
+  { label: "Small Camper Trailers", img: "/images/pop-top.webp", href: "/listings/small-caravans-category/" },
+  { label: "Used Camper Trailers", img: "/images/off-road.webp", href: "/listings/used-condition/" },
 ];
 
 interface RegionSellerProps {
@@ -29,8 +29,8 @@ export default function RegionSeller({ region }: RegionSellerProps) {
   const stateSlug = region.state.slug;
 
   const HOW_TO_STEPS = [
-    { num: 1, iconSet: "fa-regular", icon: "fa-file-lines",    title: "Create Your Listing",    desc: "Add your camping trailer details, description, price and location in minutes." },
-    { num: 2, iconSet: "fa-regular", icon: "fa-image",         title: "Upload Photos",          desc: "Add clear photos of the inside, outside and features of your camping trailer." },
+    { num: 1, iconSet: "fa-regular", icon: "fa-file-lines",    title: "Create Your Listing",    desc: "Add your camper trailer details, description, price and location in minutes." },
+    { num: 2, iconSet: "fa-regular", icon: "fa-image",         title: "Upload Photos",          desc: "Add clear photos of the inside, outside and features of your camper trailer." },
     { num: 3, iconSet: "fa-regular", icon: "fa-comment-dots",  title: "Reach Buyers",           desc: `Your listing is live across ${regionLabel} and ${stateLabel}. Buyers contact you directly.` },
     { num: 4, iconSet: "fa-regular", icon: "fa-handshake",     title: "Negotiate Directly",     desc: "Arrange inspections and negotiate price with buyers." },
     { num: 5, iconSet: "fa-regular", icon: "fa-circle-check",  title: "Complete The Sale",      desc: "Once sold, remove your listing or mark as sold. It's that simple." },
@@ -38,44 +38,44 @@ export default function RegionSeller({ region }: RegionSellerProps) {
 
   const MAIN_FAQS = [
     {
-      q: `How do I sell my camping trailer in ${regionLabel}?`,
-      a: <p>You can sell your camping trailer online by creating a private seller listing on CampingTrailersForSale.com.au. Simply add your camping trailer details, upload clear photos, set your asking price, and publish your ad so active buyers in {regionLabel} and across {stateLabel} can contact you directly.</p>,
+      q: `How do I sell my camper trailer in ${regionLabel}?`,
+      a: <p>You can sell your camper trailer online by creating a private seller listing on CampingTrailersForSale.com.au. Simply add your camper trailer details, upload clear photos, set your asking price, and publish your ad so active buyers in {regionLabel} and across {stateLabel} can contact you directly.</p>,
     },
     {
-      q: `How much does it cost to sell my camping trailer in ${regionLabel}?`,
+      q: `How much does it cost to sell my camper trailer in ${regionLabel}?`,
       a: <p>We charge a simple, flat one-time fee of just $49 (inc. GST). There are absolutely no commissions, no hidden upfront fees, and no recurring monthly subscriptions. You keep 100% of your sale price.</p>,
     },
     {
-      q: "How long does my camping trailer listing stay live?",
-      a: <p>Your camping trailer listing stays live until sold. You do not need to keep paying monthly fees to keep your ad active. Once your camping trailer is sold, you can remove the listing from the website.</p>,
+      q: "How long does my camper trailer listing stay live?",
+      a: <p>Your camper trailer listing stays live until sold. You do not need to keep paying monthly fees to keep your ad active. Once your camper trailer is sold, you can remove the listing from the website.</p>,
     },
     {
-      q: "Can I edit my camping trailer listing after publishing?",
-      a: <p>Yes. After your listing is published, you can update your camping trailer details, change the asking price, add or replace photos and improve your description if needed.</p>,
+      q: "Can I edit my camper trailer listing after publishing?",
+      a: <p>Yes. After your listing is published, you can update your camper trailer details, change the asking price, add or replace photos and improve your description if needed.</p>,
     },
     {
       q: "How do buyers contact me?",
-      a: <p>Interested buyers can contact you directly through your camping trailer listing. This allows you to answer questions, arrange inspections, negotiate the price and manage the sale privately.</p>,
+      a: <p>Interested buyers can contact you directly through your camper trailer listing. This allows you to answer questions, arrange inspections, negotiate the price and manage the sale privately.</p>,
     },
     {
-      q: "What photos should I upload when selling my camping trailer?",
-      a: <p>Upload clear photos of the outside, inside, kitchen, beds, seating area, bathroom, tyres, drawbar and any included accessories. Good photos help buyers understand the condition of your camping trailer and can increase enquiries.</p>,
+      q: "What photos should I upload when selling my camper trailer?",
+      a: <p>Upload clear photos of the outside, inside, kitchen, beds, seating area, bathroom, tyres, drawbar and any included accessories. Good photos help buyers understand the condition of your camper trailer and can increase enquiries.</p>,
     },
     {
-      q: "How should I price my camping trailer?",
-      a: <p>Check similar camping trailers for sale in {regionLabel} before setting your price. Compare by make, model, year, condition, length, ATM, tare weight, sleeping capacity, features and location. A realistic asking price can help attract more genuine buyers.</p>,
+      q: "How should I price my camper trailer?",
+      a: <p>Check similar camper trailers for sale in {regionLabel} before setting your price. Compare by make, model, year, condition, length, ATM, tare weight, sleeping capacity, features and location. A realistic asking price can help attract more genuine buyers.</p>,
     },
     {
-      q: "Is it safe to sell my camping trailer privately online?",
+      q: "Is it safe to sell my camper trailer privately online?",
       a: <p>Yes, but you should take normal precautions. Speak with buyers directly, meet in a safe location, confirm payment has cleared before handover and complete any required transfer paperwork for {stateLabel}.</p>,
     },
     {
-      q: "Do I pay commission when my camping trailer sells?",
-      a: <p>No. CampingTrailersForSale.com.au does not charge commission when your camping trailer sells. You pay the one-time listing fee and keep 100% of the agreed sale price.</p>,
+      q: "Do I pay commission when my camper trailer sells?",
+      a: <p>No. CampingTrailersForSale.com.au does not charge commission when your camper trailer sells. You pay the one-time listing fee and keep 100% of the agreed sale price.</p>,
     },
     {
-      q: "Can I remove my listing after my camping trailer is sold?",
-      a: <p>Yes. Once your camping trailer has sold, you can remove your listing so buyers know it is no longer available.</p>,
+      q: "Can I remove my listing after my camper trailer is sold?",
+      a: <p>Yes. Once your camper trailer has sold, you can remove your listing so buyers know it is no longer available.</p>,
     },
   ];
 
@@ -86,10 +86,10 @@ export default function RegionSeller({ region }: RegionSellerProps) {
       <section className="demo-hero">
         <div className="container">
           <h1 className="demo-hero__title">
-            Sell My Camping Trailer in {regionLabel}
+            Sell My Camper Trailer in {regionLabel}
           </h1>
           <p className="demo-hero__subtitle">
-            The fastest, safest way to reach active camping trailer buyers in {regionLabel}, {stateLabel}.
+            The fastest, safest way to reach active camper trailer buyers in {regionLabel}, {stateLabel}.
           </p>
 
           {/* Pricing card + CTA wrapper — one seamless unit */}
@@ -102,10 +102,10 @@ export default function RegionSeller({ region }: RegionSellerProps) {
                 <img src="/images/vic_map.svg" alt={regionLabel} />
               </div>
               <div className="demo-price-card__header">
-              <h3>Looking to sell your camping trailer?</h3>
+              <h3>Looking to sell your camper trailer?</h3>
             </div>
               <p className="demo-price-card__desc">
-                List your camping trailer on Australia's #1 camping trailer marketplace and connect with thousands of buyers in {regionLabel}, {stateLabel}.
+                List your camper trailer on Australia's #1 camper trailer marketplace and connect with thousands of buyers in {regionLabel}, {stateLabel}.
               </p>
 
             </div>
@@ -141,7 +141,7 @@ export default function RegionSeller({ region }: RegionSellerProps) {
 
           {/* CTA — inside wrapper so it attaches seamlessly to card bottom */}
           <a href="https://seller.marketplacenetwork.com.au/campingtrailer-seller-subscription/" className="demo-hero__cta">
-            List Your Camping Trailer Now <i className="fa-solid fa-arrow-right" />
+            List Your Camper Trailer Now <i className="fa-solid fa-arrow-right" />
           </a>
           </div>{/* end demo-price-wrapper */}
 
@@ -154,8 +154,8 @@ export default function RegionSeller({ region }: RegionSellerProps) {
           <div className="demo-features-grid">
             {[
               { img: "/images/chat2.png", title: "Direct Buyer Contact", desc: "Communicate directly with buyers, no middleman." },
-              { img: "/images/calendar.png", title: "Live Until Sold", desc: "Your listing stays live until your camping trailer is sold." },
-              { img: "/images/caravan.png", title: "Camping Trailer-Only Marketplace", desc: "Reach engaged camping trailer buyers actively looking to buy camping trailers." },
+              { img: "/images/calendar.png", title: "Live Until Sold", desc: "Your listing stays live until your camper trailer is sold." },
+              { img: "/images/caravan.png", title: "Camper Trailer-Only Marketplace", desc: "Reach engaged camper trailer buyers actively looking to buy camper trailers." },
               { img: "/images/dollar.png", title: "Keep 100% of Your Sale", desc: "Pay only a one-time fee for maximum value. No hidden costs." },
             ].map((item, i) => (
               <div className="demo-feature-card" key={i}>
@@ -176,14 +176,14 @@ export default function RegionSeller({ region }: RegionSellerProps) {
 
           {/* Heading */}
           <div className="demo-reach-heading">
-            <h3>Reach Camping Trailer Buyers in {regionLabel}, {stateLabel}</h3>
+            <h3>Reach Camper Trailer Buyers in {regionLabel}, {stateLabel}</h3>
           </div>
 
           <div className="demo-reach-row">
           {/* Device image */}
           <div className="demo-reach-device">
-            <img src="/images/your-caravan-desktop-seller-2.jpg" className="img-fluid d-none d-lg-block" alt="Camping Trailer For Sale Desktop" />
-            <img src="/images/your-caravan-mobile-2.jpg" className="img-fluid d-block d-lg-none" alt="Camping Trailer For Sale Mobile" />
+            <img src="/images/your-caravan-desktop-seller-2.jpg" className="img-fluid d-none d-lg-block" alt="Camper Trailer For Sale Desktop" />
+            <img src="/images/your-caravan-mobile-2.jpg" className="img-fluid d-block d-lg-none" alt="Camper Trailer For Sale Mobile" />
           </div>
 
           {/* Pricing + FAQ card */}
@@ -199,7 +199,7 @@ export default function RegionSeller({ region }: RegionSellerProps) {
               <p className="demo-reach-card__fee-label">One-Time Listing Fee</p>
               <ul className="demo-reach-card__list">
                 {[
-                  "1 Camping Trailer listed until sold",
+                  "1 Camper Trailer listed until sold",
                   "Edit your listing anytime",
                   "No expiration or monthly fees",
                 ].map((item) => (
@@ -210,7 +210,7 @@ export default function RegionSeller({ region }: RegionSellerProps) {
                 ))}
               </ul>
               <a href="https://seller.marketplacenetwork.com.au/campingtrailer-seller-subscription/" className="demo-reach-card__cta">
-                List Your Camping Trailer Now <i className="fa-solid fa-arrow-right" />
+                List Your Camper Trailer Now <i className="fa-solid fa-arrow-right" />
               </a>
             </div>
 
@@ -260,10 +260,10 @@ export default function RegionSeller({ region }: RegionSellerProps) {
                 <h3>Why sell on CampingTrailersForSale.com.au?</h3>
               </div>
               <ul className="demo-guide-card__list">
-                <li>Australia's #1 marketplace for buying and selling camping trailers.</li>
-                <li>Targeted camping trailer buyers across {regionLabel} and regional {stateLabel}.</li>
+                <li>Australia's #1 marketplace for buying and selling camper trailers.</li>
+                <li>Targeted camper trailer buyers across {regionLabel} and regional {stateLabel}.</li>
                 <li>Your listing stays live until sold with no hidden fees.</li>
-                <li>Fast, simple and secure way to sell your camping trailer.</li>
+                <li>Fast, simple and secure way to sell your camper trailer.</li>
               </ul>
             </div>
 
@@ -282,10 +282,10 @@ export default function RegionSeller({ region }: RegionSellerProps) {
             <div className="demo-guide-card">
               <div className="demo-guide-card__header">
                 <span className="demo-guide-card__num">3</span>
-                <h3>How to price your camping trailer</h3>
+                <h3>How to price your camper trailer</h3>
               </div>
               <ul className="demo-guide-card__list">
-                <li>Check similar camping trailers for sale in {regionLabel}.</li>
+                <li>Check similar camper trailers for sale in {regionLabel}.</li>
                 <li>Compare make, model, year, condition and inclusions.</li>
                 <li>List at a realistic price to attract more buyers.</li>
               </ul>
@@ -313,7 +313,7 @@ export default function RegionSeller({ region }: RegionSellerProps) {
           <div className="demo-faq-head">
             <span className="demo-faq-head__tag">FAQ</span>
             <h2>Frequently Asked Questions</h2>
-            <p>Everything you need to know about selling your camping trailer in {regionLabel} on CampingTrailersForSale.com.au</p>
+            <p>Everything you need to know about selling your camper trailer in {regionLabel} on CampingTrailersForSale.com.au</p>
           </div>
           <div className="demo-faq-list">
             {MAIN_FAQS.map((faq, i) => (
@@ -344,19 +344,19 @@ export default function RegionSeller({ region }: RegionSellerProps) {
         <div className="container">
           <div className="row align-items-center g-4">
             <div className="col-md-6">
-              <img src="/images/your-caravan-desktop-seller-2.jpg" className="img-fluid demo-why-img" alt={`${regionLabel} camping trailer buyers`} />
+              <img src="/images/your-caravan-desktop-seller-2.jpg" className="img-fluid demo-why-img" alt={`${regionLabel} camper trailer buyers`} />
             </div>
             <div className="col-md-6">
-              <h2>Why {regionLabel} Camping Trailer Buyers Visit CampingTrailersForSale Every Month</h2>
+              <h2>Why {regionLabel} Camper Trailer Buyers Visit CampingTrailersForSale Every Month</h2>
               <p>
-                CampingTrailersForSale.com.au helps camping trailer sellers in {regionLabel} reach buyers searching for
-                used camping trailers, off road camping trailers, family camping trailers, pop tops, hybrids and touring
-                camping trailers across {regionLabel} and regional {stateLabel}.
+                CampingTrailersForSale.com.au helps camper trailer sellers in {regionLabel} reach buyers searching for
+                used camper trailers, off road camper trailers, family camper trailers, pop tops, hybrids and touring
+                camper trailers across {regionLabel} and regional {stateLabel}.
               </p>
               <div className="demo-check-grid demo-check-grid--2col mt-3">
                 {[
                   "Thousands of active buyers", `Local reach across ${regionLabel}`,
-                  "Camping Trailer-only marketplace", "Simple listing process",
+                  "Camper Trailer-only marketplace", "Simple listing process",
                   "High quality enquiries", "No commissions",
                   "Live until sold – no extra fees", "Friendly local support team",
                 ].map((t) => (
@@ -374,8 +374,8 @@ export default function RegionSeller({ region }: RegionSellerProps) {
       <section className="demo-steps-section">
         <div className="container">
 
-          <h2 className="demo-steps-title">How To Sell Your Camping Trailer Online</h2>
-          <p className="demo-steps-subtitle">List in minutes and reach thousands of active camping trailer buyers in {regionLabel}.</p>
+          <h2 className="demo-steps-title">How To Sell Your Camper Trailer Online</h2>
+          <p className="demo-steps-subtitle">List in minutes and reach thousands of active camper trailer buyers in {regionLabel}.</p>
 
           {/* Steps: each column has number circle + icon + content; connectors between columns */}
           <div className="demo-steps-wrapper">
@@ -403,14 +403,14 @@ export default function RegionSeller({ region }: RegionSellerProps) {
       <section className="demo-cta-strip">
         <div className="container text-center">
           <p>
-            Start selling your camping trailer in {regionLabel} today for just{" "}
+            Start selling your camper trailer in {regionLabel} today for just{" "}
             <strong>$49 (Inc. GST)</strong> — live until sold.
           </p>
           <a href="https://seller.marketplacenetwork.com.au/campingtrailer-seller-subscription/" className="btn white_btn">
-            List Your Camping Trailer Now
+            List Your Camper Trailer Now
           </a>
           <p className="demo-cta-strip__alt-link">
-            Not in {regionLabel}? Sell your camping trailer across {stateLabel} <a href={`/sell-my-caravan-${stateSlug}/`}>here</a>.
+            Not in {regionLabel}? Sell your camper trailer across {stateLabel} <a href={`/sell-my-caravan-${stateSlug}/`}>here</a>.
           </p>
         </div>
       </section>

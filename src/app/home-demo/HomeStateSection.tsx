@@ -38,7 +38,7 @@ export default function HomeStateSection({ stateBands: stateBandsRaw }: Props) {
         <div className="row">
           <div className="col">
             <div className="section-head mb-4">
-              <h2 className="hd-section-title">Browse Camping Trailers for Sale in Australia by State</h2>
+              <h2 className="hd-section-title">Browse Camper Trailers for Sale in Australia by State</h2>
             </div>
           </div>
         </div>
@@ -81,9 +81,9 @@ export default function HomeStateSection({ stateBands: stateBandsRaw }: Props) {
                           <h3>{item.state}</h3>
                           <div className="info">
                             <div className="quick_linkss">
-                              <p>{item.display_text.replace("caravan listings", "camping trailer listings")}</p>
+                              <p>{item.display_text.replace("caravan listings", "camper trailer listings")}</p>
                               <a className="view_all" href={item.permalink}>
-                                View All Camping Trailers for Sale in {meta.code}{" "}
+                                View All Camper Trailers for Sale in {meta.code}{" "}
                                 <i className="bi bi-chevron-right" />
                               </a>
                             </div>

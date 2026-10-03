@@ -114,7 +114,7 @@ import GlobalImageFallback from "@/components/GlobalImageFallback";
       if (isListingSlug && xRobots === "noindex") {
         slugRobots = "noindex";
         slugCanonical = `https://www.campingtrailersforsale.com.au/listings/${slugParts.join("/")}/`;
-        slugDescription = "Browse camping trailers for sale across Australia. Compare prices on off-road, hybrid, pop top, touring, luxury models with size, weight & sleeping capacity.";
+        slugDescription = "Browse camper trailers for sale across Australia. Compare prices on off-road, hybrid, pop top, touring, luxury models with size, weight & sleeping capacity.";
       } else {
         // try {
           // All SEO from metaFromSlug — pure computation, no API call
@@ -128,7 +128,7 @@ import GlobalImageFallback from "@/components/GlobalImageFallback";
           if (meta.title && typeof meta.title === "object" && "absolute" in meta.title) {
             slugTitle = (meta.title as { absolute: string }).absolute;
           }
-          slugDescription = "Browse camping trailers for sale across Australia. Compare prices on off-road, hybrid, pop top, touring, luxury models with size, weight & sleeping capacity.";
+          slugDescription = "Browse camper trailers for sale across Australia. Compare prices on off-road, hybrid, pop top, touring, luxury models with size, weight & sleeping capacity.";
         // } catch {
         //   const parts = slugParts
         //     .map((p: string) =>
@@ -193,8 +193,8 @@ import GlobalImageFallback from "@/components/GlobalImageFallback";
                       "@type": "WebSite",
                       "@id": "https://www.campingtrailersforsale.com.au/#website",
                       "url": "https://www.campingtrailersforsale.com.au/",
-                      "name": "Camping Trailers For Sale",
-                      "alternateName": "Camping Trailers For Sale by Marketplace Network",
+                      "name": "Camper Trailers For Sale",
+                      "alternateName": "Camper Trailers For Sale by Marketplace Network",
                     },
                     {
                       "@type": "Organization",
@@ -206,7 +206,7 @@ import GlobalImageFallback from "@/components/GlobalImageFallback";
                       "logo": {
                         "@type": "ImageObject",
                         "url": "https://www.campingtrailersforsale.com.au/images/cfs-logo-black.svg",
-                        "caption": "Camping Trailers For Sale by Marketplace Network",
+                        "caption": "Camper Trailers For Sale by Marketplace Network",
                       },
                       "contactPoint": {
                         "@type": "ContactPoint",
@@ -220,10 +220,10 @@ import GlobalImageFallback from "@/components/GlobalImageFallback";
                       "@type": "ContactPage",
                       "@id": "https://www.campingtrailersforsale.com.au/contact/#webpage",
                       "url": "https://www.campingtrailersforsale.com.au/contact/",
-                      "name": "Contact Us | Get in Touch with Camping Trailers For Sale",
+                      "name": "Contact Us | Get in Touch with Camper Trailers For Sale",
                       "isPartOf": { "@id": "https://www.campingtrailersforsale.com.au/#website" },
                       "about": { "@id": "https://www.campingtrailersforsale.com.au/#organization" },
-                      "description": "Have a question about buying, selling, or dealer advertising solutions? Fill out our online contact form to get in touch with the Camping Trailers For Sale customer support team.",
+                      "description": "Have a question about buying, selling, or dealer advertising solutions? Fill out our online contact form to get in touch with the Camper Trailers For Sale customer support team.",
                       "breadcrumb": { "@id": "https://www.campingtrailersforsale.com.au/contact/#breadcrumb" },
                     },
                     {

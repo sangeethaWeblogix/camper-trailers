@@ -5,11 +5,11 @@ import { ReactNode } from "react";
 
  export const metadata: Metadata = {
    title: {
-     default: "Camping Trailer Enquiry Form | Exclusive Camping Trailer Deals & Offers",
+     default: "Camper Trailer Enquiry Form | Exclusive Camper Trailer Deals & Offers",
      template: "%s ",
    },
    description:
-     "Fill out our camping trailer enquiry form to receive exclusive offers from select quality camping trailer manufacturers. Get the best camping trailer deals sent directly to you.",
+     "Fill out our camper trailer enquiry form to receive exclusive offers from select quality camper trailer manufacturers. Get the best camper trailer deals sent directly to you.",
    icons: { icon: "/favicon.ico" },
    robots: "index, follow",
    verification: {

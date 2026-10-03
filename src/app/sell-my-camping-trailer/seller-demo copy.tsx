@@ -14,34 +14,34 @@ const STATE_LINKS = [
 ];
 
 const CITY_LINKS = [
-  { label: "Sell My Camping Trailer Melbourne", href: "/sell-my-camping-trailer/" },
-  { label: "Sell My Camping Trailer Sydney", href: "/sell-my-camping-trailer/" },
-  { label: "Sell My Camping Trailer Brisbane", href: "/sell-my-camping-trailer/" },
-  { label: "Sell My Camping Trailer Perth", href: "/sell-my-camping-trailer/" },
-  { label: "Sell My Camping Trailer Adelaide", href: "/sell-my-camping-trailer/" },
-  { label: "Sell My Camping Trailer Gold Coast", href: "/sell-my-camping-trailer/" },
-  { label: "Sell My Camping Trailer Sunshine Coast", href: "/sell-my-camping-trailer/" },
-  { label: "Sell My Camping Trailer Newcastle", href: "/sell-my-camping-trailer/" },
-  { label: "Sell My Camping Trailer Canberra", href: "/sell-my-camping-trailer/" },
-  { label: "Sell My Camping Trailer Hobart", href: "/sell-my-camping-trailer/" },
+  { label: "Sell My Camper Trailer Melbourne", href: "/sell-my-camping-trailer/" },
+  { label: "Sell My Camper Trailer Sydney", href: "/sell-my-camping-trailer/" },
+  { label: "Sell My Camper Trailer Brisbane", href: "/sell-my-camping-trailer/" },
+  { label: "Sell My Camper Trailer Perth", href: "/sell-my-camping-trailer/" },
+  { label: "Sell My Camper Trailer Adelaide", href: "/sell-my-camping-trailer/" },
+  { label: "Sell My Camper Trailer Gold Coast", href: "/sell-my-camping-trailer/" },
+  { label: "Sell My Camper Trailer Sunshine Coast", href: "/sell-my-camping-trailer/" },
+  { label: "Sell My Camper Trailer Newcastle", href: "/sell-my-camping-trailer/" },
+  { label: "Sell My Camper Trailer Canberra", href: "/sell-my-camping-trailer/" },
+  { label: "Sell My Camper Trailer Hobart", href: "/sell-my-camping-trailer/" },
 ];
 
 const CARAVAN_TYPES = [
-  { label: "Off Road Camping Trailers", img: "/images/off-road.webp", href: "/listings/off-road-category/" },
-  { label: "Family Camping Trailers", img: "/images/family.webp", href: "/listings/family-caravans-category/" },
-  { label: "Pop Top Camping Trailers", img: "/images/pop-top.webp", href: "/listings/pop-top-category/" },
-  { label: "Hybrid Camping Trailers", img: "/images/hybrid.webp", href: "/listings/hybrid-caravans-category/" },
-  { label: "Luxury Camping Trailers", img: "/images/luxury.webp", href: "/listings/luxury-caravans-category/" },
-  { label: "Couples Camping Trailers", img: "/images/touring.webp", href: "/listings/couples-caravans-category/" },
-  { label: "Touring Camping Trailers", img: "/images/touring.webp", href: "/listings/touring-caravans-category/" },
-  { label: "Bunk Camping Trailers", img: "/images/family.webp", href: "/listings/bunk-caravans-category/" },
-  { label: "Small Camping Trailers", img: "/images/pop-top.webp", href: "/listings/small-caravans-category/" },
-  { label: "Used Camping Trailers", img: "/images/off-road.webp", href: "/listings/used-condition/" },
+  { label: "Off Road Camper Trailers", img: "/images/off-road.webp", href: "/listings/off-road-category/" },
+  { label: "Family Camper Trailers", img: "/images/family.webp", href: "/listings/family-caravans-category/" },
+  { label: "Pop Top Camper Trailers", img: "/images/pop-top.webp", href: "/listings/pop-top-category/" },
+  { label: "Hybrid Camper Trailers", img: "/images/hybrid.webp", href: "/listings/hybrid-caravans-category/" },
+  { label: "Luxury Camper Trailers", img: "/images/luxury.webp", href: "/listings/luxury-caravans-category/" },
+  { label: "Couples Camper Trailers", img: "/images/touring.webp", href: "/listings/couples-caravans-category/" },
+  { label: "Touring Camper Trailers", img: "/images/touring.webp", href: "/listings/touring-caravans-category/" },
+  { label: "Bunk Camper Trailers", img: "/images/family.webp", href: "/listings/bunk-caravans-category/" },
+  { label: "Small Camper Trailers", img: "/images/pop-top.webp", href: "/listings/small-caravans-category/" },
+  { label: "Used Camper Trailers", img: "/images/off-road.webp", href: "/listings/used-condition/" },
 ];
 
 const HOW_TO_STEPS = [
-  { num: 1, iconSet: "fa-regular", icon: "fa-file-lines",    title: "Create Your Listing",    desc: "Add your camping trailer details, specifications, price and contact information." },
-  { num: 2, iconSet: "fa-regular", icon: "fa-image",         title: "Upload Photos",          desc: "Add clear photos of the inside, outside and key features of your camping trailer." },
+  { num: 1, iconSet: "fa-regular", icon: "fa-file-lines",    title: "Create Your Listing",    desc: "Add your camper trailer details, specifications, price and contact information." },
+  { num: 2, iconSet: "fa-regular", icon: "fa-image",         title: "Upload Photos",          desc: "Add clear photos of the inside, outside and key features of your camper trailer." },
   { num: 3, iconSet: "fa-regular", icon: "fa-comment-dots",  title: "Receive Buyer Enquiries", desc: "Interested buyers contact you directly through your listing." },
   { num: 4, iconSet: "fa-regular", icon: "fa-handshake",     title: "Negotiate Directly",     desc: "Arrange inspections, answer questions and negotiate with buyers." },
   { num: 5, iconSet: "fa-regular", icon: "fa-circle-check",  title: "Complete The Sale",      desc: "Once sold, mark your listing as sold or remove it from the site." },
@@ -50,44 +50,44 @@ const HOW_TO_STEPS = [
 
 const MAIN_FAQS = [
   {
-    q: "How do I sell my camping trailer online in Australia?",
-    a: <p>You can sell your camping trailer online by creating a private seller listing on CampingTrailersForSale.com.au. Add your camping trailer details, upload clear photos, set your asking price and publish your ad so buyers across Australia can contact you directly.</p>,
+    q: "How do I sell my camper trailer online in Australia?",
+    a: <p>You can sell your camper trailer online by creating a private seller listing on CampingTrailersForSale.com.au. Add your camper trailer details, upload clear photos, set your asking price and publish your ad so buyers across Australia can contact you directly.</p>,
   },
   {
-    q: "How much does it cost to list my camping trailer?",
-    a: <p>It costs $49 inc. GST to list your camping trailer on CampingTrailersForSale.com.au. This is a one-time listing fee with no monthly subscription, no hidden charges and no commission when your camping trailer sells.</p>,
+    q: "How much does it cost to list my camper trailer?",
+    a: <p>It costs $49 inc. GST to list your camper trailer on CampingTrailersForSale.com.au. This is a one-time listing fee with no monthly subscription, no hidden charges and no commission when your camper trailer sells.</p>,
   },
   {
-    q: "How long does my camping trailer listing stay live?",
-    a: <p>Your camping trailer listing stays live until sold. You do not need to keep paying monthly fees to keep your ad active. Once your camping trailer is sold, you can remove the listing from the website.</p>,
+    q: "How long does my camper trailer listing stay live?",
+    a: <p>Your camper trailer listing stays live until sold. You do not need to keep paying monthly fees to keep your ad active. Once your camper trailer is sold, you can remove the listing from the website.</p>,
   },
   {
-    q: "Can I edit my camping trailer listing after publishing?",
-    a: <p>Yes. After your listing is published, you can update your camping trailer details, change the asking price, add or replace photos and improve your description if needed.</p>,
+    q: "Can I edit my camper trailer listing after publishing?",
+    a: <p>Yes. After your listing is published, you can update your camper trailer details, change the asking price, add or replace photos and improve your description if needed.</p>,
   },
   {
     q: "How do buyers contact me?",
-    a: <p>Interested buyers can contact you directly through your camping trailer listing. This allows you to answer questions, arrange inspections, negotiate the price and manage the sale privately.</p>,
+    a: <p>Interested buyers can contact you directly through your camper trailer listing. This allows you to answer questions, arrange inspections, negotiate the price and manage the sale privately.</p>,
   },
   {
-    q: "What photos should I upload when selling my camping trailer?",
-    a: <p>Upload clear photos of the outside, inside, kitchen, beds, seating area, bathroom, tyres, drawbar and any included accessories. Good photos help buyers understand the condition of your camping trailer and can increase enquiries.</p>,
+    q: "What photos should I upload when selling my camper trailer?",
+    a: <p>Upload clear photos of the outside, inside, kitchen, beds, seating area, bathroom, tyres, drawbar and any included accessories. Good photos help buyers understand the condition of your camper trailer and can increase enquiries.</p>,
   },
   {
-    q: "How should I price my camping trailer?",
-    a: <p>Check similar camping trailers for sale before setting your price. Compare by make, model, year, condition, length, ATM, tare weight, sleeping capacity, features and location. A realistic asking price can help attract more genuine buyers.</p>,
+    q: "How should I price my camper trailer?",
+    a: <p>Check similar camper trailers for sale before setting your price. Compare by make, model, year, condition, length, ATM, tare weight, sleeping capacity, features and location. A realistic asking price can help attract more genuine buyers.</p>,
   },
   {
-    q: "Is it safe to sell my camping trailer privately online?",
+    q: "Is it safe to sell my camper trailer privately online?",
     a: <p>Yes, but you should take normal precautions. Speak with buyers directly, meet in a safe location, confirm payment has cleared before handover and complete any required transfer paperwork for your state or territory.</p>,
   },
   {
-    q: "Do I pay commission when my camping trailer sells?",
-    a: <p>No. CampingTrailersForSale.com.au does not charge commission when your camping trailer sells. You pay the one-time listing fee and keep 100% of the agreed sale price.</p>,
+    q: "Do I pay commission when my camper trailer sells?",
+    a: <p>No. CampingTrailersForSale.com.au does not charge commission when your camper trailer sells. You pay the one-time listing fee and keep 100% of the agreed sale price.</p>,
   },
   {
-    q: "Can I remove my listing after my camping trailer is sold?",
-    a: <p>Yes. Once your camping trailer has sold, you can remove your listing so buyers know it is no longer available.</p>,
+    q: "Can I remove my listing after my camper trailer is sold?",
+    a: <p>Yes. Once your camper trailer has sold, you can remove your listing so buyers know it is no longer available.</p>,
   },
 ];
 
@@ -101,10 +101,10 @@ export default function SellerDemo() {
       <section className="demo-hero">
         <div className="container">
           <h1 className="demo-hero__title">
-            Sell My Camping Trailer Online in Australia
+            Sell My Camper Trailer Online in Australia
           </h1>
           <p className="demo-hero__subtitle">
-            List your camping trailer for $49 until sold — no commissions, no subscriptions and direct buyer contact.
+            List your camper trailer for $49 until sold — no commissions, no subscriptions and direct buyer contact.
           </p>
           
 
@@ -118,10 +118,10 @@ export default function SellerDemo() {
                 <img src="/images/australia.png" alt="Australia" />
               </div>
               <div className="demo-price-card__header">
-              <h3>Looking to sell your camping trailer?</h3>
+              <h3>Looking to sell your camper trailer?</h3>
             </div>
               <p className="demo-price-card__desc">
-                CampingTrailersForSale.com.au helps private sellers advertise directly to genuine camping trailer buyers for a one-time $49 listing fee, with no commissions, no subscriptions and your ad live until sold.
+                CampingTrailersForSale.com.au helps private sellers advertise directly to genuine camper trailer buyers for a one-time $49 listing fee, with no commissions, no subscriptions and your ad live until sold.
               </p>
               
             </div>
@@ -157,7 +157,7 @@ export default function SellerDemo() {
 
           {/* CTA — inside wrapper so it attaches seamlessly to card bottom */}
           <a href="https://seller.campingtrailersforsale.com.au/seller-signup/" className="demo-hero__cta">
-            List Your Camping Trailer Now <i className="fa-solid fa-arrow-right" />
+            List Your Camper Trailer Now <i className="fa-solid fa-arrow-right" />
           </a>
           </div>{/* end demo-price-wrapper */}
 
@@ -171,8 +171,8 @@ export default function SellerDemo() {
           <div className="demo-features-grid">
             {[
               { img: "/images/chat2.png", title: "Direct Buyer Contact", desc: "Connect directly with genuine buyers. No middleman." },
-              { img: "/images/calendar.png", title: "Live Until Sold", desc: "Your listing stays online and visible until your camping trailer is sold." },
-              { img: "/images/caravan.png", title: "Camping Trailer-Only Marketplace", desc: "Reach a targeted audience actively looking to buy camping trailers." },
+              { img: "/images/calendar.png", title: "Live Until Sold", desc: "Your listing stays online and visible until your camper trailer is sold." },
+              { img: "/images/caravan.png", title: "Camper Trailer-Only Marketplace", desc: "Reach a targeted audience actively looking to buy camper trailers." },
               { img: "/images/dollar.png", title: "Keep 100% of Your Sale", desc: "Pay only $49 Inc GST per listing. No commissions or hidden costs." },
             ].map((item, i) => (
               <div className="demo-feature-card" key={i}>
@@ -193,14 +193,14 @@ export default function SellerDemo() {
 
           {/* Heading */}
           <div className="demo-reach-heading">
-            <h2>Reach Camping Trailer Buyers Across Australia, Including: </h2>
+            <h2>Reach Camper Trailer Buyers Across Australia, Including: </h2>
             <p>Your listing is seen by thousands of active buyers Australia-wide.</p>
           </div>
 
           {/* Device image */}
           <div className="demo-reach-device">
-            <img src="/images/your-caravan-desktop-seller-2.jpg" className="img-fluid d-none d-lg-block" alt="Camping Trailer For Sale Desktop" />
-            <img src="/images/your-caravan-mobile-2.jpg" className="img-fluid d-block d-lg-none" alt="Camping Trailer For Sale Mobile" />
+            <img src="/images/your-caravan-desktop-seller-2.jpg" className="img-fluid d-none d-lg-block" alt="Camper Trailer For Sale Desktop" />
+            <img src="/images/your-caravan-mobile-2.jpg" className="img-fluid d-block d-lg-none" alt="Camper Trailer For Sale Mobile" />
           </div>
 
           {/* Pricing + FAQ card */}
@@ -216,7 +216,7 @@ export default function SellerDemo() {
               <p className="demo-reach-card__fee-label">One-Time Listing Fee</p>
               <ul className="demo-reach-card__list">
                 {[
-                  "1 Camping Trailer listed until sold",
+                  "1 Camper Trailer listed until sold",
                   "Edit your listing anytime",
                   "No expiration or monthly fees",
                 ].map((item) => (
@@ -227,7 +227,7 @@ export default function SellerDemo() {
                 ))}
               </ul>
               <a href="https://seller.campingtrailersforsale.com.au/seller-signup/" className="demo-reach-card__cta">
-                List My Camping Trailer Now <i className="fa-solid fa-arrow-right" />
+                List My Camper Trailer Now <i className="fa-solid fa-arrow-right" />
               </a>
             </div>
 
@@ -278,9 +278,9 @@ export default function SellerDemo() {
                 <h3>Why sell on CampingTrailersForSale.com.au?</h3>
               </div>
               <ul className="demo-guide-card__list">
-                <li>Camping trailer-only marketplace, not a general classifieds page.</li>
+                <li>Camper trailer-only marketplace, not a general classifieds page.</li>
                 <li>Buyers search by type, price, weight, sleeps and location.</li>
-                <li>Your camping trailer is shown to people already looking to buy.</li>
+                <li>Your camper trailer is shown to people already looking to buy.</li>
                 <li>Direct enquiries, no commission on the final sale.</li>
               </ul>
             </div>
@@ -300,10 +300,10 @@ export default function SellerDemo() {
             <div className="demo-guide-card">
               <div className="demo-guide-card__header">
                 <span className="demo-guide-card__num">3</span>
-                <h3>How to price your camping trailer</h3>
+                <h3>How to price your camper trailer</h3>
               </div>
               <ul className="demo-guide-card__list">
-                <li>Check similar camping trailers before setting your asking price.</li>
+                <li>Check similar camper trailers before setting your asking price.</li>
                 <li>Compare make, year, condition, length, features and location.</li>
                 <li>Leave room for negotiation while staying competitive.</li>
               </ul>
@@ -331,7 +331,7 @@ export default function SellerDemo() {
           <div className="demo-faq-head">
             <span className="demo-faq-head__tag">FAQ</span>
             <h2>Frequently Asked Questions</h2>
-            <p>Everything you need to know about selling your camping trailer on CampingTrailersForSale.com.au</p>
+            <p>Everything you need to know about selling your camper trailer on CampingTrailersForSale.com.au</p>
           </div>
           <div className="demo-faq-list">
             {MAIN_FAQS.map((faq, i) => (
@@ -360,7 +360,7 @@ export default function SellerDemo() {
       {/* ── City links ── */}
       <section className="demo-city-section">
         <div className="container">
-          <h2 className="demo-section-title">Sell Your Camping Trailer Across Australia</h2>
+          <h2 className="demo-section-title">Sell Your Camper Trailer Across Australia</h2>
 
           {/* State cards */}
           <div className="demo-state-grid">
@@ -392,7 +392,7 @@ export default function SellerDemo() {
       {/* ── Caravan types ── */}
       <section className="demo-types-section">
         <div className="container">
-          <h2 className="demo-section-title">Sell Any Type of Camping Trailer</h2>
+          <h2 className="demo-section-title">Sell Any Type of Camper Trailer</h2>
           <div className="demo-types-grid">
             {CARAVAN_TYPES.map((t) => (
               <div key={t.label} className="demo-type-item">
@@ -411,20 +411,20 @@ export default function SellerDemo() {
         <div className="container">
           <div className="row align-items-center g-4">
             <div className="col-md-6">
-              <img src="/images/your-caravan-desktop-seller-2.jpg" className="img-fluid demo-why-img" alt="Camping Trailer buyers" />
+              <img src="/images/your-caravan-desktop-seller-2.jpg" className="img-fluid demo-why-img" alt="Camper Trailer buyers" />
             </div>
             <div className="col-md-6">
-              <h2>Why Thousands of Camping Trailer Buyers Visit CampingTrailersForSale Every Month</h2>
+              <h2>Why Thousands of Camper Trailer Buyers Visit CampingTrailersForSale Every Month</h2>
               <p>
-                CampingTrailersForSale.com.au is Australia's dedicated camping trailer marketplace, built exclusively
-                for camping trailer buyers and sellers. We attract thousands of genuine buyers every day who
-                are actively searching for road camping trailers, family camping trailers, pop-top camping trailers, luxury
-                camping trailers and more.
+                CampingTrailersForSale.com.au is Australia's dedicated camper trailer marketplace, built exclusively
+                for camper trailer buyers and sellers. We attract thousands of genuine buyers every day who
+                are actively searching for road camper trailers, family camper trailers, pop-top camper trailers, luxury
+                camper trailers and more.
               </p>
               <div className="demo-check-grid demo-check-grid--2col mt-3">
                 {[
                   "Australia-wide exposure", "Live until sold for one low price",
-                  "Camping Trailer-only marketplace", "Update listing anytime",
+                  "Camper Trailer-only marketplace", "Update listing anytime",
                   "Direct buyer enquiries", "No dealer involvement",
                   "No commissions or hidden fees", "Simple, fast and effective",
                 ].map((t) => (
@@ -442,8 +442,8 @@ export default function SellerDemo() {
       <section className="demo-steps-section">
         <div className="container">
           
-          <h2 className="demo-steps-title">How To Sell Your Camping Trailer Online</h2>
-          <p className="demo-steps-subtitle">List your camping trailer in minutes and connect with serious buyers Australia-wide.</p>
+          <h2 className="demo-steps-title">How To Sell Your Camper Trailer Online</h2>
+          <p className="demo-steps-subtitle">List your camper trailer in minutes and connect with serious buyers Australia-wide.</p>
 
           {/* Steps: each column has number circle + icon + content; connectors between columns */}
           <div className="demo-steps-wrapper">
@@ -474,11 +474,11 @@ export default function SellerDemo() {
       <section className="demo-cta-strip">
         <div className="container text-center">
           <p>
-            Start selling your camping trailer today for just{" "}
+            Start selling your camper trailer today for just{" "}
             <strong>$49 (Inc. GST)</strong> — Live until sold!
           </p>
           <a href="https://seller.campingtrailersforsale.com.au/seller-signup/" className="btn white_btn">
-            List Your Camping Trailer Now
+            List Your Camper Trailer Now
           </a>
         </div>
       </section>

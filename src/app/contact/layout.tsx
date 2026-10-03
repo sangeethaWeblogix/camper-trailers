@@ -6,11 +6,11 @@ import { ReactNode } from "react";
 
  export const metadata: Metadata = {
    title: {
-     default: "Contact Camping Trailers For Sale | Australia’s Camping Trailer Marketplace",
+     default: "Contact Camper Trailers For Sale | Australia’s Camper Trailer Marketplace",
      template: "%s ",
    },
    description:
-     "Have a question about camping trailers in Australia? Contact Camping Trailers For Sale for support, inquiries, or help finding your next camping trailer today.",
+     "Have a question about camper trailers in Australia? Contact Camper Trailers For Sale for support, inquiries, or help finding your next camper trailer today.",
    icons: { icon: "/favicon.ico" },
    robots: "index, follow",
    verification: {

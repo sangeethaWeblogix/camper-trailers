@@ -667,7 +667,7 @@ export default function StateFilterBar({
               <div className="slider-wrapper">
                 <div className="filter-swiper">
                   <button className={`tag${currentFilters.category ? " active" : ""}`} onClick={handleTypeOpen}>
-                    Camping Trailer Type
+                    Camper Trailer Type
                     {currentFilters.category && <span className="active_filter"><i className="bi bi-circle-fill" /></span>}
                   </button>
 
@@ -848,7 +848,7 @@ export default function StateFilterBar({
 
               {/* Caravan Type */}
               <div className="filter-item pt-0">
-                <h4>Camping Trailer Type</h4>
+                <h4>Camper Trailer Type</h4>
                 <ul className="loc-state-list">
                   {catLoading && categories.length === 0 ? (
                     <CategorySkeleton />
@@ -1232,7 +1232,7 @@ export default function StateFilterBar({
       {openModal === "type" && (
         <div className="filter-overlay">
           <div className="filter-modal">
-            <div className="filter-header"><h3>Camping Trailer Type</h3>{closeBtn}</div>
+            <div className="filter-header"><h3>Camper Trailer Type</h3>{closeBtn}</div>
             <div className="filter-body">
               <div className="filter-item pt-0">
                 <ul className="loc-state-list">

@@ -5,11 +5,11 @@ import { ReactNode } from "react";
 
  export const metadata: Metadata = {
    title: {
-     default: "About Camping Trailer Marketplace - Your Trusted Camping Trailer Resource",
+     default: "About Camper Trailer Marketplace - Your Trusted Camper Trailer Resource",
      template: "%s ",
    },
    description:
-     "Camping Trailer Marketplace is your go-to platform for finding the perfect camping trailer from the right manufacturer or dealer @ the right price.",
+     "Camper Trailer Marketplace is your go-to platform for finding the perfect camper trailer from the right manufacturer or dealer @ the right price.",
    icons: { icon: "/favicon.ico" },
    robots: "index, follow",
    verification: {

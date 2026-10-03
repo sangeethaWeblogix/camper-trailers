@@ -68,7 +68,7 @@ export default function Navbar() {
             <a className="navbar-brand" href="/">
               <Image
                 src="/images/cts-logo.svg"
-                alt="Camping Trailers For Sale"
+                alt="Camper Trailers For Sale"
                 width={150}
                 height={50}
                 priority
@@ -100,7 +100,7 @@ export default function Navbar() {
                 </li>
 
                 <li className="nav-item">
-                  <a className="nav-link" href="/sell-my-camping-trailer/">Sell My Camping Trailer</a>
+                  <a className="nav-link" href="/sell-my-camping-trailer/">Sell My Camper Trailer</a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="/dealer-advertising/">Dealer Advertising</a>
@@ -119,8 +119,8 @@ export default function Navbar() {
                 </button>
                 {hamOpen && (
                   <div className="ham-dropdown">
-                    <a href="/listings/" className="ham-item">Camping Trailer Listings</a>
-                    <a href="/sell-my-camping-trailer/" className="ham-item">Sell My Camping Trailer</a>
+                    <a href="/listings/" className="ham-item">Camper Trailer Listings</a>
+                    <a href="/sell-my-camping-trailer/" className="ham-item">Sell My Camper Trailer</a>
                     <a href="/dealer-advertising/" className="ham-item">Dealer Advertising</a>
                     <a href="/blog/" className="ham-item">Blog</a>
                     <a href="/about-us/" className="ham-item">About</a>
@@ -174,7 +174,7 @@ export default function Navbar() {
           <div className="sidenav-panel sidenav-panel-main">
             <div className="sidenav-header">
               <a href="/" onClick={closeNav} className="sidenav-logo-link">
-                <Image src="/images/cts-logo.svg" alt="Camping Trailers For Sale" width={120} height={40} className="sidenav-logo-img" />
+                <Image src="/images/cts-logo.svg" alt="Camper Trailers For Sale" width={120} height={40} className="sidenav-logo-img" />
               </a>
               <button className="sidenav-close" onClick={closeNav} aria-label="Close menu">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -193,7 +193,7 @@ export default function Navbar() {
                 </ul>
               </div>
               <div className="sidenav-cta">
-                <a href="/sell-my-camping-trailer/" className="sidenav-cta-link" onClick={closeNav}>Sell My Camping Trailer</a>
+                <a href="/sell-my-camping-trailer/" className="sidenav-cta-link" onClick={closeNav}>Sell My Camper Trailer</a>
                 <a href="/dealer-advertising/" className="sidenav-cta-link" onClick={closeNav}>Dealer Advertising</a>
                 <a href="https://seller.marketplacenetwork.com.au/seller-login/" className="sidenav-cta-login" onClick={closeNav}>
                   <i className="bi bi-person-fill"></i> Login

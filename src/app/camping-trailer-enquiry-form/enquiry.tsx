@@ -165,13 +165,13 @@ export default function ContactSection() {
                   <form onSubmit={handleSubmit} className="form" method="post">
                     <div className="text-center header_form">
                       <h4>
-                        Exclusive Offers From Select Quality Camping Trailer
+                        Exclusive Offers From Select Quality Camper Trailer
                         Manufacturers
                       </h4>
                     </div>
                     <p className="required_txt">
                       Fill out the form below, and we&apos;ll send you exclusive
-                      deals for the best camping trailers in the market.
+                      deals for the best camper trailers in the market.
                     </p>
                     <div className="row">
                       {/* Name */}
@@ -265,7 +265,7 @@ export default function ContactSection() {
                             required
                           >
                             <option value="">
-                              What type of camping trailer are you looking for?
+                              What type of camper trailer are you looking for?
                             </option>
                             <option value="Camper Trailer">Camper Trailer</option>
                             <option value="Off Road Camper">Off Road Camper</option>
@@ -338,7 +338,7 @@ export default function ContactSection() {
                       </div>
                       <div className="col-lg-12">
                         <p className="terms_text">
-                          By clicking &apos;Submit&apos;, you agree to Camping Trailer
+                          By clicking &apos;Submit&apos;, you agree to Camper Trailer
                           Marketplace{" "}
                           <Link
                             href="/privacy-collection-statement/"

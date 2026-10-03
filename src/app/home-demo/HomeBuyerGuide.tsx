@@ -13,7 +13,7 @@ export default function HomeBuyerGuide() {
               <div className="hbg-img-wrap">
                 <Image
                   src="/images/buyers_guid.jpg"
-                  alt="Camping Trailers for Sale Australia"
+                  alt="Camper Trailers for Sale Australia"
                   width={600}
                   height={420}
                   className="hbg-img"
@@ -24,7 +24,7 @@ export default function HomeBuyerGuide() {
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                     <polyline points="9 12 11 14 15 10"/>
                   </svg>
-                  <span className="hbg-badge-text">AUSTRALIA&apos;S TRUSTED<br />CAMPING TRAILER MARKETPLACE</span>
+                  <span className="hbg-badge-text">AUSTRALIA&apos;S TRUSTED<br />CAMPER TRAILER MARKETPLACE</span>
                 </div>
               </div>
             </div>
@@ -32,14 +32,14 @@ export default function HomeBuyerGuide() {
             {/* Right: Text */}
             <div className="hbg-text-col">
               <h2 className="hbg-title">
-                Camping Trailers for Sale Australia: <span className="hbg-title-accent">Buyer Guide</span>
+                Camper Trailers for Sale Australia: <span className="hbg-title-accent">Buyer Guide</span>
               </h2>
               
               <p className="hbg-body">
-                CampingTrailersForSale.com.au helps Australian buyers compare a wide range of camping trailers for sale in one convenient place. Browse affordable used camping trailers, premium new models and options designed for touring, family holidays or off-road adventures. Compare important features such as layout, ATM, tare weight, sleeping capacity, length, suspension, condition, service history and towing requirements to narrow down your choices before contacting a seller or visiting a dealership. Our easy-to-use platform makes researching and comparing camping trailers simple.
+                CampingTrailersForSale.com.au helps Australian buyers compare a wide range of camper trailers for sale in one convenient place. Browse affordable used camper trailers, premium new models and options designed for touring, family holidays or off-road adventures. Compare important features such as layout, ATM, tare weight, sleeping capacity, length, suspension, condition, service history and towing requirements to narrow down your choices before contacting a seller or visiting a dealership. Our easy-to-use platform makes researching and comparing camper trailers simple.
               </p>
               <p className="hbg-body">
-                Explore popular camping trailer types including off-road, hybrid, pop top, touring and luxury camping trailers, while also comparing trusted camping trailer brands and reputable dealers across Australia. Check whether dealers offer warranty support, finance options, trade-ins, after-sales service and detailed vehicle information before making your decision. Use our buyers guide and convenient search filters to browse listings by state, location, budget, size, weight and berth, helping you find the right camping trailer for your lifestyle and travel plans.
+                Explore popular camper trailer types including off-road, hybrid, pop top, touring and luxury camper trailers, while also comparing trusted camper trailer brands and reputable dealers across Australia. Check whether dealers offer warranty support, finance options, trade-ins, after-sales service and detailed vehicle information before making your decision. Use our buyers guide and convenient search filters to browse listings by state, location, budget, size, weight and berth, helping you find the right camper trailer for your lifestyle and travel plans.
               </p>
               
             </div>
@@ -62,10 +62,10 @@ export default function HomeBuyerGuide() {
               <span className="hbg-sell-line" />
             </div>
 
-            <h2 className="hbg-sell-title">Looking to Sell Your Camping Trailer?</h2>
+            <h2 className="hbg-sell-title">Looking to Sell Your Camper Trailer?</h2>
             <p className="hbg-sell-body">
-              If you&apos;re upgrading or no longer need your current camping trailer,{" "}
-              <a href="/sell-my-camping-trailer/" className="hbg-sell-link">sell your camping trailer</a>{" "}
+              If you&apos;re upgrading or no longer need your current camper trailer,{" "}
+              <a href="/sell-my-camping-trailer/" className="hbg-sell-link">sell your camper trailer</a>{" "}
               by creating a listing on CampingTrailersForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
             </p>
 
@@ -100,16 +100,16 @@ export default function HomeBuyerGuide() {
                 </div>
                 <h3 className="hbg-why-card-title">Australia-Wide Coverage</h3>
                 <div className="hbg-why-card-sep" />
-                <p className="hbg-why-card-desc">Browse listings from all states and territories and find camping trailers near you.</p>
+                <p className="hbg-why-card-desc">Browse listings from all states and territories and find camper trailers near you.</p>
               </div>
 
               <div className="hbg-why-card">
                 <div className="hbg-why-icon">
-                  <Image src="/images/category.svg" alt="Camping Trailer-Specific Marketplace" width={34} height={34} />
+                  <Image src="/images/category.svg" alt="Camper Trailer-Specific Marketplace" width={34} height={34} />
                 </div>
-                <h3 className="hbg-why-card-title">Camping Trailer-Specific Marketplace</h3>
+                <h3 className="hbg-why-card-title">Camper Trailer-Specific Marketplace</h3>
                 <div className="hbg-why-card-sep" />
-                <p className="hbg-why-card-desc">A focused marketplace dedicated to camping trailers and camping trailer buyers.</p>
+                <p className="hbg-why-card-desc">A focused marketplace dedicated to camper trailers and camper trailer buyers.</p>
               </div>
 
               <div className="hbg-why-card">

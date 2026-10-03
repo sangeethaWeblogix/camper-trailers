@@ -607,7 +607,7 @@ export default function ClientLogger({
                       className="back_to_search back_to_search_btn"
                     >
                       <i className="bi bi-chevron-left"></i> Back to Similar
-                      Camping Trailers
+                      Camper Trailers
                     </a>
                   ))}
 
@@ -832,7 +832,7 @@ export default function ClientLogger({
                           className="cravan_buyer"
                           onClick={() => setShowPopup(true)}
                         >
-                          Camping Trailer Buyer Safety Checklist <i className="bi bi-info-circle-fill"></i>
+                          Camper Trailer Buyer Safety Checklist <i className="bi bi-info-circle-fill"></i>
                         </button>
                   <p className="terms_text small">
                     By clicking 'Send Enquiry', you agree to Marketplace Network
@@ -920,7 +920,7 @@ export default function ClientLogger({
                           className="cravan_buyer"
                           onClick={() => setShowPopup(true)}
                         >
-                          Camping Trailer Buyer Safety Checklist <i className="bi bi-info-circle-fill"></i>
+                          Camper Trailer Buyer Safety Checklist <i className="bi bi-info-circle-fill"></i>
                         </button>
                       </div>
                     </div>
@@ -947,9 +947,9 @@ export default function ClientLogger({
                       </svg>
                     </button>
 
-                    <h2 className="title">Camping Trailer Buyer Safety Checklist</h2>
+                    <h2 className="title">Camper Trailer Buyer Safety Checklist</h2>
                     <p className="subtitle">
-                      Follow these steps to reduce the risk of scams when buying a camping trailer.
+                      Follow these steps to reduce the risk of scams when buying a camper trailer.
                     </p>
 
                     <div className="safety-wrapper">
@@ -979,7 +979,7 @@ export default function ClientLogger({
                           <li>
                             <span className="num">3</span>
                             <div>
-                              <h4>Inspect the camping trailer first</h4>
+                              <h4>Inspect the camper trailer first</h4>
                               <p>Inspect in person or arrange an inspection.</p>
                             </div>
                           </li>
@@ -1042,7 +1042,7 @@ export default function ClientLogger({
           <div className="container">
             <div className="re-title">
               <div className="tpof_tab">
-                <h3>Browse Similar Camping Trailers</h3>
+                <h3>Browse Similar Camper Trailers</h3>
               </div>
             </div>
             <div className="similar-products-three position-relative">

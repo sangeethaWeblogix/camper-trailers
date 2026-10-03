@@ -22,9 +22,9 @@ import { ReactNode } from "react";
    
    openGraph: {
       url: "https://www.campingtrailersforsale.com.au/privacy-policy/",
-     title: "Privacy Policy - campingtrailersforsale.com.au - Camping Trailer Marketplace",
+     title: "Privacy Policy - campingtrailersforsale.com.au - Camper Trailer Marketplace",
        description:
-     "Learn about Camping Trailer Marketplace's privacy policy on data collection, usage, security measures, and your rights regarding your information.",
+     "Learn about Camper Trailer Marketplace's privacy policy on data collection, usage, security measures, and your rights regarding your information.",
      
    },
  };

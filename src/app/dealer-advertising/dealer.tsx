@@ -9,7 +9,7 @@ const DEALER_FAQS = [
     a: (
       <p>
         The dealer subscription is $99 per month (including GST). This flat
-        monthly fee allows your dealership to list unlimited camping trailers on
+        monthly fee allows your dealership to list unlimited camper trailers on
         CampingTrailersForSale.com.au. There are no per-listing charges, and we never
         charge per lead or take success commissions – no matter how many
         inquiries or sales you get, $99/month covers it all.
@@ -17,7 +17,7 @@ const DEALER_FAQS = [
     ),
   },
   {
-    q: "How are my camping trailer listings added and kept up-to-date automatically?",
+    q: "How are my camper trailer listings added and kept up-to-date automatically?",
     a: (
       <p>
         We sync directly with your dealership’s website. Your listings are
@@ -27,10 +27,10 @@ const DEALER_FAQS = [
     ),
   },
   {
-    q: "What kind of audience will my camping trailers reach?",
+    q: "What kind of audience will my camper trailers reach?",
     a: (
       <p>
-        CampingTrailersForSale.com.au is a camping trailer-only marketplace with a focused,
+        CampingTrailersForSale.com.au is a camper trailer-only marketplace with a focused,
         nationwide audience of serious buyers.
       </p>
     ),
@@ -82,7 +82,7 @@ const DealerLandingPage = () => {
 
                 <p>
                   A dealer-first marketplace built to generate consistent
-                  enquiries from high-intent camping trailer buyers.
+                  enquiries from high-intent camper trailer buyers.
                 </p>
 
                 <a
@@ -107,13 +107,13 @@ const DealerLandingPage = () => {
                   <div className="feel_cfs">
                     <h2>
                       Lead Generation Machine{" "}
-                      <span>Built for Your Camping Trailer Dealership</span>
+                      <span>Built for Your Camper Trailer Dealership</span>
                     </h2>
 
                     <p className="mb-3">
                       Your stock deserves visibility without per-lead fees, CFS
                       connects your dealership with buyers actively searching
-                      for their next camping trailer—so your inventory gets seen by the
+                      for their next camper trailer—so your inventory gets seen by the
                       right audience.
                     </p>
 
@@ -129,12 +129,12 @@ const DealerLandingPage = () => {
                             {
                               img: "/images/seo_keyword.svg",
                               title: "Ranking for 300+ High-Intent Keywords",
-                              desc: "Get discovered by buyers actively searching for camping trailers.",
+                              desc: "Get discovered by buyers actively searching for camper trailers.",
                             },
                             {
                               img: "/images/visiter.svg",
                               title: "1000's of Daily Visitors & Growing",
-                              desc: "Reach a highly engaged, camping trailer-buyer-specific audience every day",
+                              desc: "Reach a highly engaged, camper trailer-buyer-specific audience every day",
                             },
                             {
                               img: "/images/inbox.svg",
@@ -204,7 +204,7 @@ const DealerLandingPage = () => {
             <div className="col-12">
               <div className="comparison">
                 <h2 className="text-center">
-                  <span>Why Camping Trailer Dealers </span> Choose CFS
+                  <span>Why Camper Trailer Dealers </span> Choose CFS
                 </h2>
 
                 <div className="table-responsive">
@@ -220,9 +220,9 @@ const DealerLandingPage = () => {
                       {[
                         "We list your entire stock automatically",
                         "Listings are updated automatically based on your website stock data",
-                        "Camping Trailer buyer/seller-only audience",
-                        "Built for camping trailer dealers—not classified clutter",
-                        "Unlimited camping trailer listings",
+                        "Camper Trailer buyer/seller-only audience",
+                        "Built for camper trailer dealers—not classified clutter",
+                        "Unlimited camper trailer listings",
                         "No per-lead fees",
                         "Best-value monthly subscription fees by a country mile",
                       ].map((text, i) => (
@@ -266,7 +266,7 @@ const DealerLandingPage = () => {
           {/* Reach Caravan Buyers Section */}
           <div className="col-lg-12">
             <div className="heading-box">
-              <h2>Reach camping trailer buyers across Australia</h2>
+              <h2>Reach camper trailer buyers across Australia</h2>
             </div>
           </div>
 
@@ -275,12 +275,12 @@ const DealerLandingPage = () => {
               <img
                 src="/images/your-caravan-desktop.jpg"
                 className="img-fluid d-none d-lg-block desktop-img"
-                alt="Camping Trailer For Sale Desktop"
+                alt="Camper Trailer For Sale Desktop"
               />
               <img
                 src="/images/your-caravan-mobile.png"
                 className="img-fluid d-block d-lg-none mobile-img"
-                alt="Camping Trailer For Sale Mobile"
+                alt="Camper Trailer For Sale Mobile"
               />
             </div>
 
