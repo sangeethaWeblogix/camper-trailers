@@ -204,7 +204,7 @@ const DealerLandingPage = () => {
             <div className="col-12">
               <div className="comparison">
                 <h2 className="text-center">
-                  <span>Why Camper Trailer Dealers </span> Choose CFS
+                  <span>Why Camper Trailer Dealers </span> Choose Marketplace Network
                 </h2>
 
                 <div className="table-responsive">
