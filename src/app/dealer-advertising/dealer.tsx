@@ -212,7 +212,7 @@ const DealerLandingPage = () => {
                     <thead>
                       <tr>
                         <th className="text-start">Comparison Table</th>
-                        <th>CFS</th>
+                        <th>Campingtrailersforsale.com.au/</th>
                         <th>Other Marketplaces</th>
                       </tr>
                     </thead>
