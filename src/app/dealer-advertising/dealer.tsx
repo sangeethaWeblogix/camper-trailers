@@ -111,7 +111,7 @@ const DealerLandingPage = () => {
                     </h2>
 
                     <p className="mb-3">
-                      Your stock deserves visibility without per-lead fees, CFS
+                      Your stock deserves visibility without per-lead fees, Marketplace Network
                       connects your dealership with buyers actively searching
                       for their next camper trailer—so your inventory gets seen by the
                       right audience.
