@@ -422,7 +422,7 @@
                <img src="/images/your-caravan-desktop-seller-2.jpg" className="img-fluid demo-why-img" alt="Camper Trailer buyers" />
              </div>
              <div className="col-md-6">
-               <h2>Why Thousands of Camper Trailer Buyers Visit CamperTrailersForSale Every Month</h2>
+               <h2>Why Thousands of Camper Trailer Buyers Visit our website Every Month</h2>
                <p>
                  CampingTrailersForSale.com.au is Australia's dedicated camper trailer marketplace, built exclusively
                  for camper trailer buyers and sellers. We attract thousands of genuine buyers every day who
