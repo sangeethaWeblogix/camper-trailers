@@ -11,7 +11,7 @@ import { splitPoolProducts, normalizeAll } from "./listingShared";
 import StateBrowseSection from "./StateBrowseSection";
 import type { BrowseSectionData } from "./browseSectionShared";
 import StateContent from "./StateContent";
-import { buildApiUrl, buildListingsSlug, buildFilterBreadcrumbs } from "./urlUtils";
+import { buildApiUrl, buildListingsSlug, buildFilterBreadcrumbs, buildTravelOptions } from "./urlUtils";
 // import { useBanners } from "@/components/BannerHandler";
 // import { useBannerTracking } from "@/hooks/useBannerTracking";
 import "./main.css?=7";
@@ -371,6 +371,7 @@ export default function StateHome({
   // Page 1 uses ONE shared pool call, split by slot_bucket into
   // Featured/New/Used — instead of 3 separate condition-locked API calls.
   const poolApiUrl = buildApiUrl("/api/pool-listings/?per_page=21", filters, seed);
+  const travelOptions = buildTravelOptions(filters);
 
   useEffect(() => {
     // Wait for the real session seed to load (see the mount effect above) —
@@ -798,6 +799,20 @@ export default function StateHome({
               </div>
             </div>
           </div>
+          <div className="lsd-explore">
+            <div className="container">
+              <h2 className="lsd-explore__title">Explore Other Travel Options in {travelOptions.label}</h2>
+              <p className="lsd-explore__body">
+                Still weighing up your options? Take a look at{" "}
+                <a href={`https://www.caravansforsale.com.au${travelOptions.path}`} className="lsd-explore__link" target="_blank" rel="noopener noreferrer">caravans for sale</a>{" "}
+                if you&apos;d like more space and comfort, or browse{" "}
+                <a href={`https://www.motorhomesforsale.com.au${travelOptions.path}`} className="lsd-explore__link" target="_blank" rel="noopener noreferrer">motorhomes for sale</a>{" "}
+                if you prefer to travel without towing. For something smaller, explore{" "}
+                <a href={`https://www.campervansforsale.au${travelOptions.path}`} className="lsd-explore__link" target="_blank" rel="noopener noreferrer">campervans for sale</a>.{" "}
+                You&apos;ll find these on our other marketplaces.
+              </p>
+            </div>
+          </div>
         </div>
       );
     }
@@ -840,6 +855,20 @@ export default function StateHome({
                 by creating a listing on CampingTrailersForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
               </p>
             </div>
+          </div>
+        </div>
+        <div className="lsd-explore">
+          <div className="container">
+            <h2 className="lsd-explore__title">Explore Other Travel Options in {travelOptions.label}</h2>
+            <p className="lsd-explore__body">
+              Still weighing up your options? Take a look at{" "}
+              <a href={`https://www.caravansforsale.com.au${travelOptions.path}`} className="lsd-explore__link" target="_blank" rel="noopener noreferrer">caravans for sale</a>{" "}
+              if you&apos;d like more space and comfort, or browse{" "}
+              <a href={`https://www.motorhomesforsale.com.au${travelOptions.path}`} className="lsd-explore__link" target="_blank" rel="noopener noreferrer">motorhomes for sale</a>{" "}
+              if you prefer to travel without towing. For something smaller, explore{" "}
+              <a href={`https://www.campervansforsale.au${travelOptions.path}`} className="lsd-explore__link" target="_blank" rel="noopener noreferrer">campervans for sale</a>.{" "}
+              You&apos;ll find these on our other marketplaces.
+            </p>
           </div>
         </div>
       </div>
@@ -956,6 +985,20 @@ export default function StateHome({
             </div>
           </div>
         </div>
+        <div className="lsd-explore">
+          <div className="container">
+            <h2 className="lsd-explore__title">Explore Other Travel Options in {travelOptions.label}</h2>
+            <p className="lsd-explore__body">
+              Still weighing up your options? Take a look at{" "}
+              <a href={`https://www.caravansforsale.com.au${travelOptions.path}`} className="lsd-explore__link" target="_blank" rel="noopener noreferrer">caravans for sale</a>{" "}
+              if you&apos;d like more space and comfort, or browse{" "}
+              <a href={`https://www.motorhomesforsale.com.au${travelOptions.path}`} className="lsd-explore__link" target="_blank" rel="noopener noreferrer">motorhomes for sale</a>{" "}
+              if you prefer to travel without towing. For something smaller, explore{" "}
+              <a href={`https://www.campervansforsale.au${travelOptions.path}`} className="lsd-explore__link" target="_blank" rel="noopener noreferrer">campervans for sale</a>.{" "}
+              You&apos;ll find these on our other marketplaces.
+            </p>
+          </div>
+        </div>
       </div>
     );
   }
@@ -1023,6 +1066,20 @@ export default function StateHome({
               by creating a listing on CampingTrailersForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
             </p>
           </div>
+        </div>
+      </div>
+      <div className="lsd-explore">
+        <div className="container">
+          <h2 className="lsd-explore__title">Explore Other Travel Options in {travelOptions.label}</h2>
+          <p className="lsd-explore__body">
+            Still weighing up your options? Take a look at{" "}
+            <a href={`https://www.caravansforsale.com.au${travelOptions.path}`} className="lsd-explore__link" target="_blank" rel="noopener noreferrer">caravans for sale</a>{" "}
+            if you&apos;d like more space and comfort, or browse{" "}
+            <a href={`https://www.motorhomesforsale.com.au${travelOptions.path}`} className="lsd-explore__link" target="_blank" rel="noopener noreferrer">motorhomes for sale</a>{" "}
+            if you prefer to travel without towing. For something smaller, explore{" "}
+            <a href={`https://www.campervansforsale.au${travelOptions.path}`} className="lsd-explore__link" target="_blank" rel="noopener noreferrer">campervans for sale</a>.{" "}
+            You&apos;ll find these on our other marketplaces.
+          </p>
         </div>
       </div>
     </div>

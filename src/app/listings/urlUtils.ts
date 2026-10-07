@@ -53,6 +53,20 @@ export function buildListingsSlug(filters: FilterState, conditionOverride?: stri
 
 const toTitleCase = (s: string) => s.replace(/[-_]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
+/** Where the "Explore Other Travel Options" sibling-marketplace links should
+ * point — only state/region decide this (every other filter: category,
+ * price, length, make, etc. is irrelevant to it). No state/region → the
+ * sibling site's Australia-wide /listings/ page; state only → its state
+ * page; state+region → its region page. Heading label follows the same
+ * priority (region beats state beats "Australia"). */
+export function buildTravelOptions(filters: FilterState): { path: string; label: string } {
+  const path = buildListingsSlug({ state: filters.state, region: filters.region });
+  const label = filters.region ? toTitleCase(String(filters.region))
+    : filters.state ? toTitleCase(String(filters.state))
+    : "Australia";
+  return { path, label };
+}
+
 export interface FilterBreadcrumb {
   label: string;
   /** Direct link to the page for just this one filter dimension (e.g. the

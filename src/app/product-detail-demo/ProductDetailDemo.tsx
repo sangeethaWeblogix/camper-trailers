@@ -392,12 +392,12 @@ export default function ProductDetailDemo({ data, similarData }: Props) {
 
   const locationCity  = product.region?.value?.replace(/-/g, " ") ?? "";
   const locationState = state;
+  const regionSlug  = product.region?.slug ?? slugify(locationCity);
+  const stateAttr   = attributes.find(a => String(a?.label ?? "").toLowerCase() === "location");
+  const stateSlug   = stateAttr?.url?.trim() || `${slugify(locationState)}-state`;
 
   if (locationCity || locationState) {
-    const regionSlug  = product.region?.slug ?? slugify(locationCity);
-    const stateAttr   = attributes.find(a => String(a?.label ?? "").toLowerCase() === "location");
     if (stateAttr) consumedLabels.add("location");
-    const stateSlug   = stateAttr?.url?.trim() || `${slugify(locationState)}-state`;
     const links: DetailLink[] = [];
     if (locationCity && regionSlug) links.push({ href: `/listings/${stateSlug}/${regionSlug}/`, text: locationCity.replace(/\b\w/g, c => c.toUpperCase()) });
     if (locationState) links.push(stateAttr?.url ? linkFromApiUrl(stateAttr.url, locationState) : { href: `/listings/${stateSlug}/`, text: locationState });
@@ -435,12 +435,18 @@ const priceUpperIdx = !isPOA ? PRICE_STEPS.findIndex(s => s >= displayPrice) : -
   const relatedSearches: { label: string; href: string }[] = [
     make ? { label: make, href: `/listings/${slugify(makeLabel)}/` } : null,
     state ? { label: `Camping Trailers for Sale in ${state}`, href: `/listings/${slugify(state)}-state/` } : null,
-    locationCity ? { label: `Camping Trailers for Sale in ${locationCity}`, href: `/listings/${slugify(state)}-state/${slugify(locationCity)}-region/` } : null,
+    locationCity ? { label: `Camping Trailers for Sale in ${locationCity.replace(/\b\w/g, c => c.toUpperCase())}`, href: `/listings/${slugify(state)}-state/${slugify(locationCity)}-region/` } : null,
     shortCategory ? { label: `${shortCategory} Camping Trailers for Sale`, href: `/listings/${slugify(shortCategory)}-category/` } : null,
     priceHi ? { label: `Camping Trailers Under $${priceHi.toLocaleString()}`, href: `/listings/under-${priceHi}/` } : null,
     (priceHi && priceLo) ? { label: `Camping Trailers Between $${priceLo.toLocaleString()} to $${priceHi.toLocaleString()}`, href: `/listings/between-${priceLo}-${priceHi}/` } : null,
     { label: `All Camping Trailers for Sale`, href: `/listings/` },
   ].filter(Boolean) as { label: string; href: string }[];
+
+  /* "Explore Other Travel Options" — same state/region path this product's
+   * own location links use, carried over to the sibling marketplaces so the
+   * visitor lands on the equivalent region page, not just their homepage. */
+  const travelLocationPath = locationCity ? `${stateSlug}/${regionSlug}/` : locationState ? `${stateSlug}/` : "";
+  const travelLocationLabel = locationCity ? locationCity.replace(/\b\w/g, c => c.toUpperCase()) : locationState;
 
   const [safeHtml, setSafeHtml] = useState("");
   useEffect(() => {
@@ -905,6 +911,22 @@ const priceUpperIdx = !isPOA ? PRICE_STEPS.findIndex(s => s >= displayPrice) : -
           </div>
           <a href="/" className="pdd-banner__cta">FIND DEALS NOW</a>
         </div>
+
+        {/* ── Explore Other Travel Options ── */}
+        {travelLocationPath && (
+          <section className="pdd-explore">
+            <h2 className="pdd-section__title">Explore Other Travel Options in {travelLocationLabel}</h2>
+            <p className="pdd-explore__body">
+              Still weighing up your options? Take a look at{" "}
+              <a href={`https://www.caravansforsale.com.au/listings/${travelLocationPath}`} className="pdd-explore__link" target="_blank" rel="noopener noreferrer">caravans for sale</a>{" "}
+              if you&apos;d like more space and comfort, or browse{" "}
+              <a href={`https://www.motorhomesforsale.com.au/listings/${travelLocationPath}`} className="pdd-explore__link" target="_blank" rel="noopener noreferrer">motorhomes for sale</a>{" "}
+              if you prefer to travel without towing. For something smaller, explore{" "}
+              <a href={`https://www.campervansforsale.au/listings/${travelLocationPath}`} className="pdd-explore__link" target="_blank" rel="noopener noreferrer">campervans for sale</a>.{" "}
+              You&apos;ll find these on our other marketplaces.
+            </p>
+          </section>
+        )}
 
       </div>
     </div>
