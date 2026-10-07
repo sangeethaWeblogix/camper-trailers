@@ -6,12 +6,12 @@
  import { getRegionBySlug } from "../sell-my-caravan-region/regions-data";
 
  const STATE_LINKS = [
-   { label: "Victoria",              img: "/images/vic_map.svg", href: "/sell-my-camping-trailer/victoria/" },
-   { label: "New South Wales",       img: "/images/nsw_map.svg", href: "/sell-my-camping-trailer/new-south-wales/" },
-   { label: "Queensland",            img: "/images/qld_map.svg", href: "/sell-my-camping-trailer/queensland/" },
-   { label: "Western Australia",     img: "/images/wa_map.svg",  href: "/sell-my-camping-trailer/western-australia/" },
-   { label: "South Australia",       img: "/images/sa_map.svg",  href: "/sell-my-camping-trailer/south-australia/" },
-   { label: "Tasmania",              img: "/images/tas_map.svg", href: "/sell-my-camping-trailer/tasmania/" },
+   { label: "Victoria",              img: "/images/vic_map.svg", href: "/sell-my-camper-trailer/victoria/" },
+   { label: "New South Wales",       img: "/images/nsw_map.svg", href: "/sell-my-camper-trailer/new-south-wales/" },
+   { label: "Queensland",            img: "/images/qld_map.svg", href: "/sell-my-camper-trailer/queensland/" },
+   { label: "Western Australia",     img: "/images/wa_map.svg",  href: "/sell-my-camper-trailer/western-australia/" },
+   { label: "South Australia",       img: "/images/sa_map.svg",  href: "/sell-my-camper-trailer/south-australia/" },
+   { label: "Tasmania",              img: "/images/tas_map.svg", href: "/sell-my-camper-trailer/tasmania/" },
  ];
 
  const CITY_SLUGS = [
@@ -31,7 +31,7 @@
    const region = getRegionBySlug(regionSlug);
    return {
      label,
-     href: region ? `/sell-my-camping-trailer/${region.state.slug}/${region.pageSlug}/` : "/sell-my-camping-trailer/",
+     href: region ? `/sell-my-camper-trailer/${region.state.slug}/${region.pageSlug}/` : "/sell-my-camper-trailer/",
    };
  });
  
@@ -422,7 +422,7 @@
                <img src="/images/your-caravan-desktop-seller-2.jpg" className="img-fluid demo-why-img" alt="Camper Trailer buyers" />
              </div>
              <div className="col-md-6">
-               <h2>Why Thousands of Camper Trailer Buyers Visit CamperTrailersForSale Every Month</h2>
+               <h2>Why Thousands of Camper Trailer Buyers Visit our website Every Month</h2>
                <p>
                  CampingTrailersForSale.com.au is Australia's dedicated camper trailer marketplace, built exclusively
                  for camper trailer buyers and sellers. We attract thousands of genuine buyers every day who

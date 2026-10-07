@@ -21,7 +21,7 @@ type ListResp = {
 
 // Maps onto GET /get-home-enquiries-list — returns featured (featured=1)
 // buy/sell requirement submissions. Confirmed working against the dedicated
-// MPN Camping Trailers Postman collection: {success, data: Requirement[]}
+// MPN Camper Trailers Postman collection: {success, data: Requirement[]}
 // on a hit, {success: false, message: "No enquiries found", data: []} when
 // empty — data is always a usable array either way.
 export async function fetchRequirements(): Promise<Requirement[]> {

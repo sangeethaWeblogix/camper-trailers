@@ -5,9 +5,9 @@ import { ReactNode } from "react";
 
 
  export const metadata: Metadata = {
-   title: "Login | Camping Trailers For Sale – Dealer & Private Seller Access",
+   title: "Login | Camper Trailers For Sale – Dealer & Private Seller Access",
   description:
-     "Access your CampingTrailersForSale.com.au account. Private sellers and dealers can log in to manage listings, post camping trailers for sale, and connect with thousands of buyers across Australia.",
+     "Access your CampingTrailersForSale.com.au account. Private sellers and dealers can log in to manage listings, post camper trailers for sale, and connect with thousands of buyers across Australia.",
    icons: { icon: "/favicon.ico" },
    robots: "index, follow",
    verification: {

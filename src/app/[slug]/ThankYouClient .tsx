@@ -46,7 +46,7 @@ export default function ThankYouClient() {
           </Typography>
 
           <Typography variant="body1" color="text.secondary" gutterBottom>
-            Your camping trailer dealer will contact you as soon as possible.
+            Your camper trailer dealer will contact you as soon as possible.
           </Typography>
 
           <Link href="/" style={{ textDecoration: "none" }}>

@@ -16,11 +16,11 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: {
-    default: "Camping Trailers For Sale – New & Used Camping Trailer Marketplace in Australia",
+    default: "Camper Trailers For Sale – New & Used Camper Trailer Marketplace in Australia",
     template: "%s ",
   },
   description:
-    "Browse camping trailers for sale across Australia. Compare prices on off-road, hybrid, pop top, touring, luxury models with size, weight & sleeping capacity.",
+    "Browse camper trailers for sale across Australia. Compare prices on off-road, hybrid, pop top, touring, luxury models with size, weight & sleeping capacity.",
   icons: { icon: "/favicon.ico" },
   robots: "index, follow",
   verification: {
@@ -30,24 +30,24 @@ export const metadata: Metadata = {
     canonical: "https://www.campingtrailersforsale.com.au",
   },
   openGraph: {
-    title: "Camping Trailers For Sale – New & Used Camping Trailer Marketplace in Australia",
-    description: "Browse camping trailers for sale across Australia. Compare prices on off-road, hybrid, pop top, touring, luxury models with size, weight & sleeping capacity.",
+    title: "Camper Trailers For Sale – New & Used Camper Trailer Marketplace in Australia",
+    description: "Browse camper trailers for sale across Australia. Compare prices on off-road, hybrid, pop top, touring, luxury models with size, weight & sleeping capacity.",
     url: "https://www.campingtrailersforsale.com.au",
-    siteName: "Camping Trailers for Sale",
+    siteName: "Camper Trailers for Sale",
     images: [
       {
         url: "https://www.campingtrailersforsale.com.au/images/cfs-logo.png",
         width: 800,
         height: 600,
-        alt: "Camping Trailers for Sale Australia",
+        alt: "Camper Trailers for Sale Australia",
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Camping Trailers For Sale – New & Used Camping Trailer Marketplace in Australia",
-    description: "Browse camping trailers for sale across Australia. Compare prices on off-road, hybrid, pop top, touring, luxury models with size, weight & sleeping capacity.",
+    title: "Camper Trailers For Sale – New & Used Camper Trailer Marketplace in Australia",
+    description: "Browse camper trailers for sale across Australia. Compare prices on off-road, hybrid, pop top, touring, luxury models with size, weight & sleeping capacity.",
   },
 };
 
@@ -60,8 +60,8 @@ const homeJsonLd = {
       "@type": "WebSite",
       "@id": `${BASE_URL}/#website`,
       "url": BASE_URL,
-      "name": "Camping Trailers For Sale",
-      "description": "Australia's Marketplace for New & Used Camping Trailers",
+      "name": "Camper Trailers For Sale",
+      "description": "Australia's Marketplace for New & Used Camper Trailers",
       "inLanguage": "en-AU",
       "potentialAction": {
         "@type": "SearchAction",
@@ -75,7 +75,7 @@ const homeJsonLd = {
     {
       "@type": "Organization",
       "@id": `${BASE_URL}/#organization`,
-      "name": "Camping Trailers For Sale",
+      "name": "Camper Trailers For Sale",
       "url": BASE_URL,
       "logo": {
         "@type": "ImageObject",

@@ -220,7 +220,7 @@ export default function StateHome({
       // Filter changed and the new page's SEO hasn't loaded yet — fall back
       // to the generic title instead of leaving the previous page's title
       // showing (stale tab title while the new fetch is in flight).
-      document.title = "Camping Trailers For Sale – Australia's Marketplace for New & Used Camping Trailers";
+      document.title = "Camper Trailers For Sale – Australia's Marketplace for New & Used Camper Trailers";
       return;
     }
     if (seo.meta_title) document.title = seo.meta_title;
@@ -719,7 +719,7 @@ export default function StateHome({
               <nav className="lsd-breadcrumb" aria-label="Breadcrumb">
                 <Link href="/">Home</Link>
                 <svg width="12" height="20" viewBox="0 0 24 24" fill="none" stroke="#3e3e3e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, display: "block" }} aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
-                <Link href="/listings/">Camping Trailers for Sale</Link>
+                <Link href="/listings/">Camper Trailers for Sale</Link>
                 {buildFilterBreadcrumbs(filters).map((crumb, i, arr) => (
                   <span key={crumb.href}>
                     <svg width="12" height="20" viewBox="0 0 24 24" fill="none" stroke="#3e3e3e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, display: "block" }} aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
@@ -769,7 +769,7 @@ export default function StateHome({
             </>
           ) : (
             <StateListingGrid
-              title={ip.seo?.h1 || "Camping Trailers for Sale"}
+              title={ip.seo?.h1 || "Camper Trailers for Sale"}
               titleAs="h1"
               viewAllHref={buildListingsSlug(filters)}
               items={ip.featured}
@@ -783,17 +783,17 @@ export default function StateHome({
           <StateContent footerDescription={ip.seo?.footer_description} faq={ip.seo?.faq} />
           {filters.category === 'off-road' && (
             <section className="lsd-offroad-extra"><div className="container">
-              <h2 className="lsd-offroad-extra__title">{seed % 2 === 0 ? "Find Your Ideal Off Road Camping Trailer" : "Search and Compare Off Road Camping Trailers"}</h2>
-              <p className="lsd-offroad-extra__body">Browse live camping trailer listings from across the country, then compare off road camping trailers in Australia using search filters by price, location, weight, length and sleeping capacity while exploring manufacturer and model reviews.</p>
+              <h2 className="lsd-offroad-extra__title">{seed % 2 === 0 ? "Find Your Ideal Off Road Camper Trailer" : "Search and Compare Off Road Camper Trailers"}</h2>
+              <p className="lsd-offroad-extra__body">Browse live camper trailer listings from across the country, then compare off road camper trailers in Australia using search filters by price, location, weight, length and sleeping capacity while exploring manufacturer and model reviews.</p>
             </div></section>
           )}
           <div className="lsd-sell-cta">
             <div className="container">
               <div className="lsd-sell-cta__inner">
-                <h2 className="lsd-sell-cta__title">Looking to Sell Your Camping Trailer?</h2>
+                <h2 className="lsd-sell-cta__title">Looking to Sell Your Camper Trailer?</h2>
                 <p className="lsd-sell-cta__body">
-                  If you&apos;re upgrading or no longer need your current camping trailer,{" "}
-                  <a href="/sell-my-camping-trailer/" className="lsd-sell-cta__link">sell your camping trailer</a>{" "}
+                  If you&apos;re upgrading or no longer need your current camper trailer,{" "}
+                  <a href="/sell-my-camper-trailer/" className="lsd-sell-cta__link">sell your camper trailer</a>{" "}
                   by creating a listing on CampingTrailersForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
                 </p>
               </div>
@@ -848,10 +848,10 @@ export default function StateHome({
         <div className="lsd-sell-cta">
           <div className="container">
             <div className="lsd-sell-cta__inner">
-              <h2 className="lsd-sell-cta__title">Looking to Sell Your Camping Trailer?</h2>
+              <h2 className="lsd-sell-cta__title">Looking to Sell Your Camper Trailer?</h2>
               <p className="lsd-sell-cta__body">
-                If you&apos;re upgrading or no longer need your current camping trailer,{" "}
-                <a href="/sell-my-camping-trailer/" className="lsd-sell-cta__link">sell your camping trailer</a>{" "}
+                If you&apos;re upgrading or no longer need your current camper trailer,{" "}
+                <a href="/sell-my-camper-trailer/" className="lsd-sell-cta__link">sell your camper trailer</a>{" "}
                 by creating a listing on CampingTrailersForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
               </p>
             </div>
@@ -899,7 +899,7 @@ export default function StateHome({
             <nav className="lsd-breadcrumb" aria-label="Breadcrumb">
               <Link href="/">Home</Link>
               <svg width="12" height="20" viewBox="0 0 24 24" fill="none" stroke="#3e3e3e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, display: "block" }} aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
-              <Link href="/listings/">Camping Trailers for Sale</Link>
+              <Link href="/listings/">Camper Trailers for Sale</Link>
               {buildFilterBreadcrumbs(filters).map((crumb, i, arr) => (
                 <span key={crumb.href}>
                   <svg width="12" height="20" viewBox="0 0 24 24" fill="none" stroke="#3e3e3e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, display: "block" }} aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
@@ -934,7 +934,7 @@ export default function StateHome({
             />
 
             <StateListingGrid
-              title={newSeo?.meta_title || (seo?.meta_title ? `New ${seo.meta_title}` : "New Camping Trailers")}
+              title={newSeo?.meta_title || (seo?.meta_title ? `New ${seo.meta_title}` : "New Camper Trailers")}
               viewAllHref={buildListingsSlug(filters, "New")}
               items={pool.new}
               loading={poolLoading}
@@ -942,7 +942,7 @@ export default function StateHome({
             />
 
             <StateListingGrid
-              title={usedSeo?.meta_title || (seo?.meta_title ? `Used ${seo.meta_title}` : "Used Camping Trailers")}
+              title={usedSeo?.meta_title || (seo?.meta_title ? `Used ${seo.meta_title}` : "Used Camper Trailers")}
               viewAllHref={buildListingsSlug(filters, "Used")}
               items={pool.used}
               loading={poolLoading}
@@ -952,7 +952,7 @@ export default function StateHome({
         ) : (
           // Non-indexed pages get one combined grid with no slot_bucket split.
           <StateListingGrid
-            title={seo?.h1 || "Camping Trailers for Sale"}
+            title={seo?.h1 || "Camper Trailers for Sale"}
             titleAs="h1"
             viewAllHref={buildListingsSlug(filters)}
             items={pool.featured}
@@ -969,17 +969,17 @@ export default function StateHome({
         <StateContent footerDescription={seo?.footer_description} faq={seo?.faq} />
         {filters.category === 'off-road' && (
           <section className="lsd-offroad-extra"><div className="container">
-            <h2 className="lsd-offroad-extra__title">{seed % 2 === 0 ? "Find Your Ideal Off Road Camping Trailer" : "Search and Compare Off Road Camping Trailers"}</h2>
-            <p className="lsd-offroad-extra__body">Browse live camping trailer listings from across the country, then compare off road camping trailers in Australia using search filters by price, location, weight, length and sleeping capacity while exploring manufacturer and model reviews.</p>
+            <h2 className="lsd-offroad-extra__title">{seed % 2 === 0 ? "Find Your Ideal Off Road Camper Trailer" : "Search and Compare Off Road Camper Trailers"}</h2>
+            <p className="lsd-offroad-extra__body">Browse live camper trailer listings from across the country, then compare off road camper trailers in Australia using search filters by price, location, weight, length and sleeping capacity while exploring manufacturer and model reviews.</p>
           </div></section>
         )}
         <div className="lsd-sell-cta">
           <div className="container">
             <div className="lsd-sell-cta__inner">
-              <h2 className="lsd-sell-cta__title">Looking to Sell Your Camping Trailer?</h2>
+              <h2 className="lsd-sell-cta__title">Looking to Sell Your Camper Trailer?</h2>
               <p className="lsd-sell-cta__body">
-                If you&apos;re upgrading or no longer need your current camping trailer,{" "}
-                <a href="/sell-my-camping-trailer/" className="lsd-sell-cta__link">sell your camping trailer</a>{" "}
+                If you&apos;re upgrading or no longer need your current camper trailer,{" "}
+                <a href="/sell-my-camper-trailer/" className="lsd-sell-cta__link">sell your camper trailer</a>{" "}
                 by creating a listing on CampingTrailersForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
               </p>
             </div>
@@ -1013,7 +1013,7 @@ export default function StateHome({
           <nav className="lsd-paged-breadcrumb" aria-label="Breadcrumb">
             <Link href="/">Home</Link>
             <svg width="10" height="16" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
-            <Link href="/listings/">Camping Trailers for Sale</Link>
+            <Link href="/listings/">Camper Trailers for Sale</Link>
             {buildFilterBreadcrumbs(filters).map((crumb) => (
               <span key={crumb.href}>
                 <svg width="10" height="16" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
@@ -1021,7 +1021,7 @@ export default function StateHome({
               </span>
             ))}
           </nav>
-          <h1 className="lsd-paged-title">{seo?.h1 || "Camping Trailers for Sale"}</h1>
+          <h1 className="lsd-paged-title">{seo?.h1 || "Camper Trailers for Sale"}</h1>
         </div>
       </div>
 
@@ -1052,17 +1052,17 @@ export default function StateHome({
       <StateContent footerDescription={seo?.footer_description} faq={seo?.faq} />
       {filters.category === 'off-road' && (
         <section className="lsd-offroad-extra"><div className="container">
-          <h2 className="lsd-offroad-extra__title">{seed % 2 === 0 ? "Find Your Ideal Off Road Camping Trailer" : "Search and Compare Off Road Camping Trailers"}</h2>
-          <p className="lsd-offroad-extra__body">Browse live camping trailer listings from across the country, then compare off road camping trailers in Australia using search filters by price, location, weight, length and sleeping capacity while exploring manufacturer and model reviews.</p>
+          <h2 className="lsd-offroad-extra__title">{seed % 2 === 0 ? "Find Your Ideal Off Road Camper Trailer" : "Search and Compare Off Road Camper Trailers"}</h2>
+          <p className="lsd-offroad-extra__body">Browse live camper trailer listings from across the country, then compare off road camper trailers in Australia using search filters by price, location, weight, length and sleeping capacity while exploring manufacturer and model reviews.</p>
         </div></section>
       )}
       <div className="lsd-sell-cta">
         <div className="container">
           <div className="lsd-sell-cta__inner">
-            <h2 className="lsd-sell-cta__title">Looking to Sell Your Camping Trailer?</h2>
+            <h2 className="lsd-sell-cta__title">Looking to Sell Your Camper Trailer?</h2>
             <p className="lsd-sell-cta__body">
-              If you&apos;re upgrading or no longer need your current camping trailer,{" "}
-              <a href="/sell-my-camping-trailer/" className="lsd-sell-cta__link">sell your camping trailer</a>{" "}
+              If you&apos;re upgrading or no longer need your current camper trailer,{" "}
+              <a href="/sell-my-camper-trailer/" className="lsd-sell-cta__link">sell your camper trailer</a>{" "}
               by creating a listing on CampingTrailersForSale.com.au and connect with active buyers across Australia. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
             </p>
           </div>

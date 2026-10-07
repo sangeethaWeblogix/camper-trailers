@@ -56,14 +56,14 @@ const BROWSE_TABS: BrowseTab[] = [
     viewAll: { text: "View all locations", href: "/listings/" },
     links: [],
     states: [
-      { text: "Camping Trailers for Sale in Victoria",          href: "/listings/victoria-state/" },
-      { text: "Camping Trailers for Sale in New South Wales",   href: "/listings/new-south-wales-state/" },
-      { text: "Camping Trailers for Sale in Queensland",        href: "/listings/queensland-state/" },
-      { text: "Camping Trailers for Sale in South Australia",   href: "/listings/south-australia-state/" },
-      { text: "Camping Trailers for Sale in Western Australia", href: "/listings/western-australia-state/" },
-      { text: "Camping Trailers for Sale in Tasmania",          href: "/listings/tasmania-state/" },
-      { text: "Camping Trailers for Sale in ACT",               href: "/listings/australian-capital-territory-state/" },
-      { text: "Camping Trailers for Sale in Northern Territory",href: "/listings/northern-territory-state/" },
+      { text: "Camper Trailers for Sale in Victoria",          href: "/listings/victoria-state/" },
+      { text: "Camper Trailers for Sale in New South Wales",   href: "/listings/new-south-wales-state/" },
+      { text: "Camper Trailers for Sale in Queensland",        href: "/listings/queensland-state/" },
+      { text: "Camper Trailers for Sale in South Australia",   href: "/listings/south-australia-state/" },
+      { text: "Camper Trailers for Sale in Western Australia", href: "/listings/western-australia-state/" },
+      { text: "Camper Trailers for Sale in Tasmania",          href: "/listings/tasmania-state/" },
+      { text: "Camper Trailers for Sale in ACT",               href: "/listings/australian-capital-territory-state/" },
+      { text: "Camper Trailers for Sale in Northern Territory",href: "/listings/northern-territory-state/" },
     ],
     regions: [
       { text: "Melbourne",     href: "/listings/victoria-state/melbourne-region/" },
@@ -87,36 +87,36 @@ const BROWSE_TABS: BrowseTab[] = [
   {
     label: "Manufacturer",
     icon: "bi-buildings",
-    viewAll: { text: "View all camping trailers", href: "/listings/" },
+    viewAll: { text: "View all camper trailers", href: "/listings/" },
     links: [
-      { text: "Jayco Camping Trailers for Sale",       href: "/listings/jayco/" },
-      { text: "Snowy River Camping Trailers for Sale", href: "/listings/snowy-river/" },
-      { text: "Evernew Camping Trailers for Sale",     href: "/listings/evernew/" },
-      { text: "Crusader Camping Trailers for Sale",    href: "/listings/crusader/" },
-      { text: "New Age Camping Trailers for Sale",     href: "/listings/new-age/" },
-      { text: "MDC Camping Trailers for Sale",         href: "/listings/mdc/" },
-      { text: "Essential Camping Trailers for Sale",   href: "/listings/essential/" },
-      { text: "Design RV Camping Trailers for Sale",   href: "/listings/design-rv/" },
-      { text: "JB Camping Trailers for Sale",          href: "/listings/jb/" },
-      { text: "Supreme Camping Trailers for Sale",     href: "/listings/supreme/" },
-      { text: "Avan Camping Trailers for Sale",        href: "/listings/avan/" },
-      { text: "Lotus Camping Trailers for Sale",       href: "/listings/lotus/" },
-      { text: "Royal Flair Camping Trailers for Sale", href: "/listings/royal-flair/" },
-      { text: "Windsor Camping Trailers for Sale",     href: "/listings/windsor/" },
-      { text: "Golf Camping Trailers for Sale",        href: "/listings/golf/" },
-      { text: "Nova Camping Trailers for Sale",        href: "/listings/nova/" },
-      { text: "Retreat Camping Trailers for Sale",     href: "/listings/retreat/" },
-      { text: "Adria Camping Trailers for Sale",       href: "/listings/adria/" },
-      { text: "Coromal Camping Trailers for Sale",     href: "/listings/coromal/" },
+      { text: "Jayco Camper Trailers for Sale",       href: "/listings/jayco/" },
+      { text: "Snowy River Camper Trailers for Sale", href: "/listings/snowy-river/" },
+      { text: "Evernew Camper Trailers for Sale",     href: "/listings/evernew/" },
+      { text: "Crusader Camper Trailers for Sale",    href: "/listings/crusader/" },
+      { text: "New Age Camper Trailers for Sale",     href: "/listings/new-age/" },
+      { text: "MDC Camper Trailers for Sale",         href: "/listings/mdc/" },
+      { text: "Essential Camper Trailers for Sale",   href: "/listings/essential/" },
+      { text: "Design RV Camper Trailers for Sale",   href: "/listings/design-rv/" },
+      { text: "JB Camper Trailers for Sale",          href: "/listings/jb/" },
+      { text: "Supreme Camper Trailers for Sale",     href: "/listings/supreme/" },
+      { text: "Avan Camper Trailers for Sale",        href: "/listings/avan/" },
+      { text: "Lotus Camper Trailers for Sale",       href: "/listings/lotus/" },
+      { text: "Royal Flair Camper Trailers for Sale", href: "/listings/royal-flair/" },
+      { text: "Windsor Camper Trailers for Sale",     href: "/listings/windsor/" },
+      { text: "Golf Camper Trailers for Sale",        href: "/listings/golf/" },
+      { text: "Nova Camper Trailers for Sale",        href: "/listings/nova/" },
+      { text: "Retreat Camper Trailers for Sale",     href: "/listings/retreat/" },
+      { text: "Adria Camper Trailers for Sale",       href: "/listings/adria/" },
+      { text: "Coromal Camper Trailers for Sale",     href: "/listings/coromal/" },
     ],
   },
   {
     label: "Condition",
     icon: "bi-patch-check",
-    viewAll: { text: "Browse all camping trailers", href: "/listings/" },
+    viewAll: { text: "Browse all camper trailers", href: "/listings/" },
     links: [
-      { text: "New Camping Trailers for Sale", href: "/listings/new-condition/" },
-      { text: "Used Camping Trailers for Sale", href: "/listings/used-condition/" },
+      { text: "New Camper Trailers for Sale", href: "/listings/new-condition/" },
+      { text: "Used Camper Trailers for Sale", href: "/listings/used-condition/" },
     ],
   },
   {
@@ -501,15 +501,15 @@ export default function BlogDetailsPage({
                   <img src="/images/category.svg" alt="" width={32} height={32} className="blog-browse-cta__icon-img" />
                   <div>
                     <h3 className="blog-browse-cta__heading">
-                      {catLabel ? `Ready to Browse ${catLabel} Camping Trailers?` : "Ready to Browse Camping Trailers?"}
+                      {catLabel ? `Ready to Browse ${catLabel} Camper Trailers?` : "Ready to Browse Camper Trailers?"}
                     </h3>
                     <p className="blog-browse-cta__desc">
-                      {catLabel ? `Explore hundreds of ${catLabel.toLowerCase()} camping trailers for sale across Australia.` : "Explore thousands of camping trailers for sale across Australia."}
+                      {catLabel ? `Explore hundreds of ${catLabel.toLowerCase()} camper trailers for sale across Australia.` : "Explore thousands of camper trailers for sale across Australia."}
                     </p>
                   </div>
                 </div>
                 <a href={catLink} className="blog-browse-cta__btn">
-                  {catLabel ? `Browse ${catLabel} Camping Trailers` : "Browse Camping Trailers"} <i className="bi bi-arrow-right" />
+                  {catLabel ? `Browse ${catLabel} Camper Trailers` : "Browse Camper Trailers"} <i className="bi bi-arrow-right" />
                 </a>
               </div>
 
@@ -608,16 +608,16 @@ export default function BlogDetailsPage({
               )}
               <div className="blog-sidebar-sticky">
                 <div className="blog-sidebar-cta">
-                  <h3 className="blog-sidebar-cta__heading">Ready to Find Your Next Camping Trailer?</h3>
-                  <p className="blog-sidebar-cta__desc">Browse thousands of new and used camping trailers from trusted dealers and private sellers across Australia.</p>
+                  <h3 className="blog-sidebar-cta__heading">Ready to Find Your Next Camper Trailer?</h3>
+                  <p className="blog-sidebar-cta__desc">Browse thousands of new and used camper trailers from trusted dealers and private sellers across Australia.</p>
                   <a href="/listings/" className="blog-sidebar-cta__btn">
-                    Search Camping Trailers Now <i className="bi bi-arrow-right" />
+                    Search Camper Trailers Now <i className="bi bi-arrow-right" />
                   </a>
                 </div>
                 <div className="blog-sidebar-cta blog-sidebar-cta--sell">
-                  <h3 className="blog-sidebar-cta__heading">Sell Your Camping Trailer Faster with Australia's Growing Camping Trailer Marketplace</h3>
-                  <a href="/sell-my-camping-trailer/" className="blog-sidebar-cta__btn">
-                    List Your Camping Trailer Now <i className="bi bi-arrow-right" />
+                  <h3 className="blog-sidebar-cta__heading">Sell Your Camper Trailer Faster with Australia's Growing Camper Trailer Marketplace</h3>
+                  <a href="/sell-my-camper-trailer/" className="blog-sidebar-cta__btn">
+                    List Your Camper Trailer Now <i className="bi bi-arrow-right" />
                   </a>
                 </div>
               </div>
@@ -632,21 +632,21 @@ export default function BlogDetailsPage({
       {cats.length > 0 && (
         <section className="bds-cat-loc">
           <div className="container">
-            <h2 className="bds-cat-title">Find {catLabel} Camping Trailers by Popular Location</h2>
+            <h2 className="bds-cat-title">Find {catLabel} Camper Trailers by Popular Location</h2>
             <div className="bds-cat-loc__major">
               {CAT_MAJOR_CITIES.map((city) => (
                 <a key={city.name} href={`${catLink}${city.state}/${city.region}/`} className="bds-cat-city-card">
                   <div className="bds-cat-city-img-wrap">
                     <img src={city.img} alt={city.name} className="bds-cat-city-img" loading="lazy" />
                   </div>
-                  <span className="bds-cat-city-name">{catLabel} Camping Trailers in {city.name} <i className="bi bi-chevron-right bds-cat-city-arrow" /></span>
+                  <span className="bds-cat-city-name">{catLabel} Camper Trailers in {city.name} <i className="bi bi-chevron-right bds-cat-city-arrow" /></span>
                 </a>
               ))}
             </div>
             <div className="bds-cat-loc__minor">
               {CAT_MINOR_CITIES.map((city) => (
                 <a key={city.name} href={`${catLink}${city.state}/${city.region ? city.region + "/" : ""}`} className="bds-cat-minor-pill">
-                  {catLabel} Camping Trailers in {city.name}
+                  {catLabel} Camper Trailers in {city.name}
                 </a>
               ))}
             </div>
@@ -658,12 +658,12 @@ export default function BlogDetailsPage({
       {cats.length > 0 && (
         <section className="bds-cat-state">
           <div className="container">
-            <h2 className="bds-cat-title">Find {catLabel} Camping Trailers by State</h2>
+            <h2 className="bds-cat-title">Find {catLabel} Camper Trailers by State</h2>
             <div className="bds-cat-state__grid">
               {CAT_STATES.map((s) => (
                 <a key={s.name} href={`${catLink}${s.slug}/`} className="bds-cat-state-card">
                   <img src={s.img} alt={s.name} className="bds-cat-state-img" loading="lazy" />
-                  <span className="bds-cat-state-name">{catLabel} Camping Trailers in {s.name}</span>
+                  <span className="bds-cat-state-name">{catLabel} Camper Trailers in {s.name}</span>
                 </a>
               ))}
             </div>
@@ -677,15 +677,15 @@ export default function BlogDetailsPage({
       {/* ── Buy or Sell CTA ── */}
       <section className="bds-cta-section">
         <div className="bds-cta-card">
-          <h2 className="bds-cta-title">Ready to Buy or Sell a Camping Trailer?</h2>
+          <h2 className="bds-cta-title">Ready to Buy or Sell a Camper Trailer?</h2>
           <p className="bds-cta-body">
             <strong>Looking to buy?</strong> Browse{" "}
-            <a href="/" className="bds-cta-link">camping trailers for sale</a>{" "}
-            from dealers and private sellers across Australia, with listings available by make, model, price, location and camping trailer type.
+            <a href="/" className="bds-cta-link">camper trailers for sale</a>{" "}
+            from dealers and private sellers across Australia, with listings available by make, model, price, location and camper trailer type.
           </p>
           <p className="bds-cta-body">
-            <strong>Looking to sell?</strong> If you&apos;re upgrading to a newer camping trailer or no longer need your current one,{" "}
-            <a href="/sell-my-camping-trailer/" className="bds-cta-link">sell your camping trailer</a>{" "}
+            <strong>Looking to sell?</strong> If you&apos;re upgrading to a newer camper trailer or no longer need your current one,{" "}
+            <a href="/sell-my-camper-trailer/" className="bds-cta-link">sell your camper trailer</a>{" "}
             by creating a listing on CampingTrailersForSale.com.au. Your advertisement stays online until it&apos;s sold for a one-time fee of $49.
           </p>
         </div>

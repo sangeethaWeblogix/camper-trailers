@@ -155,8 +155,8 @@ export default function FooterNav() {
         <div className="sell-panel" id="sell-links-panel">
           {/* Header */}
           <div className="sell-panel__header">
-            <a href="/sell-my-camping-trailer/" className="sell-panel__main-link">
-              Sell My Camping Trailer
+            <a href="/sell-my-camper-trailer/" className="sell-panel__main-link">
+              Sell My Camper Trailer
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="13"
@@ -200,16 +200,16 @@ export default function FooterNav() {
             {SELL_DATA.map((s) => (
               <div key={s.stateSlug} className="sell-panel__col">
                 <a
-                  href={`/sell-my-camping-trailer/${s.stateSlug}/`}
+                  href={`/sell-my-camper-trailer/${s.stateSlug}/`}
                   className="sell-panel__state-title"
                 >
-                  Sell My Camping Trailer in {s.state}
+                  Sell My Camper Trailer in {s.state}
                 </a>
                 <ul className="sell-panel__region-list">
                   {s.regions.map((r) => (
                     <li key={r.pageSlug}>
-                      <a href={`/sell-my-camping-trailer/${s.stateSlug}/${r.pageSlug}/`}>
-                        Sell My Camping Trailer in {r.label}
+                      <a href={`/sell-my-camper-trailer/${s.stateSlug}/${r.pageSlug}/`}>
+                        Sell My Camper Trailer in {r.label}
                       </a>
                     </li>
                   ))}

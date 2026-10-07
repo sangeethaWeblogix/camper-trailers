@@ -315,7 +315,7 @@ export function generateTitleFromFilters(
   // Keyword search: treat search term as the primary noun
   if (parsed.search) {
     const kw = titleCase(parsed.search);
-    const noun = /caravans?$/i.test(kw) ? kw : `${kw} Camping Trailers`;
+    const noun = /caravans?$/i.test(kw) ? kw : `${kw} Camper Trailers`;
     return `${noun} for Sale${locationSuffix}`;
   }
 
@@ -331,7 +331,7 @@ export function generateTitleFromFilters(
   if (parsed.model) parts.push(titleCase(parsed.model));
   if (parsed.category) parts.push(titleCase(parsed.category));
 
-  const baseNoun = parts.length > 0 ? `${parts.join(" ")} Camping Trailers` : "Camping Trailers";
+  const baseNoun = parts.length > 0 ? `${parts.join(" ")} Camper Trailers` : "Camper Trailers";
   const band = getBandText(parsed);
   const bandPart = band ? ` ${band}` : "";
 
@@ -387,7 +387,7 @@ export async function metaFromSlug(
 
   const title = generateTitleFromFilters(parsed);
   const description =
-    "Browse camping trailers for sale across Australia. Compare prices on off-road, hybrid, pop top, touring, luxury models with size, weight & sleeping capacity.";
+    "Browse camper trailers for sale across Australia. Compare prices on off-road, hybrid, pop top, touring, luxury models with size, weight & sleeping capacity.";
 
   return {
     title: { absolute: title },
@@ -406,7 +406,7 @@ export async function metaFromSlug(
           url: "https://www.campingtrailersforsale.com.au/images/cfs-logo.png",
           width: 800,
           height: 600,
-          alt: "Camping Trailers for Sale Australia",
+          alt: "Camper Trailers for Sale Australia",
         },
       ],
     },

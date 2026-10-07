@@ -7,8 +7,8 @@ const schemaGraph = [
     "@type": "WebPage",
     "@id": "https://www.campingtrailersforsale.com.au/dealer-advertising/#webpage",
     "url": "https://www.campingtrailersforsale.com.au/dealer-advertising/",
-    "name": "Camping Trailer Dealer Advertising | Unlimited Listings $99/Month | CampingTrailersForSale",
-    "description": "Advertise your camping trailer dealership on CampingTrailersForSale.com.au. Unlimited listings, zero lead fees, $99/month (inc. GST). Cancel anytime.",
+    "name": "Camper Trailer Dealer Advertising | Unlimited Listings $99/Month | CampingTrailersForSale",
+    "description": "Advertise your camper trailer dealership on CampingTrailersForSale.com.au. Unlimited listings, zero lead fees, $99/month (inc. GST). Cancel anytime.",
     "isPartOf": { "@id": "https://www.campingtrailersforsale.com.au/#website" },
     "breadcrumb": { "@id": "https://www.campingtrailersforsale.com.au/dealer-advertising/#breadcrumb" },
   },
@@ -24,13 +24,13 @@ const schemaGraph = [
   {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "Camping Trailer Dealer Advertising",
+    "name": "Camper Trailer Dealer Advertising",
     "provider": {
       "@type": "Organization",
-      "name": "Camping Trailers For Sale",
+      "name": "Camper Trailers For Sale",
       "url": "https://www.campingtrailersforsale.com.au/",
     },
-    "description": "Unlimited camping trailer listings on CampingTrailersForSale.com.au for $99/month (inc. GST). Zero lead fees, no lock-in contracts, automatic inventory sync.",
+    "description": "Unlimited camper trailer listings on CampingTrailersForSale.com.au for $99/month (inc. GST). Zero lead fees, no lock-in contracts, automatic inventory sync.",
     "url": "https://www.campingtrailersforsale.com.au/dealer-advertising/",
     "areaServed": { "@type": "Country", "name": "Australia" },
     "offers": {
@@ -54,12 +54,12 @@ const schemaGraph = [
         "name": "How much does the dealer subscription cost, and what's included?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The dealer subscription is $99 per month (including GST). This flat monthly fee allows your dealership to list unlimited camping trailers on CampingTrailersForSale.com.au. There are no per-listing charges, and we never charge per lead or take success commissions – no matter how many inquiries or sales you get, $99/month covers it all.",
+          "text": "The dealer subscription is $99 per month (including GST). This flat monthly fee allows your dealership to list unlimited camper trailers on CampingTrailersForSale.com.au. There are no per-listing charges, and we never charge per lead or take success commissions – no matter how many inquiries or sales you get, $99/month covers it all.",
         },
       },
       {
         "@type": "Question",
-        "name": "How are my camping trailer listings added and kept up-to-date automatically?",
+        "name": "How are my camper trailer listings added and kept up-to-date automatically?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "We sync directly with your dealership's website. Your listings are pulled automatically and refreshed weekly to match your current inventory.",
@@ -67,10 +67,10 @@ const schemaGraph = [
       },
       {
         "@type": "Question",
-        "name": "What kind of audience will my camping trailers reach?",
+        "name": "What kind of audience will my camper trailers reach?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "CampingTrailersForSale.com.au is a camping trailer-only marketplace with a focused, nationwide audience of serious buyers.",
+          "text": "CampingTrailersForSale.com.au is a camper trailer-only marketplace with a focused, nationwide audience of serious buyers.",
         },
       },
       {

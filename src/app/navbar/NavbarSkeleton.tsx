@@ -7,7 +7,7 @@ export default function NavbarSkeleton() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/cts-logo.svg"
-              alt="Camping Trailers For Sale"
+              alt="Camper Trailers For Sale"
               width={150}
               height={50}
             />
@@ -24,7 +24,7 @@ export default function NavbarSkeleton() {
           <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul className="navbar-nav mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link" href="/sell-my-camping-trailer/">Sell My Camping Trailer</a>
+                <a className="nav-link" href="/sell-my-camper-trailer/">Sell My Camper Trailer</a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/dealer-advertising/">Dealer Advertising</a>

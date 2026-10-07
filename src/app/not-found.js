@@ -4,18 +4,18 @@ import Notfound from "./searchError";
 
 export const metadata = {
   title: "404 - Page Not Found | Caravans For Sale",
-  description: "The page you're looking for doesn't exist or has been moved. Browse our range of camping trailers for sale across Australia.",
+  description: "The page you're looking for doesn't exist or has been moved. Browse our range of camper trailers for sale across Australia.",
   robots: "noindex, nofollow",
 };
 
 export default function NotFoundPage() {
   const categories = [
-    { name: "Off Road Camping Trailers", slug: "off-road-category" },
-    { name: "Hybrid Camping Trailers", slug: "hybrid-category" },
-    { name: "Pop Top Camping Trailers", slug: "pop-top-category" },
-    { name: "Luxury Camping Trailers", slug: "luxury-category" },
-    { name: "Family Camping Trailers", slug: "family-category" },
-    { name: "Touring Camping Trailers", slug: "touring-category" },
+    { name: "Off Road Camper Trailers", slug: "off-road-category" },
+    { name: "Hybrid Camper Trailers", slug: "hybrid-category" },
+    { name: "Pop Top Camper Trailers", slug: "pop-top-category" },
+    { name: "Luxury Camper Trailers", slug: "luxury-category" },
+    { name: "Family Camper Trailers", slug: "family-category" },
+    { name: "Touring Camper Trailers", slug: "touring-category" },
   ];
 
   const states = [
@@ -39,7 +39,7 @@ export default function NotFoundPage() {
           404
         </h1>
         <p className="err-sub">
-          Oops! The camping trailer or page you’re looking for isn’t available.
+          Oops! The camper trailer or page you’re looking for isn’t available.
         </p>
 
         <div className="search-wrap">
@@ -53,7 +53,7 @@ export default function NotFoundPage() {
             Go to Homepage
           </Link>
           <a className="btn btn-outline" href="/listings/">
-            Browse Camping Trailers
+            Browse Camper Trailers
           </a>
         </div>
 

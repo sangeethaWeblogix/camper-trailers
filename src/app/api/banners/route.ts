@@ -11,7 +11,7 @@ export async function GET() {
     const results = await Promise.allSettled(
       PLACEMENTS.map(async (placement) => {
         // site=ctfs scopes results to this site's own banners — the Marketplace
-        // Network backend serves multiple connected sites (camping trailers,
+        // Network backend serves multiple connected sites (camper trailers,
         // campervans, etc.) from the same ads-manager API; without this param
         // it returns banners for whichever site happens to match first.
         // The `_` cache-buster + explicit no-cache headers are needed because the

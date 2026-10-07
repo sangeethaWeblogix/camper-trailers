@@ -70,8 +70,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const seo = data?.seo ?? data?.product?.seo ?? {};
   const slugTitle = slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
-  const title = seo.metatitle || seo.meta_title || pd.name || data?.name || slugTitle || "Camping Trailer for Sale";
-  const description = seo.metadescription || seo.meta_description || pd.short_description || "View camping trailer details on Camping Trailers For Sale Australia.";
+  const title = seo.metatitle || seo.meta_title || pd.name || data?.name || slugTitle || "Camper Trailer for Sale";
+  const description = seo.metadescription || seo.meta_description || pd.short_description || "View camper trailer details on Camper Trailers For Sale Australia.";
   const canonicalUrl = `https://www.campingtrailersforsale.com.au/product/${slug}/`;
   const rawImages = pd.image_url ?? pd.images ?? [];
   const images: string[] = (Array.isArray(rawImages) ? rawImages : [rawImages]).filter(Boolean);
@@ -86,7 +86,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description,
       url: canonicalUrl,
-      siteName: "Camping Trailers for Sale",
+      siteName: "Camper Trailers for Sale",
       ...(images.length > 0 && { images: [{ url: images[0], alt: title }] }),
       type: "website",
     },
@@ -330,7 +330,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
       ...(priceStr && { price: priceStr }),
       availability: "https://schema.org/InStock",
       url: canonicalUrl,
-      seller: { "@type": "Organization", name: "Camping Trailers For Sale" },
+      seller: { "@type": "Organization", name: "Camper Trailers For Sale" },
     },
   };
 
