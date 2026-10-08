@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const SELL_DATA = [
+export const SELL_DATA = [
   {
     state: "Victoria",
     stateSlug: "victoria",

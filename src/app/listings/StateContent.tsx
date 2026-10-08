@@ -7,18 +7,22 @@ type Faq = { q: string; a: string };
 
 interface Props {
   footerDescription?: string;
-  faq?: string;
+  /** The API sends this as a real array; a JSON-encoded string is also
+   * accepted in case an older/alternate endpoint still sends it that way. */
+  faq?: string | Faq[];
 }
 
-function parseFaq(raw?: string): Faq[] {
+function parseFaq(raw?: string | Faq[]): Faq[] {
   if (!raw) return [];
-  try {
-    const parsed = JSON.parse(raw);
-    if (!Array.isArray(parsed)) return [];
-    return parsed.filter((f): f is Faq => !!f?.q && !!f?.a);
-  } catch {
-    return [];
-  }
+  const parsed = Array.isArray(raw) ? raw : (() => {
+    try {
+      return JSON.parse(raw);
+    } catch {
+      return null;
+    }
+  })();
+  if (!Array.isArray(parsed)) return [];
+  return parsed.filter((f): f is Faq => !!f?.q && !!f?.a);
 }
 
 function FaqItem({ q, a }: Faq) {

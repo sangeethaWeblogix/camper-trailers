@@ -381,3 +381,302 @@ footer.style-8 .content .logo-social .socials a:hover {
 .sell-panel__region-list li a:hover {
   color: #0066cc;
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+   Footer v2 — multi-column layout (design reference: motorhomesforsale.com.au
+   / caravansforsale.com.au light footer). Light theme, this site's own blue
+   #0066cc accent in place of the reference's orange.
+   ══════════════════════════════════════════════════════════════════════ */
+
+footer.style-8.ft-v2 {
+  background: #f5f6f7;
+}
+
+.ft-v2 {
+  padding: 48px 0 0;
+}
+
+.ft-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 28px;
+  padding-bottom: 36px;
+
+}
+
+.ft-col__title {
+     color: #1a1a1a;
+    margin: 0 0 18px;
+    padding-bottom: 11px;
+    font-size: 16px;
+    font-weight: 700;
+    display: inline-block;
+    position: relative;
+}
+
+.ft-col__title:after {
+    content: "";
+    background: #0066cc;
+    width: 28px;
+    height: 2px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.ft-col__title--stacked {
+  margin-top: 24px;
+}
+
+/* Sell-by-location trigger inline in the column — styled like the other links */
+.ft-sell-trigger {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+}
+
+.ft-col__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ft-col__list li a, .ft-col__list li button {
+    color: #1c1c1c;
+    font-size: 15px;
+    line-height: 1.4;
+    text-decoration: none;
+    transition: color .2s;
+}
+
+.ft-col__list li a:hover,
+.ft-col__list li button:hover {
+  color: #0066cc;
+}
+
+.ft-col__view-all {
+  color: #0066cc !important;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Our Sites — sibling marketplace network, each logo its own white card */
+.ft-sites {
+  margin: 32px 0 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.ft-sites__label {
+  
+    color: #1a1a1a;
+    margin: 0 0 18px;
+    padding-bottom: 11px;
+    font-size: 16px;
+    font-weight: 700;
+    display: inline-block;
+    position: relative;
+}
+.ft-sites__label:after {
+    content: "";
+    background: #0099da;
+    width: 28px;
+    height: 2px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.ft-sites__row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  width: 100%;
+}
+.ft-sites__logo {
+    background: #f8f9fa;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 22px 18px;
+    text-decoration: none;
+    transition: border-color .2s, background .2s;
+    display: flex;
+}
+.ft-sites__logo img {
+    width: 100%;
+    height: 27px;
+}
+.ft-sites__logo:hover {
+      background: #e6f2fc;
+    border-color: #06c;
+}
+.ft-sites__logo--current {
+  pointer-events: none;
+}
+
+/* Sell by Location — flat card, "+" toggle, matches the reference design */
+.ft-sell-card {
+  margin: 20px 0 0;
+  background: #ffffff;
+  border: 1px solid #e2e3e5;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.ft-sell-card__trigger {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+}
+.ft-sell-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.ft-sell-card__title {
+    color: #1c1c1c;
+    font-size: 16px;
+    font-weight: 700;
+}
+.ft-sell-card__sub {
+    color: #1c1c1c;
+    font-size: 15px;
+    margin-top: 2px;
+}
+.ft-sell-card__icon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #f0f7ff;
+  color: #0066cc;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+.ft-sell-card__icon--open {
+  transform: rotate(45deg);
+}
+
+/* Sell-by-location expandable panel */
+.ft-sell-panel {
+  border-top: 1px solid #e2e3e5;
+  padding: 20px 20px 16px;
+  animation: sellPanelIn 0.22s ease;
+}
+.ft-sell-panel__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px 20px;
+}
+.ft-sell-panel__col {
+  min-width: 0;
+}
+.ft-sell-panel__state-title {
+  display: block;
+  color: #15181c !important;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #0066cc;
+}
+.ft-sell-panel__region-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.ft-sell-panel__region-list li a {
+  color: #1c1c1c;
+    font-size: 14px;
+    line-height: 1.6;
+    text-decoration: none;
+    transition: color .2s;
+    display: block;
+}
+.ft-sell-panel__region-list li a:hover {
+  color: #0066cc;
+}
+
+/* Legal + copyright */
+.ft-bottom {
+  padding: 24px 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+}
+.ft-legal {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+}
+.ft-legal li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ft-legal li:not(:first-child)::before {
+  content: "\00b7";
+  color: #c2c5c9;
+}
+.ft-legal li a {
+    color: #1c1c1c;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color .2s;
+}
+.ft-legal li a:hover {
+  color: #0066cc;
+}
+.ft-copyright {
+    color: #1c1c1c;
+    margin: 0;
+    font-size: 14px;
+}
+
+@media (max-width: 1100px) {
+  .ft-grid { grid-template-columns: repeat(3, 1fr); gap: 28px 20px; }
+  .ft-sell-panel__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 767px) {
+  .ft-v2 { padding: 36px 0 0; }
+  .ft-grid { grid-template-columns: repeat(1, 1fr); gap: 28px 16px; }
+  .ft-sell-panel__grid { grid-template-columns: 1fr; }
+  .ft-sites__row { grid-template-columns: repeat(2, 1fr); }
+  .ft-sites__logo { padding: 10px 16px; }
+  .ft-sites__logo img { height: 18px; }
+  .ft-sell-card__trigger { padding: 14px 16px; }
+  .ft-bottom { justify-content: flex-start; }
+}

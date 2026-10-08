@@ -60,8 +60,9 @@ export type SeoV2 = {
   meta_description?: string;
   short_description?: string;
   footer_description?: string;
-  /** JSON-encoded string: `[{ "q": "...", "a": "..." }, ...]` */
-  faq?: string;
+  /** Real array from the API: `[{ "q": "...", "a": "..." }, ...]` — a
+   * JSON-encoded string is also tolerated (see StateContent's parseFaq). */
+  faq?: string | { q: string; a: string }[];
 };
 
 /** Featured-tab ordering: slots 1 & 2 are regular featured vans, slot 3 is the

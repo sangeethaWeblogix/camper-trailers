@@ -8,9 +8,9 @@ type Item = {
   make?: string;
   model?: string;
   link: string;
-  length?: string;
-  regular_price?: string;
-  sale_price?: string;
+  length?: string | number;
+  regular_price?: string | number;
+  sale_price?: string | number;
   image?: string;
   image_format?: string[];
   categories?: string[];
@@ -24,7 +24,7 @@ type ApiResponse = {
     meta_title?: string;
     meta_description?: string;
     footer_description?: string;
-    faq?: string;
+    faq?: string | Faq[];
   };
   pagination?: {
     total_products?: number;
@@ -132,15 +132,16 @@ async function fetchPoolListingsForHead(
   return data;
 }
 
-function parseLengthFt(raw: string): number {
+function parseLengthFt(raw: string | number): number {
   // handles "19'6 ft" (feet+inches) and "24.93 ft" (decimal feet)
-  const feetInches = raw.match(/^(\d+)'(\d+)/);
+  const str = String(raw);
+  const feetInches = str.match(/^(\d+)'(\d+)/);
   if (feetInches) return parseInt(feetInches[1]) + parseInt(feetInches[2]) / 12;
-  return parseFloat(raw);
+  return parseFloat(str);
 }
 
-function cleanPrice(raw: string): string {
-  return raw.replace(/[$,]/g, "").trim();
+function cleanPrice(raw: string | number): string {
+  return String(raw).replace(/[$,]/g, "").trim();
 }
 
 function stripHtml(raw: string): string {
@@ -159,15 +160,17 @@ function stripHtml(raw: string): string {
 
 type Faq = { q: string; a: string };
 
-function parseFaq(raw?: string): Faq[] {
+function parseFaq(raw?: string | Faq[]): Faq[] {
   if (!raw) return [];
-  try {
-    const parsed = JSON.parse(raw);
-    if (!Array.isArray(parsed)) return [];
-    return parsed.filter((f): f is Faq => !!f?.q && !!f?.a);
-  } catch {
-    return [];
-  }
+  const parsed = Array.isArray(raw) ? raw : (() => {
+    try {
+      return JSON.parse(raw);
+    } catch {
+      return null;
+    }
+  })();
+  if (!Array.isArray(parsed)) return [];
+  return parsed.filter((f): f is Faq => !!f?.q && !!f?.a);
 }
 
 function buildProductListItem(item: Item, position: number) {
