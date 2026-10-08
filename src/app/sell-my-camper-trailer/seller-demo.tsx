@@ -490,6 +490,21 @@
            </a>
          </div>
        </section>
+
+      {/* Sell elsewhere -- sibling marketplace network */}
+      <section className="demo-sell-elsewhere">
+        <div className="container">
+          <h2 className="demo-sell-elsewhere__title">Have something other than a camper trailer to sell?</h2>
+          <p className="demo-sell-elsewhere__body">
+            You can{" "}
+            <a href="https://www.caravansforsale.com.au/sell-my-caravan/" className="demo-sell-elsewhere__link" target="_blank" rel="noopener noreferrer">sell your caravan</a>,{" "}
+            <a href="https://www.motorhomesforsale.com.au/sell-my-motorhome/" className="demo-sell-elsewhere__link" target="_blank" rel="noopener noreferrer">sell your motorhome</a>{" "}
+            or{" "}
+            <a href="https://www.campervansforsale.au/sell-my-campervan/" className="demo-sell-elsewhere__link" target="_blank" rel="noopener noreferrer">sell your campervan</a>{" "}
+            through our other marketplaces. Visit the relevant website to see your listing options and get started.
+          </p>
+        </div>
+      </section>
  
      </div>
    );
