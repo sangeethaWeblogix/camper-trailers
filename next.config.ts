@@ -71,7 +71,7 @@ const nextConfig: NextConfig = {
       // ── Old caravan-enquiry-form URL → renamed route ─────────────────────
       {
         source: "/caravan-enquiry-form/",
-        destination: "/camping-trailer-enquiry-form/",
+        destination: "/camper-trailer-enquiry-form/",
         permanent: true,
       },
 

@@ -99,7 +99,7 @@ useEffect(() => {
                 some examples of what other camper trailer buyers are looking for.
               </p>
               <div className="final_post_btn">
-                <a href="/camping-trailer-enquiry-form/" className="btn">
+                <a href="/camper-trailer-enquiry-form/" className="btn">
                   Post Your Requirements
                 </a>
               </div>

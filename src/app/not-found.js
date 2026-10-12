@@ -3,31 +3,24 @@ import "./not-found.css";
 import Notfound from "./searchError";
 
 export const metadata = {
-  title: "404 - Page Not Found | Caravans For Sale",
+  title: "404 - Page Not Found | Camper Trailers For Sale",
   description: "The page you're looking for doesn't exist or has been moved. Browse our range of camper trailers for sale across Australia.",
   robots: "noindex, nofollow",
 };
 
 export default function NotFoundPage() {
   const categories = [
-    { name: "Off Road Camper Trailers", slug: "off-road-category" },
     { name: "Hybrid Camper Trailers", slug: "hybrid-category" },
-    { name: "Pop Top Camper Trailers", slug: "pop-top-category" },
-    { name: "Luxury Camper Trailers", slug: "luxury-category" },
-    { name: "Family Camper Trailers", slug: "family-category" },
-    { name: "Touring Camper Trailers", slug: "touring-category" },
+    { name: "Camper Trailers", slug: "camper-trailer-category" },
+    { name: "Off Road Camper Trailers", slug: "off-road-camper-category" },
+    { name: "Tent Trailers", slug: "tent-trailer-category" },
   ];
 
   const states = [
-    {
-      name: "Australian Capital Territory",
-      slug: "australian-capital-territory-state",
-    },
+    { name: "Victoria", slug: "victoria-state" },
     { name: "New South Wales", slug: "new-south-wales-state" },
-    { name: "Northern Territory", slug: "northern-territory-state" },
     { name: "Queensland", slug: "queensland-state" },
     { name: "South Australia", slug: "south-australia-state" },
-    { name: "Victoria", slug: "victoria-state" },
     { name: "Western Australia", slug: "western-australia-state" },
     { name: "Tasmania", slug: "tasmania-state" },
   ];

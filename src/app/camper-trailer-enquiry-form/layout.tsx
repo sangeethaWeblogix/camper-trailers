@@ -16,7 +16,7 @@ import { ReactNode } from "react";
      google: "6tT6MT6AJgGromLaqvdnyyDQouJXq0VHS-7HC194xEo", // ✅ this auto generates <meta name="google-site-verification" />
    },
    alternates: {
-    canonical: "https://www.campingtrailersforsale.com.au/camping-trailer-enquiry-form/",
+    canonical: "https://www.campingtrailersforsale.com.au/camper-trailer-enquiry-form/",
    },
    
  

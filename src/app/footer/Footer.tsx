@@ -34,7 +34,7 @@ const OUR_SITES = [
   { name: "Caravans For Sale", href: "https://www.caravansforsale.com.au/", logo: "/images/our_sites/cfs-logo-black.svg" },
   { name: "Motorhomes For Sale", href: "https://www.motorhomesforsale.com.au/", logo: "/images/our_sites/mfs-logo.svg" },
   { name: "Campervans For Sale", href: "https://www.campervansforsale.au/", logo: "/images/our_sites/camper_logo.svg" },
-  { name: "Camping Trailers For Sale", href: "/", logo: "/images/our_sites/cts-logo.svg", current: true },
+  { name: "Camper Trailers For Sale", href: "/", logo: "/images/our_sites/cts-logo.svg", current: true },
 ];
 
 const Footer = () => {
