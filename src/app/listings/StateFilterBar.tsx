@@ -1170,7 +1170,8 @@ export default function StateFilterBar({
                 </div>
               </div>
 
-              {/* Keyword */}
+              {/* Keyword — temporarily hidden, keep code for easy restore */}
+              {false && (
               <div className="filter-item">
                 <h4>Search by Keyword</h4>
                 <div style={{ position:"relative" }}>
@@ -1218,6 +1219,7 @@ export default function StateFilterBar({
                   )}
                 </div>
               </div>
+              )}
 
             </div>
             <div className="filter-footer">

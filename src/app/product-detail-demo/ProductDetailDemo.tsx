@@ -396,12 +396,13 @@ export default function ProductDetailDemo({ data, similarData }: Props) {
   const stateAttr   = attributes.find(a => String(a?.label ?? "").toLowerCase() === "location");
   const stateSlug   = stateAttr?.url?.trim() || `${slugify(locationState)}-state`;
 
+  let locationRow: DetailRow | null = null;
   if (locationCity || locationState) {
     if (stateAttr) consumedLabels.add("location");
     const links: DetailLink[] = [];
     if (locationCity && regionSlug) links.push({ href: `/listings/${stateSlug}/${regionSlug}/`, text: locationCity.replace(/\b\w/g, c => c.toUpperCase()) });
     if (locationState) links.push(stateAttr?.url ? linkFromApiUrl(stateAttr.url, locationState) : { href: `/listings/${stateSlug}/`, text: locationState });
-    detailRows.push({ label: "Location", value: [locationCity, locationState].filter(Boolean).join(", "), url: "", links });
+    locationRow = { label: "Location", value: [locationCity, locationState].filter(Boolean).join(", "), url: "", links };
   }
 
   // Any attribute the curated rows above didn't claim (new/unknown fields the
@@ -414,6 +415,8 @@ export default function ProductDetailDemo({ data, similarData }: Props) {
       return { label, value, url: a.url ? makeDetailUrl(label, value, a.url) : "" };
     });
   detailRows.push(...extraRows);
+  // Location always goes last, after every other attribute row.
+  if (locationRow) detailRows.push(locationRow);
 
   const half2     = Math.ceil(detailRows.length / 2);
   const leftRows  = detailRows.slice(0, half2);
