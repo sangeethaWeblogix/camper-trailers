@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
 import StateHero from "./StateHero";
@@ -31,32 +32,6 @@ const readPage = (id: string): number | null => {
 };
 
 const SEED_MAX = 15;
-
-// ── Seeded shuffle ────────────────────────────────────────────────────────────
-// Mulberry32 PRNG — deterministic, fast, well-distributed.
-// Used to shuffle the pool in the live-fetch path so that even when the
-// pool-listings KV cache serves identical JSON for every seed (the cache key
-// strips `seed`), each refresh still displays a different product order.
-function mulberry32(seed: number) {
-  return () => {
-    seed += 0x6D2B79F5;
-    let t = seed ^ (seed >>> 15);
-    t = Math.imul(t, 1 | seed);
-    t ^= t + Math.imul(t ^ (t >>> 7), 61 | t);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-function seededShuffle<T>(arr: T[], seed: number): T[] {
-  if (arr.length <= 1) return arr;
-  const out = [...arr];
-  const rand = mulberry32(seed);
-  for (let i = out.length - 1; i > 0; i--) {
-    const j = Math.floor(rand() * (i + 1));
-    [out[i], out[j]] = [out[j], out[i]];
-  }
-  return out;
-}
-// ─────────────────────────────────────────────────────────────────────────────
 
 /** Full pool data fetched server-side in page.tsx and passed as a prop so the
  *  SSR / KV-cached HTML contains real product listings from the first byte. */
@@ -105,6 +80,7 @@ export default function StateHome({
   initialFilters, browseData, initialPool, initialSeo, serverIsIndexed,
   initialCategories, initialStates, initialMakes, initialCategoryCounts, initialMakeCounts,
 }: Props) {
+  const router = useRouter();
   const [filters, setFilters] = useState<FilterState>(initialFilters ?? {});
   const [page, setPage] = useState(1);
   const [maxPages, setMaxPages] = useState(initialPool?.maxPages ?? 1);
@@ -144,6 +120,38 @@ export default function StateHome({
   // Only a missing initialPool (SSR fetch failed/empty) forces a live fetch,
   // so the page still has something to render.
   const initialPropConsumed = useRef(initialPool == null);
+
+  // Filter changes navigate via router.replace() (see pushFiltersToUrl), and
+  // back/forward is handled natively by Next's own router too — both cause
+  // page.tsx to re-run server-side and hand this component a fresh
+  // initialFilters/initialPool, rather than this component re-fetching that
+  // same data itself client-side. useState's initializer only applies at
+  // mount, though, so without this the component would keep showing whatever
+  // it rendered at mount regardless of later prop changes. This syncs state
+  // from props whenever a new navigation actually delivers new ones (compared
+  // by reference, since page.tsx builds a fresh initialPool object each run),
+  // and re-arms the "skip the next live fetch" refs below so the client
+  // doesn't immediately redo the fetch the server just did.
+  const prevInitialPoolRef = useRef(initialPool);
+  useEffect(() => {
+    if (prevInitialPoolRef.current === initialPool) return;
+    prevInitialPoolRef.current = initialPool;
+
+    setFilters(initialFilters ?? {});
+    setPage(1);
+    setMaxPages(initialPool?.maxPages ?? 1);
+    setClickid(null);
+    setSeo(initialPool?.seo ?? initialSeo ?? null);
+    setNewSeo(initialPool?.newSeo ?? null);
+    setUsedSeo(initialPool?.usedSeo ?? null);
+    setIsIndexed(initialPool?.isIndexed ?? serverIsIndexed ?? true);
+    if (initialPool) {
+      setPool({ featured: initialPool.featured, new: initialPool.new, used: initialPool.used });
+    }
+    initialPropConsumed.current = false;
+    conditionSeoConsumed.current = false;
+  }, [initialFilters, initialPool, initialSeo, serverIsIndexed]);
+
   // Snapshot of the most-recently-consumed preload data, keyed by poolApiUrl.
   // Used to re-bucket without a live fetch when only `isIndexed` changes (e.g.
   // the async /api/indexed-url/ check resolves to a different value than the
@@ -324,6 +332,13 @@ export default function StateHome({
   }, []);
 
   useEffect(() => {
+    // Pagination (?clickid=) still applies via a plain window.history.pushState
+    // (see handleNextPage/handlePrevPage) rather than the router, since it's
+    // just a query-string change on the same path — no server round trip
+    // needed. Filter changes, in contrast, go through router.replace() (see
+    // pushFiltersToUrl), so Next's own router already handles back/forward
+    // correctly for those: it re-renders this page with fresh server props,
+    // which the effect below (watching initialFilters/initialPool) picks up.
     const handlePopState = () => {
       const cid = new URLSearchParams(window.location.search).get("clickid");
       if (cid) {
@@ -546,33 +561,22 @@ export default function StateHome({
           // Indexed pages split into Featured/New/Used — the backend pre-splits these
           // on page 1/default order (featured_products/new_products/used_products),
           // otherwise falls back to bucketing the flat `products` array by tier/slot_bucket.
-          // seededShuffle reorders each bucket using the client's random seed so
-          // different products appear on each refresh even when the pool-listings
-          // KV cache serves the same JSON for every seed value.
+          // Order is exactly what the API returns for this seed — no client-side reordering.
           const bucketOf = (p: Listing) => (p as Listing & { tier?: string }).tier ?? p.slot_bucket;
-          const featuredSource = seededShuffle(
-            hasPreSplit ? featuredSplit : products.filter((p) => bucketOf(p) === "featured"),
-            seed
-          );
+          const featuredSource = hasPreSplit ? featuredSplit : products.filter((p) => bucketOf(p) === "featured");
           const featuredItems = buildFeaturedOrder(featuredSource, premiumsRaw, exclusivesRaw);
           const featuredIds = new Set(featuredItems.map((p) => p.id));
 
           const newSource = normalizeAll(hasPreSplit ? newSplit : products.filter((p) => bucketOf(p) === "new"));
           const usedSource = normalizeAll(hasPreSplit ? usedSplit : products.filter((p) => bucketOf(p) === "used"));
-          const newItems = seededShuffle(
-            newSource.filter((p) => !p.is_premium && !p.is_exclusive && !featuredIds.has(p.id)),
-            seed + 1000
-          );
-          const usedItems = seededShuffle(
-            usedSource.filter((p) => !p.is_premium && !p.is_exclusive && !featuredIds.has(p.id)),
-            seed + 2000
-          );
+          const newItems = newSource.filter((p) => !p.is_premium && !p.is_exclusive && !featuredIds.has(p.id));
+          const usedItems = usedSource.filter((p) => !p.is_premium && !p.is_exclusive && !featuredIds.has(p.id));
 
           setPool({ featured: featuredItems, new: newItems, used: usedItems });
         } else {
           // Non-indexed pages get one combined grid instead of a split.
           const combined = buildFeaturedOrder(
-            seededShuffle(products.length ? products : featuredSplit, seed),
+            products.length ? products : featuredSplit,
             premiumsRaw,
             exclusivesRaw
           );
@@ -621,16 +625,24 @@ export default function StateHome({
       .catch(() => setUsedSeo(null));
   }, [filters, seed, page, isIndexed]);
 
+  // router.replace (not pushState) so Next.js's own router tracks every
+  // filtered URL as a real navigation entry — back/forward then re-renders
+  // this page with fresh server data instead of risking a stale cached
+  // render from a URL Next never knew about.
   const pushFiltersToUrl = (f: FilterState) => {
-    window.history.pushState({}, "", buildListingsSlug(f));
+    router.replace(buildListingsSlug(f), { scroll: false });
   };
 
+  // No optimistic setFilters/setPage/etc. here — that used to fire the
+  // client-side live-fetch effect immediately, THEN the router.replace()
+  // navigation would ALSO land fresh server data moments later via the
+  // prop-sync effect, fetching the same thing twice (felt like the page
+  // loading twice). Just navigate and let the prop-sync effect update state
+  // once, when the real (single) server response for this filter arrives.
   const handleFilterChange = (f: FilterState) => {
-    setFilters(f); setPage(1); setMaxPages(1); setClickid(null);
     pushFiltersToUrl(f);
   };
   const handleClearAll = () => {
-    setFilters({}); setPage(1); setMaxPages(1); setClickid(null);
     pushFiltersToUrl({});
   };
 

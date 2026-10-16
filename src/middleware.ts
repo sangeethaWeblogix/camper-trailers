@@ -206,19 +206,17 @@ export async function middleware(request: NextRequest) {
     return render410(request);
   }
 
-  /* 🚫 Listings: forbidden segments, unknown params, OR wrong URL order → 410 */
+  /* 🚫 Listings: forbidden segments OR wrong URL order → 410 */
   if (isListingsPath) {
     const segments = url.pathname.split('/').filter(Boolean);
     const hasForbiddenSegment = segments.some(s => /(page|feed)/i.test(s));
 
-    const ALLOWED_PARAMS = new Set(['clickid', 'orderby', 'search', 'keyword', 'radius_kms', 'shuffle_seed']);
-    const hasUnknownParam = Array.from(url.searchParams.keys()).some(k => !ALLOWED_PARAMS.has(k.toLowerCase()));
     const hasForbiddenValue = Array.from(url.searchParams.values()).some(v => /(page|feed)/i.test(v));
 
     if (hasForbiddenSegment) {
       return gone404(request);
     }
-    if (hasUnknownParam || hasForbiddenValue) {
+    if (hasForbiddenValue) {
       return render410(request);
     }
 

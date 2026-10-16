@@ -246,7 +246,7 @@ function ListingCard({
  const postTrackClick = (product_id: number, slug?: string) => {
     try {
       navigator.sendBeacon(
-        "/api/track-click",
+        "/api/track-click/",
         new Blob([JSON.stringify({ product_id, slug })], { type: "application/json" })
       );
    } catch {}
@@ -255,7 +255,7 @@ function ListingCard({
      const postTrackEvent = (product_id: number, slug?: string) => {
     try {
        navigator.sendBeacon(
-         "/api/track",
+         "/api/track/",
          new Blob([JSON.stringify({ product_id, slug })], { type: "application/json" })
        );
      } catch {}
