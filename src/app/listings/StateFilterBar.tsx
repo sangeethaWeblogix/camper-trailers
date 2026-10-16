@@ -425,7 +425,8 @@ export default function StateFilterBar({
     ? states.filter(s => stateCounts.some(sc => sc.slug === s.value && sc.count > 0))
     : states;
 
-  const makeSource  = makeCounts.length > 0 ? makeCounts : makes.map(m => ({ name: m.name, slug: m.slug, count: 0 }));
+  const makeSourceRaw = makeCounts.length > 0 ? makeCounts : makes.map(m => ({ name: m.name, slug: m.slug, count: 0 }));
+  const makeSource = [...makeSourceRaw].sort((a, b) => a.name.localeCompare(b.name));
   const filteredMakes = makeSearch
     ? (() => {
         const q = makeSearch.toLowerCase();
@@ -434,12 +435,14 @@ export default function StateFilterBar({
           .sort((a, b) => {
             const an = a.name.toLowerCase(), bn = b.name.toLowerCase();
             const rank = (n: string) => n.startsWith(q) ? 0 : n.includes(` ${q}`) ? 1 : 2;
-            return rank(an) - rank(bn);
+            const r = rank(an) - rank(bn);
+            return r !== 0 ? r : an.localeCompare(bn);
           });
       })()
     : makeSource;
   const availableModels = makes.find(m => m.slug === tempMake)?.models ?? [];
-  const modelSource = modelCounts.length > 0 ? modelCounts : availableModels.map(m => ({ name: m.name, slug: m.slug, count: 0 }));
+  const modelSourceRaw = modelCounts.length > 0 ? modelCounts : availableModels.map(m => ({ name: m.name, slug: m.slug, count: 0 }));
+  const modelSource = [...modelSourceRaw].sort((a, b) => a.name.localeCompare(b.name));
   const filteredModels = modelSearch
     ? (() => {
         const q = modelSearch.toLowerCase();
@@ -448,7 +451,8 @@ export default function StateFilterBar({
           .sort((a, b) => {
             const an = a.name.toLowerCase(), bn = b.name.toLowerCase();
             const rank = (n: string) => n.startsWith(q) ? 0 : n.includes(` ${q}`) ? 1 : 2;
-            return rank(an) - rank(bn);
+            const r = rank(an) - rank(bn);
+            return r !== 0 ? r : an.localeCompare(bn);
           });
       })()
     : modelSource;
