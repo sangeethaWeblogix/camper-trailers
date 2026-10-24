@@ -113,7 +113,10 @@ const titleCaseLocation = (s: string) =>
 function normalizeProductDetail(raw: any): any {
   if (!raw || raw.message === "Listing not found." || raw.code) return raw;
 
-  const rawImages: string[] = raw.r2_thumbnails ?? raw.images_full ?? raw.images ?? [];
+  // images_full has every photo the seller uploaded; r2_thumbnails is a
+  // smaller "-m" (medium) subset meant for listing-card thumbnails, not the
+  // product's own gallery — prefer the full set so none of them go missing.
+  const rawImages: string[] = raw.images_full ?? raw.r2_thumbnails ?? raw.images ?? [];
   const images: string[] = rawImages.map((t) => (/^https?:\/\//.test(t) ? t : `https://${t}`));
 
   // The MPN listing has no `attributes` object — the details-table data lives
