@@ -172,16 +172,47 @@ async function fetchFromApi(filters: FilterState, seed: number): Promise<any | n
     }
   }
 
-  // Default: go through /api/pool-listings/ (Cloudflare orange-cloud → WP).
+  // Default: go through /api/pool-listings/ (Cloudflare orange-cloud → WP) —
+  // a self-referencing fetch back to this site's own domain, which lets
+  // Cloudflare's shared edge cache serve the unseeded default pool instead of
+  // hitting WordPress every time. If that self-fetch fails for any reason
+  // (DNS/network hiccup calling our own domain from inside the serverless
+  // function, a Cloudflare rule treating server-to-server traffic
+  // differently, etc.), fall back to WordPress directly rather than
+  // returning null — every /listings/* page rendered a blank shell with no
+  // content at all whenever this one fetch failed, since nothing else in
+  // fetchInitialPool can produce a result without it.
   try {
     const res = await fetch(`${APP_URL}/api/pool-listings/?${params.toString()}`, {
       cache: "no-store",
     });
-    if (!res.ok) return null;
-    return await res.json();
+    if (res.ok) {
+      const json = await res.json();
+      if (json) return json;
+    }
   } catch {
-    return null;
+    // fall through to direct WP call below
   }
+
+  if (WP_API_BASE) {
+    try {
+      const res = await fetch(`${WP_API_BASE}/pool?${params.toString()}`, {
+        headers: {
+          Accept: "application/json",
+          ...(WP_API_KEY && { "X-Secret-Key": WP_API_KEY }),
+        },
+        cache: "no-store",
+      });
+      if (!res.ok) return null;
+      const raw = await res.text();
+      const jsonStart = raw.indexOf("{");
+      return jsonStart >= 0 ? JSON.parse(raw.substring(jsonStart)) : null;
+    } catch {
+      return null;
+    }
+  }
+
+  return null;
 }
 
 /**
