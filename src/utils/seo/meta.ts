@@ -403,7 +403,7 @@ export async function metaFromSlug(
       url: canonical,
       images: [
         {
-          url: "https://www.campingtrailersforsale.com.au/images/cfs-logo.png",
+          url: "https://www.campingtrailersforsale.com.au/images/our_sites/cts-logo.png",
           width: 800,
           height: 600,
           alt: "Camper Trailers for Sale Australia",

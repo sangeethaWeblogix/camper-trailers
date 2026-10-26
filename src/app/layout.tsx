@@ -205,7 +205,7 @@ import GlobalImageFallback from "@/components/GlobalImageFallback";
                       "url": "https://www.campingtrailersforsale.com.au/",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.campingtrailersforsale.com.au/images/cfs-logo-black.svg",
+                        "url": "https://www.campingtrailersforsale.com.au/images/our_sites/cts-logo.png",
                         "caption": "Camper Trailers For Sale by Marketplace Network",
                       },
                       "contactPoint": {

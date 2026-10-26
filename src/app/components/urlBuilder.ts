@@ -204,20 +204,30 @@ export function parseSlugToFilters(
       }
       return;
     }
-    // Year range: 2020-2025-caravans-range, year-from-2025-caravans-range, year-to-2025-caravans-range
-    if (part.includes("-caravans-range")) {
-      const bothMatch = part.match(/^(\d{4})-(\d{4})-caravans-range$/);
+    // Year range: 2020-2025-camper-range, year-from-2025-camper-range,
+    // year-to-2025-camper-range, or 2025-camper-range (single exact year).
+    // The old "-caravans-range" wording is still accepted on the way in (old
+    // links/bookmarks) — buildSlugFromFilters only ever emits "-camper-range"
+    // now, so middleware's canonical-path check redirects/410s the old form.
+    if (part.includes("-caravans-range") || part.includes("-camper-range")) {
+      const singleMatch = part.match(/^(\d{4})-camper-range$/);
+      if (singleMatch) {
+        filters.acustom_fromyears = singleMatch[1];
+        filters.acustom_toyears = singleMatch[1];
+        return;
+      }
+      const bothMatch = part.match(/^(\d{4})-(\d{4})-(?:caravans|camper)-range$/);
       if (bothMatch) {
         filters.acustom_fromyears = bothMatch[1];
         filters.acustom_toyears = bothMatch[2];
         return;
       }
-      const fromMatch = part.match(/^year-from-(\d{4})-caravans-range$/);
+      const fromMatch = part.match(/^year-from-(\d{4})-(?:caravans|camper)-range$/);
       if (fromMatch) {
         filters.acustom_fromyears = fromMatch[1];
         return;
       }
-      const toMatch = part.match(/^year-to-(\d{4})-caravans-range$/);
+      const toMatch = part.match(/^year-to-(\d{4})-(?:caravans|camper)-range$/);
       if (toMatch) {
         filters.acustom_toyears = toMatch[1];
         return;

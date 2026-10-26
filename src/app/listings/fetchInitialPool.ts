@@ -38,8 +38,11 @@ function buildApiParams(filters: FilterState, seed: number): URLSearchParams {
   if (filters.to_sleep)           params.set("to_sleep",          String(filters.to_sleep));
   if (filters.from_length)        params.set("from_length",       String(filters.from_length));
   if (filters.to_length)          params.set("to_length",         String(filters.to_length));
-  if (filters.acustom_fromyears)  params.set("acustom_fromyears", String(filters.acustom_fromyears));
-  if (filters.acustom_toyears)    params.set("acustom_toyears",   String(filters.acustom_toyears));
+  // The backend's /pool endpoint expects from_year/to_year — acustom_fromyears/
+  // acustom_toyears (a leftover param name from the old backend) is silently
+  // ignored, so the year filter did nothing at all until this was fixed.
+  if (filters.acustom_fromyears)  params.set("from_year", String(filters.acustom_fromyears));
+  if (filters.acustom_toyears)    params.set("to_year",   String(filters.acustom_toyears));
   if (filters.keyword) {
     const kw = String(filters.keyword).replace(/\+/g, " ").trim().replace(/\s+/g, " ");
     if (kw) params.set("search", kw);

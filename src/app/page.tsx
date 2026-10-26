@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     siteName: "Camper Trailers for Sale",
     images: [
       {
-        url: "https://www.campingtrailersforsale.com.au/images/cfs-logo.png",
+        url: "https://www.campingtrailersforsale.com.au/images/our_sites/cts-logo.png",
         width: 800,
         height: 600,
         alt: "Camper Trailers for Sale Australia",
@@ -79,7 +79,7 @@ const homeJsonLd = {
       "url": BASE_URL,
       "logo": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/cfs-logo-black.png`,
+        "url": `${BASE_URL}/images/our_sites/cts-logo.png`,
       },
       "contactPoint": {
         "@type": "ContactPoint",

@@ -221,8 +221,8 @@ export default function StateFilterBar({
     if (currentFilters.to_price)          params.set("to_price", String(currentFilters.to_price));
     if (currentFilters.minKg)             params.set("from_atm", String(currentFilters.minKg));
     if (currentFilters.maxKg)             params.set("to_atm", String(currentFilters.maxKg));
-    if (currentFilters.acustom_fromyears) params.set("acustom_fromyears", String(currentFilters.acustom_fromyears));
-    if (currentFilters.acustom_toyears)   params.set("acustom_toyears", String(currentFilters.acustom_toyears));
+    if (currentFilters.acustom_fromyears) params.set("from_year", String(currentFilters.acustom_fromyears));
+    if (currentFilters.acustom_toyears)   params.set("to_year", String(currentFilters.acustom_toyears));
     if (currentFilters.from_length)       params.set("from_length", String(currentFilters.from_length));
     if (currentFilters.to_length)         params.set("to_length", String(currentFilters.to_length));
     if (currentFilters.from_sleep)        params.set("from_sleep", String(currentFilters.from_sleep));
@@ -264,8 +264,8 @@ export default function StateFilterBar({
       if (currentFilters.to_price)          params.set("to_price", String(currentFilters.to_price));
       if (currentFilters.minKg)             params.set("from_atm", String(currentFilters.minKg));
       if (currentFilters.maxKg)             params.set("to_atm", String(currentFilters.maxKg));
-      if (currentFilters.acustom_fromyears) params.set("acustom_fromyears", String(currentFilters.acustom_fromyears));
-      if (currentFilters.acustom_toyears)   params.set("acustom_toyears", String(currentFilters.acustom_toyears));
+      if (currentFilters.acustom_fromyears) params.set("from_year", String(currentFilters.acustom_fromyears));
+      if (currentFilters.acustom_toyears)   params.set("to_year", String(currentFilters.acustom_toyears));
       if (currentFilters.from_length)       params.set("from_length", String(currentFilters.from_length));
       if (currentFilters.to_length)         params.set("to_length", String(currentFilters.to_length));
       if (currentFilters.from_sleep)        params.set("from_sleep", String(currentFilters.from_sleep));

@@ -129,8 +129,11 @@ function buildApiParams(filters: Filters): URLSearchParams {
   if (filters.sleeps) p.set('sleep', `${filters.sleeps}`);
   if (filters.from_sleep) p.set('from_sleep', `${filters.from_sleep}`);
   if (filters.to_sleep) p.set('to_sleep', `${filters.to_sleep}`);
-  if (filters.acustom_fromyears) p.set('acustom_fromyears', `${filters.acustom_fromyears}`);
-  if (filters.acustom_toyears) p.set('acustom_toyears', `${filters.acustom_toyears}`);
+  // Backend expects from_year/to_year — acustom_fromyears/acustom_toyears
+  // (the Filters field names) is a leftover from the old backend and is
+  // silently ignored by /pool.
+  if (filters.acustom_fromyears) p.set('from_year', `${filters.acustom_fromyears}`);
+  if (filters.acustom_toyears) p.set('to_year', `${filters.acustom_toyears}`);
   return p;
 }
 

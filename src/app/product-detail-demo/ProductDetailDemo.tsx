@@ -110,6 +110,14 @@ const fmt = (n: number) =>
   n.toLocaleString("en-AU", { style: "currency", currency: "AUD", maximumFractionDigits: 0 });
 const slugify = (s: string) => s.trim().toLowerCase().replace(/\s+/g, "-");
 const toInt = (s: string) => { const n = parseInt(String(s).replace(/[^\d]/g, ""), 10); return Number.isFinite(n) && n > 0 ? n : null; };
+// For decimal values (e.g. "14.58 ft") — toInt's digit-only strip would turn
+// that into 1458 by deleting the "." instead of parsing it, producing a
+// non-existent "under-1458-length-in-feet" URL. Parses the real number, then
+// rounds UP to the nearest real indexed bucket (confirmed against the live
+// /sitemap/length and /sitemap/atm bucket lists) so the link always lands on
+// an actual page instead of some arbitrary non-indexed value.
+const toFloat = (s: string): number | null => { const n = parseFloat(String(s).replace(/[^\d.]/g, "")); return Number.isFinite(n) && n > 0 ? n : null; };
+const roundUpTo = (n: number, step: number) => Math.ceil(n / step) * step;
 const linkFromApiUrl = (rawUrl: string, text: string) => { const u = (rawUrl || "").trim().replace(/^\/+|\/+$/g, ""); return { href: /[=&]/.test(u) ? `/listings/?${u}` : `/listings/${u}/`, text }; };
 const STATE_ABBR: Record<string, string> = {
   queensland: "QLD", "new-south-wales": "NSW", "new south wales": "NSW", nsw: "NSW",
@@ -337,13 +345,10 @@ export default function ProductDetailDemo({ data, similarData }: Props) {
     const v = value.trim();
     const L = label.toLowerCase();
     if (L === "year" || L === "years") {
-      // urlBuilder.ts's year-range parser only understands `{from}-{to}-caravans-range`,
-      // `year-from-{y}-caravans-range` or `year-to-{y}-caravans-range` — a bare
-      // `{y}-caravans-range` (what this used to build) doesn't match any of them,
-      // so the canonical-path check in middleware.ts 410'd it. Use the exact-year
-      // form (same value for from and to) so it round-trips correctly.
+      // A single exact year (from === to) canonicalizes to `{y}-camper-range`
+      // — see buildSlugFromFilters in slugBuilter.ts.
       const n = toInt(v);
-      return n ? `/listings/${n}-${n}-caravans-range/` : "";
+      return n ? `/listings/${n}-camper-range/` : "";
     }
     if (apiUrl) return linkFromApiUrl(apiUrl, v).href;
     if (L === "type" || L === "category") return v ? `/listings/${slugify(v.replace(/\s*caravans?\s*/gi, " ").trim())}-category/` : "";
@@ -351,8 +356,8 @@ export default function ProductDetailDemo({ data, similarData }: Props) {
     if (L === "model") { const mk = pickFull("Make"); const mkSlug = mk.url?.trim().replace(/^\/+|\/+$/g, "") || slugify(mk.value); return v ? `/listings/${mkSlug}/${slugify(v)}/` : ""; }
     if (L === "condition" || L === "conditions") return v ? `/listings/${slugify(v)}-condition/` : "";
     if (L === "sleeping capacity" || L === "sleep" || L === "sleeps") { const n = toInt(v); return n ? `/listings/under-${n}-people-sleeping-capacity/` : ""; }
-    if (L === "length") { const n = toInt(v); return n ? `/listings/under-${n}-length-in-feet/` : ""; }
-    if (L === "atm") { const n = toInt(v); return n ? `/listings/under-${n}-kg-atm/` : ""; }
+    if (L === "length") { const n = toFloat(v); const bucket = n ? Math.ceil(n) : null; return bucket ? `/listings/under-${bucket}-length-in-feet/` : ""; }
+    if (L === "atm") { const n = toFloat(v); const bucket = n ? roundUpTo(n, 250) : null; return bucket ? `/listings/under-${bucket}-kg-atm/` : ""; }
     return "";
   };
 

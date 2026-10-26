@@ -25,8 +25,11 @@ export function buildApiUrl(base: string, filters: FilterState, seed: number, lo
   if (filters.maxKg)              params.set("to_atm",             String(filters.maxKg));
   if (filters.from_sleep)         params.set("from_sleep",         String(filters.from_sleep));
   if (filters.to_sleep)           params.set("to_sleep",           String(filters.to_sleep));
-  if (filters.acustom_fromyears)  params.set("acustom_fromyears",  String(filters.acustom_fromyears));
-  if (filters.acustom_toyears)    params.set("acustom_toyears",    String(filters.acustom_toyears));
+  // Backend expects from_year/to_year — acustom_fromyears/acustom_toyears
+  // (the FilterState field names) is a leftover from the old backend and is
+  // silently ignored by /pool.
+  if (filters.acustom_fromyears)  params.set("from_year",  String(filters.acustom_fromyears));
+  if (filters.acustom_toyears)    params.set("to_year",    String(filters.acustom_toyears));
   if (filters.from_length)        params.set("from_length",        String(filters.from_length));
   if (filters.to_length)          params.set("to_length",          String(filters.to_length));
   // Backend free-text search only recognizes `search` (see production's

@@ -181,7 +181,7 @@
              {[
                { img: "/images/chat2.png", title: "Direct Buyer Contact", desc: "Connect directly with genuine buyers. No middleman." },
                { img: "/images/calendar.png", title: "Live Until Sold", desc: "Your listing stays online and visible until your camper trailer is sold." },
-               { img: "/images/caravan.png", title: "Camper Trailer-Only Marketplace", desc: "Reach a targeted audience actively looking to buy camper trailers." },
+               { img: "/images/category.svg", title: "Camper Trailer-Only Marketplace", desc: "Reach a targeted audience actively looking to buy camper trailers." },
                { img: "/images/dollar.png", title: "Keep 100% of Your Sale", desc: "Pay only $49 Inc GST per listing. No commissions or hidden costs." },
              ].map((item, i) => (
                <div className="demo-feature-card" key={i}>
@@ -233,7 +233,7 @@
              {CITY_LINKS.map((c) => (
                <div key={c.label} className="demo-city-item">
                  <span className="demo-city-icon">
-                   <img src="/images/caravan.png" alt="" />
+                   <img src="/images/category.svg" alt="" />
                  </span>
                        <h3 className="demo-city-label">
 
