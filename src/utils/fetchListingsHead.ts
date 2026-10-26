@@ -2,18 +2,26 @@
 import { parseSlugToFilters } from "@/app/components/urlBuilder";
 
 /** Local shapes for the pool_test response fields this file actually reads —
- * kept here instead of importing from the (removed) old listings API module. */
+ * kept here instead of importing from the (removed) old listings API module.
+ * /pool items come back as `title`/`slug`/`r2_thumbnails`/`category` (not
+ * `name`/`link`/`image_format`/`categories` — see normalizeListing in
+ * src/app/listings/listingShared.ts for the same raw shape); `make`/`model`/
+ * `axle` aren't present on /pool items at all, even when filtering by make. */
 type Item = {
-  name: string;
+  name?: string;
+  title?: string;
   make?: string;
   model?: string;
-  link: string;
+  link?: string;
+  slug?: string;
   length?: string | number;
   regular_price?: string | number;
   sale_price?: string | number;
   image?: string;
   image_format?: string[];
+  r2_thumbnails?: string[];
   categories?: string[];
+  category?: string[];
   axle?: string;
 };
 
@@ -119,12 +127,26 @@ async function fetchPoolListingsForHead(
     return null;
   }
 
+  // Page 1 + default order + no condition filter (what this function always
+  // requests) makes /pool return pre-split featured_products/new_products/
+  // used_products instead of a flat products array — same quirk documented in
+  // splitPoolProducts (src/app/listings/listingShared.ts). Without this
+  // fallback, `products` here is always empty, which left every listings
+  // page's OfferCatalog schema with 0 items regardless of real inventory.
+  const flatProducts: Item[] = json.products?.length
+    ? json.products
+    : [
+        ...(json.featured_products ?? []),
+        ...(json.new_products ?? []),
+        ...(json.used_products ?? []),
+      ];
+
   const data: ApiResponse = {
     success: json.success,
     seo_v2: json.seo_v2,
     pagination: json.pagination,
     data: {
-      products: json.products ?? [],
+      products: flatProducts,
       exclusive_products: json.exclusive_products ?? [],
       emp_exclusive_products: json.emp_exclusive_products ?? [],
       premium_products: json.premium_products ?? [],
@@ -184,21 +206,25 @@ function buildProductListItem(item: Item, position: number) {
     !isNaN(lengthFt) && lengthFt > 0
       ? (lengthFt * 0.3048).toFixed(2)
       : "";
+  const thumbs = item.r2_thumbnails?.length ? item.r2_thumbnails : item.image_format;
   const images =
-    item.image_format && item.image_format.length > 0
-      ? item.image_format
-          .slice(0, 5)
-          .map((url) => ({ "@type": "ImageObject", url }))
+    thumbs && thumbs.length > 0
+      ? thumbs.slice(0, 5).map((url) => ({ "@type": "ImageObject", url }))
       : item.image
       ? [{ "@type": "ImageObject", url: item.image }]
       : [];
+  const categories = item.categories ?? item.category;
+  const url = item.link ?? (item.slug ? `${BASE_URL}/product/${item.slug}/` : "");
   return {
     "@type": "ListItem",
     position,
     item: {
-      "@type": "Caravan",
-      bodyType: item.categories && item.categories.length > 0
-        ? item.categories.join(", ")
+      // "Caravan" isn't a real schema.org type (bodyType/vehicleConfiguration
+      // below ARE real Vehicle properties, so this was almost certainly meant
+      // to be "Vehicle" — an unrecognized @type fails schema.org validation).
+      "@type": "Vehicle",
+      bodyType: categories && categories.length > 0
+        ? categories.join(", ")
         : "",
       vehicleConfiguration: item.axle ?? "",
       width: {
@@ -206,8 +232,8 @@ function buildProductListItem(item: Item, position: number) {
         unitCode: "MT",
         value: widthMt,
       },
-      url: item.link,
-      name: item.name,
+      url,
+      name: item.name ?? item.title ?? "",
       model: item.model ?? "",
       brand: {
         "@type": "Brand",
@@ -293,7 +319,10 @@ const weburl = "https://www.campingtrailersforsale.com.au"
     audience: { "@type": "Audience", audienceType: "camper trailer buyers" },
     potentialAction: {
       "@type": "SearchAction",
-      target: { "@type": "EntryPoint", urlTemplate: weburl },
+      // schema.org/Google require the literal {search_term_string} placeholder
+      // inside the URL — a bare homepage URL (the old value here) fails
+      // structured-data validation outright.
+      target: { "@type": "EntryPoint", urlTemplate: `${weburl}/listings/{search_term_string}-search/` },
     },
     mainEntity: {
       "@type": "OfferCatalog",

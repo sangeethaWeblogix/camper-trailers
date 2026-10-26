@@ -19,7 +19,6 @@ import { BannerProvider } from "@/components/BannerHandler";
 import GlobalErrorTracker from "@/components/GlobalErrorTracker";
 import { headers } from "next/headers";
 import { metaFromSlug } from "@/utils/seo/meta";
-import { fetchProductMeta } from "@/utils/fetchProductMeta";
 import fetchListingsForHead, { buildListingsJsonLd, buildBreadcrumbs } from "@/utils/fetchListingsHead";
 import GlobalImageFallback from "@/components/GlobalImageFallback";
 
@@ -62,24 +61,12 @@ import GlobalImageFallback from "@/components/GlobalImageFallback";
     let slugCanonical = "";
     let slugRobots = "";
 
-    const isProductPage =
-      pathname.startsWith("/product/") &&
-      pathname !== "/product/" &&
-      pathname !== "/product";
-
     const isContactPage = pathname === "/contact/" || pathname === "/contact";
     const isMainListings = pathname === "/listings/" || pathname === "/listings";
 
     // Static pages whose metadata ends up after </head> due to streaming — inject directly
     const STATIC_META: Record<string, { title: string; description: string; canonical: string }> = {};
     const staticMeta = STATIC_META[pathname] ?? null;
-
-    let productMeta = { title: "", description: "", canonical: "", ogImage: "" };
-
-    if (isProductPage) {
-      const slug = pathname.replace(/^\/product\//, "").replace(/\/$/, "");
-      productMeta = await fetchProductMeta(slug);
-    }
 
     // Listings JSON-LD — fetched here so both schemas render inside <head>
     // Second call hits Next.js data cache (revalidate: 3600), no extra network round-trip.
@@ -110,9 +97,13 @@ import GlobalImageFallback from "@/components/GlobalImageFallback";
       const slugString = pathname.replace(/^\/listings\//, "").replace(/\/$/, "");
       const slugParts = isMainListings ? [] : slugString.split("/").filter(Boolean);
 
-      // Middleware signals 0 products via x-robots: noindex — use it directly, no API call needed
-      if (isListingSlug && xRobots === "noindex") {
-        slugRobots = "noindex";
+      // Middleware already computed the live, inventory-aware robots decision
+      // (same value it sent as the X-Robots-Tag response header) — use it
+      // directly so the <meta name="robots"> tag can never disagree with the
+      // HTTP header, instead of re-deriving a URL-shape-only guess below that
+      // has no idea whether this specific filter combo currently has 0 results.
+      if (isListingSlug && xRobots) {
+        slugRobots = xRobots;
         slugCanonical = `https://www.campingtrailersforsale.com.au/listings/${slugParts.join("/")}/`;
         slugDescription = "Browse camper trailers for sale across Australia. Compare prices on off-road, hybrid, pop top, touring, luxury models with size, weight & sleeping capacity.";
       } else {
@@ -160,17 +151,11 @@ import GlobalImageFallback from "@/components/GlobalImageFallback";
           {staticMeta && <meta property="og:url" content={staticMeta.canonical} />}
           {staticMeta && <meta name="twitter:title" content={staticMeta.title} />}
           {staticMeta && <meta name="twitter:description" content={staticMeta.description} />}
-          {/* Product page SEO — injected here to avoid metadata-in-body streaming issue */}
-          {isProductPage && productMeta.title && <title>{productMeta.title}</title>}
-          {isProductPage && productMeta.description && <meta name="description" content={productMeta.description} />}
-          {isProductPage && productMeta.canonical && <link rel="canonical" href={productMeta.canonical} />}
-          {isProductPage && <meta name="robots" content="index, follow" />}
-          {isProductPage && productMeta.title && <meta property="og:title" content={productMeta.title} />}
-          {isProductPage && productMeta.description && <meta property="og:description" content={productMeta.description} />}
-          {isProductPage && productMeta.ogImage && <meta property="og:image" content={productMeta.ogImage} />}
-          {isProductPage && productMeta.canonical && <meta property="og:url" content={productMeta.canonical} />}
-          {isProductPage && productMeta.title && <meta name="twitter:title" content={productMeta.title} />}
-          {isProductPage && productMeta.description && <meta name="twitter:description" content={productMeta.description} />}
+          {/* Product page SEO (title/description/canonical/robots/og/twitter) comes
+              entirely from generateMetadata in product/[slug]/page.tsx — it already
+              covers everything this block used to duplicate (via its own separate
+              fetchProductMeta call), which was producing two <title> and two
+              <meta name="description"> tags on every product page. */}
           {/* Per-slug SEO tags for /listings/* (incl. bare /listings/) — rendered before streaming starts */}
           {/* <title> is set by generateMetadata in [...slug]/page.tsx via fast metaFromSlug (no API call) */}
           {hasSlugMeta && slugDescription && <meta name="description" content={slugDescription} />}

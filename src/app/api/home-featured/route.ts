@@ -14,6 +14,9 @@ function normalizeProduct(p: any): any {
   } else if (typeof p.image_format === "string") {
     p.image_format = [p.image_format];
   }
+  // Force https — the backend sometimes sends plain http:// (not just a
+  // missing protocol), which would embed an insecure image on an https page.
+  p.image_format = p.image_format.map((t: string) => `https://${t.replace(/^https?:\/\//, "")}`);
   if (!p.seller_type) p.seller_type = "dealer";
   return p;
 }

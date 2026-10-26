@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 export const metadata: Metadata = {
   title: "Sell My Camper Trailer Online Australia | List Until Sold for $49",
   description:
-    "Sell your camper trailer online across Australia for just $49. List until sold, edit anytime, pay no commission and connect directly with genuine camper trailer buyers.",
+    "Sell your camper trailer online for just $49. List until sold, edit anytime, no commission — connect directly with genuine buyers.",
   robots: "index, follow",
   alternates: {
     canonical: "https://www.campingtrailersforsale.com.au/sell-my-camper-trailer/",

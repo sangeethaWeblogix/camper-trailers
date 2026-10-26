@@ -118,6 +118,10 @@ const toInt = (s: string) => { const n = parseInt(String(s).replace(/[^\d]/g, ""
 // an actual page instead of some arbitrary non-indexed value.
 const toFloat = (s: string): number | null => { const n = parseFloat(String(s).replace(/[^\d.]/g, "")); return Number.isFinite(n) && n > 0 ? n : null; };
 const roundUpTo = (n: number, step: number) => Math.ceil(n / step) * step;
+// Force https on any image URL picked at render time — raw API fields like
+// `thumbnail`/`first_image` (unlike the already-normalized `image_format`)
+// sometimes come back as plain http://, which an https page must not embed.
+const toHttps = (url?: string | null) => (url ? `https://${url.replace(/^https?:\/\//, "")}` : undefined);
 const linkFromApiUrl = (rawUrl: string, text: string) => { const u = (rawUrl || "").trim().replace(/^\/+|\/+$/g, ""); return { href: /[=&]/.test(u) ? `/listings/?${u}` : `/listings/${u}/`, text }; };
 const STATE_ABBR: Record<string, string> = {
   queensland: "QLD", "new-south-wales": "NSW", "new south wales": "NSW", nsw: "NSW",
@@ -397,7 +401,12 @@ export default function ProductDetailDemo({ data, similarData }: Props) {
 
   const locationCity  = product.region?.value?.replace(/-/g, " ") ?? "";
   const locationState = state;
-  const regionSlug  = product.region?.slug ?? slugify(locationCity);
+  // product.region.slug comes back from the API with the "-region" suffix
+  // for some listings but not others — always ensure it's there so this
+  // never links to a non-canonical, 410'd URL like /victoria-state/melbourne/
+  // instead of /victoria-state/melbourne-region/.
+  const rawRegionSlug = product.region?.slug ?? slugify(locationCity);
+  const regionSlug = rawRegionSlug && !rawRegionSlug.endsWith("-region") ? `${rawRegionSlug}-region` : rawRegionSlug;
   const stateAttr   = attributes.find(a => String(a?.label ?? "").toLowerCase() === "location");
   const stateSlug   = stateAttr?.url?.trim() || `${slugify(locationState)}-state`;
 
@@ -491,7 +500,7 @@ const priceUpperIdx = !isPOA ? PRICE_STEPS.findIndex(s => s >= displayPrice) : -
     { label: "Home",            href: "/" },
     { label: "Camper Trailers for Sale", href: "/listings/" },
     ...(state ? [{ label: state, href: `/listings/${slugify(state)}-state/` }] : []),
-    ...(product.region?.value ? [{ label: product.region.value.replace(/-/g, " "), href: `/listings/${slugify(state)}-state/${product.region.slug ?? slugify(product.region.value)}/` }] : []),
+    ...(product.region?.value ? [{ label: product.region.value.replace(/-/g, " "), href: `/listings/${slugify(state)}-state/${regionSlug}/` }] : []),
     ...(categoryNames[0] ? [{ label: categoryNames[0], href: `/listings/${slugify(categoryNames[0].replace(/\s*caravan\s*/gi, " ").trim())}-category/` }] : []),
   ];
 
@@ -739,7 +748,7 @@ const priceUpperIdx = !isPOA ? PRICE_STEPS.findIndex(s => s >= displayPrice) : -
             <div className="pdd-similar__grid">
                 {makeSimilar.filter(r => r.slug !== product.slug).slice(0, 5).map((r, i) => {
                   const rName     = r.name ?? "";
-                  const imgUrl    = r.thumbnail || r.first_image || r.image_format?.[0] || r.image_url?.[0] || r.image || undefined;
+                  const imgUrl    = toHttps(r.thumbnail || r.first_image || r.image_format?.[0] || r.image_url?.[0] || r.image);
                   const rPrice    = parseAmt(r.price || r.sale_price || r.regular_price);
                   const rLoc      = r.state ? resolveState(r.state) : r.location ?? "";
                   const rCat      = fmtCat(r.categories?.[0] || r.category || "");
@@ -792,7 +801,7 @@ const priceUpperIdx = !isPOA ? PRICE_STEPS.findIndex(s => s >= displayPrice) : -
             <div className="pdd-similar__grid">
               {priceSimilar.slice(0, 5).map((r, i) => {
                 const rName    = r.name ?? "";
-                const imgUrl   = r.thumbnail || r.first_image || r.image_format?.[0] || r.image_url?.[0] || r.image || undefined;
+                const imgUrl   = toHttps(r.thumbnail || r.first_image || r.image_format?.[0] || r.image_url?.[0] || r.image);
                 const rPrice   = parseAmt(r.price || r.sale_price || r.regular_price);
                 const rLoc     = r.state ? resolveState(r.state) : r.location ?? "";
                 const rCat     = fmtCat(r.categories?.[0] || r.category || "");
@@ -848,10 +857,10 @@ const priceUpperIdx = !isPOA ? PRICE_STEPS.findIndex(s => s >= displayPrice) : -
               <div className="pdd-blogs">
                 {displayBlogs.map((b, i) => (
                   <a key={i} href={b.slug ? `/${b.slug}/` : (b.permalink ?? "#")} className="pdd-blog">
-                    {(b.thumbnail || b.first_image || b.image) && (
+                    {toHttps(b.thumbnail || b.first_image || b.image) && (
                       <div className="pdd-blog__img">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={b.thumbnail || b.first_image || b.image} alt={b.title} referrerPolicy="no-referrer" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                        <img src={toHttps(b.thumbnail || b.first_image || b.image)} alt={b.title} referrerPolicy="no-referrer" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       </div>
                     )}
                     <div className="pdd-blog__body">

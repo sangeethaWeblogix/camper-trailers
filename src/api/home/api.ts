@@ -97,7 +97,10 @@ function normalizeProduct(src: ProductRaw = {}): HomeProduct {
     id: src.id ?? src.product_id,
     title: src.title ?? src.name,
     slug: src.slug,
-    image: src.image ?? src.main_image ?? src.thumbnail,
+    image: (() => {
+      const img = src.image ?? src.main_image ?? src.thumbnail;
+      return img ? `https://${img.replace(/^https?:\/\//, "")}` : img;
+    })(),
     link: src.link ?? src.permalink,
     location: src.location,
     regular_price: src.regular_price,

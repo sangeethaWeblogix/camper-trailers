@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 
  export const metadata: Metadata = {
    title: {
-     default: "About Camper Trailer Marketplace - Your Trusted Camper Trailer Resource",
+     default: "About Camper Trailer Marketplace | Trusted Resource",
      template: "%s ",
    },
    description:

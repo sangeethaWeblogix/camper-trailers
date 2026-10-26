@@ -35,9 +35,15 @@ export default async function ProductLoading() {
         <div style={{ background: "#fff", minHeight: "100vh", paddingBottom: 60 }}>
           <div style={{ maxWidth: 1320, margin: "0 auto", padding: "0 15px" }}>
 
-            <h1 style={{ fontSize: 24, fontWeight: 700, color: "#000", margin: "28px 0 8px", lineHeight: 1.3 }}>
+            {/* Not a real <h1> — React's streaming SSR sends this loading
+                fallback into the same response as the real page, so a
+                non-JS crawler (e.g. Ahrefs) sees both this placeholder and
+                ProductDetailDemo's actual <h1 className="pdd-title">,
+                flagging "multiple H1 tags". This skeleton only needs to
+                look like the title, not claim to be the page's heading. */}
+            <div aria-hidden="true" style={{ fontSize: 24, fontWeight: 700, color: "#000", margin: "28px 0 8px", lineHeight: 1.3 }}>
               {title}
-            </h1>
+            </div>
 
             <div style={{ display: "flex", gap: 10, alignItems: "center", marginBottom: 14 }}>
               <Skel h={14} w={180} style={{ borderRadius: 4 }} />

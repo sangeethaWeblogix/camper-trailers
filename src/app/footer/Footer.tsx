@@ -65,6 +65,8 @@ const Footer = () => {
                 <li><a href="/listings/camper-trailer-category/">Camper Trailers</a></li>
                 <li><a href="/listings/off-road-camper-category/">Off Road Camper Trailers</a></li>
                 <li><a href="/listings/tent-trailer-category/">Tent Trailers</a></li>
+                <li><a href="/listings/toy-hauler-carrier-category/">Toy Hauler Carriers</a></li>
+                <li><a href="/camper-trailer-brands/">All Brands</a></li>
               </ul>
             </div>
 

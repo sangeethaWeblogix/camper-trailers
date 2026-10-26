@@ -119,8 +119,8 @@ const BASE_URL = "https://www.campingtrailersforsale.com.au";
 
 export function buildRegionMetadata(region: RegionInfo): Metadata {
   return {
-    title: `Sell My Camper Trailer in ${region.label} | List Until Sold for $49`,
-    description: `Sell your camper trailer in ${region.label} for just $49. List until sold, pay no commission and connect directly with camper trailer buyers across ${region.label} and ${region.state.label}.`,
+    title: `Sell My Camper Trailer – ${region.label}`,
+    description: `Sell your camper trailer in ${region.label} for just $49. List until sold, no commission — connect directly with local buyers.`,
     robots: "index, follow",
     alternates: {
       canonical: `${BASE_URL}/sell-my-camper-trailer/${region.state.slug}/${region.pageSlug}/`,

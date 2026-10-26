@@ -30,7 +30,10 @@ const formatPriceDisplay = (v: unknown): string | undefined => {
 function normalizeProduct(p: any): FeaturedListing {
   if (!p.image_format) {
     const thumbs: string[] = p.r2_thumbnails?.length ? p.r2_thumbnails : (p.thumbnail ?? p.image ?? p.main_image ? [p.thumbnail ?? p.image ?? p.main_image] : []);
-    p.image_format = thumbs.map((t: string) => (/^https?:\/\//.test(t) ? t : `https://${t}`));
+    // Force https — the backend sometimes sends plain http:// (not just a
+    // missing protocol), which the old `/^https?:\/\//` check wrongly left
+    // alone, embedding an insecure image on an https page.
+    p.image_format = thumbs.map((t: string) => `https://${t.replace(/^https?:\/\//, "")}`);
   } else if (typeof p.image_format === "string") {
     p.image_format = [p.image_format];
   }
@@ -39,6 +42,14 @@ function normalizeProduct(p: any): FeaturedListing {
   p.regular_price = formatPriceDisplay(p.regular_price);
   p.sale_price = formatPriceDisplay(p.sale_price);
   if (!p.seller_type) p.seller_type = "dealer";
+  // These raw fields may hold http:// URLs; this object is later serialized
+  // into client-component props, so even though they're unused by the
+  // renderer, leaving them on would still leak that http:// text into the
+  // page's hydration payload.
+  delete p.r2_thumbnails;
+  delete p.thumbnail;
+  delete p.main_image;
+  delete p.image;
   return p;
 }
 

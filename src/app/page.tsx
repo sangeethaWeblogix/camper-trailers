@@ -16,7 +16,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: {
-    default: "Camper Trailers For Sale – New & Used Camper Trailer Marketplace in Australia",
+    default: "Camper Trailers For Sale – New & Used Marketplace Australia",
     template: "%s ",
   },
   description:
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     canonical: "https://www.campingtrailersforsale.com.au",
   },
   openGraph: {
-    title: "Camper Trailers For Sale – New & Used Camper Trailer Marketplace in Australia",
+    title: "Camper Trailers For Sale – New & Used Marketplace Australia",
     description: "Browse camper trailers for sale across Australia. Compare prices on off-road, hybrid, pop top, touring, luxury models with size, weight & sleeping capacity.",
     url: "https://www.campingtrailersforsale.com.au",
     siteName: "Camper Trailers for Sale",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Camper Trailers For Sale – New & Used Camper Trailer Marketplace in Australia",
+    title: "Camper Trailers For Sale – New & Used Marketplace Australia",
     description: "Browse camper trailers for sale across Australia. Compare prices on off-road, hybrid, pop top, touring, luxury models with size, weight & sleeping capacity.",
   },
 };

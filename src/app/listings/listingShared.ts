@@ -39,13 +39,20 @@ type RawPoolItem = Listing & {
  * (not `kg`). Safe to call more than once — already-correct fields pass through. */
 function normalizeListing(raw: RawPoolItem): Listing {
   const thumbs = raw.r2_thumbnails?.length ? raw.r2_thumbnails : raw.image_format;
+  // r2_thumbnails is dropped (not just re-mapped into image_format) below: it
+  // sometimes holds raw http:// URLs, and since this whole object is later
+  // serialized into client-component props, keeping it around — even unused
+  // by the renderer — would still leak that http:// text into the page's
+  // hydration payload.
+  const { r2_thumbnails, ...rest } = raw;
   return {
-    ...raw,
+    ...rest,
     name: raw.name ?? raw.title ?? "",
     categories: raw.categories ?? raw.category,
-    image_format: thumbs?.map((t) =>
-      /^https?:\/\//.test(t) ? t : `https://${t}`
-    ),
+    // Force https — the backend sometimes sends plain http:// (not just a
+    // missing protocol), which the old `/^https?:\/\//` check wrongly left
+    // alone, embedding an insecure image on an https page.
+    image_format: thumbs?.map((t) => `https://${t.replace(/^https?:\/\//, "")}`),
     kg: raw.kg ?? (raw.atm != null ? `${raw.atm}kg` : undefined),
     slot_bucket: raw.slot_bucket ?? raw.tier,
   };

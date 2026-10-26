@@ -546,6 +546,15 @@ export async function middleware(request: NextRequest) {
   }
 
   /* 4️⃣ Create response */
+  // Forward the computed robots decision to the Server Component too — it was
+  // only ever being set on the outgoing response (seen by the browser), never
+  // on requestHeaders, so root layout's `headers().get("x-robots")` always saw
+  // nothing and fell back to its own static, inventory-blind computation. That
+  // disconnect is what let a page's <meta name="robots"> and its X-Robots-Tag
+  // HTTP header disagree.
+  if (isListingsPath) {
+    requestHeaders.set('x-robots', robotsHeader);
+  }
   const response = NextResponse.next({ request: { headers: requestHeaders } });
 
   if (isListingsPath) {

@@ -9,7 +9,7 @@ import { ReactNode } from "react";
      template: "%s ",
    },
    description:
-     "Read the Privacy Policy for websites operated by Marketplace Network Pty Ltd (ABN 70 694 987 052), including how we collect, use, and protect your personal information.",
+     "Read the Privacy Policy for Marketplace Network websites — how we collect, use, and protect your personal information.",
    icons: { icon: "/favicon.ico" },
    robots: "index",
    verification: {

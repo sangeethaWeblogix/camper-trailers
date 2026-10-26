@@ -117,7 +117,10 @@ function normalizeProductDetail(raw: any): any {
   // smaller "-m" (medium) subset meant for listing-card thumbnails, not the
   // product's own gallery — prefer the full set so none of them go missing.
   const rawImages: string[] = raw.images_full ?? raw.r2_thumbnails ?? raw.images ?? [];
-  const images: string[] = rawImages.map((t) => (/^https?:\/\//.test(t) ? t : `https://${t}`));
+  // Force https — the backend sometimes sends plain http:// (not just a
+  // missing protocol), which the old `/^https?:\/\//` check wrongly left
+  // alone, embedding an insecure image on an https page.
+  const images: string[] = rawImages.map((t) => `https://${t.replace(/^https?:\/\//, "")}`);
 
   // The MPN listing has no `attributes` object — the details-table data lives
   // as flat top-level fields instead. Map them onto the same {label, value}
@@ -273,14 +276,21 @@ async function fetchSimilarProducts(slug: string) {
         seen.add(it.id);
         return true;
       })
-      .map((it: any) => ({
-        ...it,
-        name: it.name ?? it.title,
-        categories: it.categories ?? it.category,
-        image_format: (it.r2_thumbnails ?? it.image_format ?? []).map((t: string) =>
-          /^https?:\/\//.test(t) ? t : `https://${t}`
-        ),
-      }));
+      .map((it: any) => {
+        // r2_thumbnails/thumbnail/first_image are dropped (not just re-mapped)
+        // below: they sometimes hold raw http:// URLs, and even when unused by
+        // the renderer, keeping them on this object would still leak that
+        // http:// text into the page's hydration payload.
+        const { r2_thumbnails, thumbnail, first_image, ...rest } = it;
+        return {
+          ...rest,
+          name: it.name ?? it.title,
+          categories: it.categories ?? it.category,
+          image_format: (r2_thumbnails ?? it.image_format ?? []).map((t: string) =>
+            `https://${t.replace(/^https?:\/\//, "")}`
+          ),
+        };
+      });
 
     if (!items.length) return null;
     return {
@@ -327,14 +337,19 @@ export default async function ProductDetailPage({ params }: PageProps) {
           ? "https://schema.org/NewCondition"
           : "https://schema.org/UsedCondition",
     }),
-    offers: {
-      "@type": "Offer",
-      priceCurrency: "AUD",
-      ...(priceStr && { price: priceStr }),
-      availability: "https://schema.org/InStock",
-      url: canonicalUrl,
-      seller: { "@type": "Organization", name: "Camper Trailers For Sale" },
-    },
+    // Google's Product/Offer schema requires a `price` — omit `offers`
+    // entirely for POA listings instead of emitting an Offer with no price,
+    // which fails rich-results validation.
+    ...(priceStr && {
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "AUD",
+        price: priceStr,
+        availability: "https://schema.org/InStock",
+        url: canonicalUrl,
+        seller: { "@type": "Organization", name: "Camper Trailers For Sale" },
+      },
+    }),
   };
 
   const similarData = await fetchSimilarProducts(slug);

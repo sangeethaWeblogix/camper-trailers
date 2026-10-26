@@ -63,8 +63,8 @@ export function getStateBySlug(slug: string): StateData | undefined {
 
 export function buildStateMetadata(state: StateData): Metadata {
   return {
-    title: `Sell My Camper Trailer in ${state.label} | List Until Sold for $49`,
-    description: `Sell your camper trailer in ${state.label} for just $49. List until sold, pay no commission and connect directly with camper trailer buyers across ${state.capital} and regional ${state.label}.`,
+    title: `Sell My Camper Trailer – ${state.label}`,
+    description: `Sell your camper trailer in ${state.label} for just $49. List until sold, no commission — connect directly with local buyers.`,
     robots: "index, follow",
     alternates: {
       canonical: `${BASE_URL}/sell-my-camper-trailer/${state.slug}/`,

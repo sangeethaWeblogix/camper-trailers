@@ -5,7 +5,7 @@ import "./statement.css?=123";
 export async function generateMetadata(): Promise<Metadata> {
   const metaTitle = "Cookie Policy - Marketplace Network";
   const metaDescription =
-    "Read our Cookie Policy for websites operated by Marketplace Network Pty Ltd (ABN 70 694 987 052), including how we collect, use, and protect your personal information.";
+    "Read our Cookie Policy — how Marketplace Network websites use cookies to collect, use, and protect your personal information.";
 
   const robots = "index";
 

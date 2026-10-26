@@ -5,11 +5,11 @@ import { ReactNode } from "react";
 
  export const metadata: Metadata = {
    title: {
-     default: "Camper Trailer Dealer Advertising | Unlimited Listings $99/Month | CampingTrailersForSale",
+     default: "Camper Trailer Dealer Advertising | Unlimited Listings $99/Month",
      template: "%s ",
    },
    description:
-     "Advertise your camper trailer dealership on CampingTrailersForSale.com.au. Unlimited listings, zero lead fees, and reach high-intent camper trailer buyers across Australia.",
+     "Advertise your camper trailer dealership with unlimited listings, zero lead fees, and reach high-intent buyers across Australia.",
    icons: { icon: "/favicon.ico" },
    robots: "index, follow",
    verification: {

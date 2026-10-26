@@ -349,10 +349,18 @@ export async function metaFromSlug(
   const slugPath = filters.length > 0 ? filters.join("/") : "";
   const canonicalUrl = `${BASE_URL}/listings/${slugPath ? slugPath + "/" : ""}`;
   const urlPath = `/listings/${slugPath ? slugPath + "/" : ""}`;
-  const robotsResult = { index: INDEXABLE_URLS.has(urlPath) };
+  // getRobotsFromFilters correctly indexes every real state/region/category/make
+  // combo by rule; INDEXABLE_URLS (a static, long-stale CSV snapshot) is kept as
+  // an OR fallback only for the handful of extra make+state+region combos it
+  // lists that the dims-based rules below don't cover.
+  const rulesRobots = getRobotsFromFilters(parsed, filters, BASE_URL);
+  const robotsResult = { index: rulesRobots.index || INDEXABLE_URLS.has(urlPath) };
 
   // ── suburb canonical fix ──
   let canonical = canonicalUrl;
+  if (!robotsResult.index && rulesRobots.overrideCanonical) {
+    canonical = rulesRobots.overrideCanonical;
+  }
   if (parsed.suburb) {
     const locationSegments = filters.filter(
       (seg) =>
