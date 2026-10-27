@@ -2,17 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { parseSlugToFilters, type Filters } from "@/app/components/urlBuilder";
 import { buildSlugFromFilters } from "@/app/components/slugBuilter";
 import { isAllowedSingleBand } from "@/utils/seo/band-utils";
-import regionPathsData from "../cfs-paths/regions.json";
 const API_KEY = process.env.MPN_API_KEY;
 const SERVER_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36';
-
-/* Valid region slugs built from cfs-paths/regions.json (sitemap source of truth) */
-const VALID_REGION_SLUGS = new Set<string>(
-  (regionPathsData.paths as string[]).map(p => {
-    const part = p.split('/').find(s => s.endsWith('-region'));
-    return part ? part.replace(/-region$/, '') : '';
-  }).filter(Boolean)
-);
 
 /* ──────────────────────────────────────────────
    Edge-safe in-memory cache
@@ -278,14 +269,13 @@ export async function middleware(request: NextRequest) {
         // correctly renders an empty, noindex'd results page instead of a
         // false 410 for a make that's actually valid on the live backend.
 
-        // Region value validation — check against cfs-paths/regions.json (sitemap source of truth)
-        const regionSegment = slugParts.find(s => s.endsWith('-region'));
-        if (regionSegment) {
-          const regionSlug = regionSegment.replace(/-region$/, '');
-          if (!VALID_REGION_SLUGS.has(regionSlug)) {
-            return render410(request);
-          }
-        }
+        // NOTE: region used to be validated against the same kind of stale
+        // static snapshot (cfs-paths/regions.json, 47 entries) — same failure
+        // mode as the make check above: the backend's real region list has
+        // grown past it (e.g. "cairns" has live inventory right now but isn't
+        // in that file), so this was 410-ing real, in-stock regions. Removed
+        // for the same reason — an invalid/typo'd region now falls through to
+        // the live /pool check below instead of a false 410.
 
         // Suburb value validation — check against location-search API (cached per suburb)
         if (filters.suburb) {

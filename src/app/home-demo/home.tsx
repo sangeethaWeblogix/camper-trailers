@@ -208,41 +208,35 @@ const handleBannerClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>) =
       <HomeFeatured items={featuredAll} />
 
       {/* ── Banner Ad ── */}
-      <div className="hd-banner-ad pb-4">
-        <div className="container">
-          {bannerLoading ? (
-            <div style={{ width: "100%", aspectRatio: "2000/517", background: "#f0f0f0", borderRadius: 8 }} />
-          ) : activeBanner ? (
-            <a
-              href={bannerClickUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hd-banner-ad__inner"
-              ref={(el) => { bannerRefs.current[0] = el; }}
-              data-banner-id={activeBanner.id}
-              onClick={handleBannerClick}
-            >
-              <span className="hd-banner-ad__label">Advertisement</span>
-              <picture>
-                {homeMbBanner && <source media="(max-width: 767px)" srcSet={homeMbBanner.image_url} />}
-                <img
-                  src={(homeDkBanner ?? homeMbBanner)?.image_url}
-                  alt={activeBanner.name}
-                  className="hd-banner-ad__img"
-                />
-              </picture>
-            </a>
-          ) : (
-            <a href="/listings/" target="_blank" rel="noopener noreferrer" className="hd-banner-ad__inner">
-              <span className="hd-banner-ad__label">Advertisement</span>
-              <picture>
-                <source media="(max-width: 767px)" srcSet="/images/1157x598-cts.jpg" />
-                <img src="/images/2000x517-cts.jpg" alt="Camper Trailers for Sale" className="hd-banner-ad__img" />
-              </picture>
-            </a>
-          )}
+      {(bannerLoading || activeBanner) && (
+        <div className="hd-banner-ad pb-4">
+          <div className="container">
+            {bannerLoading ? (
+              <div style={{ width: "100%", aspectRatio: "2000/517", background: "#f0f0f0", borderRadius: 8 }} />
+            ) : (
+              <a
+                href={bannerClickUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hd-banner-ad__inner"
+                ref={(el) => { bannerRefs.current[0] = el; }}
+                data-banner-id={activeBanner!.id}
+                onClick={handleBannerClick}
+              >
+                <span className="hd-banner-ad__label">Advertisement</span>
+                <picture>
+                  {homeMbBanner && <source media="(max-width: 767px)" srcSet={homeMbBanner.image_url} />}
+                  <img
+                    src={(homeDkBanner ?? homeMbBanner)?.image_url}
+                    alt={activeBanner!.name}
+                    className="hd-banner-ad__img"
+                  />
+                </picture>
+              </a>
+            )}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* ── New Caravans for Sale ── */}
       <HomeListingSlider

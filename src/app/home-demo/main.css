@@ -2448,31 +2448,6 @@ a.ignoretext {
 .explore-box.active {
 }
 
-/* Illustration placeholders */
-.illustration {
-  background: #e6f2fc;
-  border-radius: 16px;
-  width: 120px;
-  height: 120px;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  
-}
-
-.illustration.left {
-  background: url("/images/illustration-left.webp") bottom / 125px no-repeat;
-}
-
-.illustration.center {
-  background: url("/images/illustration-center.webp") bottom / 125px no-repeat;
-  width: 140px;
-}
-
-.illustration.right {
-  background: url("/images/illustration-right.webp") bottom / 125px no-repeat;
-}
-
 /* Responsive */
 @media (max-width: 992px) {
   .explore-boxes {

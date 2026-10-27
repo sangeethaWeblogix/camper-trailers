@@ -35,18 +35,6 @@
    };
  });
  
- const CARAVAN_TYPES = [
-   { label: "Off Road Camper Trailers", img: "/images/off-road.webp", href: "/listings/off-road-category/" },
-   { label: "Family Camper Trailers", img: "/images/family.webp", href: "/listings/family-caravans-category/" },
-   { label: "Pop Top Camper Trailers", img: "/images/pop-top.webp", href: "/listings/pop-top-category/" },
-   { label: "Hybrid Camper Trailers", img: "/images/hybrid.webp", href: "/listings/hybrid-caravans-category/" },
-   { label: "Luxury Camper Trailers", img: "/images/luxury.webp", href: "/listings/luxury-caravans-category/" },
-   { label: "Couples Camper Trailers", img: "/images/touring.webp", href: "/listings/couples-caravans-category/" },
-   { label: "Touring Camper Trailers", img: "/images/touring.webp", href: "/listings/touring-caravans-category/" },
-   { label: "Bunk Camper Trailers", img: "/images/family.webp", href: "/listings/bunk-caravans-category/" },
-   { label: "Small Camper Trailers", img: "/images/pop-top.webp", href: "/listings/small-caravans-category/" },
-   { label: "Used Camper Trailers", img: "/images/off-road.webp", href: "/listings/used-condition/" },
- ];
  
  const HOW_TO_STEPS = [
    { num: 1, iconSet: "fa-regular", icon: "fa-file-lines",    title: "Create Your Listing",    desc: "Add your camper trailer details, specifications, price and contact information." },

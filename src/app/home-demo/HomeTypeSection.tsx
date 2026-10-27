@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { type TypeCounts } from "@/api/homeApi/typeCounts/api";
 
 const TYPES = [
@@ -6,42 +5,36 @@ const TYPES = [
     slug: "off-road-category",
     category: "off-road",
     label: "Off Road Camper Trailers for Sale",
-    image: "/images/off-road.webp",
     desc: "Built tough for Australia's rougher tracks.",
   },
   {
     slug: "luxury-category",
     category: "luxury",
     label: "Luxury Camper Trailers for Sale",
-    image: "/images/luxury.webp",
     desc: "Premium comfort, high-end interiors and full-size features.",
   },
   {
     slug: "hybrid-category",
     category: "hybrid",
     label: "Hybrid Camper Trailers for Sale",
-    image: "/images/hybrid.webp",
     desc: "The balance of easy towing, compact size and outdoor living.",
   },
   {
     slug: "pop-top-category",
     category: "pop-top",
     label: "Pop Top Camper Trailers for Sale",
-    image: "/images/pop-top.webp",
     desc: "Easy to store, simple to tow and practical for getaways.",
   },
   {
     slug: "touring-category",
     category: "touring",
     label: "Touring Camper Trailers for Sale",
-    image: "/images/touring.webp",
     desc: "Comfortable, reliable and ideal for long-distance trips.",
   },
   {
     slug: "family-category",
     category: "family",
     label: "Family Camper Trailers for Sale",
-    image: "/images/family.webp",
     desc: "Spacious layouts designed for the whole family.",
   },
 ] as const;
@@ -61,15 +54,6 @@ export default function HomeTypeSection({ typeCounts }: Props) {
         <div className="htype-grid">
           {TYPES.map((t) => (
             <a key={t.slug} href={`/listings/${t.slug}/`} className="htype-card">
-              <div className="htype-card__img-wrap">
-                <Image
-                  src={t.image}
-                  alt={t.label}
-                  width={160}
-                  height={110}
-                  className="htype-card__img"
-                />
-              </div>
               <h3 className="htype-card__name">
                 {t.label.replace(" for Sale", "")}<br />for Sale
               </h3>

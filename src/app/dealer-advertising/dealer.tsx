@@ -274,13 +274,8 @@ const DealerLandingPage = () => {
             <div className="col-lg-7 images-box">
               <img
                 src="/images/your-caravan-desktop.jpg"
-                className="img-fluid d-none d-lg-block desktop-img"
+                className="img-fluid desktop-img"
                 alt="Camper Trailer For Sale Desktop"
-              />
-              <img
-                src="/images/your-caravan-mobile.png"
-                className="img-fluid d-block d-lg-none mobile-img"
-                alt="Camper Trailer For Sale Mobile"
               />
             </div>
 
