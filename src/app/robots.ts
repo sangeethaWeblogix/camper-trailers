@@ -23,9 +23,13 @@ export default function robots(): MetadataRoute.Robots {
           // Block keyword search + any other filter (state/make/region/band combos)
           // Direct /listings/*-search/ stays crawlable; only combinations are blocked
           "/listings/*/*-search/"
-         
-          
+
+
         ],
+      },
+      {
+        userAgent: ["CCBot", "AhrefsBot", "MJ12bot"],
+        disallow: "/",
       },
     ],
     sitemap: `${BASE_URL}/sitemap.xml`,

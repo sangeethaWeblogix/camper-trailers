@@ -70,21 +70,19 @@ import GlobalImageFallback from "@/components/GlobalImageFallback";
 
     // Listings JSON-LD — fetched here so both schemas render inside <head>
     // Second call hits Next.js data cache (revalidate: 3600), no extra network round-trip.
-    let listingsCollectionLd: object | null = null;
-    let listingsSearchResultsLd: object | null = null;
+    let listingsLd: object | null = null;
     if (isMainListings || isListingSlug) {
       const normalizedPath = pathname.endsWith("/") ? pathname : pathname + "/";
       const listingsData = await fetchListingsForHead(normalizedPath);
       if (listingsData) {
         const crumbs = buildBreadcrumbs(pathname);
         const pageUrl = `https://www.campingtrailersforsale.com.au${normalizedPath}`;
-        const { collectionPageLd, searchResultsLd } = buildListingsJsonLd(
+        ({ listingsLd } = buildListingsJsonLd(
           listingsData,
           pageUrl,
-          crumbs
-        );
-        listingsCollectionLd = collectionPageLd;
-        listingsSearchResultsLd = searchResultsLd;
+          crumbs,
+          normalizedPath
+        ));
       }
     }
 
@@ -234,18 +232,11 @@ import GlobalImageFallback from "@/components/GlobalImageFallback";
               }}
             />
           )}
-          {/* Listings page JSON-LD — CollectionPage + BreadcrumbList */}
-          {listingsCollectionLd && (
+          {/* Listings page JSON-LD — WebSite + CollectionPage + BreadcrumbList + ItemList (+ FAQPage) */}
+          {listingsLd && (
             <script
               type="application/ld+json"
-              dangerouslySetInnerHTML={{ __html: JSON.stringify(listingsCollectionLd) }}
-            />
-          )}
-          {/* Listings page JSON-LD — SearchResultsPage with product list */}
-          {listingsSearchResultsLd && (
-            <script
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{ __html: JSON.stringify(listingsSearchResultsLd) }}
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(listingsLd) }}
             />
           )}
           {/* ✅ Google Tag Manager (Head) */}

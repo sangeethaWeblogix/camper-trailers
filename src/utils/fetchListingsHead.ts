@@ -14,7 +14,10 @@ type Item = {
   model?: string;
   link?: string;
   slug?: string;
+  sku?: string;
   length?: string | number;
+  atm?: number | string | null;
+  condition?: string;
   regular_price?: string | number;
   sale_price?: string | number;
   image?: string;
@@ -198,73 +201,99 @@ function parseFaq(raw?: string | Faq[]): Faq[] {
   return parsed.filter((f): f is Faq => !!f?.q && !!f?.a);
 }
 
-function buildProductListItem(item: Item, position: number) {
-  const rawPrice = item.sale_price && item.sale_price !== "" ? item.sale_price : item.regular_price;
-  const price = cleanPrice(rawPrice ?? "");
-  const lengthFt = parseLengthFt(item.length ?? "");
-  const widthMt =
-    !isNaN(lengthFt) && lengthFt > 0
-      ? (lengthFt * 0.3048).toFixed(2)
-      : "";
-  const thumbs = item.r2_thumbnails?.length ? item.r2_thumbnails : item.image_format;
-  const images =
-    thumbs && thumbs.length > 0
-      ? thumbs.slice(0, 5).map((url) => ({ "@type": "ImageObject", url }))
-      : item.image
-      ? [{ "@type": "ImageObject", url: item.image }]
-      : [];
-  const categories = item.categories ?? item.category;
+/** /pool items don't carry a separate year field — titles consistently embed
+ * it ("2026 Jayco Lark OB.CP-MY26 ...", "2018 Goldstream Crown ST ..."), so
+ * pull the first plausible vehicle year out of the name instead of guessing. */
+function extractYear(name: string): number | null {
+  const m = name.match(/\b(19|20)\d{2}\b/);
+  return m ? parseInt(m[0], 10) : null;
+}
+
+/** Builds a schema.org ItemList entry per listing, matching the richer
+ * Vehicle pattern used on the sibling motorhomesforsale.com.au site. /pool
+ * items don't carry per-item make/model (confirmed even when the request is
+ * itself filtered by make), so `brand` is only set when the PAGE is filtered
+ * to a single make — safe to attribute every item on it to that make — never
+ * guessed from free-text title parsing. */
+function buildVehicleListItem(item: Item, position: number, pageMake?: string) {
+  const name = item.name ?? item.title ?? "";
   const url = item.link ?? (item.slug ? `${BASE_URL}/product/${item.slug}/` : "");
+  const rawPrice = item.sale_price && item.sale_price !== "" ? item.sale_price : item.regular_price;
+  const priceStr = cleanPrice(rawPrice ?? "");
+  const price = priceStr && !isNaN(Number(priceStr)) ? Number(priceStr) : null;
+  const thumbs = item.r2_thumbnails?.length ? item.r2_thumbnails : item.image_format;
+  const images = thumbs && thumbs.length > 0 ? thumbs.slice(0, 5) : item.image ? [item.image] : [];
+  const categories = item.categories ?? item.category ?? [];
+  const year = extractYear(name);
+  const lengthFt = parseLengthFt(item.length ?? "");
+  const atmKg = item.atm != null ? Number(item.atm) : null;
+
+  const additionalProperty: Record<string, unknown>[] = [];
+  if (!isNaN(lengthFt) && lengthFt > 0) {
+    additionalProperty.push({ "@type": "PropertyValue", name: "Length", value: Number(lengthFt.toFixed(2)), unitCode: "FOT" });
+  }
+  if (atmKg != null && !isNaN(atmKg) && atmKg > 0) {
+    additionalProperty.push({ "@type": "PropertyValue", name: "ATM", value: atmKg, unitCode: "KGM" });
+  }
+  if (categories.length > 0) {
+    additionalProperty.push({ "@type": "PropertyValue", name: "Features", value: categories.join(", ") });
+  }
+
+  const itemCondition =
+    String(item.condition ?? "").toLowerCase() === "new"
+      ? "https://schema.org/NewCondition"
+      : "https://schema.org/UsedCondition";
+
   return {
     "@type": "ListItem",
     position,
+    url,
     item: {
-      // "Caravan" isn't a real schema.org type (bodyType/vehicleConfiguration
-      // below ARE real Vehicle properties, so this was almost certainly meant
-      // to be "Vehicle" — an unrecognized @type fails schema.org validation).
       "@type": "Vehicle",
-      bodyType: categories && categories.length > 0
-        ? categories.join(", ")
-        : "",
-      vehicleConfiguration: item.axle ?? "",
-      width: {
-        "@type": "QuantitativeValue",
-        unitCode: "MT",
-        value: widthMt,
-      },
+      "@id": `${url}#vehicle`,
+      name,
       url,
-      name: item.name ?? item.title ?? "",
-      model: item.model ?? "",
-      brand: {
-        "@type": "Brand",
-        name: item.make ?? "",
-      },
-      offers: {
-        "@type": "Offer",
-        priceCurrency: "AUD",
-        price: price,
-      },
-      image: images,
+      ...(item.sku && { sku: item.sku }),
+      bodyType: "Camper Trailer",
+      ...(pageMake && { brand: { "@type": "Brand", name: pageMake } }),
+      ...(year && { vehicleModelDate: String(year) }),
+      ...(additionalProperty.length > 0 && { additionalProperty }),
+      ...(images.length > 0 && { image: images }),
+      itemCondition,
+      ...(price !== null && {
+        offers: {
+          "@type": "Offer",
+          url,
+          price,
+          priceCurrency: "AUD",
+          availability: "https://schema.org/InStock",
+          itemCondition,
+        },
+      }),
     },
   };
 }
 
+/** Single @graph combining WebSite + CollectionPage + BreadcrumbList +
+ * ItemList (+ FAQPage) — matches the structure already in production on the
+ * sibling motorhomesforsale.com.au listings pages: one connected graph with
+ * @id cross-references, rather than two separate, loosely-related scripts
+ * (the old CollectionPage/SearchResultsPage split this replaces). */
 export function buildListingsJsonLd(
   response: ApiResponse,
   pageUrl: string,
-  breadcrumbs: { name: string; url: string }[]
+  breadcrumbs: { name: string; url: string }[],
+  pathname: string
 ) {
   const pageTitle =
     response?.seo_v2?.h1 ||
     response?.seo_v2?.meta_title ||
     "Camper Trailers for Sale in Australia";
-  const totalProducts = response?.pagination?.total_products ?? 0;
 
   const allProducts = [
     ...(response.data?.products || []),
     ...(response.data?.emp_exclusive_products || []),
   ];
-const weburl = "https://www.campingtrailersforsale.com.au"
 
   const footerDescription = response?.seo_v2?.footer_description
     ? stripHtml(response.seo_v2.footer_description)
@@ -274,20 +303,39 @@ const weburl = "https://www.campingtrailersforsale.com.au"
 
   const faqItems = parseFaq(response?.seo_v2?.faq);
 
-  const collectionPageLd = {
+  // Re-derive filters from the path so a single-make page (e.g. /listings/avan/)
+  // can safely attribute `brand` to every item — see buildVehicleListItem.
+  const slugString = pathname.replace(/^\/listings\//, "").replace(/\/$/, "");
+  const slugParts = slugString ? slugString.split("/").filter(Boolean) : [];
+  const filters = parseSlugToFilters(slugParts, {});
+  const pageMake = filters.make
+    ? filters.make.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+    : undefined;
+
+  const listingsLd = {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "CollectionPage",
-        "@id": pageUrl,
-        name: pageTitle,
-        url: pageUrl,
+        "@type": "WebSite",
+        "@id": `${BASE_URL}/#website`,
+        url: `${BASE_URL}/`,
+        name: "Camper Trailers For Sale",
         inLanguage: "en-AU",
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: pageTitle,
         ...(pageDescription && { description: pageDescription }),
-        ...(totalProducts > 0 && { numberOfItems: totalProducts }),
+        inLanguage: "en-AU",
+        isPartOf: { "@id": `${BASE_URL}/#website` },
+        breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
+        mainEntity: { "@id": `${pageUrl}#itemlist` },
       },
       {
         "@type": "BreadcrumbList",
+        "@id": `${pageUrl}#breadcrumb`,
         itemListElement: breadcrumbs.map((b, i) => ({
           "@type": "ListItem",
           position: i + 1,
@@ -295,10 +343,21 @@ const weburl = "https://www.campingtrailersforsale.com.au"
           item: b.url,
         })),
       },
+      {
+        "@type": "ItemList",
+        "@id": `${pageUrl}#itemlist`,
+        name: pageTitle,
+        numberOfItems: allProducts.length,
+        itemListOrder: "https://schema.org/ItemListUnordered",
+        itemListElement: allProducts.map((item, idx) =>
+          buildVehicleListItem(item, idx + 1, pageMake)
+        ),
+      },
       ...(faqItems.length > 0
         ? [
             {
               "@type": "FAQPage",
+              "@id": `${pageUrl}#faqpage`,
               mainEntity: faqItems.map((f) => ({
                 "@type": "Question",
                 name: stripHtml(f.q),
@@ -313,27 +372,7 @@ const weburl = "https://www.campingtrailersforsale.com.au"
     ],
   };
 
-  const searchResultsLd = {
-    "@context": "https://schema.org/",
-    "@type": "SearchResultsPage",
-    audience: { "@type": "Audience", audienceType: "camper trailer buyers" },
-    potentialAction: {
-      "@type": "SearchAction",
-      // schema.org/Google require the literal {search_term_string} placeholder
-      // inside the URL — a bare homepage URL (the old value here) fails
-      // structured-data validation outright.
-      target: { "@type": "EntryPoint", urlTemplate: `${weburl}/listings/{search_term_string}-search/` },
-    },
-    mainEntity: {
-      "@type": "OfferCatalog",
-      numberOfItems: allProducts.length,
-      itemListElement: allProducts.map((item, idx) =>
-        buildProductListItem(item, idx + 1)
-      ),
-    },
-  };
-
-  return { collectionPageLd, searchResultsLd };
+  return { listingsLd };
 }
 
 // React.cache deduplicates within a single request; the 1hr cross-request cache
