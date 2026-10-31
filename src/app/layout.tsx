@@ -21,6 +21,8 @@ import { headers } from "next/headers";
 import { metaFromSlug } from "@/utils/seo/meta";
 import fetchListingsForHead, { buildListingsJsonLd, buildBreadcrumbs } from "@/utils/fetchListingsHead";
 import GlobalImageFallback from "@/components/GlobalImageFallback";
+import { fetchListingLinkCountsServer } from "./listings/fetchBrowseSectionData";
+import { FOOTER_LISTING_HREFS } from "./footer/footerLinks";
 
   const montserrat = Montserrat({
     subsets: ["latin"],
@@ -51,6 +53,9 @@ import GlobalImageFallback from "@/components/GlobalImageFallback";
     const h = await headers();
     const pathname = h.get("x-pathname") ?? "";
     const xRobots = h.get("x-robots") ?? "";
+    // Footer hides /listings/ links whose page has no products — started now,
+    // awaited just before render, so it runs alongside the head fetches below.
+    const footerLinkCountsPromise = fetchListingLinkCountsServer(FOOTER_LISTING_HREFS);
     const isListingSlug =
       pathname.startsWith("/listings/") &&
       pathname !== "/listings/" &&
@@ -136,6 +141,7 @@ import GlobalImageFallback from "@/components/GlobalImageFallback";
       }
     }
 
+    const footerLinkCounts = await footerLinkCountsPromise;
     return (
       <html lang="en">
         <head>
@@ -302,7 +308,7 @@ import GlobalImageFallback from "@/components/GlobalImageFallback";
           {children}
           </BannerProvider>
                     </main>
-          <Footer />
+          <Footer linkCounts={footerLinkCounts} />
         </body>
       </html>
       

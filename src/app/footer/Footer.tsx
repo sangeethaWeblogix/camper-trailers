@@ -4,31 +4,8 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import "./footer.css?=31";
 import BackToTopButton from "./BackToTopButton";
-import { SELL_DATA } from "./FooterNav";
-
-const POPULAR_LOCATIONS = [
-  { label: "Adelaide", stateSlug: "south-australia", regionSlug: "adelaide" },
-  { label: "Brisbane", stateSlug: "queensland", regionSlug: "brisbane" },
-  { label: "Gold Coast", stateSlug: "queensland", regionSlug: "gold-coast" },
-  { label: "Melbourne", stateSlug: "victoria", regionSlug: "melbourne" },
-  { label: "Perth", stateSlug: "western-australia", regionSlug: "perth" },
-  { label: "Sydney", stateSlug: "new-south-wales", regionSlug: "sydney" },
-  { label: "Cairns", stateSlug: "queensland", regionSlug: "cairns" },
-];
-
-/** Shown only after "View All Locations" is clicked — appended below the
- * 7 above so that list doesn't reorder, just grows in place. */
-const MORE_LOCATIONS = [
-  { label: "Ballarat", stateSlug: "victoria", regionSlug: "ballarat" },
-  { label: "Bendigo", stateSlug: "victoria", regionSlug: "bendigo" },
-  { label: "Bunbury", stateSlug: "western-australia", regionSlug: "bunbury" },
-  { label: "Geelong", stateSlug: "victoria", regionSlug: "geelong" },
-  { label: "Hobart", stateSlug: "tasmania", regionSlug: "hobart" },
-  { label: "Newcastle", stateSlug: "new-south-wales", regionSlug: "newcastle" },
-  { label: "Sunshine Coast", stateSlug: "queensland", regionSlug: "sunshine-coast" },
-  { label: "Toowoomba", stateSlug: "queensland", regionSlug: "toowoomba" },
-  { label: "Townsville", stateSlug: "queensland", regionSlug: "townsville" },
-];
+import { SELL_DATA, BROWSE_LINKS, POPULAR_LOCATIONS, MORE_LOCATIONS } from "./footerLinks";
+import { hasListings, type ListingLinkCounts } from "../listings/listingLinkCounts";
 
 const OUR_SITES = [
   { name: "Caravans For Sale", href: "https://www.caravansforsale.com.au/", logo: "/images/our_sites/cfs-logo-black.svg" },
@@ -37,7 +14,17 @@ const OUR_SITES = [
   { name: "Camper Trailers For Sale", href: "/", logo: "/images/our_sites/cts-logo.svg", current: true },
 ];
 
-const Footer = () => {
+interface Props {
+  /** Server-fetched live count per /listings/ link (see layout.tsx) — links
+   * whose page has no products are hidden until stock arrives. */
+  linkCounts?: ListingLinkCounts;
+}
+
+const locationHref = (l: { stateSlug: string; regionSlug: string }) => `/listings/${l.stateSlug}-state/${l.regionSlug}-region/`;
+
+const Footer = ({ linkCounts }: Props) => {
+  const popularLocations = POPULAR_LOCATIONS.filter((l) => hasListings(linkCounts, locationHref(l)));
+  const moreLocations = MORE_LOCATIONS.filter((l) => hasListings(linkCounts, locationHref(l)));
   const currentYear = new Date().getFullYear();
   const [sellOpen, setSellOpen] = useState(false);
   const [locationsExpanded, setLocationsExpanded] = useState(false);
@@ -58,14 +45,9 @@ const Footer = () => {
             <div className="ft-col">
               <h4 className="ft-col__title">Browse Camper Trailers</h4>
               <ul className="ft-col__list">
-                <li><a href="/listings/">All Camper Trailers for Sale</a></li>
-                <li><a href="/listings/new-condition/">New Camper Trailers</a></li>
-                <li><a href="/listings/used-condition/">Used Camper Trailers</a></li>
-                <li><a href="/listings/hybrid-category/">Hybrid Camper Trailers</a></li>
-                <li><a href="/listings/camper-trailer-category/">Camper Trailers</a></li>
-                <li><a href="/listings/off-road-camper-category/">Off Road Camper Trailers</a></li>
-                <li><a href="/listings/tent-trailer-category/">Tent Trailers</a></li>
-                <li><a href="/listings/toy-hauler-carrier-category/">Toy Hauler Carriers</a></li>
+                {BROWSE_LINKS.filter((l) => hasListings(linkCounts, l.href)).map((l) => (
+                  <li key={l.href}><a href={l.href}>{l.label}</a></li>
+                ))}
                 <li><a href="/camper-trailer-brands/">All Brands</a></li>
               </ul>
             </div>
@@ -74,7 +56,7 @@ const Footer = () => {
             <div className="ft-col">
               <h4 className="ft-col__title">Browse by State</h4>
               <ul className="ft-col__list">
-                {SELL_DATA.map((s) => (
+                {SELL_DATA.filter((s) => hasListings(linkCounts, `/listings/${s.stateSlug}-state/`)).map((s) => (
                   <li key={s.stateSlug}>
                     <a href={`/listings/${s.stateSlug}-state/`}>{s.state}</a>
                   </li>
@@ -86,17 +68,17 @@ const Footer = () => {
             <div className="ft-col">
               <h4 className="ft-col__title">Popular Locations</h4>
               <ul className="ft-col__list">
-                {POPULAR_LOCATIONS.map((l) => (
+                {popularLocations.map((l) => (
                   <li key={l.regionSlug}>
-                    <a href={`/listings/${l.stateSlug}-state/${l.regionSlug}-region/`}>{l.label}</a>
+                    <a href={locationHref(l)}>{l.label}</a>
                   </li>
                 ))}
-                {locationsExpanded && MORE_LOCATIONS.map((l) => (
+                {locationsExpanded && moreLocations.map((l) => (
                   <li key={l.regionSlug}>
-                    <a href={`/listings/${l.stateSlug}-state/${l.regionSlug}-region/`}>{l.label}</a>
+                    <a href={locationHref(l)}>{l.label}</a>
                   </li>
                 ))}
-                {!locationsExpanded && (
+                {!locationsExpanded && moreLocations.length > 0 && (
                   <li>
                     <button
                       className="ft-col__view-all ft-sell-trigger"

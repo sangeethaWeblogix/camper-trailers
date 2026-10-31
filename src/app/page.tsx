@@ -9,6 +9,8 @@ import { fetchHomePage } from "@/api/home/api";
 import { fetchTypeCounts } from "@/api/homeApi/typeCounts/api";
 import { fetchHomeFeatured } from "@/api/homeApi/featured/api";
 import { fetchBlogs } from "@/api/blog/api";
+import { fetchListingLinkCountsServer } from "./listings/fetchBrowseSectionData";
+import { HOME_LOCATION_HREFS } from "./home-demo/homeLocationLinks";
 
 const FEATURED_SEED_MAX = 15;
 
@@ -120,6 +122,14 @@ export default async function Page() {
     fetchBlogs(1),
   ]);
 
+  // Live count for every static /listings/ link on the page (state cards come
+  // from the by-state API) — links to empty pages are hidden, and come back
+  // by themselves once stock arrives.
+  const linkCounts = await fetchListingLinkCountsServer([
+    ...HOME_LOCATION_HREFS,
+    ...stateBands.map((s: { permalink?: string }) => s.permalink ?? "").filter((h: string) => h.startsWith("/listings/")),
+  ]);
+
   return (
     <>
       <script
@@ -136,6 +146,7 @@ export default async function Page() {
         featuredUsed={featuredUsed}
         blogPosts={blogPosts.items}
         visitorIp={visitorIp}
+        linkCounts={linkCounts}
       />
     </>
   );

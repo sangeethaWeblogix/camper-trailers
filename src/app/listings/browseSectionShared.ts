@@ -1,4 +1,5 @@
 import { getRegionsByState } from "../sell-my-caravan-region/regions-data";
+import type { ListingLinkCounts } from "./listingLinkCounts";
 
 export function toStateSlug(state: string): string {
   return state.trim().toLowerCase().replace(/ /g, "-");
@@ -209,6 +210,15 @@ export function buildFiltersForState(state: string) {
   }));
 }
 
+// Every href the default (no state/category, or state-only) mode renders —
+// the server fetches each one's live count so empty pages aren't linked.
+export function defaultModeLinkHrefs(state?: string): string[] {
+  const regions = state ? buildAllRegionsForState(state) : STATES;
+  const types   = state ? buildTypesForState(state) : TYPES_NO_STATE;
+  const filters = state ? buildFiltersForState(state) : FILTERS_NO_STATE;
+  return [...regions, ...types, ...filters.flatMap((f) => f.links)].map((l) => l.href);
+}
+
 export type CountItem = { name: string; slug: string; count: number };
 
 export interface BrowseSectionData {
@@ -220,4 +230,5 @@ export interface BrowseSectionData {
   atmCounts?: number[] | null;
   lengthCounts?: number[] | null;
   sleepCounts?: number[] | null;
+  linkCounts?: ListingLinkCounts | null;
 }

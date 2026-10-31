@@ -3,9 +3,11 @@ import {
   ATM_BANDS,
   LENGTH_BANDS,
   SLEEP_BANDS,
+  defaultModeLinkHrefs,
   type CountItem,
   type BrowseSectionData,
 } from "./browseSectionShared";
+import { listingLinkCountScope, type ListingLinkCounts } from "./listingLinkCounts";
 
 const API_BASE = process.env.MPN_API_BASE;
 const API_KEY = process.env.MPN_API_KEY;
@@ -31,6 +33,29 @@ export async function fetchGroupCountsServer(
   } catch {
     return [];
   }
+}
+
+/**
+ * Live product count per /listings/ href (see listingLinkCounts.ts). Cached
+ * for 15 min so the footer/home don't hit the backend on every render; a
+ * failed fetch leaves the href out (unknown = keep the link).
+ */
+export async function fetchListingLinkCountsServer(hrefs: string[]): Promise<ListingLinkCounts> {
+  const counts: ListingLinkCounts = {};
+  await Promise.all([...new Set(hrefs)].map(async (href) => {
+    const scope = listingLinkCountScope(href);
+    if (!scope) { counts[href] = 0; return; }
+    try {
+      const res = await fetch(`${API_BASE}/params-count?${scope.toString()}`, {
+        headers: wpHeaders(),
+        next: { revalidate: 900 },
+      });
+      if (!res.ok) return;
+      const json = await res.json();
+      if (typeof json?.total_products === "number") counts[href] = json.total_products;
+    } catch {}
+  }));
+  return counts;
 }
 
 /**
@@ -143,6 +168,6 @@ export async function fetchBrowseSectionData(
 
   // Default mode (no state/category, or state-only) — the pills rendered
   // here are static (STATES/TYPES_NO_STATE/FILTERS_NO_STATE) or come from
-  // getRegionsByState, none of which need count data at all.
-  return {};
+  // getRegionsByState, so each one's own live count decides if it's shown.
+  return { linkCounts: await fetchListingLinkCountsServer(defaultModeLinkHrefs(state)) };
 }

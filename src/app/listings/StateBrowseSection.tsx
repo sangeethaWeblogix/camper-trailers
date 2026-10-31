@@ -19,9 +19,11 @@ import {
   buildAllRegionsForState,
   buildTypesForState,
   buildFiltersForState,
+  defaultModeLinkHrefs,
   type CountItem,
   type BrowseSectionData,
 } from "./browseSectionShared";
+import { listingLinkCountScope, hasListings, type ListingLinkCounts } from "./listingLinkCounts";
 
 async function fetchGroupCounts(groupBy: string, scope: Record<string, string>): Promise<CountItem[]> {
   try {
@@ -46,6 +48,22 @@ async function fetchBandCount(scope: Record<string, string>, query: string): Pro
   } catch {
     return 0;
   }
+}
+
+// Client mirror of fetchListingLinkCountsServer — failed fetches stay unknown (link kept).
+async function fetchListingLinkCounts(hrefs: string[]): Promise<ListingLinkCounts> {
+  const counts: ListingLinkCounts = {};
+  await Promise.all(hrefs.map(async (href) => {
+    const scope = listingLinkCountScope(href);
+    if (!scope) { counts[href] = 0; return; }
+    try {
+      const res = await fetch(`/api/params-count/?${scope.toString()}`);
+      if (!res.ok) return;
+      const json = await res.json();
+      if (typeof json?.total_products === "number") counts[href] = json.total_products;
+    } catch {}
+  }));
+  return counts;
 }
 
 async function fetchAllBandCounts(scope: Record<string, string>) {
@@ -90,6 +108,7 @@ export default function StateBrowseSection({ state, region, category, initialDat
   const [atmCounts,      setAtmCounts]      = useState<number[] | null>(initialData?.atmCounts ?? null);
   const [lengthCounts,   setLengthCounts]   = useState<number[] | null>(initialData?.lengthCounts ?? null);
   const [sleepCounts,    setSleepCounts]    = useState<number[] | null>(initialData?.sleepCounts ?? null);
+  const [linkCounts,     setLinkCounts]     = useState<ListingLinkCounts | null>(initialData?.linkCounts ?? null);
 
   // initialData only covers the filters the server rendered this page with —
   // filter changes happen via client-side pushState (see home.tsx), not a
@@ -160,6 +179,17 @@ export default function StateBrowseSection({ state, region, category, initialDat
     return () => { cancelled = true; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryStateRegionMode, category, state, region]);
+
+  // Default mode (no category, no region) — every static pill's own count.
+  const defaultMode = !hasCategory && !hasRegion;
+  useEffect(() => {
+    if (!defaultMode || (initialData && isInitialFilters)) return;
+    let cancelled = false;
+    setLinkCounts(null);
+    fetchListingLinkCounts(defaultModeLinkHrefs(state)).then((c) => { if (!cancelled) setLinkCounts(c); });
+    return () => { cancelled = true; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [defaultMode, state]);
 
   // Shared shape for the "By Budget/ATM/Length/Sleep"-style vertical-list
   // filter columns used by every dynamic mode below.
@@ -469,9 +499,11 @@ export default function StateBrowseSection({ state, region, category, initialDat
     );
   }
 
-  const regions = hasState ? buildAllRegionsForState(state!) : STATES;
-  const types   = hasState ? buildTypesForState(state!) : TYPES_NO_STATE;
-  const filters = hasState ? buildFiltersForState(state!) : FILTERS_NO_STATE;
+  const regions = (hasState ? buildAllRegionsForState(state!) : STATES).filter((r) => hasListings(linkCounts, r.href));
+  const types   = (hasState ? buildTypesForState(state!) : TYPES_NO_STATE).filter((t) => hasListings(linkCounts, t.href));
+  const filters = (hasState ? buildFiltersForState(state!) : FILTERS_NO_STATE)
+    .map((f) => ({ ...f, links: f.links.filter((l) => hasListings(linkCounts, l.href)) }))
+    .filter((f) => f.links.length > 0);
 
   const leftTitle  = hasState ? `Browse Camper Trailers by Region in ${stateLabel(state!)}` : "Browse Camper Trailers by State";
   const rightTitle = hasState ? `Browse Camper Trailers by Type in ${stateLabel(state!)}`   : "Browse Camper Trailers by Type";

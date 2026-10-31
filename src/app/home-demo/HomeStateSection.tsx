@@ -6,6 +6,7 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import CaravansByStateSkeleton from "../components/Caravansbystateskeleton";
+import { hasListings, type ListingLinkCounts } from "../listings/listingLinkCounts";
 
 interface Item {
   state: string;
@@ -15,6 +16,7 @@ interface Item {
 
 interface Props {
   stateBands: Item[];
+  linkCounts?: ListingLinkCounts;
 }
 
 const stateMeta: Record<string, { code: string; image: string }> = {
@@ -26,9 +28,9 @@ const stateMeta: Record<string, { code: string; image: string }> = {
   tasmania:           { code: "TAS", image: "/images/tas_map.svg" },
 };
 
-export default function HomeStateSection({ stateBands: stateBandsRaw }: Props) {
+export default function HomeStateSection({ stateBands: stateBandsRaw, linkCounts }: Props) {
   const stateBands = stateBandsRaw.filter(
-    (item) => item.state.toLowerCase() !== "australian capital territory"
+    (item) => item.state.toLowerCase() !== "australian capital territory" && hasListings(linkCounts, item.permalink)
   );
   const loading = stateBands.length === 0;
 

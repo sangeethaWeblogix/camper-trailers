@@ -15,6 +15,7 @@ import HomeBuyerGuide from "./HomeBuyerGuide";
 import HomeListingSlider from "./HomeListingSlider";
 import { useBanners } from "@/components/BannerHandler";
 import { useBannerTracking } from "@/hooks/useBannerTracking";
+import { type ListingLinkCounts } from "../listings/listingLinkCounts";
 import "./main.css?=26";
 
 const BlogSection = dynamic(() => import("../blogSection"), { ssr: false });
@@ -44,6 +45,7 @@ interface Props {
   featuredUsed: FeaturedListing[];
   blogPosts: BlogPost[];
   visitorIp: string;
+  linkCounts?: ListingLinkCounts;
 }
 /* --------------------------------- Page ---------------------------------- */
 export default function HomePage({
@@ -57,6 +59,7 @@ export default function HomePage({
   featuredUsed,
   blogPosts,
   visitorIp,
+  linkCounts,
 
  }: Props) {
 
@@ -272,7 +275,7 @@ const handleBannerClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>) =
       />
 
       {/* ── Browse by State ── */}
-      <HomeStateSection stateBands={stateBands} />
+      <HomeStateSection stateBands={stateBands} linkCounts={linkCounts} />
 
       {/* ── Post Requirements ── */}
       <div className="hd-postreq-wrap">
@@ -282,7 +285,7 @@ const handleBannerClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>) =
       </div>
 
       {/* ── Find by Location ── */}
-      <HomeLocationSection />
+      <HomeLocationSection linkCounts={linkCounts} />
 
       {/* ── Buyer Guide + Why Australians ── */}
       <HomeBuyerGuide />
