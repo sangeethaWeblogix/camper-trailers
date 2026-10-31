@@ -1,4 +1,5 @@
 import { cache } from "react";
+import { normalizeBlogProduct } from "../listings/listingShared";
 
 const API_KEY = process.env.MPN_API_KEY;
 const FETCH_TIMEOUT_MS = 8000;
@@ -29,6 +30,20 @@ async function fetchWithTimeout(url: string) {
 // Response envelope matches the old /blog-detail-new shape by design.
 const MPN_ROOT_BASE = process.env.MPN_API_BASE?.replace(/\/camping-trailers\/?$/, "");
 
+// Cards embedded in the content (<div data-mpn-products="KEY">) — trimmed to
+// card fields here so sku/dealer/description stay out of the page payload.
+function slimProductSections(json: any) {
+  const post = json?.data?.blog_detail;
+  if (Array.isArray(post?.product_sections)) {
+    post.product_sections = post.product_sections.map((section: any) => ({
+      key: section.key,
+      link: section.link ?? null,
+      products: (section.products ?? []).map(normalizeBlogProduct),
+    }));
+  }
+  return json;
+}
+
 // cache() dedupes identical (slug, seed) calls within a single request, so
 // generateMetadata + layout + page no longer each hit the WP API separately.
 export const fetchBlogDetail = cache(async (slug: string, seed?: number) => {
@@ -53,7 +68,7 @@ export const fetchBlogDetail = cache(async (slug: string, seed?: number) => {
         continue;
       }
       const idx = raw.indexOf('{"');
-      return JSON.parse(idx >= 0 ? raw.substring(idx) : raw);
+      return slimProductSections(JSON.parse(idx >= 0 ? raw.substring(idx) : raw));
     } catch (err) {
       lastErr = err;
     }
