@@ -44,7 +44,10 @@ const loading = !data || !blogPosts || blogPosts.length === 0 && data.totalPages
     if (!str) return "";
     if (typeof window === "undefined") return str; // SSR safe
     const doc = new DOMParser().parseFromString(str, "text/html");
-    return doc.documentElement.textContent || "";
+    const text = doc.documentElement.textContent || "";
+    // WordPress's auto-excerpt truncation appends "[&hellip;]" — after entity
+    // decoding that's "[…]"; show a plain "..." instead of the brackets.
+    return text.replace(/\[…\]\s*$/, "...");
   }
  
 

@@ -11,11 +11,28 @@ export interface BlogPost {
   date: string;
 }
 
+/** Raw MPN /blog item — the backend sends `featured_image` (also mirrored at
+ * `r2.cdn_url`), not `image`, so every consumer reading `post.image` always
+ * got an empty string and showed a blank thumbnail. */
+type RawBlogPost = Omit<BlogPost, "image"> & {
+  image?: string;
+  featured_image?: string;
+  r2?: { cdn_url?: string };
+};
+
 export interface BlogApiResponse {
   // MPN shape: { success, data: BlogPost[], meta: {total, page, per_page, total_pages, seed} }
   success?: boolean;
-  data?: BlogPost[] | { latest_blog_posts?: { items: BlogPost[]; current_page?: number; total_pages?: number } };
+  data?: RawBlogPost[] | { latest_blog_posts?: { items: RawBlogPost[]; current_page?: number; total_pages?: number } };
   meta?: { total?: number; page?: number; per_page?: number; total_pages?: number };
+}
+
+function normalizeBlogPost(raw: RawBlogPost): BlogPost {
+  const rawImage = raw.image || raw.featured_image || raw.r2?.cdn_url || "";
+  return {
+    ...raw,
+    image: rawImage ? `https://${rawImage.replace(/^https?:\/\//, "")}` : "",
+  };
 }
 
 export type BlogPageResult = {
@@ -72,9 +89,10 @@ export const fetchBlogs = async (page: number = 1): Promise<BlogPageResult> => {
 
       // MPN returns a flat array under `data` + pagination under `meta`;
       // older shape nested items under `data.latest_blog_posts` — support both.
-      const items: BlogPost[] = Array.isArray(data?.data)
+      const rawItems: RawBlogPost[] = Array.isArray(data?.data)
         ? data.data
-        : (data?.data as { latest_blog_posts?: { items: BlogPost[] } })?.latest_blog_posts?.items ?? [];
+        : (data?.data as { latest_blog_posts?: { items: RawBlogPost[] } })?.latest_blog_posts?.items ?? [];
+      const items: BlogPost[] = rawItems.map(normalizeBlogPost);
       const currentPage = data?.meta?.page ?? (data?.data as { latest_blog_posts?: { current_page?: number } })?.latest_blog_posts?.current_page ?? page;
       const totalPages = data?.meta?.total_pages ?? (data?.data as { latest_blog_posts?: { total_pages?: number } })?.latest_blog_posts?.total_pages ?? 1;
 

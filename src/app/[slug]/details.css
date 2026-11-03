@@ -1281,9 +1281,12 @@ tr {
     position: relative;
 }
 .blog-sidebar-cta__btn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  width: 100%;
+  white-space: nowrap;
   background: #3385d6;
   color: #fff;
   padding: 10px 20px;
@@ -1294,6 +1297,7 @@ tr {
   transition: background 0.15s;
   position: relative;
   z-index: 1;
+  box-sizing: border-box;
 }
 .blog-sidebar-cta__btn:hover {
   background: #004c99;
@@ -1301,7 +1305,7 @@ tr {
 }
 
 /* ── Content typography ── */
-.blog-article-main h2.wp-block-heading {
+.blog-article-main h2.wp-block-heading, .blog-article-main h2 {
   font-size: 1.45rem;
   font-weight: 700;
   color: #0c1f3f;
@@ -1483,6 +1487,13 @@ tr {
 }
 .blog-faq-answer p { margin: 0 0 8px; }
 .blog-faq-answer p:last-child { margin-bottom: 0; }
+.blog-faq-answer a {
+  color: #3385d6;
+  text-decoration: underline;
+}
+.blog-faq-answer a:hover {
+  color: #004c99;
+}
 
 /* Right CTA card */
 .blog-faq-cta {
@@ -1869,3 +1880,4 @@ tr {
   transition: border-color 0.2s, color 0.2s;
 }
 .blog-content-share__btn:hover { border-color: #3385d6; color: #3385d6; }
+

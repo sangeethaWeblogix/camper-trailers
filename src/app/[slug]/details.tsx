@@ -231,6 +231,7 @@ type BlogDetailResponse = {
   };
   seo?: { metatitle?: string; metadescription?: string; index?: string };
 };
+
 export default function BlogDetailsPage({
   data,
 }: {
@@ -257,6 +258,13 @@ export default function BlogDetailsPage({
 
   // ✅ Run DOMParser only on client
   const post = data?.data?.blog_detail;
+  // The backend never actually sends `banner_image` — only `image` (also
+  // mirrored at `r2.cdn_url`) — so the hero image always fell back to the
+  // plain placeholder box.
+  const rawBannerImage = post?.banner_image || post?.image;
+  const bannerImage = rawBannerImage
+    ? `https://${rawBannerImage.replace(/^https?:\/\//, "")}`
+    : undefined;
   // console.log("dataaa", post);
 
   // The blog content HTML embeds <div data-mpn-products="KEY"></div> markers
@@ -475,9 +483,9 @@ export default function BlogDetailsPage({
         </div>
         {/* Right: banner image */}
         <div className="blog-hero__right">
-          {post.banner_image ? (
+          {bannerImage ? (
             <Image
-              src={post.banner_image}
+              src={bannerImage}
               alt={plainTitle}
               width={0}
               height={0}
