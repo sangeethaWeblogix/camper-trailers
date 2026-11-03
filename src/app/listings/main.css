@@ -642,7 +642,7 @@ input.loc-search-input:focus { box-shadow: 0 0 0 1.5px #7e7e7e !important; }
 .lsd-contact-modal .form-item textarea { height: 100px; padding-top: 30px; resize: vertical; }
 .lsd-contact-modal .form-item input:focus,
 .lsd-contact-modal .form-item textarea:focus { border-color: #0066cc; }
-.lsd-contact-modal .form-item label { cursor: text; z-index: 2; color: rgb(153,153,153); background: #fff; padding: 0 10px; font-size: 12px; font-weight: 400; transition: 0.3s; position: absolute; top: 8px; left: 4px; pointer-events: none; }
+.lsd-contact-modal .form-item label { cursor: text; z-index: 2; color: rgb(153,153,153); background: #fff; padding: 0 10px; font-size: 12px; font-weight: 400; transition: 0.3s; position: absolute; top: 8px; left: 4px; pointer-events: none;line-height: normal; }
 .lsd-contact-modal .phone_country { position: relative; }
 .lsd-contact-modal .phone-label { position: absolute; top: 58%; left: 10px; transform: translateY(-50%); color: #000; pointer-events: none; font-size: 16px; z-index: 1; }
 .lsd-contact-modal .form-item .phone_country input { padding-left: 40px; }

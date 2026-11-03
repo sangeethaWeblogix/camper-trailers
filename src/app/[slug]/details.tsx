@@ -742,6 +742,22 @@ export default function BlogDetailsPage({
           </p>
         </div>
       </section>
+
+      {/* ── Explore Other Travel Options ── */}
+      <section className="bds-explore-section">
+        <div className="container">
+          <h2 className="bds-explore-title">Explore Other Travel Options</h2>
+          <p className="bds-explore-body">
+            Still weighing up your options? Take a look at{" "}
+            <a href="https://www.caravansforsale.com.au/" className="bds-explore-link" target="_blank" rel="noopener noreferrer">caravans for sale</a>{" "}
+            if you&apos;d like more space and comfort, or browse{" "}
+            <a href="https://www.motorhomesforsale.com.au/" className="bds-explore-link" target="_blank" rel="noopener noreferrer">motorhomes for sale</a>{" "}
+            if you prefer to travel without towing. For something smaller, explore{" "}
+            <a href="https://www.campervansforsale.au/" className="bds-explore-link" target="_blank" rel="noopener noreferrer">campervans for sale</a>.{" "}
+            You&apos;ll find these on our other marketplaces.
+          </p>
+        </div>
+      </section>
     </div>
   );
 }
