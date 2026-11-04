@@ -60,6 +60,30 @@ export const dynamicParams = true;
 type RouteParams = { slug: string };
 type PageProps = { params: Promise<RouteParams> };
 
+/** The backend's seo_title often ends with a redundant "Camping Trailer For
+ * Sale" / "Camper Camping Trailer" suffix on top of a title that already
+ * names the product (e.g. "... Used Camper Trailer Camping Trailer For
+ * Sale", "... Off Road Camper Camping Trailer") — stripping just that
+ * trailing duplication removes the redundancy without touching the actual
+ * product name/description shown on the page, and without over-stripping a
+ * single legitimate trailing "Camper Trailer" that isn't duplicated. */
+function shortenProductTitle(title: string): string {
+  return title
+    .replace(/\s+(Camping|Camper)\s+Trailers?\s+For\s+Sale\s*$/i, "")
+    .replace(/\s+Camper\s+Camping\s+Trailer\s*$/i, "");
+}
+
+/** Same "camper trailer camping trailer" doubling as the title, mid-sentence
+ * here rather than trailing (".. camper trailer camping trailer for sale,
+ * priced at ..."). Collapsing it to one phrase trims every description by
+ * ~15 characters without losing any of the price/dealer/location detail. */
+function shortenProductDescription(description: string): string {
+  // Matches both "... camper camping trailer ..." and "... camper trailer
+  // camping trailer ..." (the latter when the preceding text already said
+  // "trailer" once, e.g. a category like "Off Road Camper").
+  return description.replace(/\bcamper\s+(?:trailer\s+)?camping\s+trailer\b/i, "camper trailer");
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const data = await Promise.race([
@@ -70,8 +94,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const seo = data?.seo ?? data?.product?.seo ?? {};
   const slugTitle = slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
-  const title = seo.metatitle || seo.meta_title || pd.name || data?.name || slugTitle || "Camper Trailer for Sale";
-  const description = seo.metadescription || seo.meta_description || pd.short_description || "View camper trailer details on Camper Trailers For Sale Australia.";
+  const title = shortenProductTitle(
+    seo.metatitle || seo.meta_title || pd.name || data?.name || slugTitle || "Camper Trailer for Sale"
+  );
+  const description = shortenProductDescription(
+    seo.metadescription || seo.meta_description || pd.short_description || "View camper trailer details on Camper Trailers For Sale Australia."
+  );
   const canonicalUrl = `https://www.campingtrailersforsale.com.au/product/${slug}/`;
   const rawImages = pd.image_url ?? pd.images ?? [];
   const images: string[] = (Array.isArray(rawImages) ? rawImages : [rawImages]).filter(Boolean);

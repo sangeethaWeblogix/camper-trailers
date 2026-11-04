@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEnquiryForm } from "@/app/components/ListContent/enquiryform";
 import CaravanDetailModal from "@/app/product/[slug]/CaravanDetailModal";
+import { toSlug } from "@/utils/seo/slug";
 import "./demo.css";
 
 /* ── Types ── */
@@ -108,7 +109,14 @@ const parseAmt = (v: string | number | undefined) => {
 };
 const fmt = (n: number) =>
   n.toLocaleString("en-AU", { style: "currency", currency: "AUD", maximumFractionDigits: 0 });
-const slugify = (s: string) => s.trim().toLowerCase().replace(/\s+/g, "-");
+// Local slugify only replaced whitespace, so any other punctuation in a raw
+// make/model/category name (a dot in "Wren OB.CP-MY25", a slash in "Toy
+// Hauler / Carrier") passed straight through into the URL — producing links
+// like ".../wren-ob.cp-my25/" and ".../toy-hauler-/-carrier-category/" that
+// 410 against the real canonical slug. toSlug (already used by
+// buildSlugFromFilters for this exact reason) strips any non-alphanumeric
+// run instead of just spaces.
+const slugify = toSlug;
 const toInt = (s: string) => { const n = parseInt(String(s).replace(/[^\d]/g, ""), 10); return Number.isFinite(n) && n > 0 ? n : null; };
 // For decimal values (e.g. "14.58 ft") — toInt's digit-only strip would turn
 // that into 1458 by deleting the "." instead of parsing it, producing a

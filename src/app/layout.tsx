@@ -100,18 +100,12 @@ import { FOOTER_LISTING_HREFS } from "./footer/footerLinks";
       const slugString = pathname.replace(/^\/listings\//, "").replace(/\/$/, "");
       const slugParts = isMainListings ? [] : slugString.split("/").filter(Boolean);
 
-      // Middleware already computed the live, inventory-aware robots decision
-      // (same value it sent as the X-Robots-Tag response header) — use it
-      // directly so the <meta name="robots"> tag can never disagree with the
-      // HTTP header, instead of re-deriving a URL-shape-only guess below that
-      // has no idea whether this specific filter combo currently has 0 results.
-      if (isListingSlug && xRobots) {
-        slugRobots = xRobots;
-        slugCanonical = `https://www.campingtrailersforsale.com.au/listings/${slugParts.join("/")}/`;
-        slugDescription = "Browse camper trailers for sale across Australia. Compare prices on off-road, hybrid, pop top, touring, luxury models with size, weight & sleeping capacity.";
-      } else {
         // try {
-          // All SEO from metaFromSlug — pure computation, no API call
+          // All SEO from metaFromSlug — pure computation, no API call. Always
+          // run this (even when xRobots below will override the robots value)
+          // — it's also where slugTitle/slugCanonical come from, and skipping
+          // it whenever xRobots was set previously left every indexed listings
+          // page with no og:title/twitter:title at all.
           const meta = await metaFromSlug(slugParts, {});
           slugCanonical = (meta.alternates?.canonical as string) ?? "";
           if (meta.robots && typeof meta.robots === "object" && "index" in meta.robots) {
@@ -123,6 +117,15 @@ import { FOOTER_LISTING_HREFS } from "./footer/footerLinks";
             slugTitle = (meta.title as { absolute: string }).absolute;
           }
           slugDescription = "Browse camper trailers for sale across Australia. Compare prices on off-road, hybrid, pop top, touring, luxury models with size, weight & sleeping capacity.";
+
+          // Middleware already computed the live, inventory-aware robots
+          // decision (same value it sent as the X-Robots-Tag response
+          // header) — prefer it over metaFromSlug's own guess above, which is
+          // URL-shape only and has no idea whether this specific filter
+          // combo currently has 0 results.
+          if (isListingSlug && xRobots) {
+            slugRobots = xRobots;
+          }
         // } catch {
         //   const parts = slugParts
         //     .map((p: string) =>
@@ -138,7 +141,6 @@ import { FOOTER_LISTING_HREFS } from "./footer/footerLinks";
         //   slugDescription = "Browse caravans for sale across Australia. Compare prices on off-road, hybrid, pop top, touring, luxury models with size, weight & sleeping capacity.";
         //   slugRobots = "index, follow";
         // }
-      }
     }
 
     const footerLinkCounts = await footerLinkCountsPromise;
@@ -153,8 +155,11 @@ import { FOOTER_LISTING_HREFS } from "./footer/footerLinks";
           {staticMeta && <meta property="og:title" content={staticMeta.title} />}
           {staticMeta && <meta property="og:description" content={staticMeta.description} />}
           {staticMeta && <meta property="og:url" content={staticMeta.canonical} />}
+          {staticMeta && <meta property="og:image" content="https://www.campingtrailersforsale.com.au/images/our_sites/cts-logo.png" />}
+          {staticMeta && <meta name="twitter:card" content="summary_large_image" />}
           {staticMeta && <meta name="twitter:title" content={staticMeta.title} />}
           {staticMeta && <meta name="twitter:description" content={staticMeta.description} />}
+          {staticMeta && <meta name="twitter:image" content="https://www.campingtrailersforsale.com.au/images/our_sites/cts-logo.png" />}
           {/* Product page SEO (title/description/canonical/robots/og/twitter) comes
               entirely from generateMetadata in product/[slug]/page.tsx — it already
               covers everything this block used to duplicate (via its own separate
@@ -168,8 +173,11 @@ import { FOOTER_LISTING_HREFS } from "./footer/footerLinks";
           {hasSlugMeta && slugTitle && <meta property="og:title" content={slugTitle} />}
           {hasSlugMeta && slugDescription && <meta property="og:description" content={slugDescription} />}
           {hasSlugMeta && slugCanonical && <meta property="og:url" content={slugCanonical} />}
+          {hasSlugMeta && <meta property="og:image" content="https://www.campingtrailersforsale.com.au/images/our_sites/cts-logo.png" />}
+          {hasSlugMeta && <meta name="twitter:card" content="summary_large_image" />}
           {hasSlugMeta && slugTitle && <meta name="twitter:title" content={slugTitle} />}
           {hasSlugMeta && slugDescription && <meta name="twitter:description" content={slugDescription} />}
+          {hasSlugMeta && <meta name="twitter:image" content="https://www.campingtrailersforsale.com.au/images/our_sites/cts-logo.png" />}
           {/* Contact page JSON-LD */}
           {isContactPage && (
             <script

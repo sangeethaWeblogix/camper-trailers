@@ -306,9 +306,11 @@ export function generateTitleFromFilters(
     ? (() => {
         const sk = parsed.state.toLowerCase().replace(/\s+/g, "-");
         const sn = STATE_NAMES[sk] ?? titleCase(parsed.state);
-        return parsed.region
-          ? ` in ${titleCase(parsed.region)}, ${sn}`
-          : ` in ${sn}, Australia`;
+        const rn = parsed.region ? titleCase(parsed.region) : "";
+        // A state's own "whole-state" region (e.g. ACT) shares its name with
+        // the state — "in Australian Capital Territory, Australian Capital
+        // Territory" repeats it for no reason.
+        return rn && rn !== sn ? ` in ${rn}, ${sn}` : ` in ${sn}, Australia`;
       })()
     : " in Australia";
 
@@ -331,7 +333,16 @@ export function generateTitleFromFilters(
   if (parsed.model) parts.push(titleCase(parsed.model));
   if (parsed.category) parts.push(titleCase(parsed.category));
 
-  const baseNoun = parts.length > 0 ? `${parts.join(" ")} Camper Trailers` : "Camper Trailers";
+  // A category like "Camper Trailer", "Off Road Camper" or "Tent Trailer"
+  // already contains "camper"/"trailer" — appending the generic "Camper
+  // Trailers" noun after it doubles the word ("Camper Trailer Camper
+  // Trailers", "Off Road Camper Camper Trailers for Sale"), which is both
+  // redundant and a title-length offender.
+  const joinedParts = parts.join(" ");
+  const alreadyNamesTrailer = /\b(camper|trailer)\b/i.test(joinedParts);
+  const baseNoun = parts.length > 0
+    ? (alreadyNamesTrailer ? joinedParts : `${joinedParts} Camper Trailers`)
+    : "Camper Trailers";
   const band = getBandText(parsed);
   const bandPart = band ? ` ${band}` : "";
 
