@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { trackEngagement } from "@/utils/engagement";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
@@ -641,6 +642,7 @@ export default function StateHome({
   // once, when the real (single) server response for this filter arrives.
   const handleFilterChange = (f: FilterState) => {
     pushFiltersToUrl(f);
+    trackEngagement("filter");
   };
   const handleClearAll = () => {
     pushFiltersToUrl({});

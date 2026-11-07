@@ -15,6 +15,8 @@
   import UTMTracker from "./UTMTracker";
   // import NextTopLoader from "nextjs-toploader";
 import NavigationHistory from "@/components/NavigationHistory";
+import VisitorQualifier from "@/components/VisitorQualifier";
+import VisitorStatus from "@/components/VisitorStatus";
 import { BannerProvider } from "@/components/BannerHandler";
 import GlobalErrorTracker from "@/components/GlobalErrorTracker";
 import { headers } from "next/headers";
@@ -295,6 +297,12 @@ import { FOOTER_LISTING_HREFS } from "./footer/footerLinks";
 </Suspense>
 <Suspense fallback={null}>
   <NavigationHistory />
+</Suspense>
+<Suspense fallback={null}>
+  <VisitorQualifier />
+</Suspense>
+<Suspense fallback={null}>
+  <VisitorStatus />
 </Suspense>
 <Suspense fallback={<NavbarSkeleton />}>
   <Navbar />

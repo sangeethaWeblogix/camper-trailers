@@ -1,3 +1,5 @@
+import type { NextFetchEvent } from "next/server";
+import { screenRequest } from "@/lib/screeningMiddleware";
 import { NextRequest, NextResponse } from "next/server";
 import { parseSlugToFilters, type Filters } from "@/app/components/urlBuilder";
 import { buildSlugFromFilters } from "@/app/components/slugBuilter";
@@ -165,7 +167,7 @@ async function refreshSeoCache(cacheKey: string, url: URL, request: NextRequest)
   } catch {}
 }
 
-export async function middleware(request: NextRequest) {
+async function handleRequest(request: NextRequest) {
   const url = request.nextUrl.clone();
   const fullPath = url.pathname + url.search;
   const userAgent = request.headers.get('user-agent') || '';
@@ -568,3 +570,8 @@ export const config = {
     "/((?!_next/static|_next/image|favicon.ico).*)",
   ],
 };
+
+/* Visitor screening (MaxMind, log-only) runs after the normal handling — see src/lib/screeningMiddleware.ts */
+export async function middleware(request: NextRequest, event: NextFetchEvent) {
+  return screenRequest(request, await handleRequest(request), event);
+}
