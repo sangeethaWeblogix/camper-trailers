@@ -662,8 +662,8 @@ export default function BlogDetailsPage({
                 <div className="blog-sidebar-cta">
                   <h3 className="blog-sidebar-cta__heading">Ready to Find Your Next Camper Trailer?</h3>
                   <p className="blog-sidebar-cta__desc">Browse thousands of new and used camper trailers from trusted dealers and private sellers across Australia.</p>
-                  <a href="/listings/" className="blog-sidebar-cta__btn">
-                    Search Camper Trailers Now <i className="bi bi-arrow-right" />
+                  <a href="/" className="blog-sidebar-cta__btn">
+                    Search Camper Trailers For Sale <i className="bi bi-arrow-right" />
                   </a>
                 </div>
                 <div className="blog-sidebar-cta blog-sidebar-cta--sell">
