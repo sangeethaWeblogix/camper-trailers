@@ -66,31 +66,31 @@ export const FAQ_TABS: FaqTab[] = [
   {
     label: "Camper Trailers for Sale by Location",
     items: [
-      { q: "Where can I find camper trailers for sale in Sydney?", a: "Browse [camper trailers for sale in Sydney](/listings/new-south-wales-state/sydney-region/) on [CampingTrailersForSale.com.au](/). Compare new and used models from dealers and private sellers." },
+      { q: "Where can I find camper trailers for sale in Sydney?", a: "Browse [camper trailers for sale in Sydney](/listings/new-south-wales-state/sydney-region/) on CampingTrailersForSale.com.au. Compare new and used models from dealers and private sellers." },
       { q: "Where can I find camper trailers for sale in Melbourne?", a: "Explore [camper trailers for sale in Melbourne](/listings/victoria-state/melbourne-region/) and compare available models by price, type, make, condition and specifications." },
       { q: "Where can I find camper trailers for sale in Brisbane?", a: "Browse [camper trailers for sale in Brisbane](/listings/queensland-state/brisbane-region/) and compare available models from dealerships and private sellers across the region." },
       { q: "Where can I find camper trailers for sale in Perth?", a: "Find [camper trailers for sale in Perth](/listings/western-australia-state/perth-region/) and compare available folding, off-road, hybrid and touring models." },
       { q: "Where can I find camper trailers for sale in Adelaide?", a: "Browse [camper trailers for sale in Adelaide](/listings/south-australia-state/adelaide-region/) and compare prices, types, brands and available specifications." },
-      { q: "How can I find camper trailers for sale near me?", a: "Use the location filters on [CampingTrailersForSale.com.au](/listings/) to search by state, city or region. Narrow results by price, condition, type and ATM." },
+      { q: "How can I find camper trailers for sale near me?", a: "Use the location filters on CampingTrailersForSale.com.au to search by state, city or region. Narrow results by price, condition, type and ATM." },
       { q: "Can I buy camper trailers from interstate dealers?", a: "Yes. You can contact interstate dealerships and arrange inspections or delivery. Check transport costs, registration requirements, warranty arrangements and payment conditions before purchasing." },
     ],
   },
   {
     label: "Selling a Camper Trailer",
     items: [
-      { q: "How do I sell my camper trailer online in Australia?", a: "Create an advertisement on [CampingTrailersForSale.com.au](/sell-my-camper-trailer/), add your trailer's specifications, price and photos, and receive enquiries directly from interested buyers." },
-      { q: "How much does it cost to advertise a camper trailer for sale?", a: "Private sellers pay $49 including GST for a listing on [CampingTrailersForSale.com.au](/). The one-time fee keeps your advertisement live until sold, with no sales commission." },
+      { q: "How do I sell my camper trailer online in Australia?", a: "Create an advertisement on CampingTrailersForSale.com.au, add your trailer's specifications, price and photos, and receive enquiries directly from interested buyers." },
+      { q: "How much does it cost to advertise a camper trailer for sale?", a: "Private sellers pay $49 including GST for a listing on CampingTrailersForSale.com.au. The one-time fee keeps your advertisement live until sold, with no sales commission." },
       { q: "Can private owners list camper trailers for sale?", a: "Yes. Private owners can [advertise camper trailers](/sell-my-camper-trailer/) directly for $49 including GST and communicate with interested buyers without a dealership." },
-      { q: "Can dealerships advertise their camper trailer inventory?", a: "Yes. Australian dealerships can advertise eligible camper trailer stock through [CampingTrailersForSale.com.au](/), allowing buyers to compare available models and contact dealers directly." },
+      { q: "Can dealerships advertise their camper trailer inventory?", a: "Yes. Australian dealerships can advertise eligible camper trailer stock through CampingTrailersForSale.com.au, allowing buyers to compare available models and contact dealers directly." },
       { q: "What details should I include in a camper trailer advertisement?", a: "Include the make, model, year, condition, asking price, ATM, tare weight, sleeping capacity, folding design, suspension and accessories. Add clear photos of the trailer and its setup." },
       { q: "How can I attract more buyers to my camper trailer listing?", a: "Set a competitive price, upload clear photographs and provide accurate specifications. Highlight important features such as off-road capability, sleeping arrangements, kitchen facilities, solar systems and maintenance history." },
-      { q: "How do I determine the resale value of my camper trailer?", a: "Compare similar camper trailers by brand, model, age, condition and features. Review current asking prices on [CampingTrailersForSale.com.au](/) and account for accessories and maintenance history." },
+      { q: "How do I determine the resale value of my camper trailer?", a: "Compare similar camper trailers by brand, model, age, condition and features. Review current asking prices on CampingTrailersForSale.com.au and account for accessories and maintenance history." },
     ],
   },
   {
     label: "General & Buying",
     items: [
-      { q: "Where can I find camper trailers for sale in Australia?", a: "Browse [new and used camper trailers for sale](/listings/) on [CampingTrailersForSale.com.au](/). Compare available models from dealerships and private sellers across Australia by price, type, make, location and specifications." },
+      { q: "Where can I find camper trailers for sale in Australia?", a: "Browse new and used camper trailers for sale on CampingTrailersForSale.com.au. Compare available models from dealerships and private sellers across Australia by price, type, make, location and specifications." },
       { q: "What is the difference between a camper trailer and a camping trailer?", a: "Camper trailer and camping trailer generally refer to the same type of towable recreational vehicle. In Australia, “camper trailer” is the more commonly used term." },
       { q: "What are the different types of camper trailers?", a: "Popular designs include hard-floor, soft-floor, forward-fold, rear-fold, teardrop, hybrid, off-road and tent trailers. Each offers different sleeping arrangements, setup requirements and towing characteristics." },
       { q: "Which camper trailers are suitable for Australian conditions?", a: "The best camper trailer depends on your destinations. Touring models suit sealed roads, while purpose-built off-road campers can handle selected rough tracks with suitable suspension, clearance and tyres." },
@@ -98,7 +98,7 @@ export const FAQ_TABS: FaqTab[] = [
       { q: "What should I consider when buying a camper trailer?", a: "Consider your budget, towing capacity, trailer weight, sleeping arrangements, setup time and intended destinations. Check storage, kitchen facilities, water capacity and overall condition before purchasing." },
       { q: "Where can I buy new camper trailers in Australia?", a: "Browse [new camper trailers for sale](/listings/new-condition/) from Australian dealerships. Compare models by brand, type, price, sleeping capacity and towing specifications." },
       { q: "Where can I find used camper trailers for sale?", a: "Explore [used camper trailers for sale](/listings/used-condition/) across Australia. Compare second-hand models from dealers and private sellers by age, price, condition and features." },
-      { q: "Can I buy camper trailers directly from private sellers?", a: "Yes. [CampingTrailersForSale.com.au](/) includes private seller advertisements. Contact the owner directly, arrange an inspection and verify registration, ownership and trailer condition before purchasing." },
+      { q: "Can I buy camper trailers directly from private sellers?", a: "Yes. CampingTrailersForSale.com.au includes private seller advertisements. Contact the owner directly, arrange an inspection and verify registration, ownership and trailer condition before purchasing." },
     ],
   },
 ];
