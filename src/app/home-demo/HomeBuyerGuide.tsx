@@ -1,4 +1,5 @@
 import Image from "next/image";
+import HomeFaqSection from "./HomeFaqSection";
 
 export default function HomeBuyerGuide() {
   return (
@@ -32,16 +33,23 @@ export default function HomeBuyerGuide() {
             {/* Right: Text */}
             <div className="hbg-text-col">
               <h2 className="hbg-title">
-                Camper Trailers for Sale Australia: <span className="hbg-title-accent">Buyer Guide</span>
+                Camper Trailers for Sale in Australia – <span className="hbg-title-accent">Buy with Confidence</span>
               </h2>
-              
+
               <p className="hbg-body">
-                CampingTrailersForSale.com.au helps Australian buyers compare a wide range of camper trailers for sale in one convenient place. Browse affordable used camper trailers, premium new models and options designed for touring, family holidays or off-road adventures. Compare important features such as layout, ATM, tare weight, sleeping capacity, length, suspension, condition, service history and towing requirements to narrow down your choices before contacting a seller or visiting a dealership. Our easy-to-use platform makes researching and comparing camper trailers simple.
+                Looking to buy a camper trailer in Australia? CampingTrailersForSale.com.au helps you browse and compare new and used camper trailers for sale from dealerships and private sellers nationwide. Whether you&apos;re buying your first camper trailer, upgrading your camping setup or searching for an affordable second-hand model, find one that suits your budget and travel plans.
               </p>
               <p className="hbg-body">
-                Explore popular camper trailer types including off-road, hybrid, pop top, touring and luxury camper trailers, while also comparing trusted camper trailer brands and reputable dealers across Australia. Check whether dealers offer warranty support, finance options, trade-ins, after-sales service and detailed vehicle information before making your decision. Use our buyers guide and convenient search filters to browse listings by state, location, budget, size, weight and berth, helping you find the right camper trailer for your lifestyle and travel plans.
+                Explore camper trailers from popular brands such as Jayco, Cub, MDC, OPUS, Patriot Campers, Black Series and Track Trailer. From compact teardrop campers and lightweight folding trailers to hard-floor, soft-floor, forward-fold, hybrid and off-road camper trailers, compare designs suited to weekend getaways, family camping and outback adventures.
               </p>
-              
+              <p className="hbg-body">
+                Use our search filters to find camper trailers by location, price, condition, make, type, sleeping capacity, length and ATM. Compare important features such as suspension, ground clearance, slide-out kitchens, water storage, solar panels, battery systems, awnings and setup convenience.
+              </p>
+              <p className="hbg-body">
+                When buying a used camper trailer, check its chassis, suspension, canvas, seals, folding mechanisms and overall condition. Whether you&apos;re planning short camping trips or extended travel around Australia,{" "}
+                <a href="https://www.campingtrailersforsale.com.au/listings/" className="hbg-link">browse our camper trailer listings</a>, compare available listings and contact dealers or private sellers directly.
+              </p>
+
             </div>
 
           </div>
@@ -63,6 +71,8 @@ export default function HomeBuyerGuide() {
           </p>
         </div>
       </section>
+
+      <HomeFaqSection />
 
       {/* ── Sell CTA Card ── */}
       <section className="hbg-sell-section">

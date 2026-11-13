@@ -11,6 +11,7 @@ import { fetchHomeFeatured } from "@/api/homeApi/featured/api";
 import { fetchBlogs } from "@/api/blog/api";
 import { fetchListingLinkCountsServer } from "./listings/fetchBrowseSectionData";
 import { HOME_LOCATION_HREFS } from "./home-demo/homeLocationLinks";
+import { FAQ_TABS } from "./home-demo/faqData";
 
 const FEATURED_SEED_MAX = 15;
 
@@ -55,6 +56,23 @@ export const metadata: Metadata = {
 
 const BASE_URL = "https://www.campingtrailersforsale.com.au";
 
+const stripMarkdownLinks = (text: string) => text.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
+
+const homeFaqLd = {
+  "@type": "FAQPage",
+  "@id": `${BASE_URL}/#faq`,
+  "mainEntity": FAQ_TABS.flatMap((tab) =>
+    tab.items.map((item) => ({
+      "@type": "Question",
+      "name": item.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": stripMarkdownLinks(item.a),
+      },
+    }))
+  ),
+};
+
 const homeJsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -65,14 +83,6 @@ const homeJsonLd = {
       "name": "Camper Trailers For Sale",
       "description": "Australia's Marketplace for New & Used Camper Trailers",
       "inLanguage": "en-AU",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": {
-          "@type": "EntryPoint",
-          "urlTemplate": `${BASE_URL}/listings/{search_term_string}-search/`,
-        },
-        "query-input": "required name=search_term_string",
-      },
     },
     {
       "@type": "Organization",
@@ -90,6 +100,7 @@ const homeJsonLd = {
         "availableLanguage": "English",
       },
     },
+    homeFaqLd,
   ],
 };
 

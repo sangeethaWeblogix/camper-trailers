@@ -3063,6 +3063,144 @@ main .section-head .category_icon li img {
   .hbg-explore-section { padding: 0 0 32px; }
 }
 
+/* ── Home FAQ ── */
+.hfaq-section {
+  padding: 0 0 48px;
+  background: #fff;
+}
+.hfaq-title {
+  color: #000;
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 20px;
+}
+.hfaq-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.hfaq-tab {
+  background: #fff;
+  border: 1.5px solid #e0e0e0;
+  color: #222;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.hfaq-tab:hover {
+  border-color: #3385d6;
+}
+.hfaq-tab--active {
+  background: #3385d6;
+  border-color: #3385d6;
+  color: #fff;
+}
+.hfaq-card {
+  background: #fff;
+  border: 1px solid #e4e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.hfaq-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-bottom: 1px solid #e4e8f0;
+}
+.hfaq-card__title {
+  color: #000;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+}
+.hfaq-card__count {
+  color: #888;
+  font-size: 14px;
+}
+.hfaq-list {
+  padding: 0 24px;
+}
+.hfaq-item {
+  border-bottom: 1px solid #eef0f3;
+}
+.hfaq-item:last-child {
+  border-bottom: none;
+}
+.hfaq-item__question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 18px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  cursor: pointer;
+}
+.hfaq-item--open .hfaq-item__question {
+  color: #3385d6;
+}
+.hfaq-item__question i {
+  flex-shrink: 0;
+  color: #999;
+  font-size: 14px;
+}
+.hfaq-item--open .hfaq-item__question i {
+  color: #3385d6;
+}
+.hfaq-item__answer {
+    color: #090909;
+    margin: 0 0 20px;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+.hfaq-link {
+  color: #3385d6;
+  text-decoration: underline;
+}
+.hfaq-link:hover {
+  color: #004c99;
+}
+@media (max-width: 767px) {
+  .hfaq-section { padding: 0 0 32px; }
+  .hfaq-title { font-size: 22px; }
+  .hfaq-card__header { padding: 14px 16px; }
+  .hfaq-list { padding: 0 16px; }
+  .hfaq-tabs {
+    flex-wrap: nowrap;
+    align-items: center;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+    margin-bottom: 18px;
+    padding-bottom: 4px;
+    -webkit-mask-image: linear-gradient(to right, #000 90%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 90%, transparent 100%);
+  }
+  .hfaq-tabs::-webkit-scrollbar { display: none; }
+  .hfaq-tab {
+    flex: 0 0 auto;
+    padding: 8px 14px;
+    font-size: 13px;
+    scroll-snap-align: start;
+  }
+  .hfaq-card__title { font-size: 16px; }
+  .hfaq-card__count { font-size: 12px; }
+  .hfaq-item__question { font-size: 0.95rem; padding: 14px 0; gap: 10px; }
+  .hfaq-item__answer { font-size: 0.9rem; }
+}
+
 /* ── Sell CTA Card (light) ── */
 .hbg-sell-section {
   padding: 0 0 48px;
